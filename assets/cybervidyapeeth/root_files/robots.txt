@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+Sitemap: https://vajiramandravi.com/sitemap.xml
+

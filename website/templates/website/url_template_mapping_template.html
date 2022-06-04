@@ -1,0 +1,27 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% load custom_tags_filters %}
+
+{% block base_meta_block %}
+    {{cv.page_data.meta_tags|safe}} 
+{% endblock base_meta_block %}
+
+{% block base_head_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'vajiramandraviweb/css/old_style.css' %}">
+{% endblock base_head_block %}
+
+{% block base_block %}
+<div class="inner_page_intro_header">
+  <div class="shadeoverlay"></div>
+  <div class="container">
+    <div class="content">
+      <h1 class=""> {{cv.page_data.page_heading}}   </h1>
+      <h2 class=""> by Vajiram &amp; Ravi  </h2>
+    </div>
+  </div>
+</div>
+
+{{cv.page_data.details|safe}}
+
+{% endblock base_block %}
+

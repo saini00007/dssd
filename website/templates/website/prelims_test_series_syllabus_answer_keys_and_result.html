@@ -1,0 +1,656 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% load custom_tags_filters %}
+
+{% block base_meta_block %}
+	<title> UPSC Prelims Test Series Syllabus, Answer Keys & Result </title>
+  <meta name="description" content="Prelims Test Series Syllabus, Answer Keys & Result" />
+{% endblock base_meta_block %}
+
+{% block base_head_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'vajiramandraviweb/css/old_style.css' %}">
+{% endblock base_head_block %}
+
+{% block base_block %}
+<div class="inner_page_intro_header">
+  <div class="shadeoverlay"></div>
+  <div class="container">
+    <div class="content">
+      <h1 class=""> UPSC Prelims Test Series Result   </h1>
+      <h2 class=""> by Vajiram &amp; Ravi  </h2>
+    </div>
+  </div>
+</div>
+<div class="inner_page_highlight_box">
+    <div class="container">
+      
+      <!-- <div class="col-sm-12">
+        <a  target="_blank" class="btn d-block btn-lg no-border-radius btn-success font_weight_600" href="https://vajiramias.com/prelims-test-series-list/">
+          Register for UPSC 2020 Online Prelims Test Series 
+        </a>
+      </div> -->
+      
+
+    </div>
+  </div>
+<div class="container">
+    <div class="inner_page_content content_wrapper">
+	<div class="row ">
+    	<div class="col-md-4 ">
+	        <!-- <h2 class="font_weight_600 font-22 margin-b-10"> Our Test Series Programs </h2> -->
+	        <a class="text-left btn d-block btn-lg no-border-radius btn-info font_weight_600 " href="/testseries.php">
+	          Overview
+	        </a>
+
+	        <!-- <a class="text-left btn d-block btn-lg no-border-radius btn-info font_weight_600 " href="
+	        upsc-classroom-gs-mains-test-series.php">
+	          Classroom & Online - GS Mains Test Series 2020
+	        </a> -->
+
+	        <!-- <a class="text-left btn d-block btn-lg no-border-radius btn-info font_weight_600" href="upsc-online-gs-mains-test-series.php">
+	          Online - GS Mains Test Series
+	        </a>
+
+	        <a class="text-left btn d-block btn-lg no-border-radius btn-info font_weight_600" href="upsc-optional-subjects-mains-test-series.php">
+	          Optional Subjects Test Series
+	        </a>
+
+	        <a class="text-left btn d-block btn-lg no-border-radius btn-info font_weight_600" href="upsc-main-exam-crash-course.php">
+	          Main Exam Crash Course
+	        </a> -->
+	        
+	        <!-- <a class="text-left btn d-block btn-lg no-border-radius btn-info font_weight_600" href="upsc-classroom-prelims-test-series.php">
+	          Classroom Prelims Test Series 2019
+	        </a>
+
+	        <a class="text-left btn d-block btn-lg no-border-radius btn-info font_weight_600" href="upsc-online-prelims-test-series.php">
+	         Online Prelims Test Series 2019
+	        </a>
+	        -->
+	        
+	        <a class="text-left btn d-block btn-lg no-border-radius btn-info font_weight_600 active" href="/prelims-test-series-syllabus-answer-keys-and-result.php">
+	         Prelims Test  Result
+	        </a>
+
+
+      	</div>
+
+	      <div class="col-md-8">
+	        <h2>UPSC Prelims Test Result</h2>
+	        <table class="table table-striped table-bordered">
+
+	          
+
+	          
+	          <tr>
+	            <th>Test Date </th>
+	            <th> Test Results </th>
+	          </tr>
+
+	          <tr>
+	            <td> 24th April 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-24th-April-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> Full Length GS Test 6 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 17th April 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-17th-April-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> Full Length GS Test 5 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 17th April 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-17th-April-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 10th April 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-10th-April-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> Full Length GS Test 4 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 3rd April 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-3rd-April-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 27th March 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-27th-March-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> Full Length GS Test 3 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 20th March 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-20th-March-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> Full Length GS Test 2 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 13th March 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-13th-March-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> Full Length GS Test 1 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 6th March 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test10-6th-March-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 10 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 6th March 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test1-6th-March-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test 1 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 27th February 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test9-27th-February-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 9 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 20th February 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test8-20th-February-2022-Result.pdf?v=2" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 8 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 13th February 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test7-13th-February-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 7 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 6th February 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test6-6th-February-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 6 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 23rd January 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test5-23rd-January-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 5 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 9th January 2022 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test4-9th-January-2022-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 4 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 26th December 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test3-26th-December-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 3 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 12th December 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test2-12th-December-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 2 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 5th December 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test1-5th-December-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 1 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td>  </td>
+	            <td>  </td>
+	          </tr>
+
+	          <tr>
+	            <td> 10th January 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test1-10th-January-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 1 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 24th January 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test2-24th-January-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 2 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 7th February 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test3-7th-February-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 3 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 21st February 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test4-21st-February-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 4 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 7th March 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test5-7th-March-2021-Result.pdf?v=2" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 5 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 21st March 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test6-21st-March-2021-Result.pdf?v=2" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 6 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 4th April 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test7-4th-April-2021-Result.pdf?v=2" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 7 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 18th April 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test8-18th-April-2021-Result.pdf?v=2" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 8 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 9th May 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test9-9th-May-2021-Result.pdf?v=2" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 9 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 16th May 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test1-16th-May-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test 1 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 23rd May 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test10-23rd-May-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 10 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 6th June 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-6th-June-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 6th June 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-6th-June-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 13th June 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-13th-June-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 20th June 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-20th-June-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 20th June 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-20th-June-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 11th July 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-11th-July-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 25th July 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-25th-July-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 8th August 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-8th-August-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 22nd August 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-22nd-August-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 19th September 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-19th-September-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 19th September 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-19th-September-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 3rd October 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-3rd-October-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 3rd october 2021 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-3rd-October-2021-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td>  </td>
+	            <td>  </td>
+	          </tr>
+
+	          
+
+	          <tr>
+	            <td> 29 Sep 2019 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_TEST_1_29Sept_2019.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 1 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+
+	          <tr>
+	            <td> 6 Oct 2019 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_TEST_2_6_Oct_2019.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 2 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+	          <tr>
+	            <td> 20 Oct 2019 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_Test_3_20_Oct_2019_Test_Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 3 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>          
+	          <tr>
+	            <td> 4 Nov 2019 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_Test-4_03rd_Nov_2019.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 4 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 17 Nov 2019 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_Test_5_17_Nov_2019.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 5 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+	          <tr>
+	            <td> 1 Dec 2019 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_Test_6_1st_Dec_2019.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 6 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>          
+
+	          <tr>
+	            <td> 22 Dec 2019 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_Test_7_22nd_Dec_2019.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 7 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 5 Jan 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_Test_8_5_Jan_2020_Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 8 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 19th Jan 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS_Test_9_19th_Jan_2020_Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 9 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 2nd Feb 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-10-2nd-Feb-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 10 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 9th Feb 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-1-Result-9Feb2020.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test 1 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 16th Feb 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-11-16th-Feb-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 11 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+	          <tr>
+	            <td> 23rd Feb 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-12-23rd-Feb-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 12 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+	          <tr>
+	            <td> 1st Mar 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-13-1st-Mar-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 13 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+	          <tr>
+	            <td> 15th Mar 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-14-15th-Mar-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 14 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+	          <tr>
+	            <td> 22nd Mar 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-2-Result-22nd-Mar-2020.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test 2 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+	          <tr>
+	            <td> 29th Mar 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-15-29th-Mar-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 15 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+	          <tr>
+	            <td> 5th April 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-16-5th-April-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 16 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 12th April 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-17-12th-April-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 17 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 19th April 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-3-Result-19th-April-2020.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test 3 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 26th April 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-18-26th-April-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 18 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 10th May 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-19-10th-May-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 19 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 10th May 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-4-Result-10th-May-2020.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test 4 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 17th May 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-20-17th-May-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test 20 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 17th May 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-5-Result-17th-May-2020.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test 5 Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 14th June 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-14th-June-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test (14th June) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 21st June 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-21st-June-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test (21st June) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 21st June 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-21st-June-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test (21st June) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 5th July 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-5th-July-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test (5th July) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 19th July 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-19th-July-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test (19th July) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 9th August 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-9th-August-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test (9th August) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 9th August 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-9th-August-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test (9th August) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 23rd August 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-23rd-August-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test (23rd August) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 13th September 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-13th-September-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test (13th September) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 27th September 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/GS-Test-27th-September-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> GS Test (27th September) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	          <tr>
+	            <td> 27th September 2020 </td>
+	            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/new/test-result/CSAT-Test-27th-September-2020-Result.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 "> CSAT Test (27th September) Result <i class="fa fa-download"></i> </a> </td>
+	          </tr>
+
+	        </table>
+	      </div>
+      </div>
+
+      <!--    	
+      <div class="col-md-8">
+        <h2>UPSC Prelims Test Syllabus, Answer Keys & Result</h2>
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th>Test Date </th>
+            <th> Answer Key </th>
+            <th> Test Results </th>
+          </tr>
+
+          <tr>
+            <td>18 Nov 2018</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Answer_Explanation_GS_Test_1_18_Nov_2018.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 1 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 disabled"> GS Test 2 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>25 Nov 2018</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_GS_Test-2_25th_Nov_2018.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 2 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 disabled"> GS Test 2 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>2 Dec 2018</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_GS_Test_3_2nd_Dec_18_updated.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 3 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Overall_Result_for_GS_Test-3_held_on_2nd_Dec'18.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 3 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>9 Dec 2018</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_GS_Test-4_9th_Dec'18.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 4 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Overall_Result_for_GS_Test-4_held_on_9th_Dec'18.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 4 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>23 Dec 2018</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_GS_Test-5_23rd_Dec'18.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 5 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Final_Result_for_GS_Test-5_held_on_23rd_Dec'18.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 5 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>6 Jan 2019</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_GS_Test-6_6th_Jan'19.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 6 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Final_Result_for_GS_Test-6_held_on_6th_Jan'19.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 6 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>13 Jan 2019</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_GS_Test-7_13th_Jan'19.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 7 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Final_Result_for_GS_Test-7_held_on_13th_Jan'19.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 7 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>20 Jan 2019</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_GS_Test-8_20th_Jan'19.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 8 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Final_Result_for_GS_Test-8_held_on_20th_Jan_19.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 8 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>27 Jan 2019</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_CSAT_Test-1_27th_Jan_19.pdf" class="btn btn_sm btn-info d-block no-border-radius font_weight_600 filled"> CSAT Test 1 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Final_Result_for_CSAT_Test-1_held_on_27th_Jan_19.pdf" class="btn btn_sm btn-primary d-block no-border-radius font_weight_600 filled"> CSAT Test 1 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>3 Feb 2019</td>
+            <td><a target="_blank" href="/static/vajiramandraviweb/pdf/Ans_and_Exp_for_GS_Test-9_3rd_Feb_19.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 9 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/Final_Result_for_GS_Test_9_held_on_3rd_Feb_19.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 9 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>10 Feb 2019</td>
+            <td><a target="_blank" href="pdf_upload/GS_Prelim_Test_10 Answer_Keys_10th_Feb.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 10 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Final_Result_for_GS_Test-10_held_on_10th_Feb_19.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 10 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>17 Feb 2019</td>
+            <td><a target="_blank" href="pdf_upload/Ans_and_Exp_for_GS_Test_11_17th_Feb_19.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 11 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Final_Result_for_GS_Test-11_held_on_17th_Feb_19.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 11 Result <i class="fa fa-download"></i> </a> </td>
+          </tr> 
+
+          <tr>
+            <td>24 Feb 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/Ans_and_Exp_for_GS_Test_12_24th_Feb_19.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 12 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Final_Result_for_GS_Test-12_held_on_24th_Feb_19.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 12 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>4 Mar 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/Ans_and_Exp_for_CSAT_Test_2_4th_Mar_19.pdf" class="btn btn_sm btn-info d-block no-border-radius font_weight_600 filled"> CSAT Test 2 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Final_Result_for_CSAT_Test_2_held_on_3rd_Feb_19.pdf" class="btn btn_sm btn-primary d-block no-border-radius font_weight_600 filled"> CSAT Test 2 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>10 Mar 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/Ans_and_Exp_for_GS_Test_13_10th_Mar_19.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 13 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/GS_Test_13_Results.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 13 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>17 Mar 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/GSP16-Test-14-GS-paper-1-Full-Test-1.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 14 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Final_Merge_Result_Test-14_17th_March 2019.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 14 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>31 Mar 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/GS_Test_15_Answer_Key.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 15 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Result_Test_15_31st_March_2019.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 15 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>7 Apr 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/Ans_and_Exp_for_GS_Test_16_Comp_2_7th_April_2019.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 16 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Result_GS_Test_16_7th_April_2019.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 16 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>14 Apr 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/CSAT_Test_3_Answer_Key_and_Explanation.pdf" class="btn btn_sm btn-info d-block no-border-radius font_weight_600 filled"> CSAT Test 3 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/CSAT_Test_3_14th_April_19_Results.pdf" class="btn btn_sm btn-primary d-block no-border-radius font_weight_600 filled"> CSAT Test 3 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>21 Apr 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/GS_Test_17_Answer_Key_and_Explanation.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 17 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Result_GS_Test_17_21st_April_2019.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 17 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>28 Apr 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/GS_Test_18_Answer_Key_and_Explanation.pdf.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 18 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Result_GS_Test_18_28th_April_2019.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 18 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>11 May 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/GS_Test_19_Answer_Key_and_Expl.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 19 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Result_GS_Comprehensive_Test_11th_may_19.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 19 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+          <tr>
+            <td>11 May 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/CSAT_Test_4_Answer_and_Expl.pdf" class="btn btn_sm btn-info d-block no-border-radius font_weight_600 filled"> CSAT Test 4 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Result_CSAT_Comprehensive_Test_11th_May_2019.pdf" class="btn btn_sm btn-primary d-block no-border-radius font_weight_600 filled"> CSAT Test 4 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+
+          <tr>
+            <td>19 May 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/GS_Test_20_19th_May_2019_Answer_Key_Explanations.pdf" class="btn btn_sm btn-success d-block no-border-radius font_weight_600 filled"> GS Test 20 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Result_GS_Comprehensive_Test_19th_May_2019.pdf" class="btn btn_sm btn-warning d-block no-border-radius font_weight_600 filled"> GS Test 20 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+          <tr>
+            <td>19 May 2019</td>
+            <td><a target="_blank" href="pdf_upload/new/CSAT_Test_5_ 19th_May_2019_Answer_Key_Explanations.pdf" class="btn btn_sm btn-info d-block no-border-radius font_weight_600 filled"> CSAT Test 5 Answer Keys <i class="fa fa-download"></i> </a></td>
+            <td><a target="_blank" href="pdf_upload/new/Result_CSAT_Comprehensive_Test_19th_May_2019.pdf" class="btn btn_sm btn-primary d-block no-border-radius font_weight_600 filled"> CSAT Test 5 Result <i class="fa fa-download"></i> </a> </td>
+          </tr>
+         
+        </table>
+    	</div>
+        -->
+	  </div>
+  </div>
+{% endblock base_block %}

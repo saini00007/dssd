@@ -1,0 +1,24 @@
+asgiref==3.5.0
+backports.zoneinfo==0.2.1
+boto3==1.22.3
+botocore==1.25.3
+bson==0.5.10
+Django==3.2.13
+django-ckeditor==6.4.0
+-e git+https://github.com/jazzband/django-debug-toolbar.git@da2910f594cae96b7097138745f5b0e36bfde467#egg=django_debug_toolbar
+django-debug-toolbar-template-timings==0.9
+django-js-asset==2.0.0
+django-storages==1.12.3
+django-tinymce==3.4.0
+gunicorn==20.1.0
+jmespath==1.0.0
+Pillow==9.1.0
+psycopg2-binary==2.9.3
+python-dateutil==2.8.2
+pytz==2022.1
+s3transfer==0.5.2
+six==1.16.0
+sqlparse==0.4.2
+typing-extensions==4.2.0
+Unipath==1.1
+urllib3==1.26.9

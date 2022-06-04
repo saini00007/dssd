@@ -1,0 +1,17 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+*.pyc
+.idea
+*.log
+*.swp
+*.orig
+*/migrations/00*
+media/*
+static/*
+logs/*
+cybervidyapeeth/production_setup.py
+cybervidyapeeth/setting_files/production.py
+git_push.sh
+cybervidyapeeth/__pycache__/*
+cybervidyapeeth/setting_files/__pycache__/base.cpython-35.pyc
+*.docx
+

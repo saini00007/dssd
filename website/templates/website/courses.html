@@ -1,0 +1,75 @@
+{% extends 'website/base.html' %}
+{% load static%}
+{% block base_meta_block %}
+	<!-- This Block Needs to be on every page of the Website -->
+	<title> Cyber Vidyapeeth&trade; </title>
+	<meta name="keywords" content="Cyber Vidyapeeth " />
+	<meta name="description" content="Cyber Vidyapeeth " />
+{% endblock%}
+
+{% block base_head_block %}
+{% endblock base_head_block %}
+{% block base_block %}
+<div class="inner_page_intro_header">
+  <div class="shadeoverlay"></div>
+  <div class="container">
+    <div class="content">
+      <h1 class="">Cyber Rakshak Courses  </h1>
+			<p class="fs-4">for Budding Talents</p>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5 page_content" id="corporate">
+
+	<div class="row">
+		<div class="col-sm-6 col-md-4 col-lg-4">
+			<div class="card mega_course_card mx-auto" style="">
+			  <img src="/static/cybervidyapeeth/images/cyber-5.jpg" class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <h5 class="card-title"> <span class="text-warning">Advance Diploma</span> in Cyber Defense </h5>
+			    <!-- <p class="card-text">
+			    	These are courses covering practical aspects of cyber security, hands on training along with degree/ diploma certificates by well known universities.
+			    </p> -->
+			    <div>
+			    	<ul class="mb-0">
+			    		<li> Symbiosis University </li>
+			    		<li> Certificate Course</li>
+			    		<li> 6 Months </li>
+			    		<li> Placement Assistance </li>
+			    	</ul>
+			    </div>
+			  </div>
+			  <a href="/courses/advance-diploma-in-cyber-defense/" class="card-footer-btn btn">
+			    See Details
+			  </a>
+		  </div>
+	  </div>
+
+	  <div class="col-sm-6 col-md-4 col-lg-4">
+		  <div class="card mega_course_card mx-auto" style="">
+			  <img src="/static/cybervidyapeeth/images/cyber-1.jpg" class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <h5 class="card-title"> <span class="text-warning">PG Diploma </span> in Cyber Defense  </h5>
+			    <!-- <p class="card-text">
+			    	These are courses covering practical aspects of cyber security, hands on training along with degree/ diploma certificates by well known universities.
+			    </p> -->
+			    <div>
+			    	<ul class="mb-0">
+			    		<li> Vinoba Bhave University </li>
+			    		<li> Diploma Course </li>
+			    		<li> 11 Months </li>
+			    		<li> Placement Assistance </li>
+			    	</ul>
+			    </div>
+			  </div>
+			  <a href="/courses/pg-diploma-in-cyber-defense/" class="card-footer-btn btn">
+			    See Details
+			  </a>
+			  
+
+		  </div>
+		</div>
+	</div>	
+</div>
+{% endblock base_block %}

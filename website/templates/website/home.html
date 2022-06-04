@@ -1,0 +1,383 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% load custom_tags_filters %}
+
+{% block base_meta_block %}
+	<!-- This Block Needs to be on every page of the Website -->
+	<title> Cyber Vidyapeeth </title>
+	<meta name="keywords" content="Cyber Vidyapeeth " />
+	<meta name="description" content="Cyber Vidyapeeth " />
+
+	<!--  OG Tags  -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Cyber Vidyapeeth&trade;" />
+	<meta property="og:description" content="Cyber Vidyapeeth" />
+	<meta property="og:image" content="https://cybervidyapeeth.com{% static 'cybervidyapeeth/images/og_image.png' %}" />
+	<meta property="og:site_name" content="cybervidyapeeth.com" />
+	<!--  OG Tags  -->
+
+	<!--  Twitter Tags  -->
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="Cyber Vidyapeeth&trade;" />
+	<meta name="twitter:description" content="Cyber Vidyapeeth" />
+	<meta name="twitter:image" content="https://cybervidyapeeth.in{% static 'cybervidyapeeth/images/og_image.png' %}" />
+	<!--  Twitter Tags  -->
+{% endblock base_meta_block %}
+
+{% block base_head_block %}
+<link rel="stylesheet" href="{% static 'cybervidyapeeth/libraries/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}" defer />
+<link rel="stylesheet" href="{% static 'cybervidyapeeth/libraries/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css' %}" defer />
+{% endblock base_head_block %}
+
+{% block base_block %}
+<!-- <header id="home" class="home_header " data-style="default" data-scroll-arrow="true">
+  <div class="header-hero d-flex aligsn-items-center text-light">
+		<div class="container  ">
+			<div class="row">
+				<div class="col-md-7">
+					<h3>Welcome to</h3>
+					
+					<h1><div class="text-warning">Cybervidyapeeth <small class="text-white">TM </small></div></h1>
+					<h4>World's First Dedicated online Cyber University</h4>
+					<h5 class="mt-4">CyberVidyapeeth's <span class="font-weight-800 text-warning">CyberVersity</span> is on a mission to create 1 Million Cyber Rakshaks for India over the next 5 years. </h5>
+					<h5 class="mt-4"> We have partnered with over 100 Corporations to place our trained CyberRakshaks </h5>
+				</div>
+				<div class="col-md-5 text-center">
+						<div class="d-inline-block align-center position-relative">
+							<div class="hero_img hero_img_1"><img src="{% static 'cybervidyapeeth/images/cybervidyapeeth-square.png' %}" /></div>
+							<div class="hero_img hero_img_2"><img src="{% static 'cybervidyapeeth/images/cybervidyapeeth-square.png' %}" /></div>
+							<div class="hero_img hero_img_3"><img src="{% static 'cybervidyapeeth/images/hacker.png' %}" /></div>
+						</div>
+				</div>
+			</div>
+	  </div>
+	</div>
+
+	<div class="overlay hero-shape fadeIn ad-100ms"></div>
+	      
+</header> -->
+<div class="home_jumbo">
+	<div class="container ">
+			<div class="row">
+				<div class="col-lg-7 left_col">
+					<!-- <h3>Welcome to</h3> -->
+					
+					<h1><div class="text-warning">Cybervidyapeeth </div></h1>
+					<h4>Education Entiity Dedicated to Cyber Defence</h4>
+					<h5 class="mt-5">CyberVidyapeeth's <span class="font-weight-800 text-warning">CyberVersity</span> is on a mission to create 1 Million Cyber Rakshaks for India over the next 5 years. </h5>
+					<!-- <h5 class="mt-4"> We have partnered with over 100 Corporations to place our trained CyberRakshaks </h5> -->
+				</div>
+				<div class="d-none d-sm-none d-md-block col-md-5 text-center ">
+						<div class="h-100 align-items-center justify-content-center d-flex">
+							<img src="{% static 'cybervidyapeeth/images/cybervidyapeeth-square.png' %}" class="hero_img "/>
+						</div>
+				</div>
+			</div>
+	  </div>
+	  <div class="overlay hero-shape fadeIn ad-100ms"></div>
+</div>
+
+
+
+<section class="h-section">
+
+	<div class="container features_shift_up mb-5" style="">
+		<div class="row align-items-stretch">
+		  <div class="col-lg-4 col-sm-6 offset-sm-3 offset-lg-0">
+	      <div class="single-features h-100 text-left ">
+				  <h3><i></i> Creating Cyber Rakshak</h3>
+	        <p>Creating a Large Pool of Cyber Rakshak aligned to NIST NICE Framework for cyber resilience.</p>
+	      </div>
+	  	</div>
+	  	<div class="col-lg-4 col-sm-6 offset-sm-3 offset-lg-0">
+	      <div class="single-features h-100 text-left ">
+		    	<h3><i></i> Research & Development</h3>
+	      	<p>Mentor research work in Cyber Defense Engineering with active collaboration of Industry, Researcher & Academia. Create & Promote Made In India Technology in Cyber Defense Space.</p>
+	      </div>
+			</div>
+	    <div class="col-lg-4 col-sm-6 offset-sm-3 offset-lg-0">
+	      <div class="single-features h-100 text-left ">
+				  <h3><i></i> Discussion & Discourse</h3>
+	      	<p>Engage & Promote collaboration among Technology, Cyber Professional, industry Academia & Researchers through Webinars, Conferences, Symposium, Events.</p>
+	      </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<!-- <h2 class="section_header text-warning"> Why Cybervidyapeeth? </h2> -->
+		<h2 class="section_mega_header text-black mb-5 pt-5 pb-5"> Why Cybervidyapeeth? </h2>
+
+		<div class="row mb-5">
+
+
+			<div class="col-lg-3 col-sm-3 col-6 col-md-3">
+				<div class="single-funfacts-box">
+					<div class="icon">
+              <img src="{% static 'cybervidyapeeth/images/funfacts-icon4.png' %}" alt="funfacts-icon">
+          </div>
+          <h3> 40+</h3>
+          <p> Corporates </p>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-sm-3 col-6 col-md-3">
+				<div class="single-funfacts-box">
+					<div class="icon">
+              <img src="{% static 'cybervidyapeeth/images/funfacts-icon1.png' %}" alt="funfacts-icon">
+          </div>
+          <h3>10+</h3>
+          <p> Universities</p>
+				</div>
+			</div>
+
+			
+			<div class="col-lg-3 col-sm-3 col-6 col-md-3">
+				<div class="single-funfacts-box">
+					<div class="icon">
+              <img src="{% static 'cybervidyapeeth/images/funfacts-icon2.png' %}" alt="funfacts-icon">
+          </div>
+          <h3>11k+</h3>
+          <p> Students Trained </p>
+				</div>
+			</div>
+
+			
+			<div class="col-lg-3 col-sm-3 col-6 col-md-3">
+				<div class="single-funfacts-box">
+					<div class="icon">
+              <img src="{% static 'cybervidyapeeth/images/funfacts-icon3.png' %}" alt="funfacts-icon">
+          </div>
+          <h3>100+</h3>
+          <p> Sessions Conducted </p>
+				</div>
+			</div>
+
+			
+			
+
+
+		</div>
+		<br/>
+		<h2 class="section_mega_header text-black mt-5 mb-4"> 
+			We reimage cyber-battle ready workforce
+		</h2>
+		<p class="text-center section_mega_p mb-5"> by training exceptional individuals from the finest Government and Private Entities</p>
+			
+		<div class="row">
+			
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/drdo.png' %}"/>	
+				</div>
+			</div>
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/rbi.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/meity.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/npcil.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/ongc.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/powergrid.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/irctc.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/gail.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/sbi.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/ntpc.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/sail.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/iocl.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/tata-power.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/adani-power.png' %}"/>	
+				</div>
+			</div>
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/cesc.png' %}"/>	
+				</div>
+			</div>
+
+
+			<div class="col-6 col-sm-4 col-md-4 col-lg-3 ">
+				<div class="corporate_customers">
+					<img class="" src="{% static 'cybervidyapeeth/images/corporates/rbl-bank.png' %}"/>	
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<section class="h-section light-section">
+	<div class="container">
+		<!-- <h2 class="section_header text-warning position-relative"> 
+			Our Courses 
+			<span class="text_shadow">Our Courses </span>
+		</h2> -->
+		<h2 class="section_mega_header text-black mb-5"> Our Offerings </h2>
+		<div class="row mt-5 row mt-5 justify-content-center">
+				
+
+				<div class="col-12 col-sm-6 ">
+					<a href="{% url 'website:courses' %}" class="card mega_course_card mx-auto" style="">
+					  <img src="{% static 'cybervidyapeeth/images/programmer.jpg' %}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h5 class="card-title"> Cyber Defense Education </h5>
+					    <!-- <p class="card-text">
+					    	These are courses covering practical aspects of cyber security, hands on training along with degree/ diploma certificates by well known universities.
+					    </p> -->
+					    <!-- <div>
+					    	<ul class="mb-0">
+					    		<li> University Accredited </li>
+					    		<li> Full Time </li>
+					    		<li> Placement Assistance </li>
+					    	</ul>
+					    </div> -->
+					  </div>
+					  <button class="card-footer-btn btn">
+					    See Details
+					  </button>
+					  
+
+				  </a>
+				</div>
+
+
+				<div class="col-12 col-sm-6">
+					<a href="{% url 'website:corporate_trainings' %}" class="card mega_course_card mx-auto" style="">
+					  <img src="{% static 'cybervidyapeeth/images/cyber-1.jpg' %}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h5 class="card-title"> Cyber Defense  Trainings </h5>
+					    <!-- <div>
+					    	<ul class="mb-0">
+					    		<li> Corporate Trainings </li>
+					    		<li> Hands-On experience </li>
+					    		<li> Certificate </li>
+					    	</ul>
+					    </div> -->
+					  </div>
+					  <button  class="card-footer-btn btn">
+					    See Details
+					  </button>
+
+				  </a>
+				</div>
+
+
+		</div>
+	</div>
+</section>
+<!-- 
+<section class="h-section " style="min-height: 200px;">
+	<div class="container">
+		<h2 class="section_mega_header text-center"> Team </h2>
+
+		<div class="row mt-4 justify-content-center">
+			<div class="col-6 col-md-4 col-lg-3">
+				<div class="card team_card mx-auto" style="">
+					  <img src="{% static 'cybervidyapeeth/images/leadership/shashank-shekhar-garuryar.jpg' %}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h5 class="card-title"> Shashank Shekhar Garuryar </h5>
+					    <div>
+					    	<p> Chairman, Security Veteran</p>
+					    </div>
+					  </div>
+			  </div>
+			</div>
+			<div class="col-6 col-md-4 col-lg-3">
+			  <div class="card team_card mx-auto" style="">
+					  <img src="{% static 'cybervidyapeeth/images/leadership/balaji-venkateshwar.jpg' %}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h5 class="card-title"> Balaji Venkateshwar</h5>
+					    <div>
+					    	<p>Chief Mentor, Cyber Defence</p>
+					    </div>
+					  </div>
+			  </div>
+			</div>
+			
+		</div>
+	</div>
+</section>
+ -->
+<section class="h-section light-section" style="min-height: 200px;">
+	<div class="container">
+		<h2 class="section_header text-center">Want to become a CyberRakshak? </h2>
+
+		<div class="text-center mt-5">
+			<a href="" class="btn btn-lg btn-warning enquiry_button_home" data-bs-toggle="modal" data-bs-target="#enquiryModal"> Apply Now! </a>
+		</div>
+	</div>
+</section>
+
+
+
+
+{% endblock base_block %}
+
+{% block base_bottom_script %}
+<script type="text/javascript" src="{% static 'cybervidyapeeth/libraries/OwlCarousel2-2.3.4/dist/owl.carousel.min.js' %}" ></script>
+
+
+<script type="text/javascript">
+	
+</script>
+{% endblock base_bottom_script %}

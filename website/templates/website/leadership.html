@@ -1,0 +1,83 @@
+{% extends 'website/base.html' %}
+{% load static%}
+{% block base_meta_block %}
+	<!-- This Block Needs to be on every page of the Website -->
+	<title> Cyber Vidyapeeth&trade; </title>
+	<meta name="keywords" content="Cyber Vidyapeeth " />
+	<meta name="description" content="Cyber Vidyapeeth " />
+{% endblock%}
+
+{% block base_head_block %}
+{% endblock base_head_block %}
+{% block base_block %}
+<div class="inner_page_intro_header">
+  <div class="shadeoverlay"></div>
+  <div class="container">
+    <div class="content">
+      <h1 class=""> Leadership @ Cybervidyapeeth  </h1>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5 page_content">
+	<div class="row advisory_row">
+		<div class="col-md-3">
+			<div class="">
+				<img src="{% static 'cybervidyapeeth/images/leadership/shashank-shekhar-garuryar.jpg' %}"  class="advisor_img"/>
+			</div>
+		</div>
+		<div class="col-md-9">
+				<h2 style="font-weight:bold;">Shashank Shekhar Garuryar</h2>
+				<h4 style="color: #003399;">Chairman</h4>
+				<p class="my-custom-p">
+					Shashank is a B.Tech ECE from BIT Sindri with MBA Marketing from IGNOU. He has domain
+					experience of Process Automation, Safe &amp; Smart Cities and Critical Infrastructure and
+					has served Power, Oil &amp; Gas, Steel, Defense, Telecom sectors in Project Management,
+					Business Development and Business Operations for close to four decades. He brings
+					insight into the complex Industry sector; understands the issues industries face and has
+					a fantastic contact network to navigate complex stakeholder environments.
+				</p>
+				<p class="my-custom-p">
+					Shashank started his career from teaching, moved to PSU/Pvt/MNC and served Fertilizer,
+					Hindalco, ABB, Datamatics, G4S, HFCL. He is one of the founder Members of ISA Delhi
+					Section.
+				</p>
+				<p class="my-custom-p">
+					Shashank is a motivational speaker, an influencer and a relationship management cum
+					behavioral sciences trainer. As a Coach and facilitator, he enables others to grow in
+					their journey of self-discovery and evolution – as a person and as a professional.
+				</p>
+				<p class="my-custom-p">
+					He believes <strong>“Training is one of the core pillars of our success”</strong>.
+				</p>
+		</div>
+	</div>
+
+	<div class="row advisory_row">
+		<div class="col-md-3">
+			<div class="">
+				<img src="{% static 'cybervidyapeeth/images/leadership/balaji-venkateshwar.jpg' %}"  class="advisor_img"/>
+			</div>
+		</div>
+		<div class="col-md-9">
+				<h2 style="font-weight:bold;">Balaji Venketeshwar</h2>
+							<h4 style="color: #003399;">Chief Mentor - Cyber Defence</h4>
+							<p class="my-custom-p">
+								Balaji Venketeshwar is a technology business executive with core specialization in Cyber
+								Defense. He has architected and operationalized multiple Cyber Security Capability
+								Centers in last 25 years. He is an innovator and evangelize Technology Innovation as way
+								of life. He has also mentored more than 3000+ cyber defense expert so far. He has 1
+								patent granted and 9 more patents filed in Cyber &amp; Technology Space.
+							</p>
+							<p class="my-custom-p">
+								He has served in various Cyber Defense related Senior Positions at SBI, Wipro BPO, Bank
+								of America, PwC, Qualcomm and IDFC First Bank. He has taken voluntary retirement from
+								corporate life after serving as CISO at IDFC First Bank and decided to devote his life
+								for nation building now.
+							</p>
+
+		</div>
+	</div>
+</div>
+
+{% endblock base_block %}

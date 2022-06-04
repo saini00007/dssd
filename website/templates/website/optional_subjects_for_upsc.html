@@ -1,0 +1,50 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% load custom_tags_filters %}
+
+{% block base_meta_block %}
+	<title> Optional Subjects for UPSC - Preparation and Strategy </title>
+  <meta name="description" content="Optional Subjects for UPSC - Preparation and Strategy- Vajiram & Ravi " />
+{% endblock base_meta_block %}
+
+{% block base_head_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'vajiramandraviweb/css/old_style.css' %}">
+{% endblock base_head_block %}
+
+{% block base_block %}
+<div class="inner_page_intro_header">
+  <div class="shadeoverlay"></div>
+  <div class="container">
+    <div class="content">
+      <h1 class=""> Optional Subjects for UPSC - Preparation and Strategy  </h1>
+      <h2 class=""> by Vajiram &amp; Ravi  </h2>
+    </div>
+  </div>
+</div>
+<div class="container">
+    <div class="inner_page_content content_wrapper">
+
+    	<ul class="">
+        <li><a href="/history-optional-subject-for-upsc.php"> History </a></li>
+        <li><a href="/economics-optional-subject-for-upsc.php">Economics </a></li>
+        <li><a href="/geography-optional-subject-for-upsc.php">Geography </a></li>
+        <li><a href="/mathematics-optional-subject-for-upsc.php">Mathematics </a></li>
+        <li><a href="/philosophy-optional-subject-for-upsc.php"> Philosophy </a></li>
+        <li><a href="/political-science-optional-subject-for-upsc.php"> Political science </a></li>
+        <li><a href="/psychology-optional-subject-for-upsc.php"> Psychology </a></li>
+        <li><a href="/sociology-optional-subject-for-upsc.php"> Sociology </a></li>
+    </ul>
+
+     <ul class="hidden">
+        <li><a href="course-29.php">Public Administration</a></li>
+        <li><a href="course-30.php">Geography</a></li>
+        <li><a href="course-31.php">Sociology</a></li>
+        <li><a href="course-40.php">History</a></li>
+        <li><a href="course-32.php">Political Science</a></li>
+        <li><a href="course-33.php">Psychology</a></li>
+        <li><a href="course-34.php">Commerce</a></li>
+        <li><a href="course-41.php">Anthropology</a></li>
+    </ul>
+    </div>
+  </div>
+{% endblock base_block %}

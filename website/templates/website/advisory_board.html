@@ -1,0 +1,70 @@
+{% extends 'website/base.html' %}
+{% load static%}
+{% block base_meta_block %}
+	<!-- This Block Needs to be on every page of the Website -->
+	<title> Cyber Vidyapeeth&trade; </title>
+	<meta name="keywords" content="Cyber Vidyapeeth " />
+	<meta name="description" content="Cyber Vidyapeeth " />
+{% endblock%}
+
+{% block base_head_block %}
+{% endblock base_head_block %}
+{% block base_block %}
+<div class="inner_page_intro_header">
+  <div class="shadeoverlay"></div>
+  <div class="container">
+    <div class="content">
+      <h1 class=""> Advisory Board @ Cybervidyapeeth  </h1>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5 page_content">
+	<div class="row advisory_row">
+		<div class="col-md-3">
+			<div class="">
+				<img src="{% static 'cybervidyapeeth/images/advisory/proframjeeprasad.jpg' %}"  class="advisor_img"/>
+			</div>
+		</div>
+		<div class="col-md-9">
+				<h2 style="font-weight:bold;">Prof. Ramjee Prasad</h2>
+				<h5 style="font-weight:bold;">Chairperson, Cyber Vidyapeeth™</h5>
+
+				<h4 style="color: #003399;">President, CTIF Global Capsule,</h4>
+				<h4 style="color: #003399;">Professor, Department of Business Development and Technology,</h4>
+				<h4 style="color: #003399;">Aarhus University, Herning, Denmark </h4>
+				<p class="p_mid">
+					Dr. Ramjee Prasad is a Professor of Future Technologies for Business Ecosystem Innovation in the Department of Business Development and Technology, Aarhus University, Denmark. He is the Founder President of the CTIF Global Capsule (CGC). He is also the Founder Chairman of the Global ICT Standardisation Forum for India, established in  2009. GISFI has the purpose of increasing of the collaboration between European, Indian, Japanese, North-American and other worldwide standardization activities in the area of Information and Communication Technology (ICT) and related application areas. He has been honored by the University of Rome “Tor Vergata”, Italy as a  Distinguished Professor of the Department of Clinical Sciences and Translational Medicine on March 15, 2016. He is Honorary Professor of University of Cape Town, South Africa, and University of KwaZulu-Natal, South Africa.
+				</p>
+				<p class="p_mid">
+					He has received Ridderkorset af Dannebrogordenen (Knight of the Dannebrog) in 2010 from the Danish Queen for the internationalization of top-class  telecommunication research and education.  He has received several international awards such as: IEEE Communications  Society Wireless Communications Technical Committee Recognition Award in  2003 for making contribution in the field of “Personal, Wireless and Mobile Systems and Networks”, Telenor’s Research Award in 2005 for impressive merits, both academic and organizational within the field of wireless and personal communication, 2014 IEEE AESS Outstanding Organizational Leadership Award for: “Organizational Leadership in developing and globalizing the CTIF (Center for TeleInFrastruktur) Research Network”, and so on. He has been Project Coordinator of several EC projects namely, MAGNET, MAGNET Beyond, eWALL  and so on. He has published more than 30 books, 1000 plus journal and conference publications, more than 15 patents, over 140 PhD Graduates and larger number of Masters (over 250). Several of his students are today worldwide telecommunication leaders themselves.
+				</p>
+		</div>
+	</div>
+
+	<div class="row advisory_row">
+		<div class="col-md-3">
+			<div class="">
+				<img src="{% static 'cybervidyapeeth/images/advisory/dregranjan.jpg' %}"  class="advisor_img"/>
+			</div>
+		</div>
+		<div class="col-md-9">
+				<h2 style="font-weight:bold;">Dr. E.G. Rajan</h2>
+							<h4 style="color: #003399;"> President, Pentagram Research Centre Pvt. Ltd.  </h4>
+							<p class="p_mid">PhD Electrical Engineering, IIT Kanpur ,
+								Guided 70 PhD scholars so far and 15 undergoing currently
+								Authored 6 books and more than 83 Technical Papers in National and International Journals and Conferences
+								Director, Avatar Med Vision U.S., LLC., NC, USA
+								Director, PRC Global Technologies Inc., Ontario, Canada
+								Editor, AMSE, Royal Academy of Doctors, Barcelona, Spain
+								Franklin Fellow, London Journals Press, United Kingdom
+								Fellow, African Center for Cyber Law &amp; Cyber Crime
+								Prevention (ACCP), Uganda (UN sponsored organization)
+
+							</p>
+
+		</div>
+	</div>
+</div>
+
+{% endblock base_block %}
