@@ -1,4 +1,2 @@
-sudo systemctl restart gunicorn
-sudo systemctl daemon-reload
-sudo systemctl restart gunicorn.socket gunicorn.service
-sudo nginx -t && sudo systemctl restart nginx
+sudo supervisorctl restart gunicorn_cybervidyapeeth
+sudo nginx -t && sudo service nginx restart nginx
