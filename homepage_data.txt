@@ -1,3 +1,27 @@
+- Done- Advisory - Done
+- Done- Team - Done
+- Done- Rename Internship cum Training
+- Done- Remove Tm from cyberversity
+- Done- CYBERVERSITY CERTIFIED THREAT INTEL EXPERT to CYBERVERSITY CERTIFIED THREAT INTEL GYANI
+- Add new items to tranings from the document sent on WhatsApp
+
+ Image Changes:
+	- CYBERVERSITY™ CERTIFIED IEC 62443 GYANI : Add Insdustrical security similar to CYBERVERSITY™ CERTIFIED NIST SP 800:82 GYANI
+	- CYBERVERSITY CERTIFIED INSIDER THREAT RAKSHAK
+- 301 redirect of other domains
+
+Later 
+- Enquiry Form
+- Collect Data before downloading Fetailed Brochure
+	- Name
+	- Email ID (Verification with SES)
+	- Mobile Number (OTP)
+	- WhatsApp Number
+	- Telegram id
+
+- AWS SES 
+
+
 Keypoints:
 Guaranteed Placement Assitance
 
