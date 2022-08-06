@@ -1,0 +1,266 @@
+{% extends 'website/base.html' %}
+{% load static%}
+{% block base_meta_block %}
+	<!-- This Block Needs to be on every page of the Website -->
+	<title> Cyber Vidyapeeth </title>
+	<meta name="keywords" content="Cyber Vidyapeeth " />
+	<meta name="description" content="Cyber Vidyapeeth " />
+{% endblock%}
+
+{% block base_head_block %}
+{% endblock base_head_block %}
+
+{% block base_block %}
+<div class="inner_page_intro_header course_detail_header" style="">
+  <div class="shadeoverlay"></div>
+  <div class="container">
+  	<div class="content">
+	    <div class="row">
+	    	<div class="col-md-12 text-center">
+		    	
+			    	<!-- <div>
+			    		<img src="{% static 'cybervidyapeeth/images/courses/vinoba_bhave_university_logo.png' %}" class="img-responsive" style="border-radius: 10px;margin-bottom: 30px; max-height:180px" />
+			    	</div> -->
+			      <h1 class=""> Cyber Rakshak Beginner Course with AICTE </h1>
+			      <p> A 30 Days long program to train students on the fundamental cyber security skills.  </p>
+			      <div>
+			      	<a href="https://forms.gle/Ny9Q8UtdhrajDaCu5" class="btn btn-lg btn-warning rounded-0"> Apply Now </a>
+			      </div>
+			    
+	   	 	</div>
+	   	 	<div class="col-md-4 d-none">
+	   	 		<div class="bg-white p-4 text-black">
+	   	 			<div class="bg-gray-f5f5f5 p-3">
+								<div class="form_error_box hidden">
+									<div class="alert alert-danger  "></div>
+								</div>
+								<form class="form flat_form ajax_form refresh_on_success" action="">
+									{% csrf_token %}
+									<div class="form-loader hidden ">
+							      <p><i class="fa fa-pulse fa-spinner "></i><br/>
+							      <span class="font-16">Please Wait ...</span></p>
+							    </div>
+
+									<div class="form-group">
+										<label> <strong>Name</strong>  <span class="text-danger">*</span></label>
+										<input type="text" name="name" class="form-control" placeholder="Enter Your Name " value="{{cv.course_chapter.name}}" />
+										<div class="help-text"></div>
+									</div>
+
+									<div class="form-group">
+										<label> <strong>Email</strong>  <span class="text-danger">*</span></label>
+										<input type="text" name="name" class="form-control" placeholder="Enter Your Email ID " value="{{cv.course_chapter.name}}" />
+										<div class="help-text"></div>
+									</div>
+
+									
+									<div class="form-group">
+										<label> <strong>Mobile</strong>  <span class="text-danger">*</span></label>
+										<input type="text" name="name" class="form-control" placeholder="Enter Your Email ID " value="{{cv.course_chapter.name}}" />
+										<div class="help-text"></div>
+									</div>
+
+							
+									
+									
+
+									
+
+
+									
+									<div class="text-right">
+									<button type="submit" class="btn submit_btn btn-danger d-block w-100 rounded-0 font-weight-600 d-block ">
+							        <span  class="spinner-border spinner-border-md spinner-border-thin btn_loader mr-1 d-none"></span>
+							        <span class="btn_text"> Apply Now</span>
+							    </button>
+							    <div class="mt-2">Last date to apply <strong class="">22nd May, 2022</strong></div>
+							  </div>
+								</form>
+							</div>
+	   	 		</div>
+	   	 	</div>
+	    </div>
+
+	    <div class="bt-white p-4" style="background: #fff;position: relative;top: 118px;box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.1);border-radius: 7px;">
+	    		<div class="row">
+	    			<div class="col-md-3">
+	    				<div class="two_row_data_box">
+	    					<div class="row_1"> Classes </div>
+	    					<div class="row_2"> 20 hours</div>
+	    				</div>
+	    			</div>
+	    			<div class="col-md-3">
+	    				<div class="two_row_data_box">
+	    					<div class="row_1"> Duration </div>
+	    					<div class="row_2"> 30 Days </div>
+	    				</div>
+	    			</div>
+
+	    			<div class="col-md-3">
+	    				<div class="two_row_data_box">
+	    					<div class="row_1"> Mode </div>
+	    					<div class="row_2"> Live Lectures </div>
+	    				</div>
+	    			</div>
+	    			<div class="col-md-3">
+	    				<div class="two_row_data_box">
+	    					<div class="row_1"> Last date to Apply </div>
+	    					<div class="row_2"> 25th Sept 2022 </div>
+	    				</div>
+	    			</div>
+
+	    		</div>
+	    </div>
+    
+
+
+    </div>
+  </div>
+</div>
+<div class="h-section">
+	<div class="container py-5 page_content">
+		<div class="row">
+			<div class="col-md-12">
+				
+					<h3 class="course_detail_heading heading_with_underline"> Program Overview </h3>
+					<div class="mb-5">
+						<p class="fs-6">
+							A 1 month long Course launched by AICTE in collaboration with Cybervidyapeeth Foundation for Cyber Engineering Skill Building that will impart solid foundation in Cyber Security Skills.
+						</p>
+					</div>
+					<h3 class="course_detail_heading heading_with_underline"> What will you Learn? </h3>
+
+					<div class="mb-5">
+
+						<div class="">
+							<div class="mb-4">
+								<div class="accordion" id="accordionPanelsStayOpenExample">
+								  <div class="accordion-item">
+								    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+								      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" style="font-size: 22px; font-weight: 600;">
+								        Python Programming
+								      </button>
+								    </h2>
+								    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+								      <div class="accordion-body">
+								       <ul>
+													<li>Installation &amp; Setup</li>
+													<li>Basic syntax</li>
+													<li>Keywords and identifiers</li>
+													<li>Comments , variable and data types</li>
+													<li>Operators ,control flow (decision making , looping, branching )</li>
+													<li>String manipulation</li>
+													<li>List ,tuples,set and &nbsp;dictionary(Basics)</li>
+													<li>Arrays</li>
+													<li>Functions(User defined and built-in)</li>
+													<li>Modules</li>
+													<li>File Handling</li>
+													<li>Exception handling</li>
+													<li>Networking Programming</li>
+													<li>Web Scraping</li>
+													<li>Working With Images</li>
+													<li>Working With PDFs and Spreadsheet CSV Files</li>
+													<li>Project:Automating Job Applications on LinkedIn</li>
+													<li>Project:Create an Automated Amazon Price Tracker</li>
+												</ul>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							</div>
+							<div class="mb-4">
+								<div class="accordion" id="accordionPanelsStayOpenExample">
+								  <div class="accordion-item">
+								    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+								      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo" style="font-size: 22px; font-weight: 600;">
+								        Data Science
+								      </button>
+								    </h2>
+								    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+								      <div class="accordion-body">
+									       <ul>
+													<li>Installation of Python, Jupyter Notebook &amp; Google Colab</li>
+													<li>Data Type, List, Functions, Loops,&nbsp;</li>
+													<li>NumPy - Math Operations &amp; Array, Pandas Dataframe</li>
+													<li>Reading CSV file &amp; DB data</li>
+													<li>Basic Statistics - Mean, Median &amp; Mode,</li>
+													<li>Variance, SD, Population vs. Sample,&nbsp;</li>
+													<li>Central Tendency Theory,&nbsp;</li>
+													<li>Charts &amp; Graphs for Analysis, Distribution-Normal, Uniform &amp; Poisson, p-value</li>
+													<li>Hypothesis Testing</li>
+													<li>Overview of ML - Training&nbsp;</li>
+													<li>Confusion Matrix&nbsp;</li>
+													<li>R-Square</li>
+													<li>Supervised Vs. Unsupervised&nbsp;</li>
+													<li>Regression&nbsp;</li>
+													<li>Decision Tree &amp; Random Forest&nbsp;</li>
+													<li>K-Means Clustering</li>
+													<li>PACKET CAPTURE, METADATA EXTRACTION AND ANOMALY DETECTION</li>
+													<li>NETWORK FLOW ANALYTICS &amp; ANOMALY DETECTION</li>
+													<li>DNS FAST FLUX ATTACK DETECTION</li>
+													</ul>
+									    </div>
+									  </div>
+									</div>
+								</div>
+							</div>
+							<div class="mb-5">
+								<div class="accordion" id="accordionPanelsStayOpenExample">
+								  <div class="accordion-item">
+								    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+								      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree" style="font-size: 22px; font-weight: 600;">
+								        Python For Security
+								      </button>
+								    </h2>
+								    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+								      <div class="accordion-body">
+								       <ul>
+													<li>Building a port scanner</li>
+													<li>Constructing a SSH Botnet</li>
+													<li>Dictionary password cracker</li>
+													<li>ZIP file Brute-Force cracker</li>
+													<li>Introduction to python shell</li>
+													<li>Write python reverse shell (Windows)</li>
+													<li>Write python reverse shell (Linux)</li>
+													<li>Write python bind shell</li>
+													<li>Handling Url's using python</li>
+													<li>Write customised port scanner using python</li>
+													<li>Perform banner grabbing</li>
+													<li>Sniffing wireless network for personal information</li>
+													<li>Lisntening for preferred networks and indentifying hiddenn wireless networks</li>
+													<li>Stalking Bluetooth Radios</li>
+													<li>Exploiting Bluetooth vulnerablities</li>
+													<li>Anonymously browsing the internet with the mechanize class</li>
+													<li>Interacting with Google using python</li>
+													<li>Interacting with Twitter using python</li>
+													<li>Python for OSINT</li>
+													<li>THREAT INTEL &amp; OSINT USING PYTHON &amp; OPENSOURCE LIBRARIES</li>
+												</ul>
+								    </div>
+								  </div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+
+					<h3 class="course_detail_heading heading_with_underline"> Prerequisites </h3>
+					<div class="mb-5">
+						<ul>
+							<li>Exposure to Programming </li>
+							<li>Access to a Laptop/ Computer </li>
+							<li>Commitment to learn the most sought after skill. </li>
+							
+						</ul>
+					</div>
+
+					<div>
+						<a href="https://forms.gle/Ny9Q8UtdhrajDaCu5" class="btn btn-warning btn-lg d-block"> Apply Now !</a>
+					</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock base_block %}

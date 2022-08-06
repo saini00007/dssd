@@ -50,6 +50,12 @@ urlpatterns=[
 
 
 
+
+	path(r'training/cyber-rakshak-beginner/', \
+		TemplateView.as_view(template_name='website/cyber_rakshak_beginner.html'), name='cyber_rakshak_beginner'),
+
+
+
 	path(r'partners/', \
 		TemplateView.as_view(template_name='website/inner_page_template.html'), name='partners'),
 
