@@ -56,7 +56,50 @@
 	<div class="overlay hero-shape fadeIn ad-100ms"></div>
 	      
 </header> -->
-<div class="home_jumbo">
+
+<div class="h-section p-0" >
+
+	<div class="" >
+		<div class=" ">
+			<div id="homepage_sliders" class="carousel slide" data-bs-ride="carousel">
+			  <div class="carousel-indicators d-none">
+			  	{% for slider in cv.homepage_sliders %}
+			    <button type="button" data-bs-target="#homepage_sliders" data-bs-slide-to="{{forloop.counter0}}" {% if forloop.counter0 == 0 %} class="active" aria-current="true" {% endif %} aria-label="Slide {{forloop.counter0}}"></button>
+			    {% endfor %}
+
+			   
+			  </div>
+			  <div class="carousel-inner">
+			  	{% for slider in cv.homepage_sliders %}
+
+			    <a {% if slider.link %} href="{{slider.link}}" {% else %} href="#" {% endif %} class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+			    	{% if slider.slide_square %}
+			    		<img src="{{slider.slide_square.url}}" class="d-block d-sm-none w-100" alt="{{slider.title}}" >
+			    		<img src="{{slider.slide.url}}" class="d-none d-sm-block w-100" alt="{{slider.title}}" >
+			    	{% else %}
+			      <img src="{{slider.slide.url}}" class="d-block w-100" alt="{{slider.title}}" >
+			    	{% endif %}
+			    </a>
+			    {% endfor %}
+			
+			  
+			    
+			  </div>
+			  <button class="carousel-control-prev" type="button" data-bs-target="#homepage_sliders" data-bs-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#homepage_sliders" data-bs-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Next</span>
+			  </button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="home_jumbo d-none">
 	<div class="container ">
 			<div class="row">
 				<div class="col-lg-7 left_col">
@@ -80,23 +123,23 @@
 
 
 <section class="h-section">
-
-	<div class="container features_shift_up mb-5" style="">
+	<!-- class remvoed: features_shift_up -->
+	<div class="container  mb-5" style="">
 		<div class="row align-items-stretch">
 		  <div class="col-lg-4 col-sm-6 offset-sm-3 offset-lg-0">
-	      <div class="single-features h-100 text-left ">
+	      <div class="single-features h-100 text-left mb-2">
 				  <h3><i></i> Creating Cyber Rakshak</h3>
 	        <p>Creating a Large Pool of Cyber Rakshak aligned to NIST NICE Framework for cyber resilience.</p>
 	      </div>
 	  	</div>
 	  	<div class="col-lg-4 col-sm-6 offset-sm-3 offset-lg-0">
-	      <div class="single-features h-100 text-left ">
+	      <div class="single-features h-100 text-left mb-2">
 		    	<h3><i></i> Research & Development</h3>
 	      	<p>Mentor research work in Cyber Defense Engineering with active collaboration of Industry, Researcher & Academia. Create & Promote Made In India Technology in Cyber Defense Space.</p>
 	      </div>
 			</div>
 	    <div class="col-lg-4 col-sm-6 offset-sm-3 offset-lg-0">
-	      <div class="single-features h-100 text-left ">
+	      <div class="single-features h-100 text-left mb-2">
 				  <h3><i></i> Discussion & Discourse</h3>
 	      	<p>Engage & Promote collaboration among Technology, Cyber Professional, industry Academia & Researchers through Webinars, Conferences, Symposium, Events.</p>
 	      </div>
@@ -378,6 +421,9 @@
 
 
 <script type="text/javascript">
-	
+	$('.carousel').carousel({
+	  interval: 2000,
+	  ride: true,
+	})
 </script>
 {% endblock base_bottom_script %}
