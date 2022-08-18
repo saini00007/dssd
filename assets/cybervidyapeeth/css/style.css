@@ -671,7 +671,44 @@ a.mega_course_card:hover{
 .owl-theme .owl-dots{
   margin-top:20px;
 }
+ 
 
+/* New Ticker  */
+.news_ticker_section p{
+	margin: 0;
+}
+.news_ticker_section{
+	background: #d62724;
+    border-top: 4px solid #b70300;
+    border-bottom: 4px solid #b70300;
+}
+
+.news_ticker_wrapper{
+	position: relative;
+}
+
+
+.news_ticker_header{
+	position: absolute;
+    background: #af0300;
+    padding: 25px 22px 22px 15px;
+    z-index: 100;
+    color: #fff;
+    font-weight: 800;
+}
+
+.news_ticker_content_row{
+  background-color: #d62724;
+  padding: 24px 18px 16px 10px;
+  color: #fff;
+  font-weight: 600;
+}
+.news_ticker_content_row a{
+	color: #fff;
+	/*text-decoration: none;*/
+
+}
+/* New Ticker Ends */
 
 
 .page_footer{

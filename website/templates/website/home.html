@@ -98,6 +98,38 @@
 
 	</div>
 </div>
+{% if cv.homepage_tickers %}
+<div class=" news_ticker_section" >
+	<div class="container" >
+
+			<section class="news_ticker_wrapper">
+		    <div class="news_ticker_header">
+		      <p class="updatetext">New Updates</p>
+		    </div>
+		    <div class="news_ticker_content_row" >
+		      <marquee onmouseover="this.stop()" onmouseout="this.start()">
+		        <p>
+		         	{% for ticker in cv.homepage_tickers %}
+		         		{% if ticker.link %}
+		         			<a href="{{ticker.link}}" target="_blank">{{ticker.title}}</a>
+		         		{% else %}
+							 		<span style="color:#FFF;"> {{ticker.title}} </span> 
+							 	{% endif %}
+							 {% if not forloop.last %}&nbsp; | &nbsp;{% endif %}
+							 
+							 {% endfor %}
+							 
+							 
+							 
+		        
+		        </p>
+		      </marquee>
+		    </div>
+    </section>
+
+	</div>
+</div>
+{% endif %}
 
 <div class="home_jumbo d-none">
 	<div class="container ">
@@ -154,7 +186,7 @@
 		<div class="row mb-5">
 
 
-			<div class="col-lg-3 col-sm-3 col-6 col-md-3">
+			<div class="col-lg-3 col-sm-3 col-12 col-md-3">
 				<div class="single-funfacts-box">
 					<div class="icon">
               <img src="{% static 'cybervidyapeeth/images/funfacts-icon4.png' %}" alt="funfacts-icon">
@@ -164,7 +196,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-3 col-sm-3 col-6 col-md-3">
+			<div class="col-lg-3 col-sm-3 col-12 col-md-3">
 				<div class="single-funfacts-box">
 					<div class="icon">
               <img src="{% static 'cybervidyapeeth/images/funfacts-icon1.png' %}" alt="funfacts-icon">
@@ -175,7 +207,7 @@
 			</div>
 
 			
-			<div class="col-lg-3 col-sm-3 col-6 col-md-3">
+			<div class="col-lg-3 col-sm-3 col-12 col-md-3">
 				<div class="single-funfacts-box">
 					<div class="icon">
               <img src="{% static 'cybervidyapeeth/images/funfacts-icon2.png' %}" alt="funfacts-icon">
@@ -186,7 +218,7 @@
 			</div>
 
 			
-			<div class="col-lg-3 col-sm-3 col-6 col-md-3">
+			<div class="col-lg-3 col-sm-3 col-12 col-md-3">
 				<div class="single-funfacts-box">
 					<div class="icon">
               <img src="{% static 'cybervidyapeeth/images/funfacts-icon3.png' %}" alt="funfacts-icon">
