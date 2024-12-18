@@ -15,3 +15,4 @@ cybervidyapeeth/__pycache__/*
 cybervidyapeeth/setting_files/__pycache__/base.cpython-35.pyc
 *.docx
 
+cybervidyapeeth/setting_files/local.py
