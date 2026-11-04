@@ -45,18 +45,34 @@ export async function dismissPopups(page) {
   if (open) await page.keyboard.press('Escape').catch(() => {});
 }
 
-/** Detect challenge/bot-wall pages so the run can stop instead of capturing a captcha. */
-export async function detectBotWall(page) {
-  return page
+export class BlockedError extends Error {
+  constructor(info) {
+    super(`blocked: ${info.reason}`);
+    this.info = info;
+  }
+}
+
+/**
+ * Detect that the site refused us or served a challenge/error page instead of itself. We only detect
+ * and report this; nothing here tries to get past a bot wall.
+ * `net` = { status, challengeSeen, cssTotal, cssFailed } gathered from network events during load.
+ */
+export async function assessBlocked(page, net) {
+  if ([401, 403, 429, 503].includes(net.status)) return { blocked: true, reason: `document returned HTTP ${net.status}`, httpStatus: net.status };
+  if (net.challengeSeen) return { blocked: true, reason: `bot-protection challenge script requested (${net.challengeSeen})`, httpStatus: net.status };
+  if (net.cssTotal > 0 && net.cssFailed === net.cssTotal) return { blocked: true, reason: `all ${net.cssTotal} stylesheets failed to load (likely blocked)`, httpStatus: net.status };
+  const wall = await page
     .evaluate(() => {
       const title = document.title || '';
       const text = (document.body ? document.body.innerText : '').replace(/\s+/g, ' ').trim();
-      const re = /just a moment|attention required|access denied|are you a (human|robot)|verify you are (a )?human|security check|captcha|unusual traffic|pardon our interruption|press (and|&) hold/i;
+      const re = /just a moment|attention required|access denied|are you a (human|robot)|verify you are (a )?human|security check|captcha|unusual traffic|pardon our interruption|press (and|&) hold|checking your browser|vercel security checkpoint/i;
       const widget = document.querySelector('iframe[src*="challenges.cloudflare"], iframe[src*="captcha"], #px-captcha, .g-recaptcha, #challenge-form, .cf-turnstile');
       const hit = re.test(title) || (text.length < 1200 && re.test(text)) || (!!widget && text.length < 1200);
-      return hit ? { detected: true, title, sample: text.slice(0, 160) } : { detected: false };
+      return hit ? { title, sample: text.slice(0, 160) } : null;
     })
-    .catch(() => ({ detected: false }));
+    .catch(() => null);
+  if (wall) return { blocked: true, reason: `challenge page content ("${wall.title || wall.sample.slice(0, 60)}")`, httpStatus: net.status };
+  return null;
 }
 
 /**
@@ -180,7 +196,23 @@ export async function openPage(run, { video = false, hooks = false, label = 'pag
   if (hooks) await context.addInitScript(hooksScript);
   const navStart = Date.now();
   const page = await context.newPage();
-  if (onResponse) page.on('response', onResponse);
+  const net = { status: null, challengeSeen: null, cssTotal: 0, cssFailed: 0 };
+  page.on('response', (res) => {
+    const req = res.request();
+    if (req.isNavigationRequest() && req.frame() === page.mainFrame() && net.status === null) net.status = res.status();
+    if (/\/\.well-known\/vercel\/security|challenges\.cloudflare\.com|cdn-cgi\/challenge-platform|captcha-delivery|px-cdn\.net/i.test(res.url())) net.challengeSeen = res.url().slice(0, 120);
+    if (req.resourceType() === 'stylesheet') {
+      net.cssTotal++;
+      if (res.status() >= 400) net.cssFailed++;
+    }
+    if (onResponse) onResponse(res);
+  });
+  page.on('requestfailed', (req) => {
+    if (req.resourceType() === 'stylesheet') {
+      net.cssTotal++;
+      net.cssFailed++;
+    }
+  });
   page.on('dialog', (d) => d.dismiss().catch(() => {}));
   try {
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: opts.navTimeout });
@@ -190,6 +222,12 @@ export async function openPage(run, { video = false, hooks = false, label = 'pag
   }
   await page.waitForLoadState('load', { timeout: 15000 }).catch(() => {});
   await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => log(label, 'network never idle (continuing)'));
+  const blocked = await assessBlocked(page, net);
+  if (blocked) {
+    run.shared.blocked = blocked;
+    await context.close().catch(() => {});
+    throw new BlockedError(blocked);
+  }
   await dismissConsent(page);
 
   const session = {

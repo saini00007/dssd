@@ -1,7 +1,7 @@
 // Pass 7 (runs first): JS introspection + network fingerprinting -> probe.json
 import path from 'node:path';
 import { sleep } from '../lib/browser.mjs';
-import { detectBotWall, openPage } from './session.mjs';
+import { openPage } from './session.mjs';
 import { log, writeJson } from './util.mjs';
 
 /** URL / bundle-text fingerprints for libraries that may be bundled without globals. */
@@ -329,7 +329,6 @@ export async function runProbe(run) {
   try {
     const { page } = s;
     await s.waitIntro();
-    run.shared.botWall = await detectBotWall(page);
     const scroller = await s.initScroller();
     log('probe', 'introspecting page');
     const snapshot = () => page.evaluate(inPage);
@@ -402,7 +401,7 @@ export async function runProbe(run) {
       url: run.url,
       profile: run.profile.name,
       capturedAt: new Date().toISOString(),
-      botWall: run.shared.botWall,
+      botWall: { detected: false },
       scroller: scroller.info,
       ...result,
       libraries,
