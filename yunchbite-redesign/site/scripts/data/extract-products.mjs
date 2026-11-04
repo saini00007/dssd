@@ -1,4 +1,15 @@
 // Parses the harvested product pages and writes src/data/products.ts.
+// SEO: hand-written meta descriptions (120–160 chars) where the old ones were too long or too short.
+const META_OVERRIDES = {
+  "makhana-jar-chatpataa": "Chatpata Masala makhana: tangy chaat spices on crunchy fox nuts, roasted in olive oil with zero palm oil and packed in an airtight countertop jar.",
+  "makhana-pillow-peri-peri": "Peri-Peri Paradise makhana: fox nuts roasted in olive oil and tossed in a fiery peri-peri blend. The perfect balance of crunch and spice, in a 12 gm pack.",
+  "makhana-raw-1": "Raw makhana from the fresh-water ponds of Bihar: hand-graded, jumbo fox nuts, unprocessed and naturally rich in plant protein, calcium and antioxidants.",
+  "makhana-zipper-black-salt": "Black Salt makhana: roasted fox nuts with mineral-rich kala namak and roasted cumin. Olive-oil roasted, zero palm oil, in a resealable zipper pouch.",
+  "makhana-zipper-chatpataa": "Chatpata Masala makhana: tangy street-chaat spices over slow-roasted, crispy fox nuts. Olive-oil roasted, zero palm oil, in an airtight zipper pouch.",
+  "makhana-zipper-cheese-herbs": "Tangy Cheese & Herbs makhana: cheddar cheese with oregano and basil over slow-roasted fox nuts. Roasted in olive oil, in a resealable zipper pouch.",
+  "makhana-zipper-peri-peri": "Peri-Peri Paradise makhana: fox nuts roasted in olive oil and seasoned with a fiery peri-peri blend, in a resealable zip-lock pouch that keeps it fresh.",
+  "makhana-zipper-pudina": "Pudina Masala makhana: garden mint and rock salt over slow-roasted makhana in virgin olive oil. Fresh, light and crunchy, in a resealable zipper pouch."
+};
 // Run: node scripts/data/extract-products.mjs   (from site/)
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
@@ -114,7 +125,7 @@ const products = SLUGS.map((slug) => {
     shelfLife: clean(section(md, "Shelf Life")),
     origin: clean(section(md, "Country of Origin")),
     metaTitle,
-    metaDescription: clean(meta.description),
+    metaDescription: META_OVERRIDES[slug] ?? clean(meta.description),
   };
 });
 

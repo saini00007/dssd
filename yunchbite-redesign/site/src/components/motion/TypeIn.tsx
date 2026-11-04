@@ -19,11 +19,12 @@ export interface TypeInProps {
 
 /**
  * Letter-by-letter headline (y 0.35em -> 0, opacity, 22 ms stagger, subtle crunch).
- * SplitText with autoSplit re-splits on resize / late font loads. aria-label keeps the text accessible.
+ * SplitText with autoSplit re-splits on resize / late font loads. aria "hidden" keeps the text accessible on any tag.
  * Reduced motion: no split, text shown as is.
  */
 export function TypeIn({ as: Tag = "span", text, trigger = "scroll", delay = 0, className, style, id }: TypeInProps) {
   const ref = useRef<HTMLElement>(null);
+  const isHeading = typeof Tag === "string" && /^h[1-6]$/.test(Tag);
 
   useGSAP(
     () => {
@@ -42,7 +43,10 @@ export function TypeIn({ as: Tag = "span", text, trigger = "scroll", delay = 0, 
         const split = SplitText.create(el, {
           type: "words,chars",
           autoSplit: true,
-          aria: "auto",
+          // Headings may carry an aria-label: "auto" labels the heading and hides the chars, keeping its role and a
+          // single copy of the text. A plain span/p may not carry aria-label: "hidden" hides the split element and adds
+          // a screen-reader copy next to it (inside the parent heading, so the heading's name stays correct).
+          aria: isHeading ? "auto" : "hidden",
           onSplit(self) {
             cleanupTrigger();
             if (played) return; // re-split after the animation finished: leave the chars in their final state
@@ -84,7 +88,7 @@ export function TypeIn({ as: Tag = "span", text, trigger = "scroll", delay = 0, 
         };
       });
     },
-    { scope: ref, dependencies: [text, trigger, delay], revertOnUpdate: true },
+    { scope: ref, dependencies: [text, trigger, delay, isHeading], revertOnUpdate: true },
   );
 
   return (

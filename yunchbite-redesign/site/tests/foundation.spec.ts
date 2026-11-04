@@ -39,13 +39,17 @@ test("client navigation (link, back, forward) works without console errors and r
   const errors = collectErrors(page);
   await noLoader(page);
   await page.goto("/", { waitUntil: "networkidle" });
-  await page.getByRole("link", { name: "/lab" }).click();
-  await expect(page).toHaveURL(/\/lab$/);
-  await expect(page.locator("main h1:visible")).toContainText("The Lab");
+  // A real footer link, clicked from the bottom of the page, so the scroll reset is tested too.
+  const footerAbout = page.getByRole("contentinfo").getByRole("link", { name: "About", exact: true });
+  await footerAbout.scrollIntoViewIfNeeded();
+  await footerAbout.click();
+  await expect(page).toHaveURL(/\/about$/);
+  await expect(page.locator("main h1:visible")).toHaveCount(1);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(5);
   await page.goBack();
   await expect(page).toHaveURL(/\/$/);
   await page.goForward();
-  await expect(page).toHaveURL(/\/lab$/);
+  await expect(page).toHaveURL(/\/about$/);
   await page.waitForTimeout(500);
   expect(errors).toEqual([]);
 });

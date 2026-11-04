@@ -328,7 +328,7 @@ export const products: Product[] = [
     "shelfLife": "9 Months from the date of manufacturing.",
     "origin": "India",
     "metaTitle": "Chatpata Masala Makhana (Jar) | Yunch Bite",
-    "metaDescription": "Tangy and savory chaat spice blend tossed with crunchy fox nuts, packed in an airtight clear countertop snack jar."
+    "metaDescription": "Chatpata Masala makhana: tangy chaat spices on crunchy fox nuts, roasted in olive oil with zero palm oil and packed in an airtight countertop jar."
   },
   {
     "slug": "makhana-jar-peri-peri",
@@ -588,7 +588,7 @@ export const products: Product[] = [
     "shelfLife": "6 Months from the date of manufacturing.",
     "origin": "India",
     "metaTitle": "Peri-Peri Paradise Makhana (Pillow Pouch) | Yunch Bite",
-    "metaDescription": "Yunch Bite Makhana is roasted to perfection in olive oil and seasoned with a unique & fiery peri-peri blend, that delivers the perfect balance of crunch and spice. A healthy snack that satisfies your cravings!"
+    "metaDescription": "Peri-Peri Paradise makhana: fox nuts roasted in olive oil and tossed in a fiery peri-peri blend. The perfect balance of crunch and spice, in a 12 gm pack."
   },
   {
     "slug": "makhana-pillow-salt-pepper",
@@ -718,7 +718,7 @@ export const products: Product[] = [
     "shelfLife": "12 Months from the date of manufacturing.",
     "origin": "India",
     "metaTitle": "Raw Makhana | Yunch Bite",
-    "metaDescription": "Hand-graded, jumbo-sized raw fox nuts sourced directly from the fresh water ponds of Bihar. Unprocessed and naturally rich in plant protein, calcium, and antioxidants."
+    "metaDescription": "Raw makhana from the fresh-water ponds of Bihar: hand-graded, jumbo fox nuts, unprocessed and naturally rich in plant protein, calcium and antioxidants."
   },
   {
     "slug": "makhana-zipper-berry-berry",
@@ -848,7 +848,7 @@ export const products: Product[] = [
     "shelfLife": "6 Months from the date of manufacturing.",
     "origin": "India",
     "metaTitle": "Black Salt Makhana (Zipper Pouch) | Yunch Bite",
-    "metaDescription": "Traditional roasted fox nuts sprinkled with mineral-rich Indian black salt (kala namak) and digestive roasted cumin."
+    "metaDescription": "Black Salt makhana: roasted fox nuts with mineral-rich kala namak and roasted cumin. Olive-oil roasted, zero palm oil, in a resealable zipper pouch."
   },
   {
     "slug": "makhana-zipper-chatpataa",
@@ -913,7 +913,7 @@ export const products: Product[] = [
     "shelfLife": "6 Months from the date of manufacturing.",
     "origin": "India",
     "metaTitle": "Chatpata Masala Makhana (Zipper Pouch) | Yunch Bite",
-    "metaDescription": "Tangy and savory street chaat spices blended over slow-roasted crispy fox nuts, preserved in an airtight zipper pouch."
+    "metaDescription": "Chatpata Masala makhana: tangy street-chaat spices over slow-roasted, crispy fox nuts. Olive-oil roasted, zero palm oil, in an airtight zipper pouch."
   },
   {
     "slug": "makhana-zipper-cheese-herbs",
@@ -978,7 +978,7 @@ export const products: Product[] = [
     "shelfLife": "6 Months from the date of manufacturing.",
     "origin": "India",
     "metaTitle": "Tangy Cheese & Herbs Makhana (Zipper Pouch) | Yunch Bite",
-    "metaDescription": "Rich cheddar cheese essence paired with aromatic Mediterranean oregano and basil, slow-roasted over crunchy fox nuts."
+    "metaDescription": "Tangy Cheese & Herbs makhana: cheddar cheese with oregano and basil over slow-roasted fox nuts. Roasted in olive oil, in a resealable zipper pouch."
   },
   {
     "slug": "makhana-zipper-peri-peri",
@@ -1043,7 +1043,7 @@ export const products: Product[] = [
     "shelfLife": "6 Months from the date of manufacturing.",
     "origin": "India",
     "metaTitle": "Peri-Peri Paradise Makhana (Zipper Pouch) | Yunch Bite",
-    "metaDescription": "Yunch Bite Makhana is roasted to perfection in olive oil and seasoned with a unique & fiery peri-peri blend, packed in a resealable zip-lock pouch for lasting freshness."
+    "metaDescription": "Peri-Peri Paradise makhana: fox nuts roasted in olive oil and seasoned with a fiery peri-peri blend, in a resealable zip-lock pouch that keeps it fresh."
   },
   {
     "slug": "makhana-zipper-pudina",
@@ -1108,7 +1108,7 @@ export const products: Product[] = [
     "shelfLife": "6 Months from the date of manufacturing.",
     "origin": "India",
     "metaTitle": "Pudina Masala Makhana (Zipper Pouch) | Yunch Bite",
-    "metaDescription": "Refreshing garden mint leaves and rock salt crushed over slow-roasted makhana kernels in virgin olive oil."
+    "metaDescription": "Pudina Masala makhana: garden mint and rock salt over slow-roasted makhana in virgin olive oil. Fresh, light and crunchy, in a resealable zipper pouch."
   },
   {
     "slug": "makhana-zipper-salt-pepper",
