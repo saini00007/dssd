@@ -5,7 +5,9 @@ import { GRID_COLS, GRID_ROWS } from './motion.mjs';
 export const DEFAULTS = {
   scrollMinPx: 0,          // accepted shifts are already thresholded in motion.mjs
   animEnergy: 0.8,         // residual above idle floor (gray levels) that counts as in-place change
-  animCellEnergy: 2.5,     // same, for the strongest 4x3 grid cell (localised changes)
+  animCellEnergy: 2.5,
+  animChanged: 0.004,      // fraction of pixels with |diff|>12 (global): small moving objects with flat interiors
+  animChangedCell: 0.04,   // same, strongest grid cell     // same, for the strongest 4x3 grid cell (localised changes)
   animEnergyScroll: 2.5,   // above the speed-dependent scroll floor while scrolling
   scrollGapFrames: 4, scrollGapSec: 0.25,
   animGapFrames: 4, animGapSec: 0.3,
@@ -28,7 +30,7 @@ export function buildTimeline({ times, motion, crop, scene }) {
       confidence: m.conf,
       residual: m.resid, rawDiff: m.raw,
       regionGrid: m.grid,
-      _sBest: m.sBest, _s0: m.s0, _dyA: m.dy,
+      _sBest: m.sBest, _s0: m.s0, _dyA: m.dy, changed: m.chg, changedGrid: m.chgGrid,
       sceneScore: scene ? scene[n] ?? 0 : null,
     });
   }
@@ -96,7 +98,7 @@ export function classifyFrames(tl, userParams = {}) {
     f.cellEnergy = f.regionGrid.map((v, c) => Math.max(0, v - (scrolling ? f._floor : cellFloor[c])));
     const maxCell = Math.max(...f.cellEnergy);
     f.isScroll = scrolling && !f.isCut;
-    f.isAnim = !f.isCut && f.n > 0 && (scrolling ? f.energy >= P.animEnergyScroll : (f.energy >= P.animEnergy || maxCell >= P.animCellEnergy));
+    f.isAnim = !f.isCut && f.n > 0 && (scrolling ? f.energy >= P.animEnergyScroll : (f.energy >= P.animEnergy || maxCell >= P.animCellEnergy || f.changed >= P.animChanged || Math.max(...f.changedGrid) >= P.animChangedCell));
     f.class = f.isCut ? 'cut' : f.isScroll && f.isAnim ? 'scroll+animate' : f.isScroll ? 'scroll' : f.isAnim ? 'animate' : 'idle';
     f.lowConf = f.confidence < 0.25 && f.rawDiff >= 0.12;
   }
@@ -123,7 +125,7 @@ const ROWS = ['top', 'middle', 'bottom'];
 
 export function describeRegion(tl, a, b) {
   const sum = new Float64Array(GRID_COLS * GRID_ROWS);
-  for (let n = a; n <= b; n++) for (let c = 0; c < sum.length; c++) sum[c] += tl[n].cellEnergy[c];
+  for (let n = a; n <= b; n++) for (let c = 0; c < sum.length; c++) sum[c] += tl[n].cellEnergy[c] + 10 * tl[n].changedGrid[c];
   const mx = Math.max(...sum);
   if (!(mx > 0)) return { region: 'none', box: [0, 0, 1, 1], localised: false, cells: Array.from(sum) };
   const sel = []; for (let c = 0; c < sum.length; c++) if (sum[c] >= 0.2 * mx) sel.push(c);
@@ -235,7 +237,11 @@ export function deriveEvents(tl, P) {
   // --- animations (in-place change >= minAnimFrames), with or without scroll
   const aRuns = runs(tl, (f) => f.isAnim, P.animGapFrames, P.animGapSec).filter((r) => r.flagged >= P.minAnimFrames);
   let animEvents = [];
-  for (const r of aRuns) {
+  for (const r0 of aRuns) {
+    // clip at cuts: frames at/after a cut belong to the cut event (fade to blank etc.), not to an animation
+    const r = { ...r0 };
+    const cutAt = cutEvents.find((c) => c.startFrame <= r.last && c.endFrame >= r.first);
+    if (cutAt) { if (cutAt.startFrame > r.first) r.last = cutAt.startFrame - 1; else r.first = cutAt.endFrame + 1; if (r.last - r.first + 1 < P.minAnimFrames) continue; }
     const seg = tl.slice(r.first, r.last + 1);
     const scrollFrac = seg.filter((f) => f.isScroll).length / seg.length;
     const hFrac = seg.filter((f) => f.dx !== 0).length / seg.length;
@@ -245,8 +251,9 @@ export function deriveEvents(tl, P) {
   // --- pinned / scroll-scrubbed: long in-place change, page not moving, bracketed by scrolling
   const scrollish = [...scrollEvents, ...hEvents];
   const nearScroll = (t0, t1) => ({
-    before: scrollish.some((s) => s.endT <= t0 + 1e-6 && t0 - s.endT <= P.pinnedScrollAdjSec),
-    after: scrollish.some((s) => s.startT >= t1 - 1e-6 && s.startT - t1 <= P.pinnedScrollAdjSec),
+    // scrolling that precedes (or is still ending as) the change begins, and scrolling that follows (or has already resumed)
+    before: scrollish.some((s) => s.startT <= t0 + 1e-6 && s.endT >= t0 - P.pinnedScrollAdjSec),
+    after: scrollish.some((s) => s.endT >= t1 - 1e-6 && s.startT <= t1 + P.pinnedScrollAdjSec),
   });
   const still = animEvents.filter((e) => e.type === 'animation');
   const groups = [];

@@ -107,7 +107,7 @@ export async function renderTimelineChart(R, { tl, events, probe, label, crop, n
   for (const p of panels) {
     const { y: py, h: ph } = p;
     let series, lo, hi, color = C.blue;
-    if (p.key === 'pos') { series = tl.map((f) => f.scrollPos); lo = Math.min(0, ...series); hi = Math.max(1, ...series); }
+    if (p.key === 'pos') { series = tl.map((f) => f.scrollPos); hi = Math.max(1, ...series); lo = Math.min(0, ...series); if (lo > -0.03 * hi) lo = 0; }
     else if (p.key === 'vel') { series = tl.map((f) => f.scrollVelocity); const m = Math.max(100, ...series.map(Math.abs)); lo = -m; hi = m; }
     else { series = tl.map((f) => (f.isCut ? null : f.energy)); const vals = series.filter((v) => v != null); hi = Math.max(3, percentile(vals, 0.995) * 1.1); lo = 0; }
     const ticks = niceTicks(lo, hi, 4); lo = Math.min(lo, ticks[0]); hi = Math.max(hi, ticks[ticks.length - 1]);

@@ -11,3 +11,5 @@ tools/**/_out/
 # harvest: raw rendered-DOM snapshots stay local (copy lives in content.md)
 research/current-site/pages/*/dom.html
 research/current-site/crawl-state.json
+# video analyser: individual per-event frames stay local (strips + sheets are committed)
+research/references/**/analysis/**/events/*/frames/

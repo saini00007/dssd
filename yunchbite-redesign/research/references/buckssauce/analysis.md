@@ -1,98 +1,138 @@
 # R1 · Bucks Sauce: reference analysis
 
 - **Site:** <https://buckssauce.com/> (small-batch BBQ sauce, US). Built by Buzzworthy.
-- **Stack** (from a browser visit): Next.js (Turbopack build), Prismic CMS (`images.prismic.io`), fonts *Inter Tight* + custom *Peperoncino Sans*, LogRocket, CrazyEgg, GTM. Vercel bot protection is on, so automated browsers are refused (429).
-- **Source:** the client's desktop screen recording (Brave, 1920×1020, 65.6 s, VFR ≈24.5 fps). It covers the homepage, a page reload (the loader), and the *Crushed Pineapple Sriracha* product page. **There is no mobile recording yet.**
-- **Frame data:** `analysis/desktop-brave-2026-11-04/` (contact sheets, per-event frame strips, motion timeline, frame stepper `viewer.html`)
-- **Timestamps** below are positions in the recording (`mm:ss`). Until the per-event strips are measured they're accurate to about ±0.5 s; measured values are marked **(measured)**.
+- **Stack** (from a browser visit): Next.js (Turbopack build), Prismic CMS (`images.prismic.io`), fonts *Inter Tight* + custom *Peperoncino Sans*, LogRocket, CrazyEgg, GTM. Vercel bot protection is on, so automated browsers are refused (429). This analysis is therefore based on the client's own recording.
+- **Source:** the client's desktop recording (Brave, 1920×1020, 65.6 s, VFR ≈24.5 fps, 1,607 frames). It covers the homepage, a reload (the loader), and the *Crushed Pineapple Sriracha* product page. **Mobile is skipped for now** (client decision).
+- **Frame data:** [`analysis/desktop-brave-2026-11-04/`](analysis/desktop-brave-2026-11-04/report.md) holds the motion timeline (`timeline.png`), 46 detected events with frame-by-frame strips (`events/E##-*/strip.jpg`), contact sheets, and the frame stepper `viewer.html` (← / → steps one frame).
+- **Precision:** timings marked **(measured)** come from frame strips with true timestamps. At ≈24.5 fps, one frame is ≈41 ms (recorder gaps up to 200 ms), so durations are ±1–2 frames. Event IDs (E##) refer to the strips.
 
 ---
 
-## A · First 5 seconds
+## The big idea: one motion motif, used everywhere
 
-The recording starts on an already-loaded homepage. The user reloads at about 00:06, so the loader is visible:
+Bucks Sauce builds its whole motion language from **circles that expand in flavour colours**:
 
-| t | What happens |
+- the loader's concentric rings (E01)
+- the colour disc behind every bottle (E04)
+- the ring burst when a bottle is added to the 3-pack (E17)
+- the arc carousel and the arched headings (E19)
+
+That consistency is why the site feels *designed* rather than *animated*.
+
+**For Yunch Bite:** makhana and popcorn are literally **popped**. "Pop" (a quick burst with a little overshoot) and "crunch" (snappy, short timings) can be our equivalent motif.
+
+## Smooth scroll (measured)
+
+- 16 scroll bursts. The median peak velocity is ≈2,400 px/s and the fastest reaches 8,200 px/s.
+- **Scroll decay τ is about 0.158 s** (median of 12 fits). That's exactly what **Lenis at its default `lerp: 0.1`** produces at 60 fps: τ = −1/(60·ln 0.9) ≈ 0.158 s. So Bucks almost certainly runs Lenis on defaults.
+- **Takeaway:** a light lerp (0.1) feels smooth but responsive. Nothing heavier is needed.
+
+---
+
+## A · First 5 seconds: loader (E01–E02, measured)
+
+| t (+ms from start) | What happens |
 |---|---|
-| 00:06 | Black screen |
-| 00:07 | **Iris reveal:** a full-bleed red field with a black circle in the centre holding the deer-chef logo. The circle grows until it fills the screen. |
-| 00:08–00:09 | The logo sits centred on black, with four **ingredient cut-outs** (habanero, cherry, pineapple, peach) floating around it with gentle drift |
-| 00:10 | The loader clears. The hero headline types in **letter by letter**: each letter drops in and fades from transparent to solid ("MAKEs OTh…" caught mid-way) |
-| 00:11 | The hero is complete: headline, bottle on a peach-coloured disc, peach cut-out, "PRODUCT NO.01 / SMOKED PEACH CHIPOTLE" rail |
+| 6.47 s (−33) | A tiny gold dot appears in the centre of black |
+| +0 → +570 | **Concentric ripple:** a gold disc expands from the centre. An orange disc follows ≈130–170 ms behind it, then crimson, then black. Each layer **accelerates** as it grows (ease-in, expo-like). Gold fills the screen at ≈+570 ms, orange at ≈+800 ms, crimson at ≈+1,070 ms. |
+| +800 → +1,070 | Black takes over the centre. The logo **scales up** from a dot inside the black circle. |
+| +1,170 → +1,700 | **Four ingredient cut-outs** (pineapple, habanero, cherry, peach) fly out from behind the logo to fixed positions, staggered ≈70–100 ms, easing out (decelerating) |
+| 8.4 → 9.6 s | Hold, about 1.3 s. Probably the page loading or a minimum display time. |
+| 9.64 s (+0 of E02) | **Exit:** the logo and fruit **zoom towards the camera** (scale ×3+, ease-in, ≈330 ms) |
+| +430 → +1,340 | The hero headline types in **letter by letter**: ≈22 ms between letters, and each letter fades in over ≈150 ms (3–4 letters fading at once). The nav appears at +430 ms. |
+| +1,030 → +1,300 | Bottle and colour disc rise from the bottom |
 
-**Total intro ≈ 4 s.** That's long for a repeat visitor, and it doesn't seem to be skippable.
+**Total ≈ 4.8 s** from dot to finished hero, including the 1.3 s hold. **Too long for repeat visits**, and there's no skip.
 
 ## B · Story structure (homepage)
 
 | # | Section | Job it does | ≈Length |
 |---|---|---|---|
 | 1 | Announcement bar "BUILD YOUR OWN 3-PACK & SAVE $4 BUCKS" (closable) + full nav | Offer and wayfinding | — |
-| 2 | Hero: "THE BBQ SAUCE THAT MAKES OTHER SAUCES INSECURE" (outline + solid type) | Attitude first, product second | 1 vh |
-| 3 | **Flavour carousel**: bottle on a colour disc + a fruit **character with a face** peeking out, ← → arrows, "PRODUCT NO.0X" odometer, "SHOP NOW" | Meet each flavour | 1 vh |
-| 4 | Kinetic manifesto: "Our BBQ sauces use real, natural stuff like it's the 1800s. Slap it on anything…" | Brand voice | 0.6 vh |
-| 5 | **Claim cards**: NO CORN SYRUP → NO SEED OILS → NO ADDITIVES → GLUTEN FREE stack up, surrounded by floating, depth-blurred ingredient cut-outs | Health proof points | ~2 vh (sticky) |
+| 2 | Hero: "THE BBQ SAUCE THAT MAKES OTHER SAUCES INSECURE" (outline + solid type) | Attitude first | 1 vh |
+| 3 | **Flavour carousel:** bottle on a colour disc + fruit **character with a face**, ← → arrows, "PRODUCT NO.0X", "SHOP NOW" | Meet each flavour | 1 vh |
+| 4 | Kinetic manifesto: "Our BBQ sauces use real, natural stuff like it's the 1800s…" | Brand voice | 0.6 vh |
+| 5 | **Claim cards:** NO CORN SYRUP → NO SEED OILS → NO ADDITIVES → GLUTEN FREE, inside a field of depth-blurred ingredient cut-outs | Health proof | ≈2 vh, pinned |
 | 6 | "CHOOSE YOUR WEAPON" giant outline header + 4 colour-coded product cards | Product grid | 1.2 vh |
-| 7 | **Build your 3-pack**: bottle silhouettes in a ring, "+" per flavour, progress ring | Upsell (commerce) | 1 vh |
-| 8 | "WHY BUCKS SAUCE" arched heading + one-line manifesto | Transition into the story | 0.6 vh |
-| 9 | **Arc carousel**: 01 SMALL BATCHES · 02 REAL INGREDIENTS · 03 OH, THIS? (award); a garlic character travels along a dotted arc | Reasons to believe | ~2 vh (scroll-driven) |
-| 10 | "REVIEWS" giant outline header + **UGC video wall** (creator handles as pills over videos) | Social proof | 1 vh |
-| 11 | Footer: logo, links, "JOIN THE BUCKS CLUB" newsletter, Instagram/Facebook tiles | Retention | 0.5 vh |
+| 7 | **Build your 3-pack:** bottle silhouettes in a ring, "+" per flavour | Upsell | 1 vh |
+| 8 | "WHY BUCKS SAUCE" arched heading + manifesto line | Transition into the story | 0.6 vh |
+| 9 | **Arc carousel:** 01 SMALL BATCHES · 02 REAL INGREDIENTS · 03 OH, THIS? (award), with a garlic character on a dotted arc | Reasons to believe | ≈2 vh, pinned |
+| 10 | "REVIEWS" giant outline header + **UGC video wall** (creator handles as pills) | Social proof | 1 vh |
+| 11 | Footer: logo, links, "JOIN THE BUCKS CLUB" newsletter, social tiles | Retention | 0.5 vh |
 
-**Product page** (from 00:45): split hero with the pack and flying pineapple cut-outs on the left and a gallery on arrows → the title typing in letter by letter → a **flavour character with sunglasses** (pineapple) → *Taste profile* and *Pairs with* cards → a row of claim icons → size select, quantity, add to cart → 3-pack banner → "THE SAUCE THAT DIDN'T ESCAPE THE LAB" with the founder video → "STARTS WITH REAL INGREDIENTS / BUILT ON FIRE" (arched type) with *Ingredients / Nutrition* tabs → ingredient and nutrition cards fanned over a row of pineapple photos ("PURE AF. SERIOUSLY") → process video clips → a "No fillers / No mystery 'natural flavors'…" tick list → "CHOOSE" + view all products → footer.
+**Product page:** a split hero (pack + flying pineapple cut-outs on the left with a gallery on arrows; the title typing in on the right) → a **flavour character in sunglasses** → *Taste profile* and *Pairs with* cards → claim icons → size, quantity, add to cart → 3-pack banner → "THE SAUCE THAT DIDN'T ESCAPE THE LAB" + founder video → "STARTS WITH REAL INGREDIENTS / BUILT ON FIRE" (arched) with *Ingredients / Nutrition* tabs → fanned data cards over a pineapple photo strip ("PURE AF. SERIOUSLY") → process clips → "No fillers…" tick list → "CHOOSE" + all products → footer.
 
 ## C · Scroll choreography
 
-| ID | Pattern | Where (t) | Notes |
+| ID | Pattern | Where | Measured detail |
 |---|---|---|---|
-| R1-C1 | **Header morph**: the full nav collapses into floating pills ("GET SAUCE" CTA + cart + menu) on the right, and the logo shrinks to an antler mark | 00:12 | The nav never blocks the content; the main CTA is always one tap away |
-| R1-C2 | **Letter-drop headline**: letters fall in with a stagger and fade as each section header enters | 00:10, 00:45, 00:49, 00:51 | Used on almost every big headline, so it's a signature move |
-| R1-C3 | **Flavour switch**: the bottle slides out and the next one slides in, the colour disc changes colour (peach → crimson), the character swaps, and the "PRODUCT NO.0X" counter rolls like an odometer | 00:13–00:17 | Arrow-driven, not scroll-driven |
-| R1-C4 | **Kinetic manifesto**: words tumble in with rotation and settle into a sentence | 00:18 | Readability suffers mid-motion |
-| R1-C5 | **Sticky stacking claim cards**: each claim card slides up over the last; at the end they collapse into a list of pills | 00:19–00:22 | Floating ingredient cut-outs around it at several depths, with the nearest ones **blurred** (fake depth of field) |
-| R1-C6 | **Giant outline headers**: "WEAPON", "REVIEWS" in viewport-wide outline type; the solid part types in | 00:23, 00:36 | Strong section breaks at almost no performance cost |
-| R1-C7 | **Arc carousel**: numbered story cards travel along a circular arc as you scroll, with a character walking along a dotted path | 00:33–00:36 | Very ownable "process" storytelling |
-| R1-C8 | **Arched heading**: text set on a curve | 00:32, 00:51 | |
-| R1-C9 | **Stacked fan cards**: ingredients and nutrition cards fanned and tilted over a photo strip | 00:52 | Makes dry data feel physical |
+| R1-C1 | **Header morph:** the full nav collapses into floating pills (GET SAUCE + cart + menu), and the logo shrinks to an antler mark | 00:12 | The main CTA stays one click away at all times |
+| R1-C2 | **Letter-type headline:** letters fade in one after another, slightly overlapping | 00:10, 00:45, 00:49, 00:51 | **≈22–35 ms between letters, ≈150 ms fade per letter.** A 25-letter title takes ≈0.9 s, a 3-word title ≈1.2 s. Used on every big headline, so it's the signature. |
+| R1-C4 | **Kinetic manifesto (E07, scroll-scrubbed):** each word tumbles up from below, rotated, and settles into the sentence as you scroll | 18.0–19.0 s | Each word settles over about 200–300 ms of scroll. **Hard to read mid-motion.** |
+| R1-C5 | **Stacking claim cards (E07, pinned, 3.4 s of scroll):** a card rises from the bottom tilted ≈−5° and straightens; when the next card arrives, the previous card's **body collapses and only its label pill stays**, stacked like index-card tabs (inactive tabs dimmed, active one bright) | 18.6–21.4 s | Cut-outs at the edges move at different depths; the **nearest ones are blurred** (fake depth of field) |
+| R1-C6 | **Giant outline headers** ("WEAPON", "REVIEWS") | 00:23, 00:36 | Strong section breaks for almost no performance cost |
+| R1-C7 | **Arc carousel (E19, pinned, 2.7 s of scroll):** numbered cards enter from the right **tilted along a large circle**, straighten at the centre, and tilt away to the left; the character stays near the centre on a dotted arc | 33.2–35.9 s | Each card takes ≈1.1 s of scroll to cross the centre at the recorded speed |
+| R1-C8 | **Arched heading** ("WHY BUCKS SAUCE", "BUILT ON FIRE") | 00:32, 00:51 | Text on a curve, sliding up as you scroll |
+| R1-C9 | **Fanned data cards:** ingredients and nutrition cards tilted and overlapping over a photo strip | 00:52 | Makes dry data feel physical |
 
-## D · Micro-interactions
+## D · Micro-interactions (measured)
 
-| ID | Pattern | Where | Notes |
-|---|---|---|---|
-| R1-D1 | **Product card hover**: "ADD TO CART $12" and "VIEW PRODUCT" buttons rise in; an antler graphic springs up behind the bottle | 00:24–00:27 | Timing pending (event strip) |
-| R1-D2 | **3-pack builder**: "+" makes a bottle fly into the ring, the progress ring fills, and the button counts down ("ADD 3 MORE" → "ADD 1 MORE") | 00:28–00:31 | Commerce-only |
-| R1-D3 | Round cream arrow buttons; claim pills with dot bullets "• NO CORN SYRUP •" | throughout | |
+| ID | Pattern | Measured detail |
+|---|---|---|
+| R1-D0 | **Flavour switch (E04, arrow click):** 1) the character disappears; 2) the current bottle swings off to the left and shrinks, while the next bottle swings in from the right, small and tilted, then grows to the centre (a **cover-flow on an arc**); 3) the **disc changes colour** (peach → crimson); 4) the "PRODUCT NO.0X" counter rolls and the flavour name **slides up**, old over new; 5) the new character **pops** out from behind the bottle with overshoot | Bottle swap ≈570 ms (+1,435 → +2,002) · character pop ≈370 ms (+2,002 → +2,370) · **≈1 s per switch** · arrow hover: the cream disc turns into an outline ring |
+| R1-D1 | **Product card hover (E24):** antlers **spring up** behind the bottle; an "ADD TO CART $12" bar sits at the card's foot; the bottle tilts slightly | Antlers grow over ≈170–230 ms (+0 → +167 → +230), ease-out with slight overshoot |
+| R1-D2 | **3-pack add (E17):** the button label changes at once ("ADD 3 MORE" → "ADD 2 MORE"); a **thick ring in the flavour's colour bursts** out from the centre (≈100 ms, fast ease-out), then **thins to a hairline and fades** (≈350 ms); the bottle drops into its slot at ≈+300 ms | **≈450 ms per add**, the same circle motif as the loader |
+| R1-D3 | Round cream arrow buttons; pill labels with dot bullets "• NO CORN SYRUP •" | — |
 
-## E · Page transitions
+## E · Page transition (E25, measured)
 
-Product card click at about 00:44 → product page at 00:45. The product title then types in with the letter drop (R1-C2). Transition type and duration: **pending** frame-level measurement.
+Click on a product card at 44.51 s:
+
+1. The page **fades to near-black in ≈100–130 ms**.
+2. It **holds black ≈430 ms** while the next page loads.
+3. The product page **appears in one frame**, with no fade-in, and its title already typing (R1-C2).
+4. **Total ≈0.7 s.**
+
+The product page entrance (E26) is choreographed:
+
+| Time | What happens |
+|---|---|
+| +0 → +500 ms | title types in |
+| +500 ms | subtitle fades in |
+| +570 ms | nav fades in |
+| +700 → +830 ms | Taste profile / Pairs with cards **rise and straighten from a tilt**, ≈70 ms apart |
+| +1,030 → +1,240 ms | the **pineapple character pops** out from behind the title (≈200 ms, overshoot), then idles with a slight wobble |
+
+**Whole entrance ≈1.5 s.**
 
 ## F · Visual system
 
-- **Colour:** a warm near-black base, cream type, and one **saturated colour per flavour** (golden yellow, chilli orange, crimson, peach orange) used for the product cards and the carousel disc.
-- **Type:** a condensed display sans set in caps, mixing **outline and solid** within one headline; a clean sans for body copy; small caps for labels.
-- **Shapes:** pill labels, round arrow buttons, circles (discs, rings, iris), arcs and curved paths.
-- **Imagery:** cut-out bottles + cut-out ingredients (exactly the **cut-out style** chosen for Yunch Bite), lifestyle and process photography, UGC video.
+- **Colour:** a warm near-black base, cream type, and **one saturated colour per flavour** (golden yellow, chilli orange, crimson, peach) on cards, discs and ring bursts.
+- **Type:** a condensed display sans in caps that mixes **outline and solid** within a headline; a clean sans for body; small caps for labels.
+- **Shapes:** pills, round buttons, circles, rings, arcs.
+- **Imagery:** cut-out bottles + cut-out ingredients, the **cut-out style chosen for Yunch Bite**. Plus lifestyle and process photography and UGC video.
 
 ## G · Product presentation
 
-- Every flavour has **its own colour and its own character**: a cartoon version of its hero ingredient with a face.
+- Every flavour has **its own colour and its own character**: a cartoon version of its hero ingredient with a face, sometimes in sunglasses.
 - Product page modules: Taste profile · Pairs with · claim icons · ingredients/nutrition tabs · founder story video · process clips · "no fillers" list.
 
 ## H · Personality devices
 
 - Irreverent copy: "makes other sauces insecure", "PURE AF. SERIOUSLY", "Doug hovering like it owes him money".
-- Two layers of mascot: the brand mascot (deer chef) in the logo, and an **ingredient character per flavour** in the product moments.
+- Two mascot layers: the brand mascot (deer chef) in the logo, and an ingredient character per flavour in the product moments.
 
 ## I · Mobile
 
-**Skipped for now** (client decision, 2026-11-04). The mobile study comes back before wireframes are finalised.
+Skipped for now (client decision, 2026-11-04). It comes back before wireframes are finalised.
 
 ## J · Performance and accessibility
 
-- Heavy: the homepage is ~74,000 px tall on desktop, with 26 `<video>` elements and 6 canvases; three analytics/session-recording scripts.
+- Heavy: the homepage is ≈74,000 px tall on desktop, with 26 `<video>` elements, 6 canvases, and 3 analytics/session-recording scripts.
 - Thin outline type on near-black only works at very large sizes.
 - The kinetic manifesto is hard to read while it moves.
-- A 4 s loader with no skip.
+- A 4.8 s loader with no skip.
+- The page transition is a plain fade to black while the next page loads, so the perceived speed depends on the network.
 
 ---
 
@@ -100,17 +140,19 @@ Product card click at about 00:44 → product page at 00:45. The product title t
 
 | ID | Verdict | How it maps to Yunch Bite |
 |---|---|---|
-| R1-A (loader) | **Adapt** | Show a *"makhana pop"* iris reveal in brand colour with Makhana Buddy and floating cut-outs (makhana, chilli, pudina leaf) **on the first visit only**, at most about 1.5 s, and skippable. |
-| R1-C1 | **Adopt** | Use the compact pill header: logo mark + one main CTA ("Find your flavour" / where to buy) + menu. |
-| R1-C2 | **Adopt** | Letter-drop headlines become the type signature, to be retuned for a *crunchy* feel. |
-| R1-C3 | **Adopt** | **Flavour switcher** for the makhana flavours: pack cut-out on a colour disc taken from the pack, plus a character, with an odometer flavour counter. Needs a character per flavour or Makhana Buddy poses. |
-| R1-C4 | **Avoid / Adapt** | Use only for a short Hinglish line ("Ye Hai Yunchy Jindgi"), never for body copy. |
-| R1-C5 | **Adopt** | Stacking **claim cards**: Zero palm oil · Roasted in olive oil · No preservatives · High protein & fibre · Gluten-free, with floating, depth-blurred makhana and spice cut-outs. |
-| R1-C6 | **Adopt** | Giant outline section headers, in the packaging typeface if it suits. |
-| R1-C7 | **Adapt** | **Process arc**: Sourced → Slow-roasted in olive oil → Seasoned → Packed fresh, with Makhana Buddy walking the path. |
-| R1-C8 / C9 | **Adopt** | Arched headings; ingredients and nutrition as fanned cards on the product page. |
-| R1-D1 | **Adapt** | Card hover: "View product" rises in and Makhana Buddy peeks out (touch: on tap). |
-| R1-D2 | **Avoid** | There's no shop. The ring-progress idea could come back in a "find your flavour" picker. |
-| R1 UGC wall | **Adapt** | Instagram reels from real customers. It depends on getting real content, because the current reviews look like placeholders. |
-
-*Effort and mobile-cost ratings are added once the mobile behaviour and the measured timings are in.*
+| Motif | **Adopt the principle** | Use one recurring shape for all motion. For Yunch Bite: **the popped makhana (round, puffy, bursting)**, for pops, ring bursts and discs in flavour colours |
+| R1-A loader | **Adapt** | A *"makhana pop"* concentric ripple in brand red, yellow and cream, then Makhana Buddy, then cut-outs flying out. **First visit only, ≤1.5 s, skippable.** No dead hold: show the page as soon as it's ready. |
+| Lenis | **Adopt** | Smooth scroll with `lerp ≈ 0.1` (measured τ 0.158 s), switched off with reduced motion |
+| R1-C1 | **Adopt** | Compact pill header: logo mark + one main CTA + menu |
+| R1-C2 | **Adopt + tune** | Letter-type headlines as the signature, ≈25 ms between letters and ≈150 ms per letter, with a slight **crunch** (small y-drop + quick settle) |
+| R1-D0 | **Adopt** | **Flavour switcher** for makhana: pack cut-out on a colour disc in the pack's colour, a character pop, an odometer flavour counter, ≈1 s per switch |
+| R1-C4 | **Avoid / Adapt** | Only for one short Hinglish line ("Ye Hai Yunchy Jindgi"), never for body copy |
+| R1-C5 | **Adopt** | **Stacking claim cards** that collapse into tabs: Zero palm oil · Roasted in olive oil · No preservatives · High protein & fibre · Gluten-free, with depth-blurred makhana and spice cut-outs |
+| R1-C6 | **Adopt** | Giant outline section headers |
+| R1-C7 | **Adapt** | **Process arc:** Sourced from Bihar ponds → Slow-roasted in olive oil → Seasoned → Packed fresh, with Makhana Buddy on the dotted arc |
+| R1-C8 / C9 | **Adopt** | Arched headings; ingredients and nutrition as fanned cards on product pages |
+| R1-D1 | **Adapt** | Card hover: a flavour-colour ring bursts behind the pack and Makhana Buddy peeks out (≈200 ms, overshoot); on touch, on tap |
+| R1-D2 | **Adapt the effect, not the feature** | No cart, but the **ring burst** (≈450 ms) becomes our "pop" feedback, e.g. when a flavour is picked |
+| R1-E | **Improve** | Not a plain fade to black: a brand-colour curtain or iris, ≤600 ms, with the next page prefetched so it never waits on the network |
+| R1 product entrance | **Adopt** | Choreographed entrance (title → subtitle → info cards → character pop) in ≈1.5 s |
+| R1 UGC wall | **Adapt** | Instagram reels from real customers. Depends on real content. |

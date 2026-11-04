@@ -11,6 +11,7 @@ import { clamp, log, fmtDur } from './util.mjs';
 
 export const GRID_COLS = 4, GRID_ROWS = 3;
 const CLAMP_DIFF = 40; // robust SAD: a few fixed UI elements / flying objects must not dominate the alignment
+const CHG_T = 12; // |diff| above this counts as a changed pixel (robust to compression noise, sensitive to small moving objects)
 const LUT = new Float32Array(511);
 for (let i = 0; i < 511; i++) LUT[i] = Math.min(Math.abs(i - 255), CLAMP_DIFF);
 
@@ -36,21 +37,21 @@ function sad(a, b, w, h, sy, sx) {
 
 /** Unclamped mean abs diff at an integer shift (0,0 => rawDiff) + 4x3 grid. */
 function diffGrid(a, b, w, h) {
-  const gs = new Float64Array(GRID_COLS * GRID_ROWS), gc = new Float64Array(GRID_COLS * GRID_ROWS);
-  let tot = 0;
+  const gs = new Float64Array(GRID_COLS * GRID_ROWS), gc = new Float64Array(GRID_COLS * GRID_ROWS), gk = new Float64Array(GRID_COLS * GRID_ROWS);
+  let tot = 0, chg = 0;
   for (let y = 0; y < h; y++) {
     const cy = Math.min(GRID_ROWS - 1, Math.floor((y * GRID_ROWS) / h)) * GRID_COLS;
     let rowSum = 0;
     for (let cx = 0; cx < GRID_COLS; cx++) {
       const xs = Math.floor((cx * w) / GRID_COLS), xe = Math.floor(((cx + 1) * w) / GRID_COLS);
-      let s = 0;
-      for (let x = xs, i = y * w + xs; x < xe; x++, i++) { const d = b[i] - a[i]; s += d < 0 ? -d : d; }
-      gs[cy + cx] += s; gc[cy + cx] += xe - xs; rowSum += s;
+      let s = 0, k = 0;
+      for (let x = xs, i = y * w + xs; x < xe; x++, i++) { const d = b[i] - a[i]; const ad = d < 0 ? -d : d; s += ad; if (ad > CHG_T) k++; }
+      gs[cy + cx] += s; gc[cy + cx] += xe - xs; gk[cy + cx] += k; rowSum += s; chg += k;
     }
     tot += rowSum;
   }
   const grid = Array.from(gs, (s, i) => (gc[i] ? s / gc[i] : 0));
-  return { mean: tot / (w * h), grid };
+  return { mean: tot / (w * h), grid, chg: chg / (w * h), chgGrid: Array.from(gk, (k, i) => (gc[i] ? k / gc[i] : 0)) };
 }
 
 /** Residual after compensating a (fractional) shift, bilinear. Returns mean + 4x3 grid (b coordinates). */
@@ -58,7 +59,8 @@ function residual(a, b, w, h, sy, sx) {
   const iy = Math.floor(sy), fy = sy - iy, ix = Math.floor(sx), fx = sx - ix;
   const y0 = Math.max(0, -iy), y1 = Math.min(h, h - iy - 1), x0 = Math.max(0, -ix), x1 = Math.min(w, w - ix - 1);
   if (y1 <= y0 + 2 || x1 <= x0 + 2) return null;
-  const gs = new Float64Array(GRID_COLS * GRID_ROWS), gc = new Float64Array(GRID_COLS * GRID_ROWS);
+  const gs = new Float64Array(GRID_COLS * GRID_ROWS), gc = new Float64Array(GRID_COLS * GRID_ROWS), gk = new Float64Array(GRID_COLS * GRID_ROWS);
+  let chg = 0;
   const w00 = (1 - fy) * (1 - fx), w01 = (1 - fy) * fx, w10 = fy * (1 - fx), w11 = fy * fx;
   let tot = 0, cnt = 0;
   for (let y = y0; y < y1; y++) {
@@ -70,9 +72,10 @@ function residual(a, b, w, h, sy, sx) {
       tot += d; cnt++;
       const c = cy + Math.min(GRID_COLS - 1, Math.floor((x * GRID_COLS) / w));
       gs[c] += d; gc[c]++;
+      if (d > CHG_T) { gk[c]++; chg++; }
     }
   }
-  return { mean: tot / cnt, grid: Array.from(gs, (s, i) => (gc[i] ? s / gc[i] : 0)) };
+  return { mean: tot / cnt, grid: Array.from(gs, (s, i) => (gc[i] ? s / gc[i] : 0)), chg: chg / cnt, chgGrid: Array.from(gk, (k, i) => (gc[i] ? k / gc[i] : 0)) };
 }
 
 function parabola(sm, s0, sp) {
@@ -112,7 +115,7 @@ export class PairAnalyser {
     if (!this.havePrev) down2(a, w, h, this.ph);
     const out = { dy: 0, dx: 0, conf: 1, resid: 0, raw: 0, grid: null, sBest: 0, s0: 0, searched: false };
     const raw = diffGrid(a, b, w, h);
-    out.raw = raw.mean; out.grid = raw.grid; out.resid = raw.mean;
+    out.raw = raw.mean; out.grid = raw.grid; out.resid = raw.mean; out.chg = raw.chg; out.chgGrid = raw.chgGrid;
     if (raw.mean >= 0.12) {
       out.searched = true;
       const R = Math.floor(0.45 * h2);
@@ -148,7 +151,7 @@ export class PairAnalyser {
       }
       if (out.dy !== 0 || out.dx !== 0) {
         const r = residual(a, b, w, h, out.dy, out.dx);
-        if (r) { out.resid = r.mean; out.grid = r.grid; }
+        if (r) { out.resid = r.mean; out.grid = r.grid; out.chg = r.chg; out.chgGrid = r.chgGrid; }
       }
     }
     const t = this.ph; this.ph = this.ch; this.ch = t; this.havePrev = true;
@@ -178,7 +181,7 @@ export function analyseMotion(file, probe, crop, { width = 360, timeout = 150000
     const t0 = Date.now();
     let lastLog = t0;
     const push = () => {
-      if (n === 0) frames.push({ dy: 0, dx: 0, conf: 1, resid: 0, raw: 0, grid: new Array(GRID_COLS * GRID_ROWS).fill(0), sBest: 0, s0: 0 });
+      if (n === 0) frames.push({ dy: 0, dx: 0, conf: 1, resid: 0, raw: 0, grid: new Array(GRID_COLS * GRID_ROWS).fill(0), sBest: 0, s0: 0, chg: 0, chgGrid: new Array(GRID_COLS * GRID_ROWS).fill(0) });
       else frames.push(an.analyse(prev, cur));
       n++;
       const t = prev; prev = cur; cur = t;
