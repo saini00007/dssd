@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { gsap, SplitText, useGSAP } from "@/components/motion/gsap";
+import { deferIn } from "@/components/motion/entrance";
 import { mq } from "@/lib/tokens";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
@@ -27,9 +28,10 @@ export function NameMerge({ left, right, result, meaning, eyebrow }: NameMergePr
       if (!el) return;
       const q = <T extends HTMLElement>(s: string) => el.querySelector<T>(s)!;
       const mm = gsap.matchMedia();
-      mm.add(`${mq.motion} and (min-width: 768px)`, () => build(34));
-      mm.add(`${mq.motion} and (max-width: 767px)`, () => build(22));
-      function build(shift: number) {
+      mm.add(`${mq.motion} and (min-width: 768px)`, (_c, safe) => build(34, safe));
+      mm.add(`${mq.motion} and (max-width: 767px)`, (_c, safe) => build(22, safe));
+      function build(shift: number, safe: gsap.ContextSafeFunc | undefined) {
+        return deferIn(safe, () => {
         const split = SplitText.create(q("[data-meaning]"), { type: "chars", aria: "none" });
         const tl = gsap.timeline({
           defaults: { ease: "none" },
@@ -43,6 +45,7 @@ export function NameMerge({ left, right, result, meaning, eyebrow }: NameMergePr
           .fromTo(split.chars, { opacity: 0, yPercent: 40 }, { opacity: 1, yPercent: 0, stagger: 0.012, duration: 0.1 }, 0.72)
           .to({}, { duration: 0.12 });
         return () => split.revert();
+        });
       }
     },
     { scope: root },

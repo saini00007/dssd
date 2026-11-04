@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import type { ShapeName } from "@/data/types";
 import { gsap, useGSAP } from "@/components/motion/gsap";
+import { deferIn } from "@/components/motion/entrance";
 import { shapeSrc } from "@/lib/media";
 import { mq } from "@/lib/tokens";
 import { cn } from "@/lib/cn";
@@ -32,7 +33,8 @@ export function DriftShapes({ shapes, className }: DriftShapesProps) {
       const el = root.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add(mq.motion, () => {
+      mm.add(mq.motion, (_c, safe) => {
+        const off = deferIn(safe, () => {
         el.querySelectorAll<HTMLElement>("[data-drift]").forEach((s) => {
           const d = Number(s.dataset.drift);
           const spin = Number(s.dataset.spin);
@@ -47,6 +49,8 @@ export function DriftShapes({ shapes, className }: DriftShapesProps) {
             },
           );
         });
+        });
+        return () => off();
       });
     },
     { scope: root },

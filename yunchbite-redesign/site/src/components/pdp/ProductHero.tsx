@@ -34,7 +34,7 @@ export function ProductHero({ product: p, flavour: f, category, copy }: ProductH
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
           <div
             data-disc=""
-            data-yb-anim=""
+            data-yb-anim="lcp"
             className="absolute bottom-[-14%] left-1/2 aspect-square w-[min(118vw,max(46rem,96vh))] -translate-x-1/2 rounded-full bg-[color-mix(in_srgb,var(--flavour)_42%,var(--color-cream))]"
           />
         </div>
@@ -63,10 +63,10 @@ export function ProductHero({ product: p, flavour: f, category, copy }: ProductH
           <ViewTransition name="pdp-title" share="morph" default="none">
             <TypeIn as="h1" text={p.name} trigger="load" className="display-type mt-3 block max-w-[16ch] text-[length:clamp(2.7rem,8.6vw,8.8rem)] leading-[0.86] md:max-w-[20ch]" />
           </ViewTransition>
-          <p data-in="sub" data-yb-anim="" className="mt-4 max-w-[52ch] text-[length:clamp(1rem,1.25vw,1.15rem)] text-ink/85">
+          <p data-in="sub" data-yb-anim="lcp" className="mt-4 max-w-[52ch] text-[length:clamp(1rem,1.25vw,1.15rem)] text-ink/85">
             {p.description}
           </p>
-          <div data-in="chips" data-yb-anim="" className="mt-5 flex flex-wrap items-center justify-center gap-2">
+          <div data-in="chips" data-yb-anim="lcp" className="mt-5 flex flex-wrap items-center justify-center gap-2">
             {p.bestseller && (
               <Pill tone="yellow" className="border-ink/20">
                 <Icon name="star" className="size-3.5 text-red" />
@@ -92,16 +92,16 @@ export function ProductHero({ product: p, flavour: f, category, copy }: ProductH
         <div className="relative z-10 mx-auto mt-4 flex w-full max-w-[var(--container-max)] flex-1 items-end justify-center">
           <div data-slot="" className="relative h-[clamp(15rem,45vh,36rem)] min-h-[15rem] w-[min(78vw,30rem)] flex-none">
             <div data-pack="" className="pointer-events-none absolute inset-0 will-change-transform">
-              <div data-in="pack" data-yb-anim="" className="absolute inset-0">
+              <div data-in="pack" data-yb-anim="lcp" className="absolute inset-0">
                 <PackImage product={p} morph priority size="hero" fit imgClassName="drop-shadow-[0_28px_32px_rgb(42_18_16/0.32)]" />
               </div>
             </div>
           </div>
-          <div data-in="aside" data-yb-anim="" className="pointer-events-none absolute bottom-6 left-0 hidden max-w-[17rem] text-left lg:block">
+          <div data-in="aside" data-yb-anim="lcp" className="pointer-events-none absolute bottom-6 left-0 hidden max-w-[17rem] text-left lg:block">
             <p className="display-type text-[length:clamp(1.3rem,2vw,1.9rem)] leading-[1.02]">{f.tagline}</p>
           </div>
-          <div data-in="buddy" data-yb-anim="" aria-hidden="true" className="pointer-events-none absolute bottom-0 right-[2%] hidden w-[clamp(7rem,15vw,15rem)] sm:block lg:right-[6%]">
-            <FlavourBuddy flavour={f} pose="peek" hand={{ x: -14, y: 58, size: 44, rotate: -14 }} priority />
+          <div data-in="buddy" data-yb-anim="lcp" aria-hidden="true" className="pointer-events-none absolute bottom-0 right-[2%] hidden w-[clamp(7rem,15vw,15rem)] sm:block lg:right-[6%]">
+            <FlavourBuddy flavour={f} pose="peek" hand={{ x: -14, y: 58, size: 44, rotate: -14 }} />
           </div>
         </div>
       </div>

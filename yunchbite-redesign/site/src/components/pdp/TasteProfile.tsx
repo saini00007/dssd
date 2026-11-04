@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
+import { whenInView } from "@/components/motion/entrance";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { TypeIn } from "@/components/motion/TypeIn";
@@ -33,13 +34,15 @@ export function TasteProfile({ heading, pairsHeading, scale, meters, taste, pair
       mm.add(mq.motion, () => {
         const fills = gsap.utils.toArray<HTMLElement>("[data-fill]", el);
         gsap.set(fills, { scaleX: 0, transformOrigin: "0 50%" });
-        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: reveal.start, once: true } });
+        const tl = gsap.timeline({ paused: true });
+        const stop = whenInView(el, reveal.start, () => tl.play());
         fills.forEach((f) => {
           const rowIdx = Number(f.dataset.row);
           const idx = Number(f.dataset.idx);
           tl.to(f, { scaleX: 1, duration: dur.move, ease: ease.roast }, rowIdx * 0.12 + idx * 0.07);
         });
         return () => {
+          stop();
           tl.kill();
           gsap.set(fills, { clearProps: "transform" });
         };

@@ -1,6 +1,7 @@
 "use client";
 import { useRef, type ReactNode } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
+import { defer } from "@/components/motion/entrance";
 import { shapeSrc } from "@/lib/media";
 import { mq } from "@/lib/tokens";
 
@@ -37,8 +38,8 @@ export function ReadProgress({ children }: { children: ReactNode }) {
         });
         return () => st.kill();
       };
-      mm.add(mq.motion, () => make(true));
-      mm.add(mq.reduce, () => make(false));
+      mm.add(mq.motion, () => defer(() => make(true)));
+      mm.add(mq.reduce, () => defer(() => make(false)));
     },
     { scope: root },
   );

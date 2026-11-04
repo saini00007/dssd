@@ -195,24 +195,35 @@ html.lenis body {
 }
 
 /* ------------------------------------------------------------------ */
-/* Animation hide-until-ready                                          */
-/* Content is always in the HTML. Elements that GSAP will animate are  */
-/* held invisible only after the inline <head> script sets data-js and */
-/* only until their effect marks them ready. A CSS failsafe reveals    */
-/* them if JS never arrives.                                           */
+/* Animation hide-until-ready (LCP-safe)                               */
+/* Content is always in the HTML and is painted as is on a hard load.  */
+/* Elements GSAP will animate are held invisible only                  */
+/*  - under the home loader (html[data-yb-loader], the curtain covers)  */
+/*  - after a client-side navigation (html[data-yb-softnav])            */
+/* and only until their effect marks them ready. data-yb-ready="wait"   */
+/* keeps below-the-fold elements hidden until they are reached. A CSS   */
+/* failsafe reveals them if JS never arrives.                           */
+/* data-yb-anim: "" | "children" | "lcp" | "lcp-children". On a hard    */
+/* load nothing is hidden at first paint; JS then hides what is below   */
+/* the fold ("wait") and reveals it on scroll.                          */
 /* ------------------------------------------------------------------ */
 @media (prefers-reduced-motion: no-preference) {
-  html[data-js] [data-yb-anim]:not([data-yb-ready]) {
+  html[data-js][data-yb-loader] [data-yb-anim]:not([data-yb-anim$="children"]):not([data-yb-ready]),
+  html[data-js][data-yb-softnav] [data-yb-anim]:not([data-yb-anim$="children"]):not([data-yb-ready]) {
     opacity: 0;
     animation: yb-failsafe 0.01s 3s forwards;
   }
-  html[data-js] [data-yb-anim="children"]:not([data-yb-ready]) {
-    opacity: 1;
-    animation: none;
-  }
-  html[data-js] [data-yb-anim="children"]:not([data-yb-ready]) > * {
+  html[data-js][data-yb-loader] [data-yb-anim$="children"]:not([data-yb-ready]) > *,
+  html[data-js][data-yb-softnav] [data-yb-anim$="children"]:not([data-yb-ready]) > * {
     opacity: 0;
     animation: yb-failsafe 0.01s 3s forwards;
+  }
+  /* JS is alive and the element is waiting for the reader: no failsafe */
+  html[data-js] [data-yb-anim]:not([data-yb-anim$="children"])[data-yb-ready="wait"] {
+    opacity: 0;
+  }
+  html[data-js] [data-yb-anim$="children"][data-yb-ready="wait"] > * {
+    opacity: 0;
   }
 }
 @keyframes yb-failsafe {

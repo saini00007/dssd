@@ -1,6 +1,7 @@
 "use client";
 import { useRef, type CSSProperties } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
+import { entranceOn } from "@/components/motion/entrance";
 import { RingBurst, type RingBurstHandle } from "@/components/motion/RingBurst";
 import { TypeIn } from "@/components/motion/TypeIn";
 import { DriftShapes } from "@/components/sections/DriftShapes";
@@ -58,6 +59,11 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
       const all = [...items, ...steps, ...(tag ? [tag] : [])];
       mm.add(mq.reduce, () => all.forEach((n) => n.setAttribute("data-yb-ready", "")));
       mm.add(mq.motion, () => {
+        if (!entranceOn()) {
+          // hard load: the opener is complete in the server HTML (LCP); entrances only play after a client navigation
+          all.forEach((n) => n.setAttribute("data-yb-ready", ""));
+          return;
+        }
         const lead = variant === "podium" ? 2 : 0;
         // order of arrival: lead pack first, then outwards (podium) / top-down (pyramid)
         const order = items
@@ -98,6 +104,7 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
         fit
         decorative
         priority={priority}
+        eager={!priority}
         sizes="(min-width: 1024px) 320px, 30vw"
         imgClassName="drop-shadow-[0_18px_22px_rgb(42_18_16/0.3)]"
       />
@@ -119,7 +126,7 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
         ) : (
           <TypeIn as="h1" text={title} trigger="load" className="display-type text-[length:clamp(3rem,10.5vw,10rem)] leading-[0.86]" />
         )}
-        <p data-tagline="" data-yb-anim="" className="mt-4 max-w-[34ch] text-[length:clamp(1rem,1.5vw,1.3rem)] text-ink/80">
+        <p data-tagline="" data-yb-anim="lcp" className="mt-4 max-w-[34ch] text-[length:clamp(1rem,1.5vw,1.3rem)] text-ink/80">
           {tagline}
         </p>
 
@@ -128,16 +135,16 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
             {packs.slice(0, 5).map((p, i) => {
               const s = PODIUM[i];
               return (
-                <div key={p.slug} data-slot="" data-yb-anim="" className="relative flex w-[19%] flex-col items-center">
+                <div key={p.slug} data-slot="" data-yb-anim="lcp" className="relative flex w-[19%] flex-col items-center">
                   {i === 2 && (
                     <div className="absolute left-1/2 top-[38%] aspect-square w-[130%] -translate-x-1/2 -translate-y-1/2">
                       <RingBurst ref={ring} color={burst} />
                     </div>
                   )}
-                  <div className="relative z-10 w-full">{pack(p, s.pack, true)}</div>
+                  <div className="relative z-10 w-full">{pack(p, s.pack, i === 2)}</div>
                   <div
                     data-step=""
-                    data-yb-anim=""
+                    data-yb-anim="lcp"
                     className="relative z-0 -mt-[1.5%] flex w-full items-start justify-center rounded-t-[22px] px-1 pt-3 text-[length:clamp(0.65rem,1.1vw,0.9rem)] font-bold uppercase tracking-wide"
                     style={{ height: `calc(var(--u) * ${s.block})`, background: p.color, color: p.ink }}
                   >
@@ -159,13 +166,13 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
                     const idx = n++;
                     if (!p) return null;
                     return (
-                      <div key={p.slug} data-slot="" data-yb-anim="" className="relative" style={{ width: r === 0 ? "14%" : "min(17%, 16vh)" }}>
+                      <div key={p.slug} data-slot="" data-yb-anim="lcp" className="relative" style={{ width: r === 0 ? "14%" : "min(17%, 16vh)" }}>
                         {idx === 0 && (
                           <div className="absolute left-1/2 top-1/2 aspect-square w-[150%] -translate-x-1/2 -translate-y-1/2">
                             <RingBurst ref={ring} color={burst} />
                           </div>
                         )}
-                        {pack(p, r === 0 ? 14 : 12, idx < 3)}
+                        {pack(p, r === 0 ? 14 : 12, idx === 0)}
                       </div>
                     );
                   })}

@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
+import { gsap, useGSAP } from "@/components/motion/gsap";
+import { whenInView } from "@/components/motion/entrance";
 import { mq } from "@/lib/tokens";
 
 export interface NutritionRowData {
@@ -54,9 +55,9 @@ export function NutritionTable({ caption, columns, rows, footnotes, note }: Nutr
         write(0);
         const tl = gsap.timeline({ paused: true });
         tl.to(bars, { scaleX: 1, duration: 1.1, ease: "power2.inOut", stagger: 0.06 }, 0).to(state, { p: 1, duration: 1.3, ease: "power2.out", onUpdate: () => write(state.p) }, 0);
-        const st = ScrollTrigger.create({ trigger: el, start: "top 75%", once: true, onEnter: () => tl.play() });
+        const stop = whenInView(el, "top 75%", () => tl.play());
         return () => {
-          st.kill();
+          stop();
           tl.kill();
           counters.forEach((c, i) => (c.textContent = finals[i]));
           gsap.set(bars, { clearProps: "transform" });

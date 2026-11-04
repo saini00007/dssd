@@ -44,16 +44,31 @@ export function BuddyIntro({ heading, body, bubble, clickHint, lines }: BuddyInt
         const irises = gsap.utils.toArray<SVGGElement>("[data-iris]", el);
         // subtle idle bob (paused off screen)
         const bob = body ? gsap.to(body, { y: -7, rotation: 0.6, duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1, paused: true }) : null;
-        const io = new IntersectionObserver(([e]) => bob?.paused(!e.isIntersecting), { rootMargin: "80px" });
+        const io = new IntersectionObserver(
+          ([e]) => {
+            near = e.isIntersecting;
+            rect = null;
+            bob?.paused(!near);
+          },
+          { rootMargin: "80px" },
+        );
         io.observe(el);
 
         const setters = irises.map((g) => ({ x: gsap.quickTo(g, "x", { duration: 0.35, ease: "power3.out" }), y: gsap.quickTo(g, "y", { duration: 0.35, ease: "power3.out" }) }));
         let raf = 0;
         let last: { x: number; y: number } | null = null;
+        // Cached geometry: re-measured only after a scroll / resize, never per pointer move.
+        let rect: DOMRect | null = null;
+        const dirty = () => {
+          rect = null;
+        };
+        window.addEventListener("scroll", dirty, { passive: true });
+        window.addEventListener("resize", dirty, { passive: true });
+        let near = false;
         const look = () => {
           raf = 0;
-          if (!svg || !last) return;
-          const r = svg.getBoundingClientRect();
+          if (!svg || !last || !near) return;
+          const r = (rect ??= svg.getBoundingClientRect());
           const k = r.width / 819;
           EYES.forEach((e, i) => {
             const ex = r.left + e.cx * k;
@@ -74,6 +89,8 @@ export function BuddyIntro({ heading, body, bubble, clickHint, lines }: BuddyInt
         window.addEventListener("pointermove", move, { passive: true });
         return () => {
           window.removeEventListener("pointermove", move);
+          window.removeEventListener("scroll", dirty);
+          window.removeEventListener("resize", dirty);
           if (raf) cancelAnimationFrame(raf);
           io.disconnect();
           bob?.kill();

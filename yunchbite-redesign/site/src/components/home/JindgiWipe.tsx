@@ -1,6 +1,7 @@
 "use client";
 import { useRef, type CSSProperties } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
+import { deferIn } from "@/components/motion/entrance";
 import { PackImage } from "@/components/product/PackImage";
 import { Container } from "@/components/ui/Container";
 import { shapeSrc } from "@/lib/media";
@@ -77,7 +78,8 @@ export function JindgiWipe({ before, after, beforeCaption, afterCaption, pack }:
       const el = root.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add(mq.motion, () => {
+      mm.add(mq.motion, (_c, safe) => {
+        const off = deferIn(safe, () => {
         const sceneB = el.querySelector<HTMLElement>("[data-scene-b]");
         const edge = el.querySelector<HTMLElement>("[data-edge]");
         const pops = gsap.utils.toArray<HTMLElement>("[data-pop]", el);
@@ -101,6 +103,8 @@ export function JindgiWipe({ before, after, beforeCaption, afterCaption, pack }:
           tl.scrollTrigger?.kill();
           tl.kill();
         };
+        });
+        return () => off();
       });
     },
     { scope: root },

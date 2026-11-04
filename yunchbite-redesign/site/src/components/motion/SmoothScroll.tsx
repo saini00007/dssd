@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "./gsap";
 import { lenis as lenisTok, mq } from "@/lib/tokens";
 import { consumeNavIntent } from "@/lib/nav-intent";
+import { markSoftNav, scheduleRefresh } from "./entrance";
 
 // A tiny external store so consumers re-render when Lenis is created/destroyed.
 let instance: Lenis | null = null;
@@ -30,6 +31,10 @@ export function useLenis(): Lenis | null {
 /** Lenis (lerp 0.1) driven by gsap.ticker; only on fine-pointer devices without reduced motion. */
 export function SmoothScroll({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  // First client-side navigation: entrances (loader-free) may play from now on. Set during render so it is in place
+  // before the new page's effects read it (this provider renders before the page content).
+  const [firstPath] = useState(pathname);
+  if (typeof document !== "undefined" && firstPath !== pathname) markSoftNav();
 
   useEffect(() => {
     const mm = gsap.matchMedia();
@@ -48,15 +53,15 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       };
     });
     // Late-loading fonts change layout; make sure triggers are measured against the final layout.
-    if (document.fonts?.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
+    if (document.fonts?.ready) document.fonts.ready.then(() => scheduleRefresh(0));
     return () => mm.revert();
   }, []);
 
   // Scroll to top on link navigations (not on browser back/forward), unless there is a hash.
   useEffect(() => {
     // Layout changes with every page: re-measure triggers once the new page is in place.
-    const t = window.setTimeout(() => ScrollTrigger.refresh(), 120);
-    if (!consumeNavIntent()) return () => window.clearTimeout(t);
+    scheduleRefresh(120);
+    if (!consumeNavIntent()) return;
     const hash = window.location.hash;
     const l = instance;
     if (hash) {
@@ -64,12 +69,12 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       if (el) {
         if (l) l.scrollTo(el, { offset: -(parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 80), immediate: true });
         else el.scrollIntoView();
-        return () => window.clearTimeout(t);
+        return;
       }
     }
     if (l) l.scrollTo(0, { immediate: true, force: true });
     else window.scrollTo(0, 0);
-    return () => window.clearTimeout(t);
+    return;
   }, [pathname]);
 
   return <>{children}</>;

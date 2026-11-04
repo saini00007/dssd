@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
+import { deferIn } from "@/components/motion/entrance";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -47,13 +48,16 @@ export function CategoryBand({ name, href, subline, statement, color, ink, cta, 
       const el = root.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add(mq.motion, () => {
+      mm.add(mq.motion, (_c, safe) => {
+        const off = deferIn(safe, () => {
         el.querySelectorAll<HTMLElement>("[data-drift]").forEach((n) => {
           const d = Number(n.dataset.drift);
           gsap.fromTo(n, { y: -d }, { y: d, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.6 } });
         });
         const disc = el.querySelector("[data-disc]");
         if (disc) gsap.fromTo(disc, { rotate: -25 }, { rotate: 25, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.6 } });
+        });
+        return () => off();
       });
     },
     { scope: root },

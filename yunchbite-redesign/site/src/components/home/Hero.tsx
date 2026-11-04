@@ -2,6 +2,7 @@
 import { useRef, type CSSProperties } from "react";
 import Image from "next/image";
 import { gsap, useGSAP } from "@/components/motion/gsap";
+import { defer, entranceOn } from "@/components/motion/entrance";
 import { whenLoaderDone } from "@/components/motion/loader-gate";
 import { TypeIn } from "@/components/motion/TypeIn";
 import { PackImage } from "@/components/product/PackImage";
@@ -59,61 +60,78 @@ export function Hero({ headline, line, primary, secondary, packs }: HeroProps) {
       });
 
       mm.add(mq.motion, () => {
-        const packsIn = q("[data-pack-in]");
         const packsOut = q("[data-pack]");
-        const kernelsIn = q("[data-k-in]");
         const kernelsFloat = q("[data-k-float]");
         const kernelsOut = q("[data-k]");
-        const intro = q("[data-intro]");
+        const headlineEl = el.querySelector<HTMLElement>("[data-headline]");
+        const introWrap = el.querySelector<HTMLElement>("[data-intro-wrap]");
+        const buddyWrap = el.querySelector<HTMLElement>("[data-buddy-wrap]");
         const buddyEl = el.querySelector<HTMLElement>("[data-buddy]");
-        const vh = window.innerHeight;
+        let tl: gsap.core.Timeline | null = null;
+        let cancel = () => {};
 
-        // ---- intro (plays when the loader curtain leaves; immediately on repeat visits) ----
-        const tl = gsap.timeline({ paused: true });
-        packsIn.forEach((p, i) => {
-          const slot = PACK_SLOTS[i];
-          tl.fromTo(
-            p,
-            { y: -(vh * 0.95), rotation: slot.r + slot.from * -26, opacity: 1 },
-            { y: 0, rotation: slot.r, duration: dur.roast + 0.15, ease: "back.out(1.5)" },
-            i * 0.07,
-          );
-          packsOut[i].setAttribute("data-yb-ready", "");
-        });
-        tl.fromTo(kernelsIn, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: dur.pop + 0.1, ease: "back.out(2)", stagger: { each: stagger.item * 0.7, from: "random" } }, 0.45);
-        if (buddyEl) {
-          gsap.set(buddyEl, { xPercent: 70, yPercent: 10, rotation: 8 });
-          tl.to(buddyEl, { xPercent: 0, yPercent: 0, rotation: 0, duration: dur.roast, ease: "back.out(1.7)" }, 1.0);
+        if (entranceOn()) {
+          // ---- intro (plays when the loader curtain leaves, or right away after a client navigation) ----
+          const packsIn = q("[data-pack-in]");
+          const kernelsIn = q("[data-k-in]");
+          const intro = q("[data-intro]");
+          const vh = window.innerHeight;
+          tl = gsap.timeline({ paused: true });
+          packsIn.forEach((p, i) => {
+            const slot = PACK_SLOTS[i];
+            tl!.fromTo(
+              p,
+              { y: -(vh * 0.95), rotation: slot.r + slot.from * -26, opacity: 1 },
+              { y: 0, rotation: slot.r, duration: dur.roast + 0.15, ease: "back.out(1.5)" },
+              i * 0.07,
+            );
+            packsOut[i].setAttribute("data-yb-ready", "");
+          });
+          tl.fromTo(kernelsIn, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: dur.pop + 0.1, ease: "back.out(2)", stagger: { each: stagger.item * 0.7, from: "random" } }, 0.45);
+          if (buddyEl) {
+            gsap.set(buddyEl, { xPercent: 70, yPercent: 10, rotation: 8 });
+            tl.to(buddyEl, { xPercent: 0, yPercent: 0, rotation: 0, duration: dur.roast, ease: "back.out(1.7)" }, 1.0);
+          }
+          gsap.set(intro, { opacity: 0, y: 26 });
+          intro.forEach((n) => n.setAttribute("data-yb-ready", ""));
+          tl.to(intro, { opacity: 1, y: 0, duration: dur.roast, ease: "power3.out", stagger: stagger.item * 1.4 }, 0.55);
+          cancel = whenLoaderDone(() => tl!.play());
+        } else {
+          // Hard load without the loader: the hero is complete in the server HTML (LCP). No entrance, just mark it ready.
+          q("[data-yb-anim]").forEach((n) => n.setAttribute("data-yb-ready", ""));
         }
-        gsap.set(intro, { opacity: 0, y: 26 });
-        intro.forEach((n) => n.setAttribute("data-yb-ready", ""));
-        tl.to(intro, { opacity: 1, y: 0, duration: dur.roast, ease: "power3.out", stagger: stagger.item * 1.4 }, 0.55);
-        const cancel = whenLoaderDone(() => tl.play());
 
-        // ---- idle float (paused while the hero is off screen) ----
-        const idle = kernelsFloat.map((k, i) =>
-          gsap.to(k, { y: i % 2 ? 14 : -14, x: i % 3 ? 6 : -6, rotation: i % 2 ? 10 : -10, duration: 2.6 + (i % 4) * 0.5, ease: "sine.inOut", yoyo: true, repeat: -1 }),
-        );
-        const toggle = ScrollTriggerToggle(el, idle);
+        // ---- idle float + scroll-out: built after first paint (the hero is already visible and final) ----
+        let toggle = () => {};
+        let idle: gsap.core.Tween[] = [];
+        let scrub: gsap.core.Timeline | null = null;
+        const off = defer(() => {
+          idle = kernelsFloat.map((k, i) =>
+            gsap.to(k, { y: i % 2 ? 14 : -14, x: i % 3 ? 6 : -6, rotation: i % 2 ? 10 : -10, duration: 2.6 + (i % 4) * 0.5, ease: "sine.inOut", yoyo: true, repeat: -1 }),
+          );
+          toggle = ScrollTriggerToggle(el, idle);
 
-        // ---- scroll: packs drift apart and up, headline ghosts, kernels fall toward HOME-02 (scrubbed, no pin) ----
-        const scrub = gsap.timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: 0.6, invalidateOnRefresh: true }, defaults: { ease: "none" } });
-        packsOut.forEach((p, i) => scrub.to(p, { x: PACK_SLOTS[i].out.x, y: PACK_SLOTS[i].out.y, rotation: PACK_SLOTS[i].out.r, duration: 1 }, 0));
-        scrub.to("[data-headline]", { opacity: 0.15, y: -vh * 0.06, duration: 0.7 }, 0);
-        scrub.to("[data-intro-wrap]", { opacity: 0, y: -vh * 0.08, duration: 0.55 }, 0.15);
-        kernelsOut.forEach((k, i) => {
-          scrub.to(k, { y: () => window.innerHeight * KERNELS[i].fall * 0.95, rotation: KERNELS[i].r * 2, duration: 1 }, 0);
-          scrub.to(k, { opacity: 0, duration: 0.3 }, 0.7);
+          // packs drift apart and up, headline ghosts, kernels fall toward HOME-02 (scrubbed, no pin)
+          const vh = window.innerHeight;
+          scrub = gsap.timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: 0.6, invalidateOnRefresh: true }, defaults: { ease: "none" } });
+          packsOut.forEach((p, i) => scrub!.to(p, { x: PACK_SLOTS[i].out.x, y: PACK_SLOTS[i].out.y, rotation: PACK_SLOTS[i].out.r, duration: 1 }, 0));
+          if (headlineEl) scrub.to(headlineEl, { opacity: 0.15, y: -vh * 0.06, duration: 0.7 }, 0);
+          if (introWrap) scrub.to(introWrap, { opacity: 0, y: -vh * 0.08, duration: 0.55 }, 0.15);
+          kernelsOut.forEach((k, i) => {
+            scrub!.to(k, { y: () => window.innerHeight * KERNELS[i].fall * 0.95, rotation: KERNELS[i].r * 2, duration: 1 }, 0);
+            scrub!.to(k, { opacity: 0, duration: 0.3 }, 0.7);
+          });
+          if (buddyEl && buddyWrap) scrub.to(buddyWrap, { y: -vh * 0.12, duration: 1 }, 0);
         });
-        if (buddyEl) scrub.to("[data-buddy-wrap]", { y: -vh * 0.12, duration: 1 }, 0);
 
         return () => {
+          off();
           cancel();
-          tl.kill();
+          tl?.kill();
           toggle();
           idle.forEach((t) => t.kill());
-          scrub.scrollTrigger?.kill();
-          scrub.kill();
+          scrub?.scrollTrigger?.kill();
+          scrub?.kill();
         };
       });
     },
@@ -143,9 +161,9 @@ export function Hero({ headline, line, primary, secondary, packs }: HeroProps) {
       {packs.map((p, i) => {
         const slot = PACK_SLOTS[i];
         return (
-          <div key={p.product.slug} data-pack="" data-yb-anim="" className={`pointer-events-none absolute ${slot.cls}`} style={{ zIndex: slot.z }}>
+          <div key={p.product.slug} data-pack="" data-yb-anim="lcp" className={`pointer-events-none absolute ${slot.cls}`} style={{ zIndex: slot.z }}>
             <div data-pack-in="" style={{ rotate: "0deg" }}>
-              <PackImage product={p.product} size="lg" sizes="(min-width: 768px) 20vw, 36vw" priority decorative morph={false} imgClassName="drop-shadow-[0_26px_30px_rgb(42_18_16/0.3)]" />
+              <PackImage product={p.product} size="lg" sizes="(min-width: 768px) 20vw, 36vw" priority={i === 2} eager={i !== 2} decorative morph={false} imgClassName="drop-shadow-[0_26px_30px_rgb(42_18_16/0.3)]" />
             </div>
           </div>
         );
@@ -169,10 +187,10 @@ export function Hero({ headline, line, primary, secondary, packs }: HeroProps) {
           />
         </div>
         <div data-intro-wrap="" className="relative z-30">
-          <p data-intro="" data-yb-anim="" className="mx-auto mt-6 max-w-[30ch] text-[length:clamp(1.05rem,1.7vw,1.5rem)] font-medium leading-snug md:max-w-[44ch]">
+          <p data-intro="" data-yb-anim="lcp" className="mx-auto mt-6 max-w-[30ch] text-[length:clamp(1.05rem,1.7vw,1.5rem)] font-medium leading-snug md:max-w-[44ch]">
             {line}
           </p>
-          <div data-intro="" data-yb-anim="" className="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <div data-intro="" data-yb-anim="lcp" className="mt-7 flex flex-wrap items-center justify-center gap-3">
             <a href={primary.href} className={buttonClass("solid", "lg")}>
               <span>{primary.label}</span>
               <SlideArrow />

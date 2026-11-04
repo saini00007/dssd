@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useRef } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
+import { gsap, useGSAP } from "@/components/motion/gsap";
+import { whenInView } from "@/components/motion/entrance";
 import { RingBurst, type RingBurstHandle } from "@/components/motion/RingBurst";
 import { shapeSrc } from "@/lib/media";
 import { dur, ease, mq } from "@/lib/tokens";
@@ -39,9 +40,9 @@ export function OliveOil({ neverFried }: { neverFried: string }) {
           .to(splash, { opacity: 1, scale: 1, x: (i) => [-70, 0, 70][i], y: (i) => [-50, -90, -44][i], rotate: (i) => [-30, 0, 30][i], duration: dur.pop, ease: ease.crunch, stagger: 0.04 }, "<")
           .to(splash, { opacity: 0, y: "+=40", duration: 0.5, ease: "power2.in" }, ">0.15")
           .to(badge, { opacity: 1, scale: 1, rotate: -4, duration: dur.pop + 0.1, ease: ease.crunch }, "<-0.2");
-        const st = ScrollTrigger.create({ trigger: el, start: "top 65%", once: true, onEnter: () => tl.play() });
+        const stop = whenInView(el, "top 65%", () => tl.play());
         return () => {
-          st.kill();
+          stop();
           tl.kill();
         };
       });

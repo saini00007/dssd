@@ -1,6 +1,7 @@
 "use client";
 import { useRef, type CSSProperties, type ElementType, type ReactNode } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
+import { deferIn } from "@/components/motion/entrance";
 import { mq } from "@/lib/tokens";
 
 // Final (resting) arch. The CSS class in globals-free inline style keeps SSR output identical to the end state.
@@ -28,7 +29,8 @@ export function ArchReveal({ as: Tag = "section", behind, className, style, head
       const el = ref.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add(mq.motion, () => {
+      mm.add(mq.motion, (_c, safe) => {
+        const off = deferIn(safe, () => {
         gsap.fromTo(
           el,
           { clipPath: ARCH_FROM },
@@ -38,6 +40,8 @@ export function ArchReveal({ as: Tag = "section", behind, className, style, head
             scrollTrigger: { trigger: el, start: "top 98%", end: "top 40%", scrub: true },
           },
         );
+        });
+        return () => off();
       });
     },
     { scope: ref },
