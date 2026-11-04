@@ -14,7 +14,7 @@ h1: Pudina Masala Popcorn | Yunch Bite Popcorn
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Crispy corn kernels infused with aromatic mint leaves and tangy Indian chaat spi
 
 ### [Button: Ingredients]
 
+Whole Grain Corn, Edible Vegetable Oil, Mint Powder, Spices & Condiments, Iodized Salt, Black Salt, Mango Powder.
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+30g
+
+energy
+
+145 kcal
+
+protein
+
+3.0 g
+
+carbohydrates
+
+20.1 g
+
+dietary Fiber
+
+4.0 g
+
+total Fat
+
+6.0 g
+
+saturated Fat
+
+1.0 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+220 mg
 
 ### [Button: Allergen Information]
 
+Processed in a facility that handles nuts and dairy. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
+
+Store in a cool, hygienic and dry place away from direct sunlight.
 
 ### [Button: Shelf Life]
 
+6 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 

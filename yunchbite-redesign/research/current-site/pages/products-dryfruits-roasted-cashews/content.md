@@ -14,7 +14,7 @@ h1: Slow Roasted Cashews | Yunch Bite Dry Fruits
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Jumbo cashews slow dry-roasted to a golden crisp and sprinkled with natural rock
 
 ### [Button: Ingredients]
 
+Whole Cashew Nuts, Rock Salt, Natural Plant Gum.
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+30g
+
+energy
+
+170 kcal
+
+protein
+
+5.1 g
+
+carbohydrates
+
+9.0 g
+
+dietary Fiber
+
+1.0 g
+
+total Fat
+
+13.5 g
+
+saturated Fat
+
+2.5 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+150 mg
 
 ### [Button: Allergen Information]
 
+Contains Tree Nuts (Cashews). Processed in a dedicated nut facility.
+
 ### [Button: Storage Instructions]
+
+Reseal pouch tightly after opening. Store in a cool, dry place.
 
 ### [Button: Shelf Life]
 
+6 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 

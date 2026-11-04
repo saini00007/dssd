@@ -85,7 +85,7 @@ Product card click at about 00:44 → product page at 00:45. The product title t
 
 ## I · Mobile
 
-**Not recorded yet.** If possible, a phone recording of the homepage and one product page would complete this section.
+**Skipped for now** (client decision, 2026-11-04). The mobile study comes back before wireframes are finalised.
 
 ## J · Performance and accessibility
 

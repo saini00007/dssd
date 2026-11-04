@@ -14,7 +14,7 @@ h1: Salted Popcorn | Yunch Bite Popcorn
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Crisp, fluffy popcorn tossed with pure Himalayan salt for a light, guilt-free mu
 
 ### [Button: Ingredients]
 
+Whole Grain Corn, Edible Vegetable Oil, Himalayan Pink Salt.
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+30g
+
+energy
+
+142 kcal
+
+protein
+
+3.2 g
+
+carbohydrates
+
+19.5 g
+
+dietary Fiber
+
+4.1 g
+
+total Fat
+
+5.8 g
+
+saturated Fat
+
+0.9 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+180 mg
 
 ### [Button: Allergen Information]
 
+Processed in a facility that also handles nuts and dairy. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
+
+Store in a cool, hygienic and dry place away from direct sunlight. Consume immediately after opening.
 
 ### [Button: Shelf Life]
 
+6 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 

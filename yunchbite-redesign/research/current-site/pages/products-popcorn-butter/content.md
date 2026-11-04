@@ -14,7 +14,7 @@ h1: Butter Popcorn | Yunch Bite Popcorn
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Rich, buttery, golden popped kernels bringing classic movie theater magic right 
 
 ### [Button: Ingredients]
 
+Whole Grain Corn, Edible Vegetable Oil, Butter Flavor Seasoning, Iodized Salt, Natural Color (Turmeric).
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+30g
+
+energy
+
+150 kcal
+
+protein
+
+3.1 g
+
+carbohydrates
+
+19.8 g
+
+dietary Fiber
+
+3.8 g
+
+total Fat
+
+6.5 g
+
+saturated Fat
+
+1.2 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+195 mg
 
 ### [Button: Allergen Information]
 
+Contains Milk Solids. Processed in a facility that handles nuts. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
+
+Store in a cool, hygienic and dry place away from direct sunlight.
 
 ### [Button: Shelf Life]
 
+6 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 

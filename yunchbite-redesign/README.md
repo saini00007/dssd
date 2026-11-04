@@ -29,6 +29,7 @@ Each phase ends with client approval before the next one starts.
 | 2026-11-04 | References: [Bucks Sauce](https://buckssauce.com/), [Agrume Farm](https://www.agrumeafarm.it/), [YAAS Energy](https://yaas-energy.com/). Bucks Sauce blocks automated browsers, so it's studied from the client's own screen recording (`research/references/buckssauce/recordings/`). | Client |
 | 2026-11-04 | **No 3D renders.** Products are shown in a **cut-out style** (transparent-background pack photos and ingredient cut-outs), not real-time 3D. | Client |
 | 2026-11-04 | Brand facts (phone, claims, address) are taken from the current website as they are and corrected later. | Client |
+| 2026-11-04 | **Mobile is skipped for now.** References are captured and analysed on desktop only; the mobile study comes back before wireframes are finalised. | Client |
 
 ## Folder map
 

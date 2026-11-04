@@ -14,7 +14,7 @@ h1: Whole Raw Cashews | Yunch Bite Dry Fruits
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Finest whole cashew nuts hand-picked from the lush groves of Mangalore. Naturall
 
 ### [Button: Ingredients]
 
+100% Whole Raw Cashews (Anacardium occidentale).
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+30g
+
+energy
+
+166 kcal
+
+protein
+
+5.2 g
+
+carbohydrates
+
+9.1 g
+
+dietary Fiber
+
+1.0 g
+
+total Fat
+
+13.1 g
+
+saturated Fat
+
+2.4 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+4 mg
 
 ### [Button: Allergen Information]
 
+Contains Tree Nuts (Cashews). Processed in a dedicated nut facility.
+
 ### [Button: Storage Instructions]
+
+Reseal pouch tightly after opening. Store in a cool, dry place or refrigerate for prolonged freshness.
 
 ### [Button: Shelf Life]
 
+9 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 

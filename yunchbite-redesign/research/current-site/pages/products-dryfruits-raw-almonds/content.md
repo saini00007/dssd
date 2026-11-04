@@ -14,7 +14,7 @@ h1: California Raw Almonds | Yunch Bite Dry Fruits
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Crisp, nutrient-dense California nonpareil almonds loaded with Vitamin E, protei
 
 ### [Button: Ingredients]
 
+100% California Raw Almonds (Prunus dulcis).
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+30g
+
+energy
+
+173 kcal
+
+protein
+
+6.4 g
+
+carbohydrates
+
+6.1 g
+
+dietary Fiber
+
+3.5 g
+
+total Fat
+
+14.9 g
+
+saturated Fat
+
+1.1 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+1 mg
 
 ### [Button: Allergen Information]
 
+Contains Tree Nuts (Almonds). Processed in a dedicated nut facility.
+
 ### [Button: Storage Instructions]
+
+Reseal pouch tightly after opening. Store in a cool, dry place.
 
 ### [Button: Shelf Life]
 
+9 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 

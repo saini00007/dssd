@@ -14,7 +14,7 @@ h1: Slow Roasted Almonds | Yunch Bite Dry Fruits
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Evenly dry-roasted California almonds with a delightful snap and light seasoning
 
 ### [Button: Ingredients]
 
+Whole Almonds, Rock Salt, Natural Plant Gum.
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+30g
+
+energy
+
+175 kcal
+
+protein
+
+6.2 g
+
+carbohydrates
+
+6.0 g
+
+dietary Fiber
+
+3.4 g
+
+total Fat
+
+15.0 g
+
+saturated Fat
+
+1.1 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+145 mg
 
 ### [Button: Allergen Information]
 
+Contains Tree Nuts (Almonds). Processed in a dedicated nut facility.
+
 ### [Button: Storage Instructions]
+
+Reseal pouch tightly after opening. Store in a cool, dry place.
 
 ### [Button: Shelf Life]
 
+6 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 
