@@ -76,7 +76,7 @@ export async function detectCrop(file, probe, { samples = 60 } = {}) {
   if (right < SW - 1 && (b = best(colG, right - 4, right + 6, gThrC)) >= 0) { snaps.right = b - right; right = b - 1; }
   // Scrollbar: thin high-contrast vertical band near the right edge, possibly inside the active run.
   if (right > SW - 40) {
-    b = best(colG, right - 24, right, Math.max(10, 8 * median(colG)));
+    b = best(colG, right - 24, right, Math.max(10, 3 * median(colG)));
     if (b >= 0 && b < right - 1) { snaps.scrollbar = b - right; right = b - 1; }
   }
   if (bottom < SH - 1 && (b = best(rowG, bottom - 4, bottom + 6, gThrR)) >= 0) { snaps.bottom = b - bottom; bottom = b - 1; }
