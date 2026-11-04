@@ -3,7 +3,8 @@
 const KW = {
   logo: /(^|[^a-z])(logo|wordmark|brandmark|logotype|lockup)([^a-z]|$)/i,
   mascot: /(mascot|character|mascott|avatar|buddy|yunchi|animated)/i,
-  pack: /(pack|pouch|packet|sachet|jar|carton|product|makhana|net[-_ ]?wt|\b\d{2,4}\s?-?g\b|\d{2,4}g\b)/i,
+  pack: /(pack|pouch|packet|sachet|jar|carton|net[-_ ]?wt|\b\d{2,4}\s?-?g(m)?\b)/i,
+  notPack: /(banner|slide|blog|avatar|collage|factory|hero|about|mascot|question|promo)/i,
   hero: /(hero|banner|cover|masthead|splash)/i,
   bg: /(^|[^a-z])(bg|background|pattern|texture|wallpaper)([^a-z]|$)/i,
   icon: /(^|[^a-z])(icon|ico|glyph|symbol|badge)([^a-z]|$)/i,
@@ -50,12 +51,12 @@ export function guessRoles(e) {
     (PRODUCT_PATH.test(u.page || '') && u.inMain && Math.max(u.w || 0, u.h || 0) >= 200) ||
     (u.link && (() => { try { return PRODUCT_PATH.test(new URL(u.link).pathname); } catch { return false; } })())
   ));
-  if (!roles.has('logo') && !roles.has('favicon') && !roles.has('og-image') && visual &&
+  if (!roles.has('logo') && !roles.has('favicon') && !roles.has('og-image') && visual && !KW.notPack.test(nameTxt) &&
       (KW.pack.test(nameTxt) || KW.pack.test(alts) || productCtx)) add('product-pack');
   if (roles.has('og-image') && (KW.pack.test(nameTxt) || KW.pack.test(alts) || productCtx)) add('product-pack');
 
   const heroCtx = U.some((u) => /^(img|img-srcset|picture-source|css-bg|img-lazy)$/.test(u.how) && !u.inHeader && !u.inFooter && (u.docTop ?? 9999) < 900 && (u.w || 0) >= 860 && (e.width || 0) >= 800);
-  if (visual && !roles.has('logo') && (KW.hero.test(nameTxt) || KW.hero.test(clsTxt) || heroCtx)) add('hero');
+  if (visual && !roles.has('logo') && (KW.hero.test(nameTxt) || (KW.hero.test(clsTxt) && (e.width || 0) >= 600) || heroCtx)) add('hero');
 
   if (visual && (hows.has('css-bg') || hows.has('css-url') || KW.bg.test(nameTxt)) && !roles.has('hero')) add('background');
 

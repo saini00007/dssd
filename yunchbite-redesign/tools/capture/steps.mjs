@@ -22,23 +22,24 @@ function quietProbe() {
 }
 
 /**
- * Wait for motion to settle: two consecutive screenshots hash equal, OR scroll position and all
- * finite animations are quiet for two polls (pages with endless loops never hash equal).
+ * Wait for motion to settle: scroll position, finite animations, gsap tweens and Lenis are quiet for two
+ * polls (endless loops such as marquees are ignored); otherwise two consecutive screenshots hash equal.
  */
 export async function settle(page, timeoutMs) {
   const start = Date.now();
+  let prevY = null;
   let prevHash = null;
-  let prevQuiet = null;
   while (Date.now() - start < timeoutMs) {
-    const buf = await page.screenshot({ type: 'jpeg', quality: 40, scale: 'css' });
-    const hash = crypto.createHash('md5').update(buf).digest('hex');
-    if (hash === prevHash) return { how: 'identical frames', ms: Date.now() - start };
-    prevHash = hash;
     const q = await page.evaluate(quietProbe);
-    const quiet = q.finite === 0 && q.tweens === 0 && !q.lenisScrolling;
-    if (quiet && prevQuiet !== null && prevQuiet === q.y) return { how: 'no running animations', ms: Date.now() - start };
-    prevQuiet = quiet ? q.y : null;
-    await sleep(100);
+    if (q.finite === 0 && q.tweens === 0 && !q.lenisScrolling && q.y === prevY) return { how: 'no running animations', ms: Date.now() - start };
+    prevY = q.y;
+    // Not quiet by DOM measures: fall back to comparing screenshots once the quick checks had a chance.
+    if (Date.now() - start > 600) {
+      const hash = crypto.createHash('md5').update(await page.screenshot({ type: 'jpeg', quality: 40, scale: 'css' })).digest('hex');
+      if (hash === prevHash) return { how: 'identical frames', ms: Date.now() - start };
+      prevHash = hash;
+    }
+    await sleep(120);
   }
   return { how: 'timeout (continuous motion on page)', ms: Date.now() - start };
 }

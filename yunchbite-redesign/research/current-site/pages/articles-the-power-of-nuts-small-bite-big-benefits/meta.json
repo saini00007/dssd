@@ -1,0 +1,14 @@
+{
+  "done": false,
+  "url": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/articles/the-power-of-nuts-small-bite-big-benefits",
+  "path": "/articles/the-power-of-nuts-small-bite-big-benefits",
+  "slug": "articles-the-power-of-nuts-small-bite-big-benefits",
+  "error": "browser.newContext: Target page, context or browser has been closed",
+  "phase": "navigation",
+  "sources": [
+    "sitemap",
+    "robots",
+    "crawl"
+  ],
+  "failedAt": "2026-11-04T07:40:21.211Z"
+}

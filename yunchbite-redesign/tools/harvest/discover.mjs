@@ -1,14 +1,11 @@
 // Page discovery from robots.txt + sitemap(.xml / index). BFS crawling lives in harvest.mjs.
 import { normalizePage } from './urls.mjs';
 
-const UA = 'Mozilla/5.0 (compatible; YunchBiteHarvester/1.0)';
+import { httpGet } from './http.mjs';
 
-async function get(url, headers, timeoutMs = 20000) {
-  const res = await fetch(url, {
-    headers: { 'user-agent': UA, accept: 'application/xml,text/xml,text/plain,*/*', ...headers },
-    redirect: 'follow', signal: AbortSignal.timeout(timeoutMs),
-  });
-  return { status: res.status, text: res.ok ? await res.text() : '' };
+async function get(url, headers) {
+  const r = await httpGet(url, { headers, timeout: 20000, accept: 'application/xml,text/xml,text/plain,*/*' });
+  return { status: r.status, text: r.ok ? r.body.toString('utf8') : '' };
 }
 
 const locs = (xml) => [...xml.matchAll(/<loc>\s*(?:<!\[CDATA\[)?\s*([^<\]]+?)\s*(?:\]\]>)?\s*<\/loc>/gi)].map((m) => m[1].replace(/&amp;/g, '&'));
@@ -34,7 +31,7 @@ export async function discoverFromSitemaps(site, headers = {}, log = () => {}) {
     if (r.status === 401 || r.status === 403) notes.push(`robots.txt returned HTTP ${r.status} (deployment protection / auth wall?)`);
     for (const m of r.text.matchAll(/^\s*sitemap:\s*(\S+)/gim)) {
       let u = m[1];
-      try { u = site.toCanonical(new URL(u)).href; } catch { continue; }
+      try { u = site.toCanonical(new URL(u, site.origin)).href; } catch { continue; }
       sitemapUrls.set(u, 'robots');
     }
   } catch (e) { notes.push(`robots.txt fetch failed: ${e.message}`); }
@@ -58,7 +55,7 @@ export async function discoverFromSitemaps(site, headers = {}, log = () => {}) {
         }
       } else {
         log(`  sitemap ${url}: ${urls.length} urls`);
-        for (const u of urls) add(u, src === 'robots' ? 'robots' : 'sitemap');
+        for (const u of urls) { add(u, 'sitemap'); if (src === 'robots') add(u, 'robots'); }
       }
     } catch (e) { notes.push(`${url} fetch failed: ${e.message}`); }
   }

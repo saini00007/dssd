@@ -29,6 +29,29 @@ export async function autoScroll({ stepFrac = 0.6, delayMs = 160, maxSteps = 140
   return { height: document.documentElement.scrollHeight, steps: Math.round((Date.now() - t0) / delayMs) };
 }
 
+/** Open accordions / <details> so collapsed copy (ingredients, nutrition, FAQ ...) is in the DOM. Returns how many were opened. */
+export async function expandAll() {
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  let n = 0;
+  for (const d of document.querySelectorAll('details:not([open])')) { d.open = true; n++; }
+  for (let round = 0; round < 3; round++) {
+    const btns = [...document.querySelectorAll('[aria-expanded="false"]')].filter((el) =>
+      /^(BUTTON|SUMMARY|DIV|H[1-6]|LI|SPAN)$/.test(el.tagName) && !el.hasAttribute('aria-haspopup') &&
+      !el.closest('nav,header,[role=menu],[role=listbox],[role=combobox]') && el.getAttribute('role') !== 'combobox' &&
+      !el.closest('a[href]') && getComputedStyle(el).display !== 'none');
+    if (!btns.length) break;
+    for (const b of btns) { try { b.click(); n++; } catch { /* ignore */ } await sleep(60); }
+    await sleep(450);
+  }
+  // single-open accordions re-close earlier panels (content stays mounted): force every collapsed region visible
+  const st = document.createElement('style');
+  st.textContent = '[class*="Collapse-hidden"],[class*="collapse-hidden"],[data-state="closed"][role="region"],.collapse:not(.show),.accordion-collapse{visibility:visible !important;height:auto !important;display:block !important;opacity:1 !important;max-height:none !important}';
+  document.head.appendChild(st);
+  for (const r of document.querySelectorAll('[role="region"][hidden]')) { r.removeAttribute('hidden'); n++; }
+  await sleep(200);
+  return n;
+}
+
 /** Everything we need from the rendered DOM in one round trip. */
 export function extractPage({ minSvg = 24 }) {
   const abs = (u) => { try { return new URL(u, document.baseURI).href; } catch { return null; } };
@@ -296,7 +319,7 @@ export function extractPage({ minSvg = 24 }) {
       }
     }
   }
-  const finishInline = (s) => s.replace(/[ \t\r\n ]+/g, ' ').split(BR).map((x) => x.trim()).join('  \n').trim();
+  const finishInline = (s) => s.replace(/\)\[/g, ') [').replace(/[ \t\r\n ]+/g, ' ').split(BR).map((x) => x.trim()).join('  \n').trim();
 
   const blocks = [];
   let run = [];

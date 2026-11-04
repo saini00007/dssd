@@ -10,6 +10,7 @@ import { makeSite, normalizePage, pathOf } from './urls.mjs';
 import { discoverFromSitemaps } from './discover.mjs';
 import { AssetStore } from './assets.mjs';
 import { harvestPage, pageDirFor } from './page.mjs';
+import { ensureEnvProxy } from './http.mjs';
 import { buildContactSheets } from './contact.mjs';
 import { loadMetas, buildSitemap, writeSitemap, writeIssues, writeSummary } from './reports.mjs';
 
@@ -193,6 +194,7 @@ export async function run(opts, log = (...a) => console.log(...a)) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
+  ensureEnvProxy();
   let opts;
   try { opts = parseCli(process.argv.slice(2)); } catch (e) { console.error(e.message + '\n'); console.error(HELP); process.exit(2); }
   if (opts.help || !opts.startUrl) { console.log(HELP); process.exit(opts.help ? 0 : 2); }

@@ -59,7 +59,7 @@ function sampleFollow({ el, ms }) {
 function cursorStyle(el) {
   const r = el.getBoundingClientRect();
   const cs = getComputedStyle(el);
-  return { width: round(r.width, 1), height: round(r.height, 1), opacity: cs.opacity, backgroundColor: cs.backgroundColor, mixBlendMode: cs.mixBlendMode, borderRadius: cs.borderTopLeftRadius };
+  return { width: Math.round(r.width * 10) / 10, height: Math.round(r.height * 10) / 10, opacity: cs.opacity, backgroundColor: cs.backgroundColor, mixBlendMode: cs.mixBlendMode, borderRadius: cs.borderTopLeftRadius };
 }
 
 function magneticCandidatesInPage() {

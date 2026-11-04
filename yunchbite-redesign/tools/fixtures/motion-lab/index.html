@@ -25,7 +25,6 @@
 
 <main>
   <section class="hero" data-bg="#f6f1e9" id="hero">
-    <canvas class="gl" id="gl" width="480" height="270"></canvas>
     <div class="layer layer--a" data-depth="60"></div>
     <div class="layer layer--b" data-depth="-40"></div>
     <div class="layer layer--c" data-depth="110"></div>
@@ -82,7 +81,8 @@
       <h2 class="section__title">Watch the kitchen breathe</h2>
       <div class="media-row" style="margin-top:8vh">
         <video id="film-video" src="clip.mp4" autoplay muted loop playsinline></video>
-        <p>A looping reel from the line, shot between the lunch and dinner rushes.</p>
+        <canvas class="gl" id="gl" width="480" height="270"></canvas>
+        <p>A looping reel from the line, shot between the lunch and dinner rushes, next to a live WebGL gradient.</p>
       </div>
     </div>
   </section>

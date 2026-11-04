@@ -44,7 +44,7 @@ img { display: block; max-width: 100%; }
 .float { position: absolute; left: var(--gutter); bottom: 48px; width: 76px; height: 76px; border-radius: 22px; background: #ffd166; animation: float 4s ease-in-out infinite; z-index: 2; }
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-24px) rotate(12deg); } }
 .badge { position: absolute; right: var(--gutter); bottom: 48px; width: 110px; height: 110px; border-radius: 50%; border: 2px dashed var(--ink); display: grid; place-items: center; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; z-index: 2; }
-canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.35; z-index: 0; }
+canvas.gl { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius); }
 
 /* marquee */
 .marquee { overflow: hidden; background: var(--ink); color: var(--paper); padding: 22px 0; white-space: nowrap; }
@@ -77,7 +77,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.
 .card__body p { margin-top: 6px; font-size: 15px; opacity: 0.7; }
 .card:hover { transform: translateY(-12px); box-shadow: 0 28px 48px rgba(0,0,0,0.18); }
 .card:hover img { transform: scale(1.1); }
-.media-row { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+.media-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
 .media-row video, .media-row canvas { width: 100%; border-radius: var(--radius); background: #000; }
 .media-row canvas { aspect-ratio: 16 / 9; }
 

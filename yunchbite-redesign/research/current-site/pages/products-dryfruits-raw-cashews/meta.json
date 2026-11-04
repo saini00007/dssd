@@ -1,0 +1,14 @@
+{
+  "done": false,
+  "url": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/dryfruits-raw-cashews",
+  "path": "/products/dryfruits-raw-cashews",
+  "slug": "products-dryfruits-raw-cashews",
+  "error": "browser.newContext: Target page, context or browser has been closed",
+  "phase": "navigation",
+  "sources": [
+    "sitemap",
+    "robots",
+    "crawl"
+  ],
+  "failedAt": "2026-11-04T07:40:20.579Z"
+}

@@ -68,7 +68,7 @@ function profileSection(dir, p) {
   const L = [];
   const rel = (f) => `${p.profile}/${f}`;
   L.push(`## Profile: ${p.profile}`, '');
-  L.push('### Pass status', '', table(['pass', 'status', 'time (s)', 'detail'], Object.entries(status(p)).map(([k, v]) => [k, v.status, v.seconds ?? '', v.error || v.reason || ''])), '');
+  L.push('### Pass status', '', table(['pass', 'status', 'time (s)', 'detail'], Object.entries(p.status).map(([k, v]) => [k, v.status, v.seconds ?? '', v.error || v.reason || ''])), '');
   if (!probe) {
     L.push('_Probe pass produced no data: tech stack, tokens and animation inventory are unavailable._', '');
   } else {
@@ -189,18 +189,19 @@ function profileSection(dir, p) {
   L.push(`- Probe data: [probe.json](${rel('probe.json')})`, '');
   return L.join('\n');
 
-  function status(pr) {
-    return pr.status;
-  }
+}
+
+export function writeBlocked(outDir, url, blocked, meta) {
+  const md = `# Motion capture report: ${url}\n\n**BLOCKED**: ${blocked.reason}\n\nThe site refused automated access or served a challenge/error page, so nothing was captured. The tool only detects this state; it does not try to bypass bot protection.\n\nCaptured ${meta.capturedAt}${blocked.httpStatus ? ` | document status ${blocked.httpStatus}` : ''}\n`;
+  fs.writeFileSync(path.join(outDir, 'report.md'), md);
+  writeJson(path.join(outDir, 'summary.json'), { url, ...meta, blocked: true, reason: blocked.reason, httpStatus: blocked.httpStatus ?? null, profiles: [] });
 }
 
 export function writeReport(outDir, url, profileSummaries, meta) {
   const L = [`# Motion capture report: ${url}`, '', `Captured ${meta.capturedAt} | profiles: ${profileSummaries.map((p) => p.profile).join(', ')} | total ${meta.totalSeconds}s`, ''];
-  const walls = profileSummaries.filter((p) => p._data.probe?.botWall?.detected || p.status.probe?.reason === 'bot wall');
-  if (walls.length) L.push('> WARNING: the site served a challenge/error page (see per-profile notes). Results do not describe the real site.', '');
   L.push('## Summary', '', table(['profile', 'stack', 'ScrollTriggers (pinned)', 'tweens', 'CSS/WAAPI anims', 'hovers', 'custom cursor', 'parallax layers', 'magnetic', 'transitions'], profileSummaries.map((p) => [p.profile, Object.keys(p.libraries || {}).join(', ') || 'none detected', `${p.motion.scrollTriggers} (${p.motion.pinned})`, p.motion.creationTimeTweens || p.motion.liveTweens, `${p.motion.cssAnimations}/${p.motion.waapiAnimations}`, p.hoverCaptured ?? 'n/a', p.customCursor ?? 'n/a', p.parallaxLayers ?? 'n/a', (p.magneticElements || []).join(', ') || (p.magneticElements ? 'none' : 'n/a'), (p.transitions || []).map((t) => t.type).join('; ') || 'n/a'])), '');
   for (const p of profileSummaries) L.push(profileSection(path.join(outDir, p.profile), p), '');
   L.push('## Honest limits', '', '- Headless Chromium uses software WebGL; heavy WebGL pages drop frames, so video timing can differ from a real GPU.', '- GSAP bundled without a `window.gsap` global cannot be introspected; it is reported as "bundle fingerprint" only.', '- Hover/cursor passes use synthetic mouse input and are skipped on touch profiles.', '- Computed-style diffs only see what changed in the sampled element subtree and its ::before/::after.', '');
   fs.writeFileSync(path.join(outDir, 'report.md'), L.join('\n'));
-  writeJson(path.join(outDir, 'summary.json'), { url, ...meta, profiles: profileSummaries.map(({ _data, ...rest }) => rest) });
+  writeJson(path.join(outDir, 'summary.json'), { url, ...meta, blocked: false, profiles: profileSummaries.map(({ _data, ...rest }) => rest) });
 }

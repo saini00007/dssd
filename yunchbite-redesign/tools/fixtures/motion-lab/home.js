@@ -103,8 +103,15 @@ $$('.section__title').forEach((t) => {
   g.vertexAttribPointer(loc, 2, g.FLOAT, false, 0, 0);
   const ut = g.getUniformLocation(prog, 't');
   g.uniform2f(g.getUniformLocation(prog, 'r'), canvas.width, canvas.height);
-  (function frame(ms) { g.uniform1f(ut, ms / 1000); g.drawArrays(g.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(frame); })(0);
+  // render only while on screen (common optimisation; keeps the rest of the page cheap to capture)
+  let visible = false;
+  (function frame(ms) { if (visible) { g.uniform1f(ut, ms / 1000); g.drawArrays(g.TRIANGLE_STRIP, 0, 4); } requestAnimationFrame(frame); })(0);
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
 })();
+
+// ---- autoplay video pauses off screen
+const film = $('#film-video');
+new IntersectionObserver(([e]) => { e.isIntersecting ? film.play().catch(() => {}) : film.pause(); }).observe(film);
 
 // ---- magnetic button: starts moving as the pointer approaches, before hovering it
 const magnet = $('#magnet');

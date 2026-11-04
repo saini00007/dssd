@@ -1,0 +1,14 @@
+{
+  "done": false,
+  "url": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/popcorn-salted",
+  "path": "/products/popcorn-salted",
+  "slug": "products-popcorn-salted",
+  "error": "browser.newContext: Target page, context or browser has been closed",
+  "phase": "navigation",
+  "sources": [
+    "crawl",
+    "sitemap",
+    "robots"
+  ],
+  "failedAt": "2026-11-04T07:40:20.175Z"
+}

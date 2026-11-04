@@ -2,9 +2,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { contextOptions, DESKTOP, MOBILE, sleep } from '../lib/browser.mjs';
-import { autoScroll, extractPage } from './inpage.mjs';
+import { autoScroll, extractPage, expandAll } from './inpage.mjs';
 import { normalizePage, pathOf, slugForUrl, decodeOptimizerUrl, guessPageType } from './urls.mjs';
 import { extOf } from './assets.mjs';
+import { httpGet } from './http.mjs';
 
 const MAX_BODY = 60 * 1024 * 1024;
 const MAX_FETCH = 250 * 1024 * 1024;
@@ -20,7 +21,7 @@ async function pool(items, n, fn) {
 }
 
 /** Launch one rendering pass with a profile; returns everything observed. */
-async function visit({ browser, url, profile, opts, extract, contexts }) {
+async function visit({ browser, url, profile, opts, extract, contexts, shotFile }) {
   const context = await browser.newContext(contextOptions(profile, {
     extraHTTPHeaders: opts.headers, serviceWorkers: 'block', acceptDownloads: false,
   }));
@@ -84,7 +85,12 @@ async function visit({ browser, url, profile, opts, extract, contexts }) {
   await page.evaluate(autoScroll, { stepFrac: 0.6, delayMs: opts.scrollDelay, maxSteps: 160, maxMs: 40000 }).catch(() => {});
   await page.waitForLoadState('networkidle', { timeout: 8000 }).catch(() => {});
   await sleep(400);
+  if (shotFile) {
+    try { v.shot = await screenshot(page, shotFile); } catch (e) { v.shotError = e.message; }
+  }
   if (extract) {
+    v.expanded = await page.evaluate(expandAll).catch(() => 0);
+    if (v.expanded) await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
     try { v.data = await page.evaluate(extractPage, { minSvg: opts.minSvg }); }
     catch { await sleep(800); v.data = await page.evaluate(extractPage, { minSvg: opts.minSvg }); }
   }
@@ -155,9 +161,9 @@ async function ingestAssets({ v, store, site, pagePath, pageUrl, opts, log }) {
   // web app manifest icons
   if (v.data?.manifestHref) {
     try {
-      const r = await v.context.request.get(v.data.manifestHref, { timeout: 15000 });
-      if (r.ok()) {
-        const j = JSON.parse((await r.body()).toString('utf8'));
+      const r = await httpGet(v.data.manifestHref, { headers: opts.headers, timeout: 15000 });
+      if (r.ok) {
+        const j = JSON.parse(r.body.toString('utf8'));
         for (const ic of j.icons || []) addRef(abs(ic.src, v.data.manifestHref), { how: 'apple-touch-icon', sizes: ic.sizes });
       }
     } catch { /* ignore */ }
@@ -179,11 +185,9 @@ async function ingestAssets({ v, store, site, pagePath, pageUrl, opts, log }) {
         if (cap && !v.mediaUrls.has(target)) { buf = cap.body; mime = cap.mime; }
         else {
           try {
-            const res = await v.context.request.get(target, { timeout: opts.navTimeout, maxRedirects: 5 });
-            if (res.ok()) {
-              const body = await res.body();
-              if (body.length <= MAX_FETCH) { buf = body; mime = (res.headers()['content-type'] || '').split(';')[0]; }
-            } else missing.push({ url: target, status: res.status() });
+            const res = await httpGet(target, { headers: { ...opts.headers, referer: pageUrl }, timeout: Math.max(opts.navTimeout, 90000), maxBytes: MAX_FETCH });
+            if (res.ok) { buf = res.body; mime = (res.headers['content-type'] || '').split(';')[0]; }
+            else missing.push({ url: target, status: res.status, error: res.tooBig ? 'too large' : undefined });
           } catch (e) { missing.push({ url: target, error: String(e.message).split('\n')[0] }); }
         }
         let fallback = false;
@@ -250,7 +254,7 @@ export async function harvestPage({ browser, url, site, opts, store, outDir, sou
 
   const work = async () => {
     let v;
-    try { v = await visit({ browser, url, profile: DESKTOP, opts, extract: true, contexts }); }
+    try { v = await visit({ browser, url, profile: DESKTOP, opts, extract: true, contexts, shotFile: opts.screens ? path.join(dir, 'screenshot-desktop.jpg') : null }); }
     catch (e) { throw Object.assign(e, { phase: 'navigation' }); }
     await v.settleJobs();
     const data = v.data;
@@ -262,18 +266,17 @@ export async function harvestPage({ browser, url, site, opts, store, outDir, sou
 
     // screenshots
     const shots = {};
-    if (opts.screens) {
-      try { shots.desktop = await screenshot(v.page, path.join(dir, 'screenshot-desktop.jpg')); } catch (e) { shots.desktopError = e.message; }
-    }
+    if (v.shot) shots.desktop = v.shot;
+    if (v.shotError) shots.desktopError = v.shotError;
     // mobile pass (screenshot + any mobile-only assets, e.g. different <picture> art direction)
     if (opts.screens) {
       try {
-        const m = await visit({ browser, url, profile: MOBILE, opts, extract: true, contexts });
+        const m = await visit({ browser, url, profile: MOBILE, opts, extract: true, contexts, shotFile: path.join(dir, 'screenshot-mobile.jpg') });
         await m.settleJobs();
         const mi = await ingestAssets({ v: m, store, site, pagePath, pageUrl: m.finalUrl, opts, log });
         for (const [k, e] of mi.touched) if (!ing.touched.has(k)) ing.touched.set(k, e);
         ing.missing.push(...mi.missing);
-        shots.mobile = await screenshot(m.page, path.join(dir, 'screenshot-mobile.jpg'));
+        if (m.shot) shots.mobile = m.shot; else shots.mobileError = m.shotError;
         for (const e of m.consoleErrors) if (!v.consoleErrors.includes(e)) v.consoleErrors.push(e);
         await m.context.close();
       } catch (e) { shots.mobileError = e.message; }
@@ -337,7 +340,7 @@ export async function harvestPage({ browser, url, site, opts, store, outDir, sou
       og: m.og, twitter: m.twitter, h1: h1s, headings: data.headings, framework: m.isNext ? 'next.js' : undefined,
       jsonLd, links: { internal: links.internal, external: links.external, otherHosts: links.aliasLinks, files: links.files, contacts: links.contacts },
       images, assets: [...new Set([...ing.touched.values()].map((e) => e.file).concat(ing.svgFiles))].sort(),
-      screenshots: { ...shots }, docHeight: m.docHeight, wordCount: (data.markdown.match(/\b[\p{L}\p{N}']+\b/gu) || []).length,
+      screenshots: { ...shots }, docHeight: m.docHeight, expandedSections: v.expanded || 0, wordCount: (data.markdown.match(/\b[\p{L}\p{N}']+\b/gu) || []).length,
       sources, issues, consoleErrors: v.consoleErrors, failedRequests: v.failedRequests, badResponses: v.badResponses,
       harvestedAt: new Date().toISOString(), tookMs: Date.now() - t0,
     };

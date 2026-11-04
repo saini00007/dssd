@@ -51,11 +51,13 @@ export async function runScroll(run) {
       let lastY = latest.y;
       let lastChange = Date.now();
       let bottomSince = null;
+      let first = true;
       while (Date.now() < hardStop) {
         const now = Date.now();
         const px = Math.min(150, (opts.scrollSpeed * (now - lastTick)) / 1000);
         lastTick = now;
-        if (px > 0) await scroller.wheel(dir * px);
+        if (px > 0) await scroller.wheel(dir * px, first);
+        first = false;
         if (now - lastSample >= SAMPLE_MS) {
           lastSample = now;
           await sample();

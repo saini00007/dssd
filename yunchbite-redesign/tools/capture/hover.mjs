@@ -315,8 +315,15 @@ async function hoverOne({ page, handle, cand, vp, run, outDir, n }) {
   const rect0 = (await snapshot()).rect;
   const park = parkPoint(rect0, vp.width, vp.height);
   await page.mouse.move(park.x, park.y, { steps: 6 });
-  await sleep(450); // let any hover-out / magnet reset finish
-  const before = await snapshot();
+  // let any earlier hover-out / elastic magnet reset finish: wait until the subtree stops changing
+  let before = await snapshot();
+  for (let i = 0; i < 12; i++) {
+    await sleep(150);
+    const next = await snapshot();
+    const still = JSON.stringify(next.styles) === JSON.stringify(before.styles);
+    before = next;
+    if (still) break;
+  }
   const rect = before.rect;
   await sleep(150);
   const before2 = await snapshot();

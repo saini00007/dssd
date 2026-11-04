@@ -125,16 +125,17 @@ export class Scroller {
     });
   }
 
-  async wheel(dy) {
+  /** One wheel event at the scroll point; `move` repositions the pointer first (skip it for rapid streams). */
+  async wheel(dy, move = true) {
     if (!this._pt) this._pt = await this.point();
-    await this.page.mouse.move(this._pt.x, this._pt.y);
+    if (move) await this.page.mouse.move(this._pt.x, this._pt.y);
     await this.page.mouse.wheel(0, dy);
   }
 
   /** Wheel `px` pixels as `parts` events over ~`ms`, like a trackpad flick. */
   async flick(px, { parts = 4, ms = 160 } = {}) {
     for (let i = 0; i < parts; i++) {
-      await this.wheel(px / parts);
+      await this.wheel(px / parts, i === 0);
       await sleep(ms / parts);
     }
   }
@@ -156,7 +157,7 @@ export class Scroller {
 
   /** Wheel until the element's centre sits near the middle of the viewport. Returns its viewport rect or null. */
   async toElement(handle, { tolerance = 0.18 } = {}) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 24; i++) {
       const r = await handle.evaluate((el) => {
         const b = el.getBoundingClientRect();
         return { x: b.x, y: b.y, width: b.width, height: b.height, vh: innerHeight, vw: innerWidth };
@@ -165,7 +166,7 @@ export class Scroller {
       const fits = r.height < r.vh * 0.8;
       if (Math.abs(off) < r.vh * tolerance || (!fits && r.y < r.vh * 0.5 && r.y + r.height > r.vh * 0.5)) return r;
       const before = (await this.state()).y;
-      await this.flick(Math.max(-600, Math.min(600, off)), { parts: 3, ms: 120 });
+      await this.flick(Math.max(-1400, Math.min(1400, off)), { parts: 4, ms: 140 });
       await this.waitIdle({ timeout: 1800 });
       if ((await this.state()).y === before) return r; // cannot scroll further
     }

@@ -26,6 +26,9 @@ Each phase ends with client approval before the next one starts.
 | 2026-11-04 | **Exact same sitemap.** No shop or cart pages are added. | Client |
 | 2026-11-04 | Motion direction comes from the client's reference sites, studied frame by frame (scroll, hover, cursor, transitions) with real browser recordings. | Client |
 | 2026-11-04 | Order of work: theoretical overview, then wireframes, then design and build. The client supplies any extra assets (PNGs, custom illustrations) on request. | Client |
+| 2026-11-04 | References: [Bucks Sauce](https://buckssauce.com/), [Agrume Farm](https://www.agrumeafarm.it/), [YAAS Energy](https://yaas-energy.com/). Bucks Sauce blocks automated browsers, so it's studied from the client's own screen recording (`research/references/buckssauce/recordings/`). | Client |
+| 2026-11-04 | **No 3D renders.** Products are shown in a **cut-out style** (transparent-background pack photos and ingredient cut-outs), not real-time 3D. | Client |
+| 2026-11-04 | Brand facts (phone, claims, address) are taken from the current website as they are and corrected later. | Client |
 
 ## Folder map
 
