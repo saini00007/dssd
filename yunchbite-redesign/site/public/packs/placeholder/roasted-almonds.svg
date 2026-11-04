@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Yunch Bite pack placeholder: Roasted Almonds">
+<ellipse cx="300" cy="768" rx="236" ry="16" fill="#2A1210" opacity=".14"/>
+<clipPath id="p"><path d="M96 64 H504 Q520 64 520 80 L528 676 Q528 700 506 712 Q300 760 94 712 Q72 700 72 676 L80 80 Q80 64 96 64 Z"/></clipPath>
+<path d="M96 64 H504 Q520 64 520 80 L528 676 Q528 700 506 712 Q300 760 94 712 Q72 700 72 676 L80 80 Q80 64 96 64 Z" fill="#876B41"/>
+<g clip-path="url(#p)">
+<rect x="60" y="60" width="480" height="48" fill="#9D8663"/>
+<rect x="60" y="108" width="480" height="5" fill="#6F5835"/>
+<rect x="60" y="150" width="480" height="3" fill="#6F5835" opacity=".7"/>
+<rect x="60" y="156" width="480" height="2" fill="#9D8663" opacity=".7"/>
+<path d="M72 60 H132 L118 660 Q112 700 72 700 Z" fill="#000" opacity=".1"/>
+<path d="M528 60 H476 L486 660 Q490 704 528 704 Z" fill="#000" opacity=".14"/>
+<path d="M60 676 Q300 736 540 676 V780 H60 Z" fill="#000" opacity=".14"/>
+<path d="M60 676 Q300 736 540 676" fill="none" stroke="#9D8663" stroke-width="3" opacity=".5"/>
+<path d="M150 170 L150 640" stroke="#fff" stroke-width="10" opacity=".08"/>
+</g>
+<circle cx="300" cy="86" r="9" fill="#6F5835"/>
+<rect x="134" y="206" width="332" height="404" rx="22" fill="#FFFDF5"/>
+<text x="300" y="262" font-size="30" font-weight="800" text-anchor="middle" fill="#D61610" font-family="Arial Black,Arial,Helvetica,sans-serif" letter-spacing="1">YUNCH BITE</text>
+<text x="300" y="304" font-size="17" font-weight="700" text-anchor="middle" fill="#2A1210" font-family="Arial,Helvetica,sans-serif" letter-spacing="2.5">DRY FRUITS</text>
+<rect x="258" y="326" width="84" height="5" rx="2.5" fill="#876B41"/>
+<text x="300" y="432" font-size="44" font-weight="800" text-anchor="middle" fill="#2A1210" font-family="Arial Black,Arial,Helvetica,sans-serif">ROASTED</text><text x="300" y="482" font-size="44" font-weight="800" text-anchor="middle" fill="#2A1210" font-family="Arial Black,Arial,Helvetica,sans-serif">ALMONDS</text>
+<rect x="170" y="520" width="260" height="46" rx="23" fill="#876B41"/>
+<text x="300" y="548" font-size="13.5" font-weight="700" text-anchor="middle" fill="#FFFDF5" font-family="Arial,Helvetica,sans-serif" letter-spacing="1.6">PACK PHOTO COMING SOON</text>
+</svg>

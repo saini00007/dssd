@@ -24,14 +24,6 @@ export function RingBurst({ color, className, ref }: RingBurstProps) {
   const c2 = useRef<SVGCircleElement>(null);
   const { contextSafe } = useGSAP({ scope: root });
 
-  useImperativeHandle(ref, () => ({
-    burst() {
-      if (!c1.current || !c2.current) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      play();
-    },
-  }));
-
   const play = contextSafe(() => {
         gsap.fromTo(
           c1.current,
@@ -44,6 +36,14 @@ export function RingBurst({ color, className, ref }: RingBurstProps) {
           { attr: { r: 40, "stroke-width": 0.3 }, opacity: 0, duration: 0.5, delay: 0.07, ease: "expo.out", overwrite: true },
         );
   });
+
+  useImperativeHandle(ref, () => ({
+    burst() {
+      if (!c1.current || !c2.current) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      play();
+    },
+  }));
 
   return (
     <svg

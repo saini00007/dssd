@@ -1,8 +1,16 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import type { Metadata } from "next";
 
 export const SITE_URL = "https://yunchbite.com";
 export const BRAND = "Yunch Bite";
-export const DEFAULT_OG = "/brand/og.jpg";
+/** /brand/og.jpg when the assets agent has produced it, otherwise the logo. */
+export function defaultOgImage(): { url: string; width: number; height: number; alt: string } {
+  const hasOg = existsSync(join(process.cwd(), "public/brand/og.jpg"));
+  return hasOg
+    ? { url: "/brand/og.jpg", width: 1200, height: 630, alt: "Yunch Bite: Yunchy. Crunchy. Healthy Bite." }
+    : { url: "/brand/logo.png", width: 362, height: 186, alt: "Yunch Bite" };
+}
 
 interface PageMetaInput {
   /** Page title. If it already contains "Yunch Bite" it is used as-is, otherwise "%s | Yunch Bite". */
@@ -31,7 +39,7 @@ export function pageMetadata({
   modifiedTime,
 }: PageMetaInput): Metadata {
   const canonical = path === "/" ? "/" : path.replace(/\/+$/, "");
-  const img = typeof image === "string" ? { url: image } : (image ?? { url: DEFAULT_OG });
+  const img = typeof image === "string" ? { url: image } : (image ?? defaultOgImage());
   const hasBrand = title.toLowerCase().includes("yunch bite");
   const ogTitle = hasBrand ? title : `${title} | ${BRAND}`;
   return {

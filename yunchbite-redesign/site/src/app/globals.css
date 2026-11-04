@@ -230,7 +230,7 @@ html.lenis body {
 .yb-loader {
   display: none;
 }
-html[data-yb-loader="on"] .yb-loader {
+html[data-yb-loader] .yb-loader {
   display: block;
   animation: yb-loader-failsafe 0.01s 4.5s forwards;
 }
@@ -279,11 +279,14 @@ html[data-yb-loader="on"] .yb-loader {
 @media (prefers-reduced-motion: reduce) {
   .yb-marquee-track {
     animation: none;
+    width: 100%;
+    justify-content: center;
+  }
+  .yb-marquee-track > ul {
     flex-wrap: wrap;
     justify-content: center;
-    width: auto;
   }
-  .yb-marquee-track [data-dup] {
+  .yb-marquee-track > [data-dup] {
     display: none;
   }
 }
