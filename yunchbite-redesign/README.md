@@ -8,9 +8,9 @@ Current site: <https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/
 
 | # | Phase | Output | Status |
 |---|-------|--------|--------|
-| 0 | Discovery: brand knowledge, sitemap, harvest of every reusable asset from the live site | `docs/01-brand-knowledge.md`, `research/current-site/` | Brand notes done. **Asset harvest blocked: the site's host isn't allowed by this environment's network policy.** Harvester is built and tested. |
-| 1 | Reference deep-dive: frame-by-frame capture of scroll, hover, cursor, loader and page-transition motion on the reference sites the client picks | `research/references/<site>/`, `docs/04-reference-findings.md` | Capture toolkit built and tested. **Waiting for the reference URLs and network access.** |
-| 2 | Theoretical site overview: every page and section in text, each tied to a component and to the reference frames it borrows from | `docs/05-site-overview.md` | Format agreed in `docs/03-site-overview-format.md`; content comes after phase 1 |
+| 0 | Discovery: brand knowledge, sitemap, harvest of every reusable asset from the live site | `docs/01-brand-knowledge.md`, `docs/current-content-inventory.md`, `research/current-site/` | **Done.** 44 pages, 110 assets, full copy inventory |
+| 1 | Reference deep-dive: frame-by-frame capture of scroll, hover, cursor, loader and page-transition motion on the reference sites the client picks | `research/references/<site>/analysis.md`, `docs/04-reference-findings.md` | **Done (desktop).** Bucks Sauce (from the client's recording), Agrume Farm, YAAS; synthesis into the Yunch Bite motion language |
+| 2 | Theoretical site overview: every page and section in text, each tied to a component and to the reference frames it borrows from | `docs/05-site-overview.md` | **v1 ready for client review** |
 | 3 | Wireframes: low-fidelity structure plus motion notes for each page template | TBD | — |
 | 4 | Visual design and motion prototypes | TBD | — |
 | 5 | Build (Next.js, Vercel) and QA | TBD | — |
