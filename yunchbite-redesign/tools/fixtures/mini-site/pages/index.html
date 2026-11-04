@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head>
+<title>Yunch Bite | Healthy Makhana Snacks</title>
+<meta name="description" content="Crunchy roasted makhana snacks in bold flavours.">
+<link rel="canonical" href="__ORIGIN__/">
+<meta property="og:title" content="Yunch Bite">
+<meta property="og:description" content="Crunch without the guilt.">
+<meta property="og:image" content="__ORIGIN__/images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<!--@head-->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Yunch Bite","url":"https://yunchbite.com","logo":"https://yunchbite.com/logo.png"}</script>
+</head><body><div id="__next">
+<!--@header-->
+<main>
+<section class="hero">
+  <div>
+    <h1>Crunch Without the Guilt</h1>
+    <p>Roasted makhana snacks, <strong>bold flavours</strong> and zero junk.</p>
+    <p><a class="btn" href="/products">Shop Makhana</a> <button type="button" class="btn">Join the waitlist</button></p>
+    <img class="mascot" src="/images/mascot-dance.gif" alt="Yunchi the dancing mascot" width="160" height="160">
+  </div>
+  <div>
+    <video autoplay muted loop playsinline poster="/media/hero-poster.jpg" width="640" height="360"><source src="/media/hero-loop.mp4" type="video/mp4"></video>
+  </div>
+</section>
+<section>
+  <h2>Our Makhana Range</h2>
+  <div class="cards">
+    <a class="card" href="/products/makhana/peri-peri-makhana-50g">
+      <img alt="Peri Peri Makhana 50g pack" width="300" height="300"
+        src="/_next/image?url=%2Fimages%2Fpack-peri.png&w=3840&q=75"
+        srcset="/_next/image?url=%2Fimages%2Fpack-peri.png&w=384&q=75 1x, /_next/image?url=%2Fimages%2Fpack-peri.png&w=640&q=75 2x">
+      <h3>Peri Peri</h3><p>Fiery and tangy.</p>
+    </a>
+    <a class="card" href="/products/makhana/peri-peri-makhana-50g">
+      <img alt="Classic Salted Makhana 50g pack" width="300" height="300" src="/_next/image?url=%2Fimages%2Fpack-classic.png&w=640&q=75">
+      <h3>Classic Salted</h3><p>Simple and clean.</p>
+    </a>
+  </div>
+  <picture>
+    <source srcset="/images/promo.avif" type="image/avif">
+    <source srcset="/images/promo.webp" type="image/webp">
+    <img src="/images/promo.jpg" alt="Festive gift box promo" width="450" height="300">
+  </picture>
+</section>
+<div class="banner"><h2>Snacking, reimagined</h2></div>
+<section><h2>Why Yunch Bite</h2>
+  <ul><li>High protein</li><li>Low calorie</li><li>No palm oil</li></ul>
+  <img src="/images/leaf.svg" alt="Leaf icon" width="64" height="64">
+  <div id="tagline"></div>
+</section>
+<div class="spacer" aria-hidden="true"></div>
+<section class="lazy-wrap"><h2>Fresh from the farm</h2>
+  <img class="io-lazy" data-src="/images/lazy-below-fold.png" alt="Farm fields at sunrise" width="500" height="350">
+</section>
+</main>
+<!--@footer-->
+</div>
+<script>
+document.getElementById('tagline').innerHTML='<h2>Snacks that love you back</h2><p>Rendered by client JS.</p>';
+fetch('/anim/loader.json').then(function(r){return r.json()}).catch(function(){});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=e.target;i.src=i.dataset.src;i.classList.add('loaded');io.unobserve(i);}})},{rootMargin:'0px'});
+document.querySelectorAll('img.io-lazy').forEach(function(i){io.observe(i)});
+</script>
+</body></html>

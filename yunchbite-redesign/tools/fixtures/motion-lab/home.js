@@ -20,7 +20,6 @@ function heroReveal() {
   gsap.from('.hero__sub', { y: 30, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.5 });
   gsap.from('.layer', { scale: 0, duration: 1.4, ease: 'elastic.out(1, 0.6)', stagger: 0.12, delay: 0.3 });
 }
-gsap.set('#hero-title', { visibility: 'visible' });
 
 // ---- mouse-move parallax (hero layers)
 window.addEventListener('mousemove', (e) => {

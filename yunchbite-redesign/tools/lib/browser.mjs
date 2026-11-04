@@ -17,8 +17,6 @@ export const DESKTOP = {
   deviceScaleFactor: 1,
   isMobile: false,
   hasTouch: false,
-  userAgent:
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36',
 };
 
 /** Mobile capture profile. Chromium-based Android preset: most Indian traffic is Android Chrome. */
@@ -35,8 +33,9 @@ export const LAUNCH_ARGS = [
   '--enable-webgl',
   '--autoplay-policy=no-user-gesture-required',
   '--hide-scrollbars',
-  '--disable-blink-features=AutomationControlled',
 ];
+// Policy: these tools never try to get past bot protection (no stealth flags, no UA spoofing,
+// no webdriver masking). A site that blocks automated browsers is reported as blocked.
 
 export async function launch(opts = {}) {
   return chromium.launch({ headless: true, args: LAUNCH_ARGS, ...opts });

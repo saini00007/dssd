@@ -1,0 +1,23 @@
+@font-face{font-family:"YB Display";src:url(/_next/static/media/yb-display.5a1b2c3d.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
+:root{--brand:#E8541E}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,sans-serif;color:#222}
+h1,h2,h3{font-family:"YB Display",serif}
+header.site-header{display:flex;align-items:center;gap:24px;padding:12px 24px;background:#fff;border-bottom:1px solid #eee}
+header.site-header nav ul{display:flex;gap:16px;list-style:none;margin:0;padding:0}
+.logo-link svg{display:block}
+.hero{position:relative;padding:40px 24px;min-height:520px;display:grid;grid-template-columns:1fr 1fr;gap:24px;background:#fff7f0}
+.hero video{width:100%;max-width:640px;border-radius:12px}
+.btn{display:inline-block;padding:12px 20px;background:var(--brand);color:#fff;border-radius:999px;text-decoration:none;border:0;font-size:16px}
+.cards{display:flex;gap:24px;padding:24px;flex-wrap:wrap}
+.card{width:300px}
+.card img{width:100%;height:auto}
+.banner{height:200px;background-image:url(/images/bg-pattern.png);background-size:200px;color:#fff;display:flex;align-items:center;justify-content:center}
+.promo-hover:hover{background-image:url(/images/hover-only.png)}
+.spacer{height:1800px;background:linear-gradient(#fff,#eee)}
+.lazy-wrap{padding:24px;min-height:500px}
+.lazy-wrap img{max-width:500px;width:100%;opacity:0;transition:opacity .4s}
+.lazy-wrap img.loaded{opacity:1}
+footer.site-footer{padding:32px 24px;background:#222;color:#eee}
+footer a{color:#ffd}
+.mascot{width:160px;height:160px}
