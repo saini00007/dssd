@@ -1,0 +1,233 @@
+{
+  "done": true,
+  "url": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact",
+  "requestedUrl": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact",
+  "finalUrl": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact",
+  "path": "/contact",
+  "slug": "contact",
+  "status": 200,
+  "type": "static",
+  "title": "Contact Us | Partner & Connect With Yunch Bite | Yunch Bite",
+  "description": "Get in touch with Yunch Bite. Inquire about distribution, retail partnerships, or reach our support team directly.",
+  "canonical": "https://yunchbite.com/contact",
+  "robots": "index, follow",
+  "lang": "en",
+  "themeColor": null,
+  "og": {
+    "og:title": "Contact Us | Partner & Connect With Yunch Bite",
+    "og:description": "Get in touch with Yunch Bite. Inquire about distribution, retail partnerships, or reach our support team directly.",
+    "og:url": "https://yunchbite.com/contact"
+  },
+  "twitter": {
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Yunch Bite | Yunchy, Crunchy, Healthy Bite",
+    "twitter:description": "Premium roasted foxnuts, dry fruits, and healthy snacks made with pure love and wholesome ingredients.",
+    "twitter:image": "https://yunchbite.com/images/home/og-hero.jpg"
+  },
+  "h1": [
+    "Contact Us"
+  ],
+  "headings": [
+    {
+      "level": 1,
+      "text": "Contact Us"
+    },
+    {
+      "level": 2,
+      "text": "Partnership with us?"
+    },
+    {
+      "level": 2,
+      "text": "Have a Question?"
+    },
+    {
+      "level": 2,
+      "text": "Follow Yunch Bite"
+    }
+  ],
+  "framework": "next.js",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Yunch Bite",
+      "url": "https://yunchbite.com",
+      "logo": "https://yunchbite.com/images/home/brand-logo-clean.png",
+      "description": "Yunch Bite creates premium, handcrafted roasted makhana (foxnuts), dry fruits, and healthy gourmet snacks roasted in virgin olive oil with zero palm oil.",
+      "sameAs": [
+        "https://www.instagram.com/yunchbite",
+        "https://www.facebook.com/yunchbite",
+        "https://www.linkedin.com/company/yunchbite"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91 97850 009977",
+        "contactType": "Customer Service",
+        "email": "wecare@yunchbite.com",
+        "areaServed": "IN",
+        "availableLanguage": [
+          "en",
+          "hi"
+        ]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Khasra No.- 25/ 32, Killa No.- 14, 2, Tigaon",
+        "addressLocality": "Faridabad",
+        "addressRegion": "Haryana",
+        "postalCode": "121101",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Yunch Bite",
+      "url": "https://yunchbite.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://yunchbite.com/products?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ],
+  "links": {
+    "internal": [
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/",
+        "text": "Yunch Bite Logo",
+        "region": "header",
+        "raw": "/"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about",
+        "text": "About Us",
+        "region": "header",
+        "raw": "/about"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers",
+        "text": "Bestsellers",
+        "region": "header",
+        "raw": "/bestsellers"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products",
+        "text": "Our Product",
+        "region": "header",
+        "raw": "/products"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews",
+        "text": "Blogs and Reviews",
+        "region": "header",
+        "raw": "/blogs-reviews"
+      }
+    ],
+    "external": [
+      {
+        "href": "https://www.instagram.com/yunchbite",
+        "text": "@yunchbite",
+        "region": "body"
+      },
+      {
+        "href": "https://www.facebook.com/yunchbite",
+        "text": "@yunchbite",
+        "region": "body"
+      },
+      {
+        "href": "https://www.linkedin.com/company/yunchbite",
+        "text": "@yunchbite",
+        "region": "body"
+      }
+    ],
+    "otherHosts": [],
+    "files": [],
+    "contacts": [
+      {
+        "href": "tel:+9197850009977",
+        "text": "+91 97850 009977"
+      },
+      {
+        "href": "mailto:wecare@yunchbite.com",
+        "text": "wecare@yunchbite.com"
+      }
+    ]
+  },
+  "images": [
+    {
+      "src": "/images/yunchbite-logo-official.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/yunchbite-logo-official.png",
+      "alt": "Yunch Bite Logo",
+      "hasAlt": true,
+      "natural": "364x189",
+      "rendered": "155x48",
+      "loading": null,
+      "asset": "images/yunchbite-logo-official.png"
+    },
+    {
+      "src": "/images/contact-mascot-hero.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/contact-mascot-hero.png",
+      "alt": "Yunch Bite Mascot pointing towards Contact Us",
+      "hasAlt": true,
+      "natural": "260x195",
+      "rendered": "390x293",
+      "loading": null,
+      "asset": "images/contact-mascot-hero.png"
+    }
+  ],
+  "assets": [
+    "css/04kbfy3_uaejq.css",
+    "fonts/Montserrat-800-2b402d8a.woff2",
+    "fonts/Montserrat-800-44fac91e.woff2",
+    "fonts/Montserrat-800-8298327d.woff2",
+    "fonts/Montserrat-800-a88409fd.woff2",
+    "fonts/Montserrat-800-e8f2fbee.woff2",
+    "fonts/Roboto-Condensed-700-537f068c.woff2",
+    "fonts/Roboto-Condensed-700-65645b6e.woff2",
+    "fonts/Roboto-Condensed-700-825d4e07.woff2",
+    "fonts/Roboto-Condensed-700-9c282a6d.woff2",
+    "fonts/Roboto-Condensed-700-a01ece5c.woff2",
+    "fonts/Roboto-Condensed-700-c300beac.woff2",
+    "fonts/Roboto-Condensed-700-ef1484ef.woff2",
+    "images/contact-mascot-hero.png",
+    "images/yunchbite-logo-official.png",
+    "svg/inline-muisvgicon-root.svg",
+    "svg/inline-story-catalog.svg"
+  ],
+  "screenshots": {
+    "desktop": {
+      "height": 1172,
+      "capped": false
+    },
+    "mobile": {
+      "height": 1707,
+      "capped": false
+    }
+  },
+  "docHeight": 1172,
+  "expandedSections": 0,
+  "wordCount": 236,
+  "sources": [
+    "crawl",
+    "sitemap",
+    "robots"
+  ],
+  "issues": [
+    {
+      "type": "canonical-other-host",
+      "detail": "https://yunchbite.com/contact"
+    },
+    {
+      "type": "no-og-image"
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "badResponses": [],
+  "harvestedAt": "2026-11-04T07:42:56.330Z",
+  "tookMs": 21268
+}

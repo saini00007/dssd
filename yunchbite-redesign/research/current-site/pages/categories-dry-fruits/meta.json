@@ -1,0 +1,321 @@
+{
+  "done": true,
+  "url": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/categories/dry-fruits",
+  "requestedUrl": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/categories/dry-fruits",
+  "finalUrl": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/categories/dry-fruits",
+  "path": "/categories/dry-fruits",
+  "slug": "categories-dry-fruits",
+  "status": 200,
+  "type": "static",
+  "title": "Dry Fruits Range | Gourmet Roasted Healthy Snacks | Yunch Bite",
+  "description": "Nourishment for Healthier Tomorrow!!!",
+  "canonical": "https://yunchbite.com/categories/dry-fruits",
+  "robots": "index, follow",
+  "lang": "en",
+  "themeColor": null,
+  "og": {
+    "og:title": "Dry Fruits Range | Gourmet Roasted Healthy Snacks",
+    "og:description": "Nourishment for Healthier Tomorrow!!!",
+    "og:url": "https://yunchbite.com/categories/dry-fruits",
+    "og:image": "https://yunchbite.com/images/products/homepage_16.png",
+    "og:image:alt": "Dry Fruits Yunch Bite Snacks"
+  },
+  "twitter": {
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Yunch Bite | Yunchy, Crunchy, Healthy Bite",
+    "twitter:description": "Premium roasted foxnuts, dry fruits, and healthy snacks made with pure love and wholesome ingredients.",
+    "twitter:image": "https://yunchbite.com/images/home/og-hero.jpg"
+  },
+  "h1": [
+    "Nourishment for Healthier Tomorrow!!!"
+  ],
+  "headings": [
+    {
+      "level": 1,
+      "text": "Nourishment for Healthier Tomorrow!!!"
+    },
+    {
+      "level": 2,
+      "text": "Raw Nuts"
+    },
+    {
+      "level": 2,
+      "text": "Roasted Nuts"
+    }
+  ],
+  "framework": "next.js",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Yunch Bite",
+      "url": "https://yunchbite.com",
+      "logo": "https://yunchbite.com/images/home/brand-logo-clean.png",
+      "description": "Yunch Bite creates premium, handcrafted roasted makhana (foxnuts), dry fruits, and healthy gourmet snacks roasted in virgin olive oil with zero palm oil.",
+      "sameAs": [
+        "https://www.instagram.com/yunchbite",
+        "https://www.facebook.com/yunchbite",
+        "https://www.linkedin.com/company/yunchbite"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91 97850 009977",
+        "contactType": "Customer Service",
+        "email": "wecare@yunchbite.com",
+        "areaServed": "IN",
+        "availableLanguage": [
+          "en",
+          "hi"
+        ]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Khasra No.- 25/ 32, Killa No.- 14, 2, Tigaon",
+        "addressLocality": "Faridabad",
+        "addressRegion": "Haryana",
+        "postalCode": "121101",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Yunch Bite",
+      "url": "https://yunchbite.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://yunchbite.com/products?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ],
+  "links": {
+    "internal": [
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/",
+        "text": "Yunch Bite Logo",
+        "region": "header",
+        "raw": "/"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about",
+        "text": "About Us",
+        "region": "header",
+        "raw": "/about"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers",
+        "text": "Bestsellers",
+        "region": "header",
+        "raw": "/bestsellers"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products",
+        "text": "Our Product",
+        "region": "header",
+        "raw": "/products"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews",
+        "text": "Blogs and Reviews",
+        "region": "header",
+        "raw": "/blogs-reviews"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact",
+        "text": "Contact Us",
+        "region": "header",
+        "raw": "/contact"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/dryfruits-raw-cashews",
+        "text": "Whole Raw Cashews | Yunch Bite Dry Fruits 100 gm",
+        "region": "body",
+        "raw": "/products/dryfruits-raw-cashews"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/dryfruits-raw-almonds",
+        "text": "California Raw Almonds | Yunch Bite Dry Fruits 100 gm",
+        "region": "body",
+        "raw": "/products/dryfruits-raw-almonds"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/dryfruits-roasted-cashews",
+        "text": "Slow Roasted Cashews | Yunch Bite Dry Fruits 100 gm",
+        "region": "body",
+        "raw": "/products/dryfruits-roasted-cashews"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/dryfruits-roasted-almonds",
+        "text": "Slow Roasted Almonds | Yunch Bite Dry Fruits 100 gm",
+        "region": "body",
+        "raw": "/products/dryfruits-roasted-almonds"
+      }
+    ],
+    "external": [],
+    "otherHosts": [],
+    "files": [],
+    "contacts": []
+  },
+  "images": [
+    {
+      "src": "/images/yunchbite-logo-official.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/yunchbite-logo-official.png",
+      "alt": "Yunch Bite Logo",
+      "hasAlt": true,
+      "natural": "364x189",
+      "rendered": "155x48",
+      "loading": null,
+      "asset": "images/yunchbite-logo-official.png"
+    },
+    {
+      "src": "/images/products/homepage_16.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/homepage_16.png",
+      "alt": "Dry Fruits Banner",
+      "hasAlt": true,
+      "natural": "385x543",
+      "rendered": "594x450",
+      "loading": null,
+      "asset": "images/homepage_16.png"
+    },
+    {
+      "src": "/images/products/dryfruits-raw-cashews-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/dryfruits-raw-cashews-hq.jpg",
+      "alt": "Whole Raw Cashews | Yunch Bite Dry Fruits",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/dryfruits-raw-cashews-hq.jpg"
+    },
+    {
+      "src": "/images/products/dryfruits-raw-almonds-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/dryfruits-raw-almonds-hq.jpg",
+      "alt": "California Raw Almonds | Yunch Bite Dry Fruits",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/dryfruits-raw-almonds-hq.jpg"
+    },
+    {
+      "src": "/images/products/dryfruits-roasted-cashews-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/dryfruits-roasted-cashews-hq.jpg",
+      "alt": "Slow Roasted Cashews | Yunch Bite Dry Fruits",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/dryfruits-roasted-cashews-hq.jpg"
+    },
+    {
+      "src": "/images/products/dryfruits-roasted-almonds-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/dryfruits-roasted-almonds-hq.jpg",
+      "alt": "Slow Roasted Almonds | Yunch Bite Dry Fruits",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/dryfruits-roasted-almonds-hq.jpg"
+    },
+    {
+      "src": "/images/products/dryfruits-raw-cashews-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/dryfruits-raw-cashews-hq.jpg",
+      "alt": "Whole Raw Cashews | Yunch Bite Dry Fruits",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/dryfruits-raw-cashews-hq.jpg"
+    },
+    {
+      "src": "/images/products/dryfruits-raw-almonds-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/dryfruits-raw-almonds-hq.jpg",
+      "alt": "California Raw Almonds | Yunch Bite Dry Fruits",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/dryfruits-raw-almonds-hq.jpg"
+    },
+    {
+      "src": "/images/products/dryfruits-roasted-cashews-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/dryfruits-roasted-cashews-hq.jpg",
+      "alt": "Slow Roasted Cashews | Yunch Bite Dry Fruits",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/dryfruits-roasted-cashews-hq.jpg"
+    },
+    {
+      "src": "/images/products/dryfruits-roasted-almonds-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/dryfruits-roasted-almonds-hq.jpg",
+      "alt": "Slow Roasted Almonds | Yunch Bite Dry Fruits",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/dryfruits-roasted-almonds-hq.jpg"
+    }
+  ],
+  "assets": [
+    "css/04kbfy3_uaejq.css",
+    "fonts/Montserrat-800-2b402d8a.woff2",
+    "fonts/Montserrat-800-44fac91e.woff2",
+    "fonts/Montserrat-800-8298327d.woff2",
+    "fonts/Montserrat-800-a88409fd.woff2",
+    "fonts/Montserrat-800-e8f2fbee.woff2",
+    "fonts/Roboto-Condensed-700-537f068c.woff2",
+    "fonts/Roboto-Condensed-700-65645b6e.woff2",
+    "fonts/Roboto-Condensed-700-825d4e07.woff2",
+    "fonts/Roboto-Condensed-700-9c282a6d.woff2",
+    "fonts/Roboto-Condensed-700-a01ece5c.woff2",
+    "fonts/Roboto-Condensed-700-c300beac.woff2",
+    "fonts/Roboto-Condensed-700-ef1484ef.woff2",
+    "images/dryfruits-raw-almonds-hq.jpg",
+    "images/dryfruits-raw-cashews-hq.jpg",
+    "images/dryfruits-roasted-almonds-hq.jpg",
+    "images/dryfruits-roasted-cashews-hq.jpg",
+    "images/homepage_16.png",
+    "images/yunchbite-logo-official.png",
+    "svg/inline-muisvgicon-root.svg",
+    "svg/inline-story-catalog.svg",
+    "svg/inline-svg-5403b86f.svg"
+  ],
+  "screenshots": {
+    "desktop": {
+      "height": 1612,
+      "capped": false
+    },
+    "mobile": {
+      "height": 2286,
+      "capped": false
+    }
+  },
+  "docHeight": 1612,
+  "expandedSections": 0,
+  "wordCount": 515,
+  "sources": [
+    "sitemap",
+    "robots"
+  ],
+  "issues": [
+    {
+      "type": "canonical-other-host",
+      "detail": "https://yunchbite.com/categories/dry-fruits"
+    },
+    {
+      "type": "og-image-other-host",
+      "detail": "https://yunchbite.com/images/products/homepage_16.png"
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "badResponses": [],
+  "harvestedAt": "2026-11-04T07:44:10.502Z",
+  "tookMs": 15769
+}

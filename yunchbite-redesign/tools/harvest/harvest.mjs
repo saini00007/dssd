@@ -36,6 +36,7 @@ Options:
   --delay <ms>         polite delay before each page (default 250)
   --timeout <s>        per-page hard timeout in seconds (default 180)
   --retries <n>        navigation attempts per page (default 3)
+  --note "text"       free-text note recorded in summary.md (e.g. why this start host was chosen)
   --min-svg <px>       inline <svg> smaller than this (max side) are ignored (default 24)
   -h, --help           show this help
 
@@ -53,7 +54,7 @@ export function parseCli(argv) {
       'no-sitemap': { type: 'boolean', default: false }, 'no-contact': { type: 'boolean', default: false },
       force: { type: 'boolean', default: false }, header: { type: 'string', multiple: true, default: [] },
       delay: { type: 'string', default: '250' }, timeout: { type: 'string', default: '180' }, retries: { type: 'string', default: '3' },
-      'min-svg': { type: 'string', default: '24' }, help: { type: 'boolean', short: 'h', default: false },
+      'min-svg': { type: 'string', default: '24' }, note: { type: 'string', default: '' }, help: { type: 'boolean', short: 'h', default: false },
     },
   });
   const headers = {};
@@ -64,7 +65,7 @@ export function parseCli(argv) {
     paths: values.paths.split(',').map((s) => s.trim()).filter(Boolean),
     screens: !values['no-screens'], crawl: !values['no-crawl'], sitemap: !values['no-sitemap'], contact: !values['no-contact'],
     force: values.force, headers, delay: Number(values.delay), pageTimeout: Number(values.timeout) * 1000,
-    navTimeout: 45000, retries: Number(values.retries), minSvg: Number(values['min-svg']), scrollDelay: 160,
+    navTimeout: 45000, retries: Number(values.retries), minSvg: Number(values['min-svg']), note: values.note, scrollDelay: 160,
   };
 }
 
@@ -187,7 +188,7 @@ export async function run(opts, log = (...a) => console.log(...a)) {
   writeSitemap(outDir, rows, site);
   const counts = writeIssues({ outDir, metas, rows, entries, site, notes, skippedCap });
   const result = { ...stats, duplicates: store.stats.duplicates, startedAt: startedAt.toISOString(), ms: Date.now() - startedAt, skippedCap };
-  writeSummary({ outDir, site, metas, rows, entries, counts, run: result, sheets });
+  writeSummary({ outDir, site, metas, rows, entries, counts, run: result, sheets, startUrl: opts.startUrl, note: opts.note });
   log(`Done in ${Math.round(result.ms / 1000)}s: ${stats.harvested} harvested, ${stats.skipped} skipped, ${stats.failed} failed; ${entries.length} unique assets.`);
   log(`Output: ${outDir}  (see summary.md, issues.md, assets/manifest.json)`);
   return { ...result, outDir, pages: rows, entries, counts, sheets, startNorm };

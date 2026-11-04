@@ -8,5 +8,6 @@ research/references/**/hover/**/*.webm
 research/_runs/
 tools/**/_out/
 
-# TEMPORARY: harvest output is committed once the run is final (avoids binary churn in history)
-research/current-site/
+# harvest: raw rendered-DOM snapshots stay local (copy lives in content.md)
+research/current-site/pages/*/dom.html
+research/current-site/crawl-state.json

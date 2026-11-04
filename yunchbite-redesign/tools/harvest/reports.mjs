@@ -1,7 +1,7 @@
 // Site-level outputs: sitemap.json / sitemap.md / issues.md / summary.md (built from pages/*/meta.json + manifest).
 import fs from 'node:fs';
 import path from 'node:path';
-import { normalizePage } from './urls.mjs';
+import { normalizePage, guessPageType } from './urls.mjs';
 
 const fmtBytes = (n) => (n >= 1048576 ? `${(n / 1048576).toFixed(1)} MB` : n >= 1024 ? `${Math.round(n / 1024)} KB` : `${n} B`);
 const esc = (s) => String(s ?? '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
@@ -37,7 +37,8 @@ export function buildSitemap({ metas, site, state }) {
     const from = [...(inbound.get(url) || [])];
     if (from.length && !sources.includes('crawl')) sources.push('crawl');
     return {
-      url, path: m.path, slug: m.slug, title: m.title ?? null, h1: m.h1?.[0] ?? null, type: m.type ?? null,
+      url, path: m.path, slug: m.slug, title: m.title ?? null, h1: m.h1?.[0] ?? null,
+      type: m.url ? guessPageType(new URL(m.url).pathname, (m.jsonLd || []).flatMap((j) => (Array.isArray(j) ? j : j['@graph'] || [j]).map((x) => x?.['@type']).flat().filter(Boolean))) : null,
       status: m.status ?? null, depth: depth.has(url) ? depth.get(url) : null, harvested: !!m.done, error: m.error,
       discoveredFrom: sources.sort(), linkedFrom: from.sort(), inSitemap: sources.some((s) => s === 'sitemap' || s === 'robots'),
       assets: m.assets?.length ?? 0, words: m.wordCount ?? null,
@@ -116,9 +117,18 @@ export function writeIssues({ outDir, metas, rows, entries, site, notes, skipped
   }
   sec('Links pointing to another host of the same site', hostLines, 'Bug list: these links work only because the other host exists (e.g. a Vercel preview URL). They were normalised to the canonical host for crawling.');
   track('alias-host links', [...byHost.values()].reduce((a, b) => a + b.length, 0));
-  const canon = [];
-  for (const m of done) for (const i of m.issues || []) if (['canonical-other-host', 'og-image-other-host'].includes(i.type)) canon.push(`- ${m.path}: ${i.type} -> ${i.detail}`);
-  sec('Canonical / og:image pointing at another host', canon);
+  const canonGroups = new Map();
+  const canonMismatch = [];
+  for (const m of done) for (const i of m.issues || []) {
+    if (!['canonical-other-host', 'og-image-other-host'].includes(i.type)) continue;
+    let h = ''; try { h = new URL(i.detail).host; } catch { /* */ }
+    const k = `${i.type} -> ${h}`;
+    const g = canonGroups.get(k) || []; g.push(`${m.path} (${i.detail})`); canonGroups.set(k, g);
+    if (i.type === 'canonical-other-host') { try { if (new URL(i.detail).pathname.replace(/\/$/, '') !== m.path.split('?')[0].replace(/\/$/, '')) canonMismatch.push(`- ${m.path}: canonical is ${i.detail} (different path)`); } catch { /* */ } }
+  }
+  sec('Canonical / og:image pointing at another host', [...canonGroups].map(([k, g]) => `- **${k}**: ${g.length} pages, e.g. ${g.slice(0, 3).join('; ')}`),
+    'Expected if you crawl a preview host whose canonicals use the production domain; a bug if the production domain is the crawled host.');
+  sec('Canonical pointing at a different path than the page itself', canonMismatch);
   const redirects = done.filter((m) => m.redirected || m.offSiteRedirect).map((m) => `- ${m.requestedUrl} -> ${m.redirected || m.finalUrl}`);
   sec('Redirects', redirects);
 
@@ -190,7 +200,7 @@ export function writeIssues({ outDir, metas, rows, entries, site, notes, skipped
   return counts;
 }
 
-export function writeSummary({ outDir, site, metas, rows, entries, counts, run, sheets }) {
+export function writeSummary({ outDir, site, metas, rows, entries, counts, run, sheets, startUrl, note }) {
   const done = metas.filter((m) => m.done);
   const failed = metas.filter((m) => !m.done);
   const byType = {};
@@ -201,6 +211,7 @@ export function writeSummary({ outDir, site, metas, rows, entries, counts, run, 
   for (const r of rows) pageTypes[r.type || 'failed'] = (pageTypes[r.type || 'failed'] || 0) + 1;
   const md = `# Harvest summary
 
+- Start URL: ${startUrl}${note ? `\n- Note: ${note}` : ''}
 - Site: ${site.origin} (aliases: ${site.aliases.join(', ') || 'none'})
 - Run: ${run.startedAt} (${Math.round(run.ms / 1000)}s) - pages harvested this run: ${run.harvested}, skipped (already done): ${run.skipped}, failed: ${run.failed}
 - Pages total: ${rows.length} (${done.length} ok, ${failed.length} failed) - by type: ${Object.entries(pageTypes).map(([k, v]) => `${k} ${v}`).join(', ')}

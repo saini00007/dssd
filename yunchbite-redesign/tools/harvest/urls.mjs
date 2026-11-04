@@ -91,6 +91,6 @@ export function guessPageType(pathname, ldTypes = []) {
   if (t.some((x) => /collectionpage|itemlist/.test(x))) return 'category';
   const seg = p.split('/').filter(Boolean);
   if (/^(blog|blogs|journal|news|stories|articles|recipes)$/i.test(seg[0])) return 'blog';
-  if (/^(products?|shop|store|collections?|catalog(ue)?|snacks|range)$/i.test(seg[0])) return seg.length >= 3 || (seg.length === 2 && /^(product|p)$/i.test(seg[0]) ) ? 'product' : 'category';
+  if (/^(products?|shop|store|collections?|categories|category|catergries|catalog(ue)?|snacks|range)$/i.test(seg[0])) return seg.length >= 3 || (seg.length === 2 && /^(product|p)$/i.test(seg[0]) ) ? 'product' : 'category';
   return 'static';
 }

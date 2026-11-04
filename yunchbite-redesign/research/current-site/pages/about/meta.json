@@ -1,0 +1,240 @@
+{
+  "done": true,
+  "url": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about",
+  "requestedUrl": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about",
+  "finalUrl": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about",
+  "path": "/about",
+  "slug": "about",
+  "status": 200,
+  "type": "static",
+  "title": "About Us | Our Story, Mission & Healthier Tomorrow | Yunch Bite",
+  "description": "Learn about Yunch Bite: our journey to revolutionize everyday snacking with authentic slow-roasted lotus seeds (makhana), zero palm oil, and wholesome ingredients.",
+  "canonical": "https://yunchbite.com/about",
+  "robots": "index, follow",
+  "lang": "en",
+  "themeColor": null,
+  "og": {
+    "og:title": "About Us | Our Story, Mission & Healthier Tomorrow",
+    "og:description": "Learn about Yunch Bite: our journey to revolutionize everyday snacking with authentic slow-roasted lotus seeds (makhana), zero palm oil, and wholesome ingredients.",
+    "og:url": "https://yunchbite.com/about"
+  },
+  "twitter": {
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Yunch Bite | Yunchy, Crunchy, Healthy Bite",
+    "twitter:description": "Premium roasted foxnuts, dry fruits, and healthy snacks made with pure love and wholesome ingredients.",
+    "twitter:image": "https://yunchbite.com/images/home/og-hero.jpg"
+  },
+  "h1": [
+    "About Us"
+  ],
+  "headings": [
+    {
+      "level": 1,
+      "text": "About Us"
+    },
+    {
+      "level": 3,
+      "text": "Our Story"
+    },
+    {
+      "level": 3,
+      "text": "Our Story"
+    },
+    {
+      "level": 3,
+      "text": "Our Journey"
+    },
+    {
+      "level": 3,
+      "text": "Our Journey"
+    },
+    {
+      "level": 3,
+      "text": "Our Mission & Vision"
+    },
+    {
+      "level": 3,
+      "text": "Our Product Philosophy"
+    },
+    {
+      "level": 3,
+      "text": "Our Founder"
+    },
+    {
+      "level": 2,
+      "text": "“ONE BITE, AND YOUR TASTE BUDS WILL NEVER SETTLE FOR ANYTHING LESS.”"
+    }
+  ],
+  "framework": "next.js",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Yunch Bite",
+      "url": "https://yunchbite.com",
+      "logo": "https://yunchbite.com/images/home/brand-logo-clean.png",
+      "description": "Yunch Bite creates premium, handcrafted roasted makhana (foxnuts), dry fruits, and healthy gourmet snacks roasted in virgin olive oil with zero palm oil.",
+      "sameAs": [
+        "https://www.instagram.com/yunchbite",
+        "https://www.facebook.com/yunchbite",
+        "https://www.linkedin.com/company/yunchbite"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91 97850 009977",
+        "contactType": "Customer Service",
+        "email": "wecare@yunchbite.com",
+        "areaServed": "IN",
+        "availableLanguage": [
+          "en",
+          "hi"
+        ]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Khasra No.- 25/ 32, Killa No.- 14, 2, Tigaon",
+        "addressLocality": "Faridabad",
+        "addressRegion": "Haryana",
+        "postalCode": "121101",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Yunch Bite",
+      "url": "https://yunchbite.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://yunchbite.com/products?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ],
+  "links": {
+    "internal": [
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/",
+        "text": "Yunch Bite Logo",
+        "region": "header",
+        "raw": "/"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers",
+        "text": "Bestsellers",
+        "region": "header",
+        "raw": "/bestsellers"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products",
+        "text": "Our Product",
+        "region": "header",
+        "raw": "/products"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews",
+        "text": "Blogs and Reviews",
+        "region": "header",
+        "raw": "/blogs-reviews"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact",
+        "text": "Contact Us",
+        "region": "header",
+        "raw": "/contact"
+      }
+    ],
+    "external": [],
+    "otherHosts": [],
+    "files": [],
+    "contacts": []
+  },
+  "images": [
+    {
+      "src": "/images/yunchbite-logo-official.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/yunchbite-logo-official.png",
+      "alt": "Yunch Bite Logo",
+      "hasAlt": true,
+      "natural": "364x189",
+      "rendered": "155x48",
+      "loading": null,
+      "asset": "images/yunchbite-logo-official.png"
+    },
+    {
+      "src": "/images/about/about-hero-banner.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/about/about-hero-banner.png",
+      "alt": "Yunch Bite - Crafted for Every Generation - 100% Natural, Roasted in Olive Oil, High in Protein",
+      "hasAlt": true,
+      "natural": "862x570",
+      "rendered": "1180x780",
+      "loading": null,
+      "asset": "images/about-hero-banner.png"
+    },
+    {
+      "src": "/images/about/promotional-collage.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/about/promotional-collage.png",
+      "alt": "Yunch Bite snacking lifestyle collage",
+      "hasAlt": true,
+      "natural": "836x471",
+      "rendered": "1180x420",
+      "loading": null,
+      "asset": "images/promotional-collage.png"
+    }
+  ],
+  "assets": [
+    "css/04kbfy3_uaejq.css",
+    "fonts/Montserrat-800-2b402d8a.woff2",
+    "fonts/Montserrat-800-44fac91e.woff2",
+    "fonts/Montserrat-800-8298327d.woff2",
+    "fonts/Montserrat-800-a88409fd.woff2",
+    "fonts/Montserrat-800-e8f2fbee.woff2",
+    "fonts/Roboto-Condensed-700-537f068c.woff2",
+    "fonts/Roboto-Condensed-700-65645b6e.woff2",
+    "fonts/Roboto-Condensed-700-825d4e07.woff2",
+    "fonts/Roboto-Condensed-700-9c282a6d.woff2",
+    "fonts/Roboto-Condensed-700-a01ece5c.woff2",
+    "fonts/Roboto-Condensed-700-c300beac.woff2",
+    "fonts/Roboto-Condensed-700-ef1484ef.woff2",
+    "images/about-hero-banner.png",
+    "images/promotional-collage.png",
+    "images/yunchbite-logo-official.png",
+    "svg/inline-muibox-root.svg",
+    "svg/inline-muisvgicon-root.svg",
+    "svg/inline-story-catalog.svg"
+  ],
+  "screenshots": {
+    "desktop": {
+      "height": 2596,
+      "capped": false
+    },
+    "mobile": {
+      "height": 2367,
+      "capped": false
+    }
+  },
+  "docHeight": 5408,
+  "expandedSections": 12,
+  "wordCount": 1087,
+  "sources": [
+    "crawl",
+    "sitemap",
+    "robots"
+  ],
+  "issues": [
+    {
+      "type": "canonical-other-host",
+      "detail": "https://yunchbite.com/about"
+    },
+    {
+      "type": "no-og-image"
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "badResponses": [],
+  "harvestedAt": "2026-11-04T07:42:52.016Z",
+  "tookMs": 46271
+}

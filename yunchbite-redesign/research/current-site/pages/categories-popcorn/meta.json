@@ -1,0 +1,260 @@
+{
+  "done": true,
+  "url": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/categories/popcorn",
+  "requestedUrl": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/categories/popcorn",
+  "finalUrl": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/categories/popcorn",
+  "path": "/categories/popcorn",
+  "slug": "categories-popcorn",
+  "status": 200,
+  "type": "static",
+  "title": "Popcorn Range | Gourmet Roasted Healthy Snacks | Yunch Bite",
+  "description": "Simple Ingredients, Extra Happiness!!!",
+  "canonical": "https://yunchbite.com/categories/popcorn",
+  "robots": "index, follow",
+  "lang": "en",
+  "themeColor": null,
+  "og": {
+    "og:title": "Popcorn Range | Gourmet Roasted Healthy Snacks",
+    "og:description": "Simple Ingredients, Extra Happiness!!!",
+    "og:url": "https://yunchbite.com/categories/popcorn",
+    "og:image": "https://yunchbite.com/images/products/homepage_15.png",
+    "og:image:alt": "Popcorn Yunch Bite Snacks"
+  },
+  "twitter": {
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Yunch Bite | Yunchy, Crunchy, Healthy Bite",
+    "twitter:description": "Premium roasted foxnuts, dry fruits, and healthy snacks made with pure love and wholesome ingredients.",
+    "twitter:image": "https://yunchbite.com/images/home/og-hero.jpg"
+  },
+  "h1": [
+    "Simple Ingredients, Extra Happiness!!!"
+  ],
+  "headings": [
+    {
+      "level": 1,
+      "text": "Simple Ingredients, Extra Happiness!!!"
+    },
+    {
+      "level": 2,
+      "text": "Pillow Pouch"
+    }
+  ],
+  "framework": "next.js",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Yunch Bite",
+      "url": "https://yunchbite.com",
+      "logo": "https://yunchbite.com/images/home/brand-logo-clean.png",
+      "description": "Yunch Bite creates premium, handcrafted roasted makhana (foxnuts), dry fruits, and healthy gourmet snacks roasted in virgin olive oil with zero palm oil.",
+      "sameAs": [
+        "https://www.instagram.com/yunchbite",
+        "https://www.facebook.com/yunchbite",
+        "https://www.linkedin.com/company/yunchbite"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91 97850 009977",
+        "contactType": "Customer Service",
+        "email": "wecare@yunchbite.com",
+        "areaServed": "IN",
+        "availableLanguage": [
+          "en",
+          "hi"
+        ]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Khasra No.- 25/ 32, Killa No.- 14, 2, Tigaon",
+        "addressLocality": "Faridabad",
+        "addressRegion": "Haryana",
+        "postalCode": "121101",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Yunch Bite",
+      "url": "https://yunchbite.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://yunchbite.com/products?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ],
+  "links": {
+    "internal": [
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/",
+        "text": "Yunch Bite Logo",
+        "region": "header",
+        "raw": "/"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about",
+        "text": "About Us",
+        "region": "header",
+        "raw": "/about"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers",
+        "text": "Bestsellers",
+        "region": "header",
+        "raw": "/bestsellers"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products",
+        "text": "Our Product",
+        "region": "header",
+        "raw": "/products"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews",
+        "text": "Blogs and Reviews",
+        "region": "header",
+        "raw": "/blogs-reviews"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact",
+        "text": "Contact Us",
+        "region": "header",
+        "raw": "/contact"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/popcorn-salted",
+        "text": "Salted Popcorn | Yunch Bite Popcorn 30 gm",
+        "region": "body",
+        "raw": "/products/popcorn-salted"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/popcorn-pudina",
+        "text": "Pudina Masala Popcorn | Yunch Bite Popcorn 30 gm",
+        "region": "body",
+        "raw": "/products/popcorn-pudina"
+      },
+      {
+        "href": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products/popcorn-butter",
+        "text": "Butter Popcorn | Yunch Bite Popcorn 30 gm",
+        "region": "body",
+        "raw": "/products/popcorn-butter"
+      }
+    ],
+    "external": [],
+    "otherHosts": [],
+    "files": [],
+    "contacts": []
+  },
+  "images": [
+    {
+      "src": "/images/yunchbite-logo-official.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/yunchbite-logo-official.png",
+      "alt": "Yunch Bite Logo",
+      "hasAlt": true,
+      "natural": "364x189",
+      "rendered": "155x48",
+      "loading": null,
+      "asset": "images/yunchbite-logo-official.png"
+    },
+    {
+      "src": "/images/products/homepage_15.png",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/homepage_15.png",
+      "alt": "Popcorn Banner",
+      "hasAlt": true,
+      "natural": "316x544",
+      "rendered": "594x450",
+      "loading": null,
+      "asset": "images/homepage_15.png"
+    },
+    {
+      "src": "/images/products/popcorn-salted-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/popcorn-salted-hq.jpg",
+      "alt": "Salted Popcorn | Yunch Bite Popcorn",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/popcorn-salted-hq.jpg"
+    },
+    {
+      "src": "/images/products/popcorn-pudina-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/popcorn-pudina-hq.jpg",
+      "alt": "Pudina Masala Popcorn | Yunch Bite Popcorn",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/popcorn-pudina-hq.jpg"
+    },
+    {
+      "src": "/images/products/popcorn-butter-hq.jpg",
+      "original": "https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/images/products/popcorn-butter-hq.jpg",
+      "alt": "Butter Popcorn | Yunch Bite Popcorn",
+      "hasAlt": true,
+      "natural": "1024x1024",
+      "rendered": "112x116",
+      "loading": "lazy",
+      "asset": "images/popcorn-butter-hq.jpg"
+    }
+  ],
+  "assets": [
+    "css/04kbfy3_uaejq.css",
+    "fonts/Montserrat-800-2b402d8a.woff2",
+    "fonts/Montserrat-800-44fac91e.woff2",
+    "fonts/Montserrat-800-8298327d.woff2",
+    "fonts/Montserrat-800-a88409fd.woff2",
+    "fonts/Montserrat-800-e8f2fbee.woff2",
+    "fonts/Roboto-Condensed-700-537f068c.woff2",
+    "fonts/Roboto-Condensed-700-65645b6e.woff2",
+    "fonts/Roboto-Condensed-700-825d4e07.woff2",
+    "fonts/Roboto-Condensed-700-9c282a6d.woff2",
+    "fonts/Roboto-Condensed-700-a01ece5c.woff2",
+    "fonts/Roboto-Condensed-700-c300beac.woff2",
+    "fonts/Roboto-Condensed-700-ef1484ef.woff2",
+    "images/homepage_15.png",
+    "images/popcorn-butter-hq.jpg",
+    "images/popcorn-pudina-hq.jpg",
+    "images/popcorn-salted-hq.jpg",
+    "images/yunchbite-logo-official.png",
+    "svg/inline-muisvgicon-root.svg",
+    "svg/inline-story-catalog.svg",
+    "svg/inline-svg-5403b86f.svg"
+  ],
+  "screenshots": {
+    "desktop": {
+      "height": 1028,
+      "capped": false
+    },
+    "mobile": {
+      "height": 1488,
+      "capped": false
+    }
+  },
+  "docHeight": 1028,
+  "expandedSections": 0,
+  "wordCount": 269,
+  "sources": [
+    "sitemap",
+    "robots"
+  ],
+  "issues": [
+    {
+      "type": "canonical-other-host",
+      "detail": "https://yunchbite.com/categories/popcorn"
+    },
+    {
+      "type": "og-image-other-host",
+      "detail": "https://yunchbite.com/images/products/homepage_15.png"
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "badResponses": [],
+  "harvestedAt": "2026-11-04T07:44:02.420Z",
+  "tookMs": 19099
+}
