@@ -47,13 +47,61 @@ Tangy and savory street chaat spices blended over slow-roasted crispy fox nuts, 
 
 ### [Button: Ingredients]
 
+Makhana (Fox Nuts), Olive Oil, Chat Masala [Iodized Salt, Black Salt, Dry Mango Powder, Cumin Powder, Black Pepper, Ginger Powder, Spices, INS 330].
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+100g
+
+energy
+
+422 kcal
+
+protein
+
+9.6 g
+
+carbohydrates
+
+67.1 g
+
+dietary Fiber
+
+12.0 g
+
+total Fat
+
+13.8 g
+
+saturated Fat
+
+1.8 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+410 mg
 
 ### [Button: Allergen Information]
 
+Processed in a clean facility that also handles nuts and dairy. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
 
+Reseal zipper tightly after opening. Store in a cool, dry place.
+
 ### [Button: Shelf Life]
+
+6 Months from the date of manufacturing.
 
 ### [Button: Country of Origin]
 

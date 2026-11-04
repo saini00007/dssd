@@ -643,11 +643,14 @@
       "height": 1073,
       "capped": false
     },
-    "mobileError": "page.evaluate: Target page, context or browser has been closed"
+    "mobile": {
+      "height": 1321,
+      "capped": false
+    }
   },
-  "docHeight": 1109,
+  "docHeight": 1460,
   "expandedSections": 16,
-  "wordCount": 1431,
+  "wordCount": 1526,
   "sources": [
     "sitemap",
     "robots",
@@ -666,6 +669,6 @@
   "consoleErrors": [],
   "failedRequests": [],
   "badResponses": [],
-  "harvestedAt": "2026-11-04T07:40:19.384Z",
-  "tookMs": 26935
+  "harvestedAt": "2026-11-04T07:46:55.995Z",
+  "tookMs": 39288
 }

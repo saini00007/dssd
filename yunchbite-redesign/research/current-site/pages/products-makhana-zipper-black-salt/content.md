@@ -14,7 +14,7 @@ h1: Black Salt | Yunch Bite Makhana
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Traditional roasted fox nuts sprinkled with mineral-rich Indian black salt (kala
 
 ### [Button: Ingredients]
 
+Makhana (Fox Nuts), Olive Oil, Black Salt, Cumin Powder, Spices & Condiments, Acidity Regulator (INS 330).
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+100g
+
+energy
+
+416 kcal
+
+protein
+
+9.6 g
+
+carbohydrates
+
+68.0 g
+
+dietary Fiber
+
+12.2 g
+
+total Fat
+
+13.4 g
+
+saturated Fat
+
+1.7 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+430 mg
 
 ### [Button: Allergen Information]
 
+Processed in a clean facility that also handles nuts and dairy. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
+
+Reseal zipper tightly after opening. Store in a cool, dry place.
 
 ### [Button: Shelf Life]
 
+6 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 

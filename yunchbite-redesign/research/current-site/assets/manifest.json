@@ -8534,6 +8534,14 @@
       {
         "page": "/catergries/makhana",
         "how": "network"
+      },
+      {
+        "page": "/products/makhana-zipper-cheese-herbs",
+        "how": "network"
+      },
+      {
+        "page": "/products/makhana-jar-peri-peri",
+        "how": "network"
       }
     ],
     "thirdParty": false

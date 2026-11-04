@@ -47,13 +47,61 @@ Pink Himalayan salt and fragrant cracked black pepper over slow-roasted fox nuts
 
 ### [Button: Ingredients]
 
+Makhana (Fox Nuts), Olive Oil, Himalayan Pink Salt, Black Pepper, Spices & Condiments.
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+100g
+
+energy
+
+415 kcal
+
+protein
+
+9.8 g
+
+carbohydrates
+
+68.0 g
+
+dietary Fiber
+
+12.4 g
+
+total Fat
+
+13.2 g
+
+saturated Fat
+
+1.7 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+320 mg
 
 ### [Button: Allergen Information]
 
+Processed in a clean facility that also handles nuts and dairy. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
 
+Reseal zipper tightly after opening. Store in a cool, dry place.
+
 ### [Button: Shelf Life]
+
+6 Months from the date of manufacturing.
 
 ### [Button: Country of Origin]
 

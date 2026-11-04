@@ -47,13 +47,61 @@ Yunch Bite Makhana is roasted to perfection in olive oil and seasoned with a uni
 
 ### [Button: Ingredients]
 
+Makhana (Fox Nuts), Olive Oil, Peri-Peri Seasoning [Chilli, Garlic, Onion, Black Pepper, Iodized Salt, Citric Acid (INS 330), Natural Spices].
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+100g
+
+energy
+
+428 kcal
+
+protein
+
+9.5 g
+
+carbohydrates
+
+66.4 g
+
+dietary Fiber
+
+11.8 g
+
+total Fat
+
+14.2 g
+
+saturated Fat
+
+1.9 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+390 mg
 
 ### [Button: Allergen Information]
 
+Processed in a clean facility that also handles nuts and dairy. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
 
+Reseal zipper tightly after opening. Store in a cool, dry place.
+
 ### [Button: Shelf Life]
+
+6 Months from the date of manufacturing.
 
 ### [Button: Country of Origin]
 

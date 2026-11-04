@@ -648,9 +648,9 @@
       "capped": false
     }
   },
-  "docHeight": 1109,
+  "docHeight": 1460,
   "expandedSections": 16,
-  "wordCount": 1431,
+  "wordCount": 1523,
   "sources": [
     "crawl",
     "sitemap",
@@ -669,6 +669,6 @@
   "consoleErrors": [],
   "failedRequests": [],
   "badResponses": [],
-  "harvestedAt": "2026-11-04T07:39:49.364Z",
-  "tookMs": 28016
+  "harvestedAt": "2026-11-04T07:45:54.043Z",
+  "tookMs": 40462
 }

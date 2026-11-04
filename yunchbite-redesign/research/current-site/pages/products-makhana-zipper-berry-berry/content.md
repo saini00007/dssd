@@ -47,13 +47,61 @@ Sweet, zesty natural wild berry extract dusted onto olive oil roasted crunchy ma
 
 ### [Button: Ingredients]
 
+Makhana (Fox Nuts), Olive Oil, Berry Seasoning [Sugar, Mixed Berry Powder, Citric Acid (INS 330), Natural Berry Flavour], Black Salt, Pink Salt, Spices & Condiments.
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+100g
+
+energy
+
+435 kcal
+
+protein
+
+8.8 g
+
+carbohydrates
+
+71.2 g
+
+dietary Fiber
+
+11.0 g
+
+total Fat
+
+13.5 g
+
+saturated Fat
+
+1.8 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+240 mg
 
 ### [Button: Allergen Information]
 
+Processed in a clean facility that also handles nuts and dairy. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
 
+Reseal zipper tightly after opening. Store in a cool, dry place.
+
 ### [Button: Shelf Life]
+
+6 Months from the date of manufacturing.
 
 ### [Button: Country of Origin]
 

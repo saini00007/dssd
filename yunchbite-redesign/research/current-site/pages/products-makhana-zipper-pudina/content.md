@@ -14,7 +14,7 @@ h1: Pudina Masala | Yunch Bite Makhana
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Refreshing garden mint leaves and rock salt crushed over slow-roasted makhana ke
 
 ### [Button: Ingredients]
 
+Makhana (Fox Nuts), Olive Oil, Pudina Seasoning [Iodized Salt, Mint Powder, Black Salt, Cumin Powder, Coriander Powder, Black Pepper, Spices & Condiments, INS 330].
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+100g
+
+energy
+
+418 kcal
+
+protein
+
+9.4 g
+
+carbohydrates
+
+67.5 g
+
+dietary Fiber
+
+12.1 g
+
+total Fat
+
+13.6 g
+
+saturated Fat
+
+1.8 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+0 mg
+
+sodium
+
+385 mg
 
 ### [Button: Allergen Information]
 
+Processed in a clean facility that also handles nuts and dairy. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
+
+Reseal zipper tightly after opening. Store in a cool, dry place.
 
 ### [Button: Shelf Life]
 
+6 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 

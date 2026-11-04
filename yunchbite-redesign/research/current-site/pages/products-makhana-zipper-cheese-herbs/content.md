@@ -14,7 +14,7 @@ h1: Tangy Cheese & Herbs | Yunch Bite Makhana
 
 [Input text: Search]
 
-[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/)[About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about)[Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers)[Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products)[Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews)[Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
+[Home](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/) [About Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/about) [Bestsellers](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/bestsellers) [Our Product](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/products) [Blogs and Reviews](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/blogs-reviews) [Contact Us](https://yunchbite-git-main-pradeeps-projects-bf5ebbc6.vercel.app/contact)
 
 ---
 
@@ -47,15 +47,65 @@ Rich cheddar cheese essence paired with aromatic Mediterranean oregano and basil
 
 ### [Button: Ingredients]
 
+Makhana (Fox Nuts), Olive Oil, Cheese Powder, Milk Solids, Iodized Salt, Mixed Herbs (Oregano, Basil), Spices & Condiments.
+
 ### [Button: Nutritional Information]
+
+serving Size
+
+100g
+
+energy
+
+438 kcal
+
+protein
+
+10.2 g
+
+carbohydrates
+
+65.0 g
+
+dietary Fiber
+
+11.5 g
+
+total Fat
+
+15.5 g
+
+saturated Fat
+
+3.1 g
+
+trans Fat
+
+0 g
+
+cholesterol
+
+4 mg
+
+sodium
+
+395 mg
 
 ### [Button: Allergen Information]
 
+Contains Milk Solids. Processed in a facility that also handles nuts. Naturally gluten-free.
+
 ### [Button: Storage Instructions]
+
+Reseal zipper tightly after opening. Store in a cool, dry place.
 
 ### [Button: Shelf Life]
 
+6 Months from the date of manufacturing.
+
 ### [Button: Country of Origin]
+
+India
 
 ## Other Related Products
 
