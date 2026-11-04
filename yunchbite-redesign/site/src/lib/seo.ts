@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import type { Metadata } from "next";
+import { BASE_PATH } from "@/lib/base-path";
 
 export const SITE_URL = "https://yunchbite.com";
 export const BRAND = "Yunch Bite";
@@ -62,7 +63,8 @@ export function pageMetadata({
       description,
       images: [img.url],
     },
-    ...(noindex ? { robots: { index: false, follow: false } } : {}),
+    // The GitHub Pages preview (served under a base path) must never be indexed ahead of yunchbite.com.
+    ...(noindex || BASE_PATH ? { robots: { index: false, follow: false } } : {}),
   };
 }
 

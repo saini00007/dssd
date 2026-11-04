@@ -14,7 +14,7 @@ const tsconfig = join(out, "tsconfig.json");
 writeFileSync(
   tsconfig,
   JSON.stringify({
-    compilerOptions: { target: "ES2020", module: "commonjs", moduleResolution: "node", outDir: join(out, "js"), rootDir: dataDir, strict: true, skipLibCheck: true, esModuleInterop: true },
+    compilerOptions: { target: "ES2020", module: "commonjs", moduleResolution: "node", types: ["node"], typeRoots: [join(root, "node_modules/@types")], outDir: join(out, "js"), rootDir: dataDir, strict: true, skipLibCheck: true, esModuleInterop: true },
     include: [join(dataDir, "**/*.ts")],
   }),
 );

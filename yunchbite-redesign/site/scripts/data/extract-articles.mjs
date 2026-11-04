@@ -63,8 +63,9 @@ writeFileSync(
 // Text is exactly as on the current site; only spelling/brand-name formatting was cleaned.
 // Health claims in these articles are flagged for legal review in docs/current-content-inventory.md.
 import type { Article } from "./types";
+import { withBase } from "./base-path";
 
-export const articles: Article[] = ${JSON.stringify(out, null, 2)};
+export const articles: Article[] = ${JSON.stringify(out, null, 2).replace(/"hero": ("[^"]+")/g, '"hero": withBase($1)')};
 
 export function getArticle(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);

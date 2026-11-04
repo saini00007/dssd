@@ -10,6 +10,7 @@ import { Header } from "@/components/layout/Header";
 import { MenuOverlay } from "@/components/layout/MenuOverlay";
 import { Footer } from "@/components/layout/Footer";
 import { Loader } from "@/components/layout/Loader";
+import { BASE_PATH, withBase } from "@/lib/base-path";
 
 // Fonts. Swapping the brand fonts later (open question Q3) is a one-line change each.
 const display = Bricolage_Grotesque({
@@ -28,6 +29,8 @@ const og = defaultOgImage();
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  // GitHub Pages preview: noindex (pages that set their own metadata get the same rule via pageMetadata).
+  ...(BASE_PATH ? { robots: { index: false, follow: false } } : {}),
   title: { default: `${site.name} | ${site.tagline}`, template: "%s | Yunch Bite" },
   description: site.shortDescription,
   applicationName: site.name,
@@ -49,11 +52,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: withBase("/favicon.ico"), sizes: "any" },
+      { url: withBase("/icon-192.png"), sizes: "192x192", type: "image/png" },
+      { url: withBase("/icon-512.png"), sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    apple: [{ url: withBase("/apple-touch-icon.png"), sizes: "180x180" }],
   },
   formatDetection: { telephone: false },
 };
