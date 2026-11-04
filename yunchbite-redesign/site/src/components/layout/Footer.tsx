@@ -87,12 +87,12 @@ export function Footer() {
       </Container>
 
       {/* Giant wordmark; Buddy sits on it */}
-      <div className="@container relative overflow-hidden">
-        <div className="relative mx-auto max-w-[var(--container-max)] px-gutter">
+      <div className="@container relative overflow-x-clip pt-[clamp(5rem,12vw,10rem)]">
+        <div className="relative mx-auto max-w-[var(--container-max)] px-gutter [--wm:calc((100cqw-2*var(--gutter))/3.72)]">
           <FooterBuddy />
           <p
             aria-hidden="true"
-            className="display-type select-none whitespace-nowrap text-center text-red text-[length:clamp(4rem,19.6cqw,18rem)] leading-[0.78] tracking-[-0.02em]"
+            className="display-type select-none whitespace-nowrap text-center text-red text-[length:var(--wm)] leading-[0.8] tracking-[0.005em]"
             style={{ fontStretch: "75%" }}
           >
             Yunch Bite

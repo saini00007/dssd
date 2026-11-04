@@ -39,7 +39,7 @@ export function PartnerBand({ variant = "full", behind, className }: PartnerBand
       <Container className="relative z-10 grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
         <div>
           <Eyebrow className="mb-5 text-yellow">{partnerBand.eyebrow}</Eyebrow>
-          <TypeIn as="h2" id="partner-band-heading" text={partnerBand.heading} className="display-type text-[length:var(--text-display)] leading-[0.92]" />
+          <TypeIn as="h2" id="partner-band-heading" text={partnerBand.heading} className="display-type text-[length:clamp(2.6rem,5.6vw,5.5rem)] leading-[0.92]" />
           <Reveal className="mt-9" delay={0.15}>
             <ButtonLink href={href} variant="cream" size="lg">
               {partnerBand.cta.label}

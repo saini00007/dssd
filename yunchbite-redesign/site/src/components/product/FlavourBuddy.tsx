@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useImperativeHandle, useRef, type Ref } from "react";
 import type { BuddyPose, Flavour } from "@/data/types";
 import { popElement } from "@/components/motion/pop";
-import { buddySrc, shapeSrc } from "@/lib/media";
+import { buddyImage, shapeSrc } from "@/lib/media";
 import { cn } from "@/lib/cn";
 
 export interface FlavourBuddyHandle {
@@ -31,7 +31,7 @@ export function FlavourBuddy({
   flavour,
   pose = "peek",
   width = "100%",
-  hand = { x: 6, y: 52, size: 34, rotate: -14 },
+  hand = { x: -4, y: 56, size: 34, rotate: -16 },
   active,
   popOnMount,
   priority,
@@ -39,6 +39,7 @@ export function FlavourBuddy({
   ref,
 }: FlavourBuddyProps) {
   const root = useRef<HTMLDivElement>(null);
+  const img = buddyImage(pose);
   const prev = useRef<boolean | undefined>(popOnMount ? false : active);
 
   const pop = () => {
@@ -50,12 +51,11 @@ export function FlavourBuddy({
   useEffect(() => {
     if (active && !prev.current) pop();
     prev.current = active;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
   return (
     <div ref={root} className={cn("relative", className)} style={{ width }} aria-hidden="true">
-      <Image src={buddySrc(pose)} alt="" width={480} height={560} priority={priority} sizes="(min-width: 768px) 240px, 40vw" className="h-auto w-full select-none" draggable={false} />
+      <Image src={img.src} alt="" width={img.width} height={img.height} priority={priority} sizes="(min-width: 768px) 240px, 40vw" className="h-auto w-full select-none" draggable={false} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={shapeSrc(flavour.ingredient)}

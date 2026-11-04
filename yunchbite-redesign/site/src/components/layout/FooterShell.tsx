@@ -5,11 +5,16 @@ import { ArchReveal } from "@/components/ui/ArchReveal";
 
 /** Reads the colour of the last section above the footer so the arch corners blend into it. */
 function lastSectionColor(): string {
-  let el: Element | null = document.getElementById("main");
-  for (let depth = 0; depth < 4 && el?.lastElementChild; depth++) {
-    el = el.lastElementChild;
+  const main = document.getElementById("main");
+  if (!main) return "";
+  // With cacheComponents, previous pages stay in <main> hidden (display: none): use the visible one.
+  let el: Element | undefined = Array.from(main.children)
+    .reverse()
+    .find((c) => c.getClientRects().length > 0);
+  for (let depth = 0; depth < 4 && el; depth++) {
     const bg = getComputedStyle(el).backgroundColor;
-    if (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") return bg;
+    if (depth > 0 && bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") return bg;
+    el = el.lastElementChild ?? undefined;
   }
   return "";
 }

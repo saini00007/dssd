@@ -18,8 +18,8 @@ function RollLabel({ open }: { open: boolean }) {
     <span aria-hidden="true" data-open={open} className="inline-flex">
       {Array.from({ length: 5 }, (_, i) => (
         <span key={i} className="roll-col" style={{ ["--i" as string]: i }}>
-          <span>{a[i] ?? " "}</span>
-          <span>{b[i] ?? " "}</span>
+          <span>{a[i] ?? "\u00a0"}</span>
+          <span>{b[i] ?? "\u00a0"}</span>
         </span>
       ))}
     </span>
@@ -124,7 +124,7 @@ export function Header() {
           <nav
             aria-label="Primary"
             inert={open}
-            className="hidden grid-cols-[1fr] transition-[grid-template-columns,opacity] duration-[var(--dur-move)] ease-[var(--ease-roast)] md:grid group-data-[state=collapsed]/hdr:grid-cols-[0fr] group-data-[state=collapsed]/hdr:opacity-0"
+            className="hidden grid-cols-[1fr] transition-[grid-template-columns,opacity] duration-[var(--dur-move)] ease-[var(--ease-roast)] md:grid group-data-[state=collapsed]/hdr:grid-cols-[0fr] group-data-[state=collapsed]/hdr:opacity-0 group-data-[menu-open]/hdr:opacity-0"
           >
             <ul className="flex min-w-0 items-center gap-1 overflow-hidden">
               {primaryNav.map((l) => (
@@ -145,7 +145,7 @@ export function Header() {
             </ul>
           </nav>
 
-          <div inert={open} className="hidden sm:block">
+          <div inert={open} className="hidden transition-opacity duration-[var(--dur-quick)] sm:block group-data-[menu-open]/hdr:opacity-0">
             <ButtonLink href={headerCta.href + "#partner"} size="md" arrow={false} magnetic={false} className="h-11 px-5 text-[0.95rem]">
               {headerCta.label}
             </ButtonLink>

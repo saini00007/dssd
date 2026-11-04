@@ -54,7 +54,9 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
   // Scroll to top on link navigations (not on browser back/forward), unless there is a hash.
   useEffect(() => {
-    if (!consumeNavIntent()) return;
+    // Layout changes with every page: re-measure triggers once the new page is in place.
+    const t = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+    if (!consumeNavIntent()) return () => window.clearTimeout(t);
     const hash = window.location.hash;
     const l = instance;
     if (hash) {
@@ -62,12 +64,12 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       if (el) {
         if (l) l.scrollTo(el, { offset: -(parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 80), immediate: true });
         else el.scrollIntoView();
-        return;
+        return () => window.clearTimeout(t);
       }
     }
     if (l) l.scrollTo(0, { immediate: true, force: true });
     else window.scrollTo(0, 0);
-    ScrollTrigger.refresh();
+    return () => window.clearTimeout(t);
   }, [pathname]);
 
   return <>{children}</>;

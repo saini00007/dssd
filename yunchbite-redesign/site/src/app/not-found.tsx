@@ -7,7 +7,7 @@ import { TypeIn } from "@/components/motion/TypeIn";
 import { Reveal } from "@/components/motion/Reveal";
 import { TransitionLink } from "@/components/ui/TransitionLink";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { buddySrc } from "@/lib/media";
+import { buddyImage } from "@/lib/media";
 import { menuCategories } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ export default function NotFound() {
             <TypeIn as="h1" trigger="load" text="Yeh page toh koi kha gaya!" className="display-type text-[length:var(--text-display)] leading-[0.92]" />
             <Reveal delay={0.2}>
               <p className="mt-6 max-w-[44ch] text-lg text-ink/80">
-                Buddy looked everywhere, but all that is left is an empty pouch. Let&apos;s get you back to something crunchy.
+                Buddy looked everywhere, but this page has wandered off. Let&apos;s get you back to something crunchy.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <ButtonLink href="/" variant="solid" size="lg">
@@ -48,7 +48,7 @@ export default function NotFound() {
             </Reveal>
           </div>
           <div className="relative mx-auto w-full max-w-[420px]">
-            <Image src={buddySrc("confused")} alt="Makhana Buddy looking confused, holding an empty pouch" width={480} height={560} priority sizes="(min-width: 768px) 420px, 80vw" className="h-auto w-full" />
+            <Image src={buddyImage("confused").src} alt="Makhana Buddy looking lost" width={buddyImage("confused").width} height={buddyImage("confused").height} priority sizes="(min-width: 768px) 420px, 80vw" className="h-auto w-full [mask-image:linear-gradient(to_right,transparent_0,#000_10%)]" />
           </div>
         </Container>
       </div>

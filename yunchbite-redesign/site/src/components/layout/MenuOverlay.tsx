@@ -9,7 +9,7 @@ import { PackImage } from "@/components/product/PackImage";
 import { getProduct } from "@/data/products";
 import { categories } from "@/data/categories";
 import { menuPages, site } from "@/data/site";
-import { buddySrc } from "@/lib/media";
+import { buddyImage } from "@/lib/media";
 import { dur, ease, mq, stagger } from "@/lib/tokens";
 import { useMenu } from "./MenuContext";
 
@@ -111,8 +111,10 @@ export function MenuOverlay() {
         return;
       }
       if (e.key !== "Tab") return;
+      // Focus cycle in DOM order: the (non-inert) header controls, then the panel.
+      const inHeader = Array.from(document.querySelectorAll<HTMLElement>("#site-header a[href], #site-header button")).filter((el) => !el.closest("[inert]"));
       const inPanel = Array.from(panel.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []);
-      const list = [...inPanel, ...(buttonRef.current ? [buttonRef.current] : [])];
+      const list = [...inHeader, ...inPanel];
       if (!list.length) return;
       const active = document.activeElement as HTMLElement | null;
       const idx = active ? list.indexOf(active) : -1;
@@ -155,14 +157,13 @@ export function MenuOverlay() {
         aria-modal="true"
         aria-label="Site menu"
         inert={!open}
-        data-header-theme="dark"
         data-lenis-prevent
         style={{ clipPath: CLOSED, visibility: "hidden" }}
         className="on-dark fixed inset-0 z-[55] overflow-y-auto overflow-x-clip bg-red text-cream"
       >
-        <div className="mx-auto flex min-h-full max-w-[var(--container-max)] flex-col px-gutter pb-8 pt-[clamp(5rem,13vh,7.5rem)] md:flex-row md:gap-10 lg:gap-16">
+        <div className="mx-auto flex min-h-full max-w-[var(--container-max)] flex-col px-gutter pb-8 pt-[clamp(5rem,13vh,7.5rem)] md:flex-row md:gap-10 lg:gap-12">
           <nav aria-label="Main pages" className="flex-1">
-            <ul className="flex flex-col" style={{ ["--step" as string]: "clamp(0.75rem, 3.2vw, 3.25rem)" }}>
+            <ul className="flex flex-col" style={{ ["--step" as string]: "clamp(0.4rem, 2.3vw, 2.9rem)" }}>
               {menuPages.map((p, i) => {
                 const current = p.href === "/" ? pathname === "/" : pathname === p.href || pathname.startsWith(p.href + "/");
                 return (
@@ -171,7 +172,7 @@ export function MenuOverlay() {
                       href={p.href}
                       aria-current={current ? "page" : undefined}
                       onClick={() => onLinkClick(p.href)}
-                      className="group/item relative inline-flex items-center gap-[0.35em] py-[0.04em] text-[length:clamp(1.9rem,min(7.4vh,9vw),5.2rem)] leading-[0.98] transition-transform duration-[var(--dur-pop)] ease-[var(--ease-crunch)] hover:translate-x-[0.35em] focus-visible:translate-x-[0.35em]"
+                      className="group/item relative inline-flex items-center gap-[0.35em] py-[0.04em] whitespace-nowrap text-[length:clamp(1.8rem,min(6.7vh,7vw),5rem)] leading-[0.98] transition-transform duration-[var(--dur-pop)] ease-[var(--ease-crunch)] hover:translate-x-[0.35em] focus-visible:translate-x-[0.35em]"
                     >
                       <span
                         aria-hidden="true"
@@ -189,7 +190,7 @@ export function MenuOverlay() {
             </ul>
           </nav>
 
-          <div className="mt-10 flex flex-1 flex-col justify-between gap-8 md:mt-0 md:max-w-[560px]">
+          <div className="mt-10 flex flex-col gap-8 md:mt-0 md:w-[min(46vw,500px)] md:shrink-0">
             <div data-menu-extra>
               <p className="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-cream/80">Choose your crunch</p>
               <ul className="grid grid-cols-3 gap-3">
@@ -205,7 +206,7 @@ export function MenuOverlay() {
                       >
                         {product && (
                           <span className="absolute inset-x-[14%] top-[8%] bottom-[22%] transition-transform duration-[var(--dur-pop)] ease-[var(--ease-crunch)] group-hover/tile:scale-110 group-hover/tile:-rotate-3">
-                            <PackImage product={product} size="sm" />
+                            <PackImage product={product} size="sm" fit decorative />
                           </span>
                         )}
                         <span className="relative text-[0.95rem] font-bold leading-tight">{c.name}</span>
@@ -214,6 +215,12 @@ export function MenuOverlay() {
                   );
                 })}
               </ul>
+            </div>
+
+            {/* Makhana Buddy waves from the bottom-right of the right column */}
+            <div aria-hidden="true" className="pointer-events-none relative hidden min-h-[120px] flex-1 overflow-hidden md:block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img data-menu-buddy src={buddyImage("wave").src} alt="" width={buddyImage("wave").width} height={buddyImage("wave").height} className="absolute bottom-0 right-0 h-auto max-h-full w-auto max-w-[min(100%,230px)] origin-bottom [mask-image:linear-gradient(to_right,transparent_0,#000_14%)]" />
             </div>
 
             <div data-menu-extra className="flex flex-col gap-4">
@@ -242,11 +249,6 @@ export function MenuOverlay() {
           </div>
         </div>
 
-        {/* Makhana Buddy waves from the bottom-right */}
-        <div aria-hidden="true" className="pointer-events-none fixed bottom-0 right-[clamp(0.5rem,4vw,4rem)] hidden w-[clamp(120px,15vw,230px)] overflow-hidden md:block">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img data-menu-buddy src={buddySrc("wave")} alt="" width={480} height={560} className="h-auto w-full" />
-        </div>
       </div>
     </div>
   );

@@ -16,7 +16,8 @@ export interface InsetOpenerProps {
   className?: string;
 }
 
-const FROM = "inset(46% 24% 6% 24% round 28px)";
+const FROM_DESKTOP = "inset(46% 24% 6% 24% round 28px)";
+const FROM_MOBILE = "inset(40% 7% 8% 7% round 24px)";
 const TO = "inset(0% 0% 0% 0% round 0px)";
 
 /**
@@ -35,15 +36,17 @@ export function InsetOpener({ title, eyebrow, subtitle, image, as = "h1", classN
       const img = el.querySelector<HTMLElement>("[data-img]");
       if (!media || !head || !img) return;
       const mm = gsap.matchMedia();
-      mm.add(mq.motion, () => {
+      mm.add(`${mq.motion} and (min-width: 768px)`, () => build(FROM_DESKTOP));
+      mm.add(`${mq.motion} and (max-width: 767px)`, () => build(FROM_MOBILE));
+      function build(from: string) {
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: 0.5 },
         });
-        tl.fromTo(media, { clipPath: FROM }, { clipPath: TO }, 0)
+        tl.fromTo(media, { clipPath: from }, { clipPath: TO }, 0)
           .fromTo(img, { scale: 1.25 }, { scale: 1 }, 0)
           .to(head, { yPercent: -18, opacity: 0, scale: 0.94 }, 0.35);
-      });
+      }
     },
     { scope: root },
   );
@@ -61,7 +64,7 @@ export function InsetOpener({ title, eyebrow, subtitle, image, as = "h1", classN
         </div>
         <div
           data-media=""
-          className="relative mx-auto mt-8 aspect-[16/9] w-[calc(100%-2*var(--gutter))] overflow-hidden rounded-card motion-safe:absolute motion-safe:inset-0 motion-safe:mt-0 motion-safe:aspect-auto motion-safe:w-full motion-safe:rounded-none motion-safe:[clip-path:inset(46%_24%_6%_24%_round_28px)]"
+          className="relative mx-auto mt-8 aspect-[16/9] w-[calc(100%-2*var(--gutter))] overflow-hidden rounded-card motion-safe:absolute motion-safe:inset-0 motion-safe:mt-0 motion-safe:aspect-auto motion-safe:w-full motion-safe:rounded-none motion-safe:[clip-path:inset(46%_24%_6%_24%_round_28px)] motion-safe:max-md:[clip-path:inset(40%_7%_8%_7%_round_24px)]"
         >
           <div data-img="" className="absolute inset-0">
             <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />

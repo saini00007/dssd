@@ -20,6 +20,8 @@ export interface PackImageProps {
   priority?: boolean;
   /** Wrap in <ViewTransition name="pack-<slug>"> so a card pack morphs into the product hero. */
   morph?: boolean;
+  /** Fill the parent box (object-contain, bottom aligned) instead of sizing by the pack's own aspect ratio. */
+  fit?: boolean;
   /** Decorative (alt=""), e.g. when the name is shown right next to it. */
   decorative?: boolean;
   className?: string;
@@ -27,17 +29,17 @@ export interface PackImageProps {
 }
 
 /** The pack cut-out. Fills its (relatively positioned) box and keeps the pack's aspect ratio. */
-export function PackImage({ product, size = "md", sizes, priority, morph, decorative, className, imgClassName }: PackImageProps) {
+export function PackImage({ product, size = "md", sizes, priority, morph, fit, decorative, className, imgClassName }: PackImageProps) {
   const pack = packSrc(product);
   const img = (
-    <div className={cn("relative w-full", className)} style={{ aspectRatio: `${pack.width} / ${pack.height}` }}>
+    <div className={cn("relative w-full", fit && "h-full", className)} style={fit ? undefined : { aspectRatio: `${pack.width} / ${pack.height}` }}>
       <Image
         src={pack.src}
         alt={decorative ? "" : `${product.name} ${product.formatLabel} pack`}
         fill
         sizes={sizes ?? SIZES[size]}
         priority={priority}
-        className={cn("object-contain", imgClassName)}
+        className={cn("object-contain", fit && "object-bottom", imgClassName)}
       />
     </div>
   );

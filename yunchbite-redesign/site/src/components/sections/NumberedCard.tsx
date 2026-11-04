@@ -28,16 +28,16 @@ export function NumberedCard({ number, title, children, href, tone = "cream", as
     <>
       <span
         aria-hidden="true"
-        className="display-type text-outline block text-[length:clamp(5rem,9vw,8rem)] leading-[0.8] transition-[color,transform] duration-[var(--dur-pop)] ease-[var(--ease-crunch)] group-hover/num:text-current group-hover/num:-translate-y-1 group-focus-visible/num:text-current"
+        className="display-type text-outline block text-[length:clamp(5rem,9vw,8rem)] leading-[0.8] transition-[-webkit-text-fill-color,transform] duration-[var(--dur-pop)] ease-[var(--ease-crunch)] group-hover/num:[-webkit-text-fill-color:currentColor] group-focus-visible/num:[-webkit-text-fill-color:currentColor] group-hover/num:-translate-y-1"
       >
         {number}
       </span>
       <span className="mt-8 block">
         <span className="display-type block text-[length:var(--text-h3)] leading-[0.95]">{title}</span>
-        {children && <span className="mt-3 block max-w-[34ch] text-[0.98rem] leading-snug opacity-90">{children}</span>}
+        {children && <span className="mt-3 block max-w-[34ch] text-[0.98rem] leading-snug">{children}</span>}
       </span>
       {href && (
-        <span aria-hidden="true" className="absolute bottom-6 right-6 grid size-11 place-items-center rounded-full bg-ink text-cream transition-transform duration-[var(--dur-pop)] ease-[var(--ease-crunch)] group-hover/num:rotate-[-45deg]">
+        <span aria-hidden="true" className="absolute right-6 top-6 grid size-11 place-items-center rounded-full bg-ink text-cream transition-transform duration-[var(--dur-pop)] ease-[var(--ease-crunch)] group-hover/num:rotate-[-45deg]">
           <Icon name="arrow" />
         </span>
       )}

@@ -8,10 +8,9 @@ const MAIN = ["/products", "/bestsellers", "/about", "/why-yunch-bite", "/benefi
 
 /** All 38 routes: home + 8 main pages, 3 categories, 21 products, 5 articles. /lab is excluded. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  const entry = (path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"], lastModified: Date = now) => ({
+  const entry = (path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"], lastModified?: Date) => ({
     url: `${SITE_URL}${path}`,
-    lastModified,
+    ...(lastModified ? { lastModified } : {}),
     changeFrequency,
     priority,
   });

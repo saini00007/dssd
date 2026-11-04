@@ -1,6 +1,6 @@
 "use client";
-import { useImperativeHandle, useRef, type Ref } from "react";
-import { gsap, useGSAP } from "./gsap";
+import { useEffect, useImperativeHandle, useRef, type Ref } from "react";
+import { gsap } from "./gsap";
 
 export interface RingBurstHandle {
   /** Plays the ring: expands and thins (~450 ms). */
@@ -19,35 +19,35 @@ export interface RingBurstProps {
  * (default: centred, 150% of the parent). Call `ref.current.burst()`.
  */
 export function RingBurst({ color, className, ref }: RingBurstProps) {
-  const root = useRef<SVGSVGElement>(null);
   const c1 = useRef<SVGCircleElement>(null);
   const c2 = useRef<SVGCircleElement>(null);
-  const { contextSafe } = useGSAP({ scope: root });
-
-  const play = contextSafe(() => {
-        gsap.fromTo(
-          c1.current,
-          { attr: { r: 20, "stroke-width": 9 }, opacity: 1 },
-          { attr: { r: 49, "stroke-width": 0.4 }, opacity: 0, duration: 0.55, ease: "expo.out", overwrite: true },
-        );
-        gsap.fromTo(
-          c2.current,
-          { attr: { r: 16, "stroke-width": 5 }, opacity: 0.8 },
-          { attr: { r: 40, "stroke-width": 0.3 }, opacity: 0, duration: 0.5, delay: 0.07, ease: "expo.out", overwrite: true },
-        );
-  });
+  useEffect(() => {
+    const a = c1.current;
+    const b = c2.current;
+    return () => void gsap.killTweensOf([a, b]);
+  }, []);
 
   useImperativeHandle(ref, () => ({
     burst() {
-      if (!c1.current || !c2.current) return;
+      const a = c1.current;
+      const b = c2.current;
+      if (!a || !b) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      play();
+      gsap.fromTo(
+        a,
+        { attr: { r: 20, "stroke-width": 9 }, opacity: 1 },
+        { attr: { r: 49, "stroke-width": 0.4 }, opacity: 0, duration: 0.55, ease: "expo.out", overwrite: true },
+      );
+      gsap.fromTo(
+        b,
+        { attr: { r: 16, "stroke-width": 5 }, opacity: 0.8 },
+        { attr: { r: 40, "stroke-width": 0.3 }, opacity: 0, duration: 0.5, delay: 0.07, ease: "expo.out", overwrite: true },
+      );
     },
   }));
 
   return (
     <svg
-      ref={root}
       viewBox="0 0 100 100"
       aria-hidden="true"
       focusable="false"

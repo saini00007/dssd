@@ -2,11 +2,12 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
-import { buddySrc } from "@/lib/media";
+import { buddyImage } from "@/lib/media";
 import { dur, ease, mq } from "@/lib/tokens";
 
 /** Buddy sits on the footer wordmark and peeks up when you hover the wordmark area. */
 export function FooterBuddy() {
+  const img = buddyImage("sit");
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -30,8 +31,8 @@ export function FooterBuddy() {
   );
 
   return (
-    <div ref={root} aria-hidden="true" className="pointer-events-none absolute bottom-[78%] right-[6%] z-10 w-[clamp(90px,13cqw,190px)]">
-      <Image src={buddySrc("sit")} alt="" width={480} height={560} sizes="(min-width: 1024px) 190px, 90px" className="h-auto w-full select-none" />
+    <div ref={root} aria-hidden="true" className="pointer-events-none absolute right-[calc(var(--gutter)+3%)] z-10 w-[clamp(120px,16cqw,240px)]" style={{ bottom: "calc(100% - var(--wm) * 0.1)", maskImage: "linear-gradient(to right, transparent 0, #000 14%)", WebkitMaskImage: "linear-gradient(to right, transparent 0, #000 14%)" }}>
+      <Image src={img.src} alt="" width={img.width} height={img.height} sizes="(min-width: 1024px) 340px, 150px" className="h-auto w-full select-none" />
     </div>
   );
 }

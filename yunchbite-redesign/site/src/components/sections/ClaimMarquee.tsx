@@ -25,8 +25,8 @@ function Row({ items, tone, dup }: { items: readonly string[]; tone: (typeof ton
       {...(dup ? { "data-dup": "", "aria-hidden": true } : {})}
       className="flex shrink-0 items-center gap-3 pr-3"
     >
-      {items.map((t) => (
-        <li key={t} className={cn("flex items-center gap-3 rounded-pill border-2 px-6 py-3 text-[length:clamp(1rem,1.6vw,1.35rem)] font-bold whitespace-nowrap", tone.pill)}>
+      {items.map((t, i) => (
+        <li key={`${t}-${i}`} className={cn("flex items-center gap-3 rounded-pill border-2 px-6 py-3 text-[length:clamp(1rem,1.6vw,1.35rem)] font-bold whitespace-nowrap", tone.pill)}>
           <span aria-hidden="true" className={cn("size-2.5 rounded-full", tone.dot)} />
           {t}
         </li>

@@ -42,10 +42,10 @@ export function PackCardView({
   const vars = { "--flavour": card.color, "--flavour-ink": card.ink } as CSSProperties;
 
   return (
-    <article className={cn("group/card relative", className)} style={vars}>
+    <article className={cn("group/card relative h-full", className)} style={vars}>
       {/* Buddy peeks over the top edge (behind the card body) */}
       <div className="pointer-events-none absolute bottom-full right-[8%] z-0 mb-[-26px] w-[30%] translate-y-[88%] transition-transform duration-[var(--dur-pop)] ease-[var(--ease-crunch)] group-hover/card:translate-y-0 group-has-[a:focus-visible]/card:translate-y-0">
-        <FlavourBuddy flavour={{ ingredient: card.ingredient, name: card.name }} pose="peek" hand={{ x: -6, y: 40, size: 40, rotate: -18 }} />
+        <FlavourBuddy flavour={{ ingredient: card.ingredient, name: card.name }} pose="peek" hand={{ x: -8, y: 54, size: 40, rotate: -16 }} />
       </div>
 
       <TransitionLink
@@ -59,7 +59,7 @@ export function PackCardView({
         onFocus={(e) => {
           if (e.currentTarget.matches(":focus-visible")) ring.current?.burst();
         }}
-        className="relative z-10 block overflow-hidden rounded-card bg-[color-mix(in_srgb,var(--flavour)_16%,var(--color-cream))] outline-offset-4 transition-shadow duration-[var(--dur-pop)] hover:shadow-[var(--shadow-lift)] focus-visible:shadow-[var(--shadow-lift)]"
+        className="relative z-10 flex h-full flex-col overflow-hidden rounded-card bg-[color-mix(in_srgb,var(--flavour)_16%,var(--color-cream))] outline-offset-4 transition-shadow duration-[var(--dur-pop)] hover:shadow-[var(--shadow-lift)] focus-visible:shadow-[var(--shadow-lift)]"
       >
         <div className="relative aspect-[5/5.4] w-full">
           {/* flavour-colour disc */}
@@ -69,13 +69,13 @@ export function PackCardView({
           </div>
           {/* pack lifts on hover with the crunch ease */}
           <div className="absolute inset-x-[22%] bottom-[8%] top-[10%] transition-transform duration-[var(--dur-pop)] ease-[var(--ease-crunch)] will-change-transform group-hover/card:-translate-y-[5%] group-hover/card:rotate-[2.5deg] group-hover/card:scale-[1.06] group-has-[a:focus-visible]/card:-translate-y-[5%] group-has-[a:focus-visible]/card:rotate-[2.5deg] group-has-[a:focus-visible]/card:scale-[1.06]">
-            <div className="absolute inset-0 flex items-end">
-              <PackImage product={card} size="md" priority={priority} morph={morph} decorative imgClassName="drop-shadow-[0_18px_22px_rgb(42_18_16/0.28)]" />
+            <div className="absolute inset-0">
+              <PackImage product={card} size="md" fit priority={priority} morph={morph} decorative imgClassName="drop-shadow-[0_18px_22px_rgb(42_18_16/0.28)]" />
             </div>
           </div>
         </div>
 
-        <div className="flex items-end justify-between gap-3 px-5 pb-5 pt-1">
+        <div className="mt-auto flex items-end justify-between gap-3 px-5 pb-5 pt-1">
           <div className="min-w-0">
             <Heading className="display-type text-[length:clamp(1.35rem,2.1vw,1.9rem)] leading-[0.95]">{card.name}</Heading>
             <p className="sr-only">{card.formatLabel}</p>

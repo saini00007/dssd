@@ -9,20 +9,20 @@ import type { ShapeName } from "@/data/types";
 
 // Deterministic layout (SSR-safe): x/y in vw/vh from the bottom centre, rotation, size, shape.
 const PILE: { s: ShapeName; x: number; y: number; r: number; w: number }[] = [
-  { s: "makhana-1", x: -22, y: 0, r: -18, w: 15 },
-  { s: "makhana-2", x: -8, y: 1, r: 12, w: 17 },
-  { s: "makhana-3", x: 8, y: 0, r: -9, w: 16 },
-  { s: "makhana-4", x: 23, y: 1, r: 20, w: 14 },
-  { s: "chilli", x: -30, y: 11, r: 28, w: 10 },
-  { s: "makhana-5", x: -14, y: 14, r: -30, w: 14 },
-  { s: "pudina-leaf", x: 2, y: 15, r: 14, w: 11 },
-  { s: "makhana-1", x: 16, y: 13, r: -14, w: 13 },
-  { s: "cheese", x: 30, y: 12, r: 8, w: 10 },
-  { s: "makhana-3", x: -6, y: 27, r: 24, w: 12 },
-  { s: "pepper", x: 9, y: 27, r: -20, w: 9 },
-  { s: "makhana-2", x: -20, y: 26, r: -8, w: 11 },
-  { s: "berry", x: 21, y: 25, r: 16, w: 9 },
-  { s: "makhana-4", x: 1, y: 38, r: 6, w: 10 },
+  { s: "makhana-1", x: -22, y: 0, r: -18, w: 20 },
+  { s: "makhana-2", x: -8, y: 1, r: 12, w: 23 },
+  { s: "makhana-3", x: 8, y: 0, r: -9, w: 22 },
+  { s: "makhana-4", x: 23, y: 1, r: 20, w: 19 },
+  { s: "chilli", x: -30, y: 8, r: 28, w: 14 },
+  { s: "makhana-5", x: -14, y: 10, r: -30, w: 19 },
+  { s: "pudina-leaf", x: 2, y: 10, r: 14, w: 15 },
+  { s: "makhana-1", x: 16, y: 9, r: -14, w: 18 },
+  { s: "cheese", x: 30, y: 8, r: 8, w: 14 },
+  { s: "makhana-3", x: -6, y: 19, r: 24, w: 16 },
+  { s: "pepper", x: 9, y: 19, r: -20, w: 12 },
+  { s: "makhana-2", x: -20, y: 18, r: -8, w: 15 },
+  { s: "berry", x: 21, y: 18, r: 16, w: 12 },
+  { s: "makhana-4", x: 1, y: 27, r: 6, w: 14 },
 ];
 
 const STORAGE_KEY = "yb-loader";
