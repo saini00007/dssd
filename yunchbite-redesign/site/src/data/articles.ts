@@ -14,7 +14,7 @@ export const articles: Article[] = [
       "name": "Dr. Ananya Roy",
       "role": "Holistic Nutritionist & Wellness Coach"
     },
-    "hero": "/photos/blog/blog-makhana.webp",
+    "hero": "/photos/blog/why-makhana-is-the-perfect-smart-snack.webp",
     "heroAlt": "A bowl of seasoned, crunchy makhana with scattered fox nuts",
     "lead": "Discover why fox nuts (makhana) are celebrated by nutritionists worldwide as the ultimate crunch snack packed with plant-based protein, antioxidants, and vital minerals.",
     "body": [
@@ -70,7 +70,7 @@ export const articles: Article[] = [
       "name": "Karan Malhotra",
       "role": "Sports Dietitian"
     },
-    "hero": "/photos/blog/blog-nuts.webp",
+    "hero": "/photos/blog/the-power-of-nuts-small-bite-big-benefits.webp",
     "heroAlt": "Almonds and cashews ready to snack on",
     "lead": "Almonds and cashews are more than just delicious crunch—they are nutrient-dense powerhouses that fuel brain clarity, heart vitality, and lasting stamina.",
     "body": [
@@ -112,7 +112,7 @@ export const articles: Article[] = [
       "name": "Pooja Singhania",
       "role": "Culinary Nutritionist"
     },
-    "hero": "/photos/blog/blog-popcorn.webp",
+    "hero": "/photos/blog/popcorn-the-crunchy-snack-you-can-feel-good-about.webp",
     "heroAlt": "A bowl of fluffy golden popcorn",
     "lead": "Break free from the myth that popcorn is unhealthy. Learn how 100% whole grain corn kernels popped without hydrogenated oils offer pure fiber-filled satisfaction.",
     "body": [
@@ -154,7 +154,7 @@ export const articles: Article[] = [
       "name": "Yunch Bite Culinary Team",
       "role": "Flavor Innovation & Quality Lab"
     },
-    "hero": "/photos/blog/blog-products.webp",
+    "hero": "/photos/blog/discover-our-range-of-healthy-snacks.webp",
     "heroAlt": "The Yunch Bite range of makhana, popcorn and dry fruits",
     "lead": "From zesty Peri-Peri makhanas to slow-roasted golden cashews and crispy popcorn, explore the delicious journey behind Yunch Bite's healthy snack lineup.",
     "body": [
@@ -188,7 +188,7 @@ export const articles: Article[] = [
       "name": "Simran Kapoor",
       "role": "Family Wellness Advocate"
     },
-    "hero": "/photos/blog/blog-family.webp",
+    "hero": "/photos/blog/healthy-snacking-habits-for-the-whole-family.webp",
     "heroAlt": "A family snacking together at home",
     "lead": "Nurturing mindful eating habits at home can be effortless when nutritious snacks taste just as fun, crunchy, and flavor-packed as childhood favorites.",
     "body": [

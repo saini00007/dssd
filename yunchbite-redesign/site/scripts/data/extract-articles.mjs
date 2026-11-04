@@ -52,7 +52,7 @@ const out = ARTICLES.map((a) => {
   else body.splice(a.after + 1, 0, prod); // after the first h2 + paragraph
   return {
     slug: a.slug, title: clean(title), category: a.category, date, readTime,
-    author: { name: author, role }, hero: `/photos/blog/${a.hero}.webp`, heroAlt: a.alt,
+    author: { name: author, role }, hero: `/photos/blog/${a.slug}.webp`, heroAlt: a.alt,
     lead, body, metaTitle: clean(meta.title), metaDescription: clean(meta.description),
   };
 });
