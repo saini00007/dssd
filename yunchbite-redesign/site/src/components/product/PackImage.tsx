@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { ViewTransition } from "react";
-import type { Product } from "@/data/types";
 import { packSrc } from "@/lib/media";
 import { cn } from "@/lib/cn";
 
@@ -12,7 +11,7 @@ const SIZES = {
 } as const;
 
 export interface PackImageProps {
-  product: Pick<Product, "slug" | "name" | "formatLabel" | "flavourKey">;
+  product: { slug: string; name: string; formatLabel: string; flavourKey: string };
   /** Preset for the `sizes` attribute: sm 120px, md card (default), lg, hero. */
   size?: keyof typeof SIZES;
   /** Overrides the preset. */
