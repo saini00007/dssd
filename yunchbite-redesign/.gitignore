@@ -13,3 +13,6 @@ research/current-site/pages/*/dom.html
 research/current-site/crawl-state.json
 # video analyser: individual per-event frames stay local (strips + sheets are committed)
 research/references/**/analysis/**/events/*/frames/
+# TEMPORARY while captures run; committed once each capture is final
+research/references/agrumeafarm/
+research/references/yaas-energy/
