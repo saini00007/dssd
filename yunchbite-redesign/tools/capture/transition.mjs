@@ -72,7 +72,7 @@ export async function runTransition(run) {
   const results = [];
   for (const [n, cand] of cands.entries()) {
     if (Date.now() > deadline) break;
-    const s = await openPage(run, { video: true, label: `transition-${n + 1}` });
+    const s = await openPage(run, { video: true, hooks: true, label: `transition-${n + 1}` });
     const { page } = s;
     let webm;
     try {

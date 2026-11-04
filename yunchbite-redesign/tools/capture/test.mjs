@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import http from 'node:http';
 import { startServer } from '../fixtures/serve.mjs';
 import { capture } from './capture.mjs';
 import { ffprobeDuration, readJson } from './util.mjs';
@@ -81,6 +82,18 @@ for (const profile of profiles) {
 const report = fs.readFileSync(path.join(out, 'report.md'), 'utf8');
 for (const h of ['Tech stack', 'Motion system', 'Per-section timeline', 'Hover catalogue', 'Cursor and pointer', 'Page transitions', 'Design tokens', 'Media']) check(`report.md has "${h}"`, report.includes(`### ${h}`));
 check('summary.json is machine readable', readJson(path.join(out, 'summary.json'))?.profiles?.length === profiles.length);
+
+// a site answering 429 with a Vercel challenge script must be reported as blocked, not captured
+const wall = http.createServer((q, r) => {
+  r.writeHead(429, { 'content-type': 'text/html' });
+  r.end('<title>Vercel Security Checkpoint</title><script src="/.well-known/vercel/security/static/challenge.v2.min.js"></script>');
+});
+await new Promise((r) => wall.listen(0, '127.0.0.1', r));
+const blockedOut = path.join(here, '_out', 'fixture-blocked');
+const blockedRun = await capture([`http://127.0.0.1:${wall.address().port}/`, '--out', blockedOut, '--profiles', 'desktop']);
+wall.close();
+const blockedSummary = readJson(path.join(blockedOut, 'summary.json'), {});
+check('HTTP 429 + challenge site is reported as blocked (summary.json + report.md), nothing captured', blockedRun.blocked && blockedSummary.blocked === true && /429/.test(blockedSummary.reason) && /BLOCKED/.test(fs.readFileSync(path.join(blockedOut, 'report.md'), 'utf8')));
 
 const failed = results.filter((r) => !r.ok);
 console.log(`\n${results.length - failed.length}/${results.length} checks passed${failed.length ? `; FAILED: ${failed.map((f) => f.name).join('; ')}` : ''}`);

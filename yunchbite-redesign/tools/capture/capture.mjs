@@ -37,7 +37,7 @@ const HELP = `Usage: node capture/capture.mjs <url> [options]
 `;
 
 /** Share of the profile budget a pass may use, so one heavy pass cannot starve the others. */
-const PASS_SHARE = { probe: 0.15, scroll: 0.35, frames: 0.15, steps: 0.2, hover: 0.2, cursor: 0.2, transition: 0.2 };
+const PASS_SHARE = { probe: 0.15, scroll: 0.35, frames: 0.15, steps: 0.2, hover: 0.3, cursor: 0.2, transition: 0.2 };
 const PASS_ORDER = ['probe', 'scroll', 'frames', 'steps', 'hover', 'cursor', 'transition'];
 const RUNNERS = { probe: runProbe, scroll: runScroll, frames: runFrames, steps: runSteps, hover: runHover, cursor: runCursor, transition: runTransition };
 const PROFILES = { desktop: DESKTOP, mobile: MOBILE };

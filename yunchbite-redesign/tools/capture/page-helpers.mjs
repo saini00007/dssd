@@ -37,6 +37,15 @@ function helpers() {
     return s ? s.scrollHeight : Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0);
   };
 
+  /** Jump to the top without animation (library-aware); used only for passes that are not recording motion. */
+  cap.toTop = () => {
+    const l = window.lenis;
+    if (l && typeof l.scrollTo === 'function') l.scrollTo(0, { immediate: true });
+    else window.scrollTo(0, 0);
+    const s = cap.scrollEl();
+    if (s) s.scrollTop = 0;
+  };
+
   const skipTags = new Set(['SCRIPT', 'STYLE', 'LINK', 'TEMPLATE', 'NOSCRIPT', 'META']);
   const visibleKids = (root) =>
     [...root.children].filter((el) => {
@@ -54,10 +63,11 @@ function helpers() {
   cap.landmarks = () => {
     let root = document.querySelector('main') || document.body;
     let kids = visibleKids(root);
-    for (let i = 0; i < 3 && kids.length <= 2 && kids.length > 0; i++) {
+    // descend through wrapper elements (#root > div.app > sections) until a level with several sections
+    for (let i = 0; i < 5 && kids.length > 0 && kids.length < 3; i++) {
       const big = kids.reduce((a, b) => (b.getBoundingClientRect().height > a.getBoundingClientRect().height ? b : a));
       const nk = visibleKids(big);
-      if (nk.length < 3) break;
+      if (nk.length === 0 || (kids.length === 2 && nk.length < 3)) break;
       kids = nk;
     }
     if (root !== document.body) {

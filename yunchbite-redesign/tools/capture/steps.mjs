@@ -90,7 +90,7 @@ export async function runSteps(run) {
     }
 
     // Full-page screenshot after everything has been scrolled through (lazy content/reveals done).
-    await page.evaluate(() => (window.lenis ? window.lenis.scrollTo(0, { immediate: true }) : window.scrollTo(0, 0)));
+    await page.evaluate(() => window.__cap.toTop());
     await sleep(800);
     const final = await scroller.state();
     const height = Math.min(final.h, opts.fullPageCap);

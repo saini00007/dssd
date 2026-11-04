@@ -175,7 +175,7 @@ export async function runCursor(run) {
     log('cursor', followers.length ? `custom cursor: ${followers.map((f) => f.selector).join(', ')}` : 'no pointer-following element found');
 
     // ---- 2. mouse-move parallax in the first viewport
-    await page.evaluate(() => (window.lenis ? window.lenis.scrollTo(0, { immediate: true }) : window.scrollTo(0, 0)));
+    await page.evaluate(() => window.__cap.toTop());
     await sleep(500);
     await page.evaluate(moversInPage, true);
     const pinfo = await page.evaluate(() => ({ sel: window.__cap.moverSel, parent: window.__cap.moverParent }));
