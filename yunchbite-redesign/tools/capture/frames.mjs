@@ -84,12 +84,15 @@ export async function runFrames(run) {
     return `t ${t.toFixed(2)}s | y ${s ? s.scrollY : '?'}`;
   };
 
-  log('frames', `contact sheets ${cols}x${rows} @ ${opts.sheetFps}fps`);
-  const sheets = await contactSheets(video, { outDir: sheetDir, fps: opts.sheetFps, cols, rows, tileW, label: stamp });
+  // keep sheet counts readable on long recordings: lower the sampling rate so at most ~24 sheets are produced
+  const duration = await ffprobeDuration(video);
+  const sheetFps = Math.max(1, Math.min(opts.sheetFps, Math.floor((24 * cols * rows) / Math.max(duration, 1))));
+  log('frames', `contact sheets ${cols}x${rows} @ ${sheetFps}fps`);
+  const sheets = await contactSheets(video, { outDir: sheetDir, fps: sheetFps, cols, rows, tileW, label: stamp });
 
   // Raw frames at the sheet rate (git-ignored); sized for reading, not archival.
   const rawW = Math.min(960, vp.width);
-  const rawRun = await ffmpeg(['-i', video, '-vf', `fps=${opts.sheetFps},scale=${rawW}:-2`, '-q:v', '4', path.join(rawDir, 'f_%05d.jpg')]);
+  const rawRun = await ffmpeg(['-i', video, '-vf', `fps=${sheetFps},scale=${rawW}:-2`, '-q:v', '4', path.join(rawDir, 'f_%05d.jpg')]);
   if (rawRun.code !== 0) throw new Error('raw frame extraction failed');
 
   // Scene-change keyframes; the gap term stops continuous motion (video, WebGL) from flooding the output.
@@ -116,7 +119,7 @@ export async function runFrames(run) {
   const rawFiles = fs.readdirSync(rawDir).filter((f) => f.endsWith('.jpg')).sort();
   const index = {
     video: path.relative(dir, video),
-    sheetFps: opts.sheetFps,
+    sheetFps,
     sceneThreshold: opts.sceneThreshold,
     sheets: sheets.map((sh) => ({
       file: `frames/sheets/${sh.file}`,
@@ -127,7 +130,7 @@ export async function runFrames(run) {
     })),
     keyframes,
     raw: rawFiles.map((f, i) => {
-      const t = i / opts.sheetFps;
+      const t = i / sheetFps;
       return { file: `frames/raw/${f}`, t: +t.toFixed(2), scrollY: nearestSample(samples, t)?.scrollY ?? null };
     }),
   };

@@ -21,8 +21,12 @@ export async function dismissConsent(page) {
         return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none';
       };
       const all = [...document.querySelectorAll('button, a, [role=button], input[type=button], input[type=submit]')].filter(visible);
-      const hits = all.filter((el) => re.test((el.innerText || el.value || '').replace(/\s+/g, ' ').trim()));
+      const text = (el) => (el.innerText || el.value || '').replace(/\s+/g, ' ').trim();
       const inBanner = (el) => el.closest('[id*=cookie i],[class*=cookie i],[id*=consent i],[class*=consent i],[id*=cmp i],[class*=cmp i],[id*=onetrust i],[class*=gdpr i],[id*=gdpr i],[role=dialog]');
+      // Inside a cookie/consent container be lenient ("Cool, got it", "Sounds good"); elsewhere require an exact accept phrase.
+      const positive = /\b(accept|agree|allow|got it|ok|okay|sounds good|continue|understood|yes|fine)\b/i;
+      const negative = /decline|reject|deny|refuse|necessary only|essential only|settings|manage|customi[sz]e|preferences|learn more|policy|no,? thanks/i;
+      const hits = all.filter((el) => (inBanner(el) ? positive.test(text(el)) && !negative.test(text(el)) && text(el).length < 40 : re.test(text(el))));
       const pick = hits.find(inBanner) || (hits.length === 1 ? hits[0] : null);
       if (!pick) return null;
       pick.setAttribute('data-cap-consent', '1');

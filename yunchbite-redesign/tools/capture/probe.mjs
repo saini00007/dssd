@@ -379,7 +379,7 @@ export async function runProbe(run) {
     const libraries = {};
     for (const [name, info] of Object.entries(result.libs)) libraries[name] = { detected: true, ...info, via: ['global', ...(fp[name] ? [fp[name].via] : [])] };
     for (const [name, f] of Object.entries(fp)) {
-      if (libraries[name]) continue;
+      if (libraries[name] || (name === 'ScrollTrigger' && libraries.gsap)) continue; // ScrollTrigger is part of the gsap entry
       libraries[name] = { detected: true, via: [f.via], evidence: f.evidence, note: f.via.includes('bundle') ? 'detected via bundle fingerprint (no global) - runtime details unavailable' : 'detected via network request URL only' };
     }
 

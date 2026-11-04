@@ -42,10 +42,9 @@ export async function runScroll(run) {
     phaseEnd();
     const scroller = await s.initScroller();
     const vh = (await scroller.state()).vh;
-    const hardStop = Math.min(deadline, Date.now() + opts.scrollMax * 1000);
 
     /** Wheel steadily in `dir` until `done(state)` returns a reason, scroll stalls, or time runs out. */
-    const drive = async (dir, done) => {
+    const drive = async (dir, done, hardStop) => {
       let lastTick = Date.now();
       let lastSample = 0;
       let lastY = latest.y;
@@ -54,7 +53,7 @@ export async function runScroll(run) {
       let first = true;
       while (Date.now() < hardStop) {
         const now = Date.now();
-        const px = Math.min(150, (opts.scrollSpeed * (now - lastTick)) / 1000);
+        const px = Math.min(450, (opts.scrollSpeed * (now - lastTick)) / 1000);
         lastTick = now;
         if (px > 0) await scroller.wheel(dir * px, first);
         first = false;
@@ -81,7 +80,7 @@ export async function runScroll(run) {
 
     log('scroll', `scrolling down at ~${opts.scrollSpeed}px/s (viewport ${vh}px)`);
     phaseStart('scroll-down');
-    endReason.down = await drive(1, () => null);
+    endReason.down = await drive(1, () => null, Math.min(deadline, Date.now() + opts.scrollMax * 1000));
     phaseEnd();
     const bottomY = latest.y;
 
@@ -95,7 +94,7 @@ export async function runScroll(run) {
     const upBy = Math.min(6000, Math.max(vh * 2, latest.h * 0.4));
     log('scroll', `scrolling back up ~${Math.round(upBy)}px`);
     phaseStart('scroll-up');
-    endReason.up = await drive(-1, (st) => (st.y <= Math.max(0, bottomY - upBy) ? 'target reached' : null));
+    endReason.up = await drive(-1, (st) => (st.y <= Math.max(0, bottomY - upBy) ? 'target reached' : null), Date.now() + Math.min(30000, opts.scrollMax * 333));
     phaseEnd();
     for (let i = 0; i < 3; i++) {
       await sleep(250);

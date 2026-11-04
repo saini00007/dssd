@@ -60,7 +60,7 @@ export async function runSteps(run) {
       const section = await page.evaluate(() => window.__cap.inView());
       const index = steps.length;
       const file = `steps/step-${pad(index)}-y${pad(st.y, 4)}.jpg`;
-      await page.screenshot({ path: path.join(dir, file), type: 'jpeg', quality: 85, scale: 'css' });
+      await page.screenshot({ path: path.join(dir, file), type: 'jpeg', quality: 85, scale: 'css', timeout: 40000 });
       steps.push({ index, file, scrollY: st.y, docHeight: st.h, viewportHeight: st.vh, section, settled: settled.how, settleMs: settled.ms });
       return st;
     };
@@ -68,13 +68,21 @@ export async function runSteps(run) {
     let st = await scroller.state();
     const stepPx = Math.round(st.vh * opts.stepFraction);
     log('steps', `stepping ${stepPx}px (${opts.stepFraction} viewport)`);
-    await shot(await settle(page, opts.settleTimeout));
+    await shot(await settle(page, opts.settleTimeout)).catch((e) => log('steps', `first screenshot failed: ${e.message.split('\n')[0]}`));
     let stuck = 0;
-    while (steps.length < opts.maxSteps && Date.now() < deadline) {
+    let failures = 0;
+    while (steps.length < opts.maxSteps && Date.now() < deadline && failures < 3) {
       const before = (await scroller.state()).y;
       await scroller.flick(stepPx, { parts: 5, ms: 200 });
       const how = await settle(page, opts.settleTimeout);
-      st = await shot(how);
+      try {
+        st = await shot(how);
+        failures = 0;
+      } catch (e) {
+        failures++;
+        log('steps', `screenshot failed at y=${(await scroller.state()).y}: ${e.message.split('\n')[0]}`);
+        continue;
+      }
       if (st.y === before) {
         if (++stuck >= 2) break;
       } else stuck = 0;
@@ -96,7 +104,7 @@ export async function runSteps(run) {
       'Full-page capture resizes the viewport, so vh-based layouts, pinned (ScrollTrigger) sections, smooth-scroll wrappers and scroll-linked reveals can look different from the real scrolled page' +
       (scroller.info.mode === 'element' ? '; this page scrolls an inner container, so the full-page image only shows the outer document' : '');
 
-    writeJson(path.join(dir, 'steps', 'steps.json'), { stepPx, scroller: scroller.info, steps, fullPage });
+    writeJson(path.join(dir, 'steps', 'steps.json'), { stepPx, scroller: scroller.info, steps, fullPage, abortedAfterScreenshotFailures: failures >= 3 });
     log('steps', `${steps.length} step screenshots, full page ${fullPage.file ? 'ok' : 'failed'}`);
     return { steps: steps.length, fullPage: fullPage.file };
   } finally {

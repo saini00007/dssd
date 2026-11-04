@@ -36,6 +36,8 @@ const HELP = `Usage: node capture/capture.mjs <url> [options]
   -h, --help
 `;
 
+/** Share of the profile budget a pass may use, so one heavy pass cannot starve the others. */
+const PASS_SHARE = { probe: 0.15, scroll: 0.35, frames: 0.15, steps: 0.2, hover: 0.2, cursor: 0.2, transition: 0.2 };
 const PASS_ORDER = ['probe', 'scroll', 'frames', 'steps', 'hover', 'cursor', 'transition'];
 const RUNNERS = { probe: runProbe, scroll: runScroll, frames: runFrames, steps: runSteps, hover: runHover, cursor: runCursor, transition: runTransition };
 const PROFILES = { desktop: DESKTOP, mobile: MOBILE };
@@ -109,7 +111,8 @@ export async function capture(argv) {
       const profile = PROFILES[name];
       const dir = path.join(cli.out, name);
       ensureDir(dir);
-      const run = { browser, profile, url: cli.url, dir, opts: cli.opts, deadline: Date.now() + cli.opts.budget * 1000, shared: {} };
+      const run = { browser, profile, url: cli.url, dir, opts: cli.opts, deadline: 0, shared: {} };
+      const profileDeadline = Date.now() + cli.opts.budget * 1000;
       const { plan, skipped } = planPasses(cli.explicit, profile);
       const status = { ...skipped };
       const profileStart = Date.now();
@@ -119,12 +122,13 @@ export async function capture(argv) {
           status[pass] = { status: 'skipped', reason: 'site is blocking automated access' };
           continue;
         }
-        if (Date.now() > run.deadline) {
+        if (Date.now() > profileDeadline) {
           status[pass] = { status: 'skipped', reason: 'time budget exhausted' };
           log(pass, 'skipped: time budget exhausted');
           continue;
         }
         const t0 = Date.now();
+        run.deadline = Math.min(profileDeadline, t0 + PASS_SHARE[pass] * cli.opts.budget * 1000);
         try {
           log(pass, 'start');
           const detail = await RUNNERS[pass](run);

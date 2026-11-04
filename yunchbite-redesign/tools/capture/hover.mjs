@@ -260,7 +260,12 @@ export async function runHover(run) {
     const index = [];
     const skipped = [];
     const vp = run.profile.viewport;
+    let failures = 0;
     for (const cand of picked) {
+      if (failures >= 3) {
+        skipped.push({ selector: cand.selector, reason: 'page too slow to screenshot (3 consecutive failures)' });
+        continue;
+      }
       if (Date.now() > deadline) {
         skipped.push({ selector: cand.selector, reason: 'time budget exhausted' });
         continue;
@@ -292,7 +297,9 @@ export async function runHover(run) {
           continue;
         }
         index.push(await hoverOne({ page, handle, cand, vp, run, outDir, n: index.length + 1 }));
+        failures = 0;
       } catch (e) {
+        if (/screenshot/i.test(e.message)) failures++;
         skipped.push({ selector: cand.selector, reason: `error: ${e.message.split('\n')[0]}` });
       } finally {
         await handle.dispose().catch(() => {});
@@ -336,7 +343,7 @@ async function hoverOne({ page, handle, cand, vp, run, outDir, n }) {
   };
   clip.width = Math.min(vp.width - clip.x, Math.ceil(rect.width + pad_ * 2));
   clip.height = Math.min(vp.height - clip.y, Math.ceil(rect.height + pad_ * 2));
-  const grab = (file) => page.screenshot({ path: path.join(dir, file), clip, type: 'jpeg', quality: 85, scale: 'css' });
+  const grab = (file) => page.screenshot({ path: path.join(dir, file), clip, type: 'jpeg', quality: 85, scale: 'css', timeout: 20000 });
 
   const frames = [];
   await grab('f0-before.jpg');
