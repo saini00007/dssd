@@ -717,7 +717,7 @@ export const products: Product[] = [
     "storage": "Store in a cool, hygienic and dry place away from direct sunlight. Once opened, store in an airtight container.",
     "shelfLife": "12 Months from the date of manufacturing.",
     "origin": "India",
-    "metaTitle": "Raw Makhana (Raw) | Yunch Bite",
+    "metaTitle": "Raw Makhana | Yunch Bite",
     "metaDescription": "Hand-graded, jumbo-sized raw fox nuts sourced directly from the fresh water ponds of Bihar. Unprocessed and naturally rich in plant protein, calcium, and antioxidants."
   },
   {

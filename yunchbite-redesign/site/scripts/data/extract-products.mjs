@@ -101,7 +101,7 @@ const products = SLUGS.map((slug) => {
   const name = FLAVOUR_NAME[fk];
   const fmtMeta = { zipper: "Zipper Pouch", pillow: "Pillow Pouch", jar: "Jar", raw: "Raw" }[format];
   const lead = category === "makhana" && !name.includes("Makhana") ? `${name} Makhana` : name;
-  const metaTitle = `${lead} (${fmtMeta}) | Yunch Bite`;
+  const metaTitle = format === "raw" ? `${lead} | Yunch Bite` : `${lead} (${fmtMeta}) | Yunch Bite`;
   return {
     slug, name, flavourKey: fk, category, format, formatLabel, sizes, rating,
     bestseller: BESTSELLERS.has(slug),
