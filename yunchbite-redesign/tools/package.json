@@ -1,0 +1,18 @@
+{
+  "name": "yunchbite-research-tools",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Browser tooling for the Yunch Bite redesign: brand asset harvesting and motion/interaction capture of reference sites.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "fixtures": "node fixtures/serve.mjs",
+    "capture": "node capture/capture.mjs",
+    "harvest": "node harvest/harvest.mjs"
+  },
+  "devDependencies": {
+    "gsap": "3.15.1",
+    "image-size": "2.0.4",
+    "lenis": "1.3.27"
+  }
+}

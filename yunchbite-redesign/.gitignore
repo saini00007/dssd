@@ -1,0 +1,9 @@
+# tooling
+tools/node_modules/
+# raw captures are large; contact sheets, reports and JSON are committed instead
+research/references/**/video/*.webm
+research/references/**/video/*.mp4
+research/references/**/frames/raw/
+research/references/**/hover/**/*.webm
+research/_runs/
+tools/**/_out/
