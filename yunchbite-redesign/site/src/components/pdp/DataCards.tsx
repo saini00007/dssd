@@ -1,7 +1,6 @@
 "use client";
 import { useId, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
-import { whenInView } from "@/components/motion/entrance";
 import { Container } from "@/components/ui/Container";
 import { TypeIn } from "@/components/motion/TypeIn";
 import { shapeSrc } from "@/lib/media";
@@ -94,22 +93,26 @@ export function DataCards({ heading, tabLabels, servingLabel, factLabels, ingred
           gsap.set(c, { x: 0, y: 90, rotate: (i - 1) * 16, scale: 0.9, opacity: 0, transformOrigin: "50% 90%" });
           c.setAttribute("data-yb-ready", "");
         });
-        let st: gsap.core.Timeline | null = null;
-        const stop = whenInView(stack, "top 78%", () => {
-          entered.current = true;
-          st = gsap.timeline();
-          cards.forEach((c, i) => {
-            const f = fan(rel(i, activeRef.current), wide.current);
-            st!.to(c, { ...f, opacity: 1, duration: dur.roast, ease: ease.roast }, i * 0.1);
-          });
-          if (activeRef.current === 1) {
-            const nut = el.querySelector<HTMLElement>('[data-card="nutrition"]');
-            if (nut) gsap.delayedCall(0.5, () => playNutrition(nut));
-          }
+        const st = gsap.timeline({
+          scrollTrigger: {
+            trigger: stack,
+            start: "top 78%",
+            once: true,
+            onEnter: () => {
+              entered.current = true;
+              if (activeRef.current === 1) {
+                const nut = el.querySelector<HTMLElement>('[data-card="nutrition"]');
+                if (nut) gsap.delayedCall(0.5, () => playNutrition(nut));
+              }
+            },
+          },
+        });
+        cards.forEach((c, i) => {
+          const f = fan(rel(i, activeRef.current), wide.current);
+          st.to(c, { ...f, opacity: 1, duration: dur.roast, ease: ease.roast }, i * 0.1);
         });
         return () => {
-          stop();
-          st?.kill();
+          st.kill();
           gsap.set(cards, { clearProps: "transform,opacity" });
         };
       });

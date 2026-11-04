@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
-import { deferIn } from "@/components/motion/entrance";
 import { TypeIn } from "@/components/motion/TypeIn";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { mq } from "@/lib/tokens";
@@ -37,10 +36,9 @@ export function InsetOpener({ title, eyebrow, subtitle, image, as = "h1", classN
       const img = el.querySelector<HTMLElement>("[data-img]");
       if (!media || !head || !img) return;
       const mm = gsap.matchMedia();
-      mm.add(`${mq.motion} and (min-width: 768px)`, (_c, safe) => build(FROM_DESKTOP, safe));
-      mm.add(`${mq.motion} and (max-width: 767px)`, (_c, safe) => build(FROM_MOBILE, safe));
-      function build(from: string, safe: gsap.ContextSafeFunc | undefined) {
-        return deferIn(safe, () => {
+      mm.add(`${mq.motion} and (min-width: 768px)`, () => build(FROM_DESKTOP));
+      mm.add(`${mq.motion} and (max-width: 767px)`, () => build(FROM_MOBILE));
+      function build(from: string) {
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: 0.5 },
@@ -48,7 +46,6 @@ export function InsetOpener({ title, eyebrow, subtitle, image, as = "h1", classN
         tl.fromTo(media, { clipPath: from }, { clipPath: TO }, 0)
           .fromTo(img, { scale: 1.25 }, { scale: 1 }, 0)
           .to(head, { yPercent: -18, opacity: 0, scale: 0.94 }, 0.35);
-        });
       }
     },
     { scope: root },
@@ -69,7 +66,7 @@ export function InsetOpener({ title, eyebrow, subtitle, image, as = "h1", classN
           data-media=""
           className="relative mx-auto mt-8 aspect-[16/9] w-[calc(100%-2*var(--gutter))] overflow-hidden rounded-card motion-safe:absolute motion-safe:inset-0 motion-safe:mt-0 motion-safe:aspect-auto motion-safe:w-full motion-safe:rounded-none motion-safe:[clip-path:inset(46%_24%_6%_24%_round_28px)] motion-safe:max-md:[clip-path:inset(40%_7%_8%_7%_round_24px)]"
         >
-          <div data-img="" className="absolute inset-0 motion-safe:[transform:scale(1.25)]">
+          <div data-img="" className="absolute inset-0">
             <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
           </div>
         </div>

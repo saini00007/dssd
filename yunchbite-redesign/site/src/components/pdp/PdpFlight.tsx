@@ -1,7 +1,6 @@
 "use client";
 import { useRef, type ReactNode } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
-import { defer, entranceOn } from "@/components/motion/entrance";
 import { popElement } from "@/components/motion/pop";
 import { whenLoaderDone } from "@/components/motion/loader-gate";
 import { dur, ease, mq } from "@/lib/tokens";
@@ -51,12 +50,8 @@ export function PdpFlight({ children }: { children: ReactNode }) {
       const mm = gsap.matchMedia();
       mm.add(mq.reduce, () => marks.forEach((m) => m.setAttribute("data-yb-ready", "")));
 
-      // ---- entrance (loader / client navigation only: on a hard load the hero is final in the server HTML) -------------
+      // ---- entrance --------------------------------------------------------------------------------------------
       mm.add(mq.motion, () => {
-        if (!entranceOn()) {
-          marks.forEach((m) => m.setAttribute("data-yb-ready", ""));
-          return;
-        }
         const viaTransition = viewTransitionActive();
         const tl = gsap.timeline({ paused: true });
         if (disc) {
@@ -94,92 +89,65 @@ export function PdpFlight({ children }: { children: ReactNode }) {
         };
       });
 
-      // ---- flight: desktop (built after first paint; measurements are cached, the scroll handler does pure math) -------
+      // ---- flight: desktop ---------------------------------------------------------------------------------------
       mm.add(`${mq.motion} and (min-width: 1024px)`, () => {
         const land = q("[data-land]");
         if (!land) return;
-        let st: ScrollTrigger | null = null;
-        const off = defer(() => {
-          el.dataset.flight = "on";
-          gsap.set(pack, { transformOrigin: "50% 50%" });
+        el.dataset.flight = "on";
+        gsap.set(pack, { transformOrigin: "50% 50%" });
 
-          // Cached geometry, in document / stage-relative coordinates (re-measured on every ScrollTrigger refresh).
-          let m = { H: 0, run: 1, heroTop: 0, slotX: 0, slotRelY: 0, titleRelY: 0, landX: 0, landY: 0, scaleLand: 1, w: 0 };
-          const measure = () => {
-            const s = window.scrollY;
-            const sr = slot.getBoundingClientRect();
-            const lr = land.getBoundingClientRect();
-            const hr = stage.getBoundingClientRect();
-            const hero0 = hero.getBoundingClientRect();
-            const tr = title?.getBoundingClientRect();
-            const H = window.innerHeight;
-            const sLand = Math.min(Math.max(sr.height > 0 ? lr.height / sr.height : 1, 0.2), 1.6);
-            const sLandW = sr.width > 0 ? lr.width / sr.width : 1;
-            m = {
-              H,
-              run: Math.max(hero.offsetHeight - stage.offsetHeight, 1),
-              heroTop: hero0.top + s,
-              slotX: sr.left + sr.width / 2,
-              slotRelY: sr.top + sr.height / 2 - hr.top,
-              titleRelY: tr ? tr.top + tr.height / 2 - hr.top : H * 0.28,
-              landX: lr.left + lr.width / 2,
-              landY: lr.top + lr.height / 2 + s,
-              scaleLand: Math.min(sLand, sLandW),
-              w: el.clientWidth,
-            };
-          };
+        const update = () => {
+          const sr = slot.getBoundingClientRect();
+          const lr = land.getBoundingClientRect();
+          const hr = stage.getBoundingClientRect();
+          const H = window.innerHeight;
+          const s = window.scrollY;
+          const slotC = { x: sr.left + sr.width / 2, y: sr.top + sr.height / 2 };
+          const landC = { x: lr.left + lr.width / 2, y: lr.top + lr.height / 2 };
+          const run = Math.max(hero.offsetHeight - stage.offsetHeight, 1);
+          const sLand = Math.min(Math.max(sr.height > 0 ? lr.height / sr.height : 1, 0.2), 1.6);
+          const sLandW = sr.width > 0 ? lr.width / sr.width : 1;
+          const scaleLand = Math.min(sLand, sLandW);
 
-          const update = (s: number) => {
-            const { H, run, heroTop, slotX, slotRelY, titleRelY, landX, landY, scaleLand, w } = m;
-            // the sticky stage's top edge in the viewport at scroll `s`
-            const stageTop = Math.min(Math.max(heroTop - s, 0), heroTop + run - s);
-            const slotY = stageTop + slotRelY;
-            const lY = landY - s;
+          // Phase A: stage pinned. Pack rises across the title and tilts.
+          const tr = title?.getBoundingClientRect();
+          const titleRelY = tr ? tr.top + tr.height / 2 - hr.top : H * 0.28;
+          const p1 = { x: slotC.x + (el.clientWidth * 0.1), y: hr.top + titleRelY + H * 0.1 };
+          const a = clamp01(s / run);
+          const eA = gsap.parseEase("power2.inOut")(a);
 
-            // Phase A: stage pinned. Pack rises across the title and tilts.
-            const p1 = { x: slotX + w * 0.1, y: stageTop + titleRelY + H * 0.1 };
-            const a = clamp01(s / run);
-            const eA = gsap.parseEase("power2.inOut")(a);
+          let x: number, y: number, rot: number, sc: number;
+          if (s <= run) {
+            x = lerp(slotC.x, p1.x, eA);
+            y = lerp(slotC.y, p1.y, eA);
+            rot = lerp(0, -16, eA);
+            sc = lerp(1, 0.92, eA);
+          } else {
+            // Phase B: glide from the title to the landing slot (which scrolls up to meet it).
+            const sEnd = landC.y + s - H * 0.52; // scroll position at which the slot sits at 52% of the viewport
+            const b = clamp01((s - run) / Math.max(sEnd - run, H * 0.5));
+            const eB = gsap.parseEase("power3.inOut")(b);
+            // fixed start point = where phase A ended (stage still pinned at that instant: stage top 0)
+            const startY = titleRelY + H * 0.1;
+            const startX = slotC.x + el.clientWidth * 0.1;
+            x = lerp(startX, landC.x, eB);
+            y = lerp(startY, landC.y, eB);
+            rot = lerp(-16, 0, gsap.parseEase("back.out(2.2)")(b));
+            sc = lerp(0.92, scaleLand, eB);
+          }
+          gsap.set(pack, { x: x - slotC.x, y: y - slotC.y, rotation: rot, scale: sc });
+        };
 
-            let x: number, y: number, rot: number, sc: number;
-            if (s <= run) {
-              x = lerp(slotX, p1.x, eA);
-              y = lerp(slotY, p1.y, eA);
-              rot = lerp(0, -16, eA);
-              sc = lerp(1, 0.92, eA);
-            } else {
-              // Phase B: glide from the title to the landing slot (which scrolls up to meet it).
-              const sEnd = landY - H * 0.52; // scroll position at which the slot sits at 52% of the viewport
-              const b = clamp01((s - run) / Math.max(sEnd - run, H * 0.5));
-              const eB = gsap.parseEase("power3.inOut")(b);
-              // fixed start point = where phase A ended (stage still pinned at that instant: stage top 0)
-              const startY = titleRelY + H * 0.1;
-              const startX = slotX + w * 0.1;
-              x = lerp(startX, landX, eB);
-              y = lerp(startY, lY, eB);
-              rot = lerp(-16, 0, gsap.parseEase("back.out(2.2)")(b));
-              sc = lerp(0.92, scaleLand, eB);
-            }
-            setPack(x - slotX, y - slotY, rot, sc);
-          };
-          const setPack = (x: number, y: number, rotation: number, scale: number) => gsap.set(pack, { x, y, rotation, scale });
-
-          measure();
-          st = ScrollTrigger.create({
-            trigger: el,
-            start: "top bottom",
-            end: "bottom top",
-            onUpdate: (self) => update(self.scroll()),
-            onRefresh: (self) => {
-              measure();
-              update(self.scroll());
-            },
-          });
-          update(window.scrollY);
+        const st = ScrollTrigger.create({
+          trigger: el,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: update,
+          onRefresh: update,
         });
+        update();
         return () => {
-          off();
-          st?.kill();
+          st.kill();
           delete el.dataset.flight;
           gsap.set(pack, { clearProps: "transform,opacity" });
         };
@@ -187,18 +155,14 @@ export function PdpFlight({ children }: { children: ReactNode }) {
 
       // ---- tablet / phone: a gentle tilt as the hero scrolls away -------------------------------------------------
       mm.add(`${mq.motion} and (max-width: 1023px)`, () => {
-        let tween: gsap.core.Tween | null = null;
-        const off = defer(() => {
-          tween = gsap.to(pack, {
-            y: -50,
-            rotation: -7,
-            ease: "none",
-            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 0.5 },
-          });
+        const tween = gsap.to(pack, {
+          y: -50,
+          rotation: -7,
+          ease: "none",
+          scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 0.5 },
         });
         return () => {
-          off();
-          tween?.revert();
+          tween.revert();
         };
       });
     },

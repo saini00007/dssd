@@ -2,7 +2,6 @@
 import { useRef, type CSSProperties } from "react";
 import Image from "next/image";
 import { gsap, useGSAP } from "@/components/motion/gsap";
-import { deferIn } from "@/components/motion/entrance";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { TypeIn } from "@/components/motion/TypeIn";
@@ -67,8 +66,7 @@ export function ProcessPath({ steps, title, eyebrow, tone = "soft", id, classNam
       const st = stage.current;
       if (!el || !st) return;
       const mm = gsap.matchMedia();
-      mm.add(`(min-width: 768px) and ${mq.motion}`, (_c, safe) => {
-        const off = deferIn(safe, () => {
+      mm.add(`(min-width: 768px) and ${mq.motion}`, () => {
         const cards = gsap.utils.toArray<HTMLElement>("[data-step]", el);
         const walker = el.querySelector<HTMLElement>("[data-walker]");
         const bob = el.querySelector<HTMLElement>("[data-bob]");
@@ -129,8 +127,6 @@ export function ProcessPath({ steps, title, eyebrow, tone = "soft", id, classNam
           tl.kill();
           gsap.set([...cards, walker, bob].filter(Boolean) as HTMLElement[], { clearProps: "all" });
         };
-        });
-        return () => off();
       });
     },
     { scope: root, dependencies: [count] },

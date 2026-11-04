@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
-import { deferIn } from "@/components/motion/entrance";
 import { photos } from "@/data/assets";
 import { mq } from "@/lib/tokens";
 import { cn } from "@/lib/cn";
@@ -37,8 +36,7 @@ export function PhotoStack({ steps }: PhotoStackProps) {
       const el = root.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add(`${mq.motion} and (min-width: 768px)`, (_c, safe) => {
-        const off = deferIn(safe, () => {
+      mm.add(`${mq.motion} and (min-width: 768px)`, () => {
         const section = el.closest("[data-stack-section]") ?? el;
         const cards = el.querySelectorAll<HTMLElement>("[data-card]");
         const tl = gsap.timeline({ defaults: { ease: "power2.inOut" }, scrollTrigger: { trigger: section, start: "top top", end: "bottom bottom", scrub: 0.6 } });
@@ -47,8 +45,6 @@ export function PhotoStack({ steps }: PhotoStackProps) {
           tl.fromTo(c, { xPercent: sx * 100, yPercent: sy * 100, rotation: (i % 2 ? 1 : -1) * 12, scale: 1.04 }, { xPercent: 0, yPercent: 0, rotation: PILE[i], scale: 1, duration: 0.7 }, i * 0.04);
         });
         tl.to({}, { duration: 0.3 });
-        });
-        return () => off();
       });
     },
     { scope: root },

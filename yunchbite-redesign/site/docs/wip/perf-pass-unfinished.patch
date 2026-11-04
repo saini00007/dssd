@@ -1,0 +1,2440 @@
+diff --git a/yunchbite-redesign/site/ARCHITECTURE.md b/yunchbite-redesign/site/ARCHITECTURE.md
+index 0449fa8..0e9b54e 100644
+--- a/yunchbite-redesign/site/ARCHITECTURE.md
++++ b/yunchbite-redesign/site/ARCHITECTURE.md
+@@ -44,6 +44,7 @@ Every contributor (human or agent) follows this file. The design source of truth
+    - Pinned sections ≤2.5 viewports, at most 2 per page.
+    - No autoplay video above the fold.
+    - Animate `transform` and `opacity` only (clip-path is OK for reveals).
++   - LCP-safe motion: a hard load paints complete content (no entrance on the first viewport); entrances play under the home loader and after client navigations; below-the-fold setup is lazy (IntersectionObserver reveals, idle-built ScrollTriggers). See `docs/FOUNDATION-API.md`, "Performance policy".
+ 
+ ## Folder structure
+ 
+diff --git a/yunchbite-redesign/site/docs/FOUNDATION-API.md b/yunchbite-redesign/site/docs/FOUNDATION-API.md
+index bd5ea3d..97015cd 100644
+--- a/yunchbite-redesign/site/docs/FOUNDATION-API.md
++++ b/yunchbite-redesign/site/docs/FOUNDATION-API.md
+@@ -20,9 +20,9 @@ These are built, tested, and used in `/lab`. Read the source in `src/components/
+ |---|---|
+ | `gsap.ts` | `{ gsap, ScrollTrigger, SplitText, useGSAP }` registered once |
+ | `<SmoothScroll>`, `useLenis()` | already in the root layout |
+-| `<TypeIn as? text trigger?="scroll"\|"load" delay? className? style? id?>` | text always in SSR; `trigger="load"` waits for the home loader; reduced motion shows the text as is |
+-| `<Reveal as? y?=40 x? delay? stagger? duration? start?="top 80%">` | `stagger` reveals direct children one by one |
+-| `<Pop as? delay? from?=0.6 trigger?>`, `popElement(el,{from,delay,y})` | the "pop" |
++| `<TypeIn as? text trigger?="scroll"\|"load" lcp? delay? className? style? id?>` | text always in SSR; `trigger="load"` (implies `lcp`) is for the first-viewport title: visible as is on a hard load, types in under the home loader / after a client navigation. `"scroll"` splits lazily (IntersectionObserver, about a viewport ahead) and types in at the reveal line; reduced motion shows the text as is |
++| `<Reveal as? y?=40 x? delay? stagger? duration? start?="top 80%" lcp?>` | `stagger` reveals direct children one by one. IntersectionObserver based (no ScrollTrigger per element, no inline styles until it plays). `lcp` = the content is in the first viewport |
++| `<Pop as? delay? from?=0.6 trigger? lcp?>`, `popElement(el,{from,delay,y})` | the "pop" (`trigger="load"` implies `lcp`) |
+ | `<RingBurst ref color className?>`, `ref.current.burst()` | place inside a `relative` parent; it's 150% of the parent, centred |
+ | `<MagneticWrap strength?=0.28>` | fine pointer only |
+ | `useReducedMotion()`, `useFinePointer()`, `useIsTouch()`, `useMediaQuery(q, serverValue?)` | — |
+@@ -96,3 +96,14 @@ These are built, tested, and used in `/lab`. Read the source in `src/components/
+ ## Buddy poses available
+ 
+ Only `point` and `sit` exist. The others fall back: peek, walk, thumbs and pop → point; wave and confused → sit.
++
++## Performance policy (LCP-safe motion)
++
++- **Hard load = complete first paint.** Nothing in the first viewport is hidden or animated on a hard load (no loader, no client navigation yet). `globals.css` hides `[data-yb-anim]` only under `html[data-yb-softnav]` (set by `SmoothScroll` on the first client-side pathname change) and only until the effect marks the element ready. Under the home loader (`html[data-yb-loader]`) the page is painted as is underneath the opaque curtain; JS puts the hero in its start pose before the curtain leaves.
++- `data-yb-anim` values: `""` (below the fold: JS decides), `"children"`, `"lcp"` and `"lcp-children"` (first viewport by construction). `data-yb-ready="wait"` = JS is alive and the element waits for the reader (hidden, no failsafe timer).
++- Non-`lcp` elements on a hard load: `revealOnView` (in `motion/entrance.ts`) leaves anything already in the first viewport as painted and hides what is below the fold until it is reached. After a client navigation or under the loader it always holds the element until the reveal line.
++- **Idle setup.** ScrollTriggers (pins, scrubs, drifting shapes) are built through `defer()` / `deferIn(contextSafe, fn)` (`motion/entrance.ts`): after first paint (FCP), one job per idle task, then a single `ScrollTrigger.refresh()` (`scheduleRefresh`). ScrollTrigger is loaded lazily (`loadScrollTrigger()` in `motion/gsap.ts`; `ScrollTrigger` is a live binding, only touch it in deferred work). Lenis is loaded after first paint too.
++- When tweening many elements at once, call `warm(els)` (`motion/gsap.ts`) first: it reads every element's transform in one pass so GSAP does not force a style recalculation per element.
++- Scroll handlers must not read layout per event: measure on refresh/resize (see `PdpFlight`, `OccasionStrip`, `BuddyIntro`).
++- Images: only the LCP image gets `priority` (preload, fetchpriority high); other first-viewport images use `PackImage eager`.
++- The display font is a local, weight-800-pinned subset (`src/app/fonts/`, 74 KB instead of 129 KB).
+diff --git a/yunchbite-redesign/site/next.config.ts b/yunchbite-redesign/site/next.config.ts
+index 1b46499..86a361d 100644
+--- a/yunchbite-redesign/site/next.config.ts
++++ b/yunchbite-redesign/site/next.config.ts
+@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
+   partialPrefetching: true,
+   images: {
+     formats: ["image/avif", "image/webp"],
++    // Fewer candidate widths keep every <img srcset> (147 on the home page) short: the server HTML shrinks by about a
++    // third, and each image still gets a candidate within ~1.4x of what it needs.
++    deviceSizes: [640, 828, 1200, 1920],
++    imageSizes: [96, 192, 288, 384],
+   },
+   turbopack: {
+     rules: {
+diff --git a/yunchbite-redesign/site/src/app/articles/[slug]/page.tsx b/yunchbite-redesign/site/src/app/articles/[slug]/page.tsx
+index b844541..90af0f3 100644
+--- a/yunchbite-redesign/site/src/app/articles/[slug]/page.tsx
++++ b/yunchbite-redesign/site/src/app/articles/[slug]/page.tsx
+@@ -100,7 +100,7 @@ export default async function ArticlePage(props: PageProps<"/articles/[slug]">)
+             </nav>
+             <Pill tone="red" className="mt-8">{a.category}</Pill>
+             <TypeIn as="h1" trigger="load" text={a.title} className="display-type mt-5 block text-[length:clamp(2.6rem,6.6vw,6.2rem)] leading-[0.9]" />
+-            <Reveal className="mt-8" y={20}>
++            <Reveal lcp className="mt-8" y={20}>
+               <p className="max-w-[44ch] text-[length:clamp(1.25rem,2vw,1.6rem)] leading-snug text-ink/85">{a.lead}</p>
+               <p className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3 border-t-2 border-ink/10 pt-6 text-sm">
+                 <span aria-hidden="true" className="grid size-11 place-items-center rounded-full bg-maroon text-base font-black text-cream">{initials(a.author.name)}</span>
+diff --git a/yunchbite-redesign/site/src/app/categories/[category]/page.tsx b/yunchbite-redesign/site/src/app/categories/[category]/page.tsx
+index 0a7f571..e9e4b95 100644
+--- a/yunchbite-redesign/site/src/app/categories/[category]/page.tsx
++++ b/yunchbite-redesign/site/src/app/categories/[category]/page.tsx
+@@ -102,7 +102,7 @@ export default async function CategoryPage(props: PageProps<"/categories/[catego
+         <Container className="relative z-10 text-center">
+           <Eyebrow className="mb-3 text-red">{c.name}</Eyebrow>
+           <TypeIn as="h1" text={c.title} trigger="load" className="display-type mx-auto block max-w-[22ch] text-[length:clamp(2.2rem,5.2vw,4.9rem)] leading-[0.9]" />
+-          <Reveal delay={0.2}>
++          <Reveal lcp delay={0.2}>
+             <p className="mt-3 text-[length:clamp(1rem,1.5vw,1.3rem)] font-semibold text-ink/80">{c.subline}</p>
+           </Reveal>
+         </Container>
+diff --git a/yunchbite-redesign/site/src/app/fonts/bricolage-grotesque-latin-800.woff2 b/yunchbite-redesign/site/src/app/fonts/bricolage-grotesque-latin-800.woff2
+new file mode 100644
+index 0000000..e57a1b7
+Binary files /dev/null and b/yunchbite-redesign/site/src/app/fonts/bricolage-grotesque-latin-800.woff2 differ
+diff --git a/yunchbite-redesign/site/src/app/globals.css b/yunchbite-redesign/site/src/app/globals.css
+index 3e0bc05..1a98895 100644
+--- a/yunchbite-redesign/site/src/app/globals.css
++++ b/yunchbite-redesign/site/src/app/globals.css
+@@ -195,25 +195,34 @@ html.lenis body {
+ }
+ 
+ /* ------------------------------------------------------------------ */
+-/* Animation hide-until-ready                                          */
+-/* Content is always in the HTML. Elements that GSAP will animate are  */
+-/* held invisible only after the inline <head> script sets data-js and */
+-/* only until their effect marks them ready. A CSS failsafe reveals    */
+-/* them if JS never arrives.                                           */
++/* Animation hide-until-ready (LCP-safe)                               */
++/* Content is always in the HTML and is painted as is on a hard load,  */
++/* including under the home loader (the opaque curtain covers it, and   */
++/* JS puts it in its start pose long before the curtain leaves).        */
++/* Elements GSAP will animate are held invisible by CSS only after a    */
++/* client-side navigation (html[data-yb-softnav]) and only until their  */
++/* effect marks them ready. data-yb-ready="wait" keeps below-the-fold   */
++/* elements hidden until they are reached. A CSS failsafe reveals them  */
++/* if JS never arrives.                                                 */
++/* data-yb-anim: "" | "children" | "lcp" | "lcp-children" (first        */
++/* viewport by construction: JS never defers them to scrolling).        */
+ /* ------------------------------------------------------------------ */
+ @media (prefers-reduced-motion: no-preference) {
+-  html[data-js] [data-yb-anim]:not([data-yb-ready]) {
++  html[data-js][data-yb-softnav] [data-yb-anim]:not([data-yb-anim$="children"]):not([data-yb-ready]) {
+     opacity: 0;
+     animation: yb-failsafe 0.01s 3s forwards;
+   }
+-  html[data-js] [data-yb-anim="children"]:not([data-yb-ready]) {
+-    opacity: 1;
+-    animation: none;
+-  }
+-  html[data-js] [data-yb-anim="children"]:not([data-yb-ready]) > * {
++  html[data-js][data-yb-softnav] [data-yb-anim$="children"]:not([data-yb-ready]) > * {
+     opacity: 0;
+     animation: yb-failsafe 0.01s 3s forwards;
+   }
++  /* JS is alive and the element is waiting for the reader (or the loader): no failsafe */
++  html[data-js] [data-yb-anim]:not([data-yb-anim$="children"])[data-yb-ready="wait"] {
++    opacity: 0;
++  }
++  html[data-js] [data-yb-anim$="children"][data-yb-ready="wait"] > * {
++    opacity: 0;
++  }
+ }
+ @keyframes yb-failsafe {
+   to {
+diff --git a/yunchbite-redesign/site/src/app/layout.tsx b/yunchbite-redesign/site/src/app/layout.tsx
+index 12fa068..160f7eb 100644
+--- a/yunchbite-redesign/site/src/app/layout.tsx
++++ b/yunchbite-redesign/site/src/app/layout.tsx
+@@ -1,7 +1,9 @@
+ import type { Metadata, Viewport } from "next";
+-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
++import { DM_Sans } from "next/font/google";
++import localFont from "next/font/local";
+ import "./globals.css";
+ import { site } from "@/data/site";
++import { getProduct } from "@/data/products";
+ import { SITE_URL, jsonLd, defaultOgImage } from "@/lib/seo";
+ import { SmoothScroll } from "@/components/motion/SmoothScroll";
+ import { CursorLabel, CursorLabelProvider } from "@/components/layout/CursorLabel";
+@@ -12,11 +14,16 @@ import { Footer } from "@/components/layout/Footer";
+ import { Loader } from "@/components/layout/Loader";
+ 
+ // Fonts. Swapping the brand fonts later (open question Q3) is a one-line change each.
+-const display = Bricolage_Grotesque({
++// Display face: Bricolage Grotesque (SIL OFL), latin subset, variable on opsz (12-96) and wdth (75-100) but pinned to
++// weight 800, the only weight the headline voice uses (`display-type`). The full 200-800 variable file is 129 KB; this
++// one is 74 KB, which is the largest single saving on the LCP path. To swap the brand font (open question Q3), replace
++// this file (or this call with a next/font/google one) and keep the `--font-bricolage` variable.
++const display = localFont({
++  src: "./fonts/bricolage-grotesque-latin-800.woff2",
+   variable: "--font-bricolage",
+-  subsets: ["latin"],
+-  axes: ["opsz", "wdth"],
++  weight: "800",
+   display: "swap",
++  declarations: [{ prop: "font-stretch", value: "75% 100%" }],
+ });
+ const body = DM_Sans({
+   variable: "--font-dm-sans",
+@@ -100,6 +107,14 @@ const website = {
+ // first-visit loader shows (home page, first visit this session, motion allowed). No-JS visitors never see either.
+ const bootScript = `(function(){var d=document.documentElement;d.setAttribute('data-js','');try{var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;if(location.pathname==='/'&&!rm&&!sessionStorage.getItem('yb-loader')){d.setAttribute('data-yb-loader','on')}}catch(e){}})();`;
+ 
++// One representative pack per category for the menu tiles.
++const menuTiles = Object.fromEntries(
++  Object.entries({ makhana: "makhana-zipper-peri-peri", popcorn: "popcorn-salted", "dry-fruits": "dryfruits-roasted-almonds" }).map(([k, slug]) => {
++    const p = getProduct(slug);
++    return [k, p && { slug: p.slug, name: p.name, formatLabel: p.formatLabel, flavourKey: p.flavourKey }];
++  }),
++);
++
+ export default function RootLayout({ children }: LayoutProps<"/">) {
+   return (
+     <html lang="en-IN" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
+@@ -117,7 +132,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
+                 Skip to content
+               </a>
+               <Header />
+-              <MenuOverlay />
++              <MenuOverlay tileProducts={menuTiles} />
+               <main id="main" tabIndex={-1} className="outline-none">
+                 {children}
+               </main>
+diff --git a/yunchbite-redesign/site/src/app/why-yunch-bite/page.tsx b/yunchbite-redesign/site/src/app/why-yunch-bite/page.tsx
+index 75143a2..7c56fe4 100644
+--- a/yunchbite-redesign/site/src/app/why-yunch-bite/page.tsx
++++ b/yunchbite-redesign/site/src/app/why-yunch-bite/page.tsx
+@@ -27,7 +27,7 @@ export default function WhyPage() {
+         <Container>
+           <Eyebrow className="mb-5 text-red">Great taste with higher standards</Eyebrow>
+           <TypeIn as="h1" trigger="load" text={w["WHY-01"].title} className="display-type block text-[length:var(--text-hero)] leading-[0.86]" />
+-          <Reveal className="mt-8">
++          <Reveal lcp className="mt-8">
+             <p className="max-w-[64ch] text-[1.15rem] leading-[1.75]">{w["WHY-01"].intro}</p>
+           </Reveal>
+         </Container>
+diff --git a/yunchbite-redesign/site/src/components/category/PackCarousel.tsx b/yunchbite-redesign/site/src/components/category/PackCarousel.tsx
+index f7b974b..fdd8f8b 100644
+--- a/yunchbite-redesign/site/src/components/category/PackCarousel.tsx
++++ b/yunchbite-redesign/site/src/components/category/PackCarousel.tsx
+@@ -81,7 +81,7 @@ function Item({
+         className="block size-full rounded-[28px] outline-offset-2"
+       >
+         <span data-float="" className="block size-full">
+-          <PackImage product={g.rep} fit decorative sizes="(min-width: 1024px) 360px, 60vw" priority={Math.abs(d) < 1.5} imgClassName="drop-shadow-[0_26px_28px_rgb(42_18_16/0.34)]" />
++          <PackImage product={g.rep} fit decorative sizes="(min-width: 1024px) 360px, 60vw" priority={Math.abs(d) < 0.5} eager={Math.abs(d) < 1.5} imgClassName="drop-shadow-[0_26px_28px_rgb(42_18_16/0.34)]" />
+         </span>
+       </TransitionLink>
+     </li>
+diff --git a/yunchbite-redesign/site/src/components/content/ArticleHero.tsx b/yunchbite-redesign/site/src/components/content/ArticleHero.tsx
+index 38e46d7..a8e604d 100644
+--- a/yunchbite-redesign/site/src/components/content/ArticleHero.tsx
++++ b/yunchbite-redesign/site/src/components/content/ArticleHero.tsx
+@@ -2,6 +2,7 @@
+ import Image from "next/image";
+ import { useRef } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { mq } from "@/lib/tokens";
+ 
+ /** ART-03: the hero image starts inset and widens as it scrolls through (scrubbed). Static rounded block under reduced motion. */
+@@ -12,17 +13,20 @@ export function ArticleHero({ src, alt, width, height }: { src: string; alt: str
+       const el = root.current;
+       if (!el) return;
+       const mm = gsap.matchMedia();
+-      mm.add(`${mq.motion} and (min-width: 768px)`, () => {
++      mm.add(`${mq.motion} and (min-width: 768px)`, (_c, safe) => {
++        const off = deferIn(safe, () => {
+         gsap.fromTo(el.querySelector("[data-frame]"), { clipPath: "inset(0% 12% 0% 12% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 28px)", ease: "none", scrollTrigger: { trigger: el, start: "top 85%", end: "top 20%", scrub: 0.5 } });
+         gsap.fromTo(el.querySelector("[data-img]"), { scale: 1.15 }, { scale: 1, ease: "none", scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 30%", scrub: 0.5 } });
++        });
++        return () => off();
+       });
+     },
+     { scope: root },
+   );
+   return (
+     <div ref={root} className="mx-auto w-full max-w-[1280px] px-gutter">
+-      <div data-frame="" className="overflow-hidden rounded-card">
+-        <div data-img="" className="relative aspect-[16/9]">
++      <div data-frame="" className="overflow-hidden rounded-card motion-safe:md:[clip-path:inset(0%_12%_0%_12%_round_28px)]">
++        <div data-img="" className="relative aspect-[16/9] motion-safe:md:[transform:scale(1.15)]">
+           <Image src={src} alt={alt} width={width} height={height} priority sizes="(min-width: 1280px) 1200px, 100vw" className="absolute inset-0 size-full object-cover" />
+         </div>
+       </div>
+diff --git a/yunchbite-redesign/site/src/components/content/NameMerge.tsx b/yunchbite-redesign/site/src/components/content/NameMerge.tsx
+index fd3d41f..bed1d01 100644
+--- a/yunchbite-redesign/site/src/components/content/NameMerge.tsx
++++ b/yunchbite-redesign/site/src/components/content/NameMerge.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef } from "react";
+ import { gsap, SplitText, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { mq } from "@/lib/tokens";
+ import { Eyebrow } from "@/components/ui/Eyebrow";
+ 
+@@ -27,22 +28,24 @@ export function NameMerge({ left, right, result, meaning, eyebrow }: NameMergePr
+       if (!el) return;
+       const q = <T extends HTMLElement>(s: string) => el.querySelector<T>(s)!;
+       const mm = gsap.matchMedia();
+-      mm.add(`${mq.motion} and (min-width: 768px)`, () => build(34));
+-      mm.add(`${mq.motion} and (max-width: 767px)`, () => build(22));
+-      function build(shift: number) {
++      mm.add(`${mq.motion} and (min-width: 768px)`, (_c, safe) => build(34, safe));
++      mm.add(`${mq.motion} and (max-width: 767px)`, (_c, safe) => build(22, safe));
++      function build(shift: number, safe: gsap.ContextSafeFunc | undefined) {
++        return deferIn(safe, () => {
+         const split = SplitText.create(q("[data-meaning]"), { type: "chars", aria: "none" });
+         const tl = gsap.timeline({
+           defaults: { ease: "none" },
+           scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: 0.6 },
+         });
+-        tl.fromTo(q("[data-yan]"), { xPercent: -shift * 3, opacity: 0.2 }, { xPercent: 0, opacity: 1, duration: 0.4, ease: "power2.inOut" }, 0)
+-          .fromTo(q("[data-chi]"), { xPercent: shift * 3, opacity: 0.2 }, { xPercent: 0, opacity: 1, duration: 0.4, ease: "power2.inOut" }, 0)
++        tl.fromTo(q("[data-yan]"), { xPercent: -shift * 3, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.4, ease: "power2.inOut" }, 0)
++          .fromTo(q("[data-chi]"), { xPercent: shift * 3, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.4, ease: "power2.inOut" }, 0)
+           .fromTo(q("[data-plus]"), { scale: 0, rotate: -90 }, { scale: 1, rotate: 0, duration: 0.2, ease: "back.out(2)" }, 0.28)
+           .fromTo(q("[data-result]"), { scale: 0.4, opacity: 0, yPercent: 20 }, { scale: 1, opacity: 1, yPercent: 0, duration: 0.22, ease: "back.out(1.8)" }, 0.5)
+           .to(q("[data-equation]"), { opacity: 0.35, scale: 0.88, yPercent: -12, duration: 0.2, ease: "power2.inOut" }, 0.5)
+           .fromTo(split.chars, { opacity: 0, yPercent: 40 }, { opacity: 1, yPercent: 0, stagger: 0.012, duration: 0.1 }, 0.72)
+           .to({}, { duration: 0.12 });
+         return () => split.revert();
++        });
+       }
+     },
+     { scope: root },
+diff --git a/yunchbite-redesign/site/src/components/content/NutritionTable.tsx b/yunchbite-redesign/site/src/components/content/NutritionTable.tsx
+index b776e58..64519d5 100644
+--- a/yunchbite-redesign/site/src/components/content/NutritionTable.tsx
++++ b/yunchbite-redesign/site/src/components/content/NutritionTable.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef } from "react";
+-import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
++import { gsap, useGSAP } from "@/components/motion/gsap";
++import { whenInView } from "@/components/motion/entrance";
+ import { mq } from "@/lib/tokens";
+ 
+ export interface NutritionRowData {
+@@ -54,9 +55,9 @@ export function NutritionTable({ caption, columns, rows, footnotes, note }: Nutr
+         write(0);
+         const tl = gsap.timeline({ paused: true });
+         tl.to(bars, { scaleX: 1, duration: 1.1, ease: "power2.inOut", stagger: 0.06 }, 0).to(state, { p: 1, duration: 1.3, ease: "power2.out", onUpdate: () => write(state.p) }, 0);
+-        const st = ScrollTrigger.create({ trigger: el, start: "top 75%", once: true, onEnter: () => tl.play() });
++        const stop = whenInView(el, "top 75%", () => tl.play());
+         return () => {
+-          st.kill();
++          stop();
+           tl.kill();
+           counters.forEach((c, i) => (c.textContent = finals[i]));
+           gsap.set(bars, { clearProps: "transform" });
+diff --git a/yunchbite-redesign/site/src/components/content/OliveOil.tsx b/yunchbite-redesign/site/src/components/content/OliveOil.tsx
+index 847f984..0069563 100644
+--- a/yunchbite-redesign/site/src/components/content/OliveOil.tsx
++++ b/yunchbite-redesign/site/src/components/content/OliveOil.tsx
+@@ -1,7 +1,8 @@
+ "use client";
+ import Image from "next/image";
+ import { useRef } from "react";
+-import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
++import { gsap, useGSAP } from "@/components/motion/gsap";
++import { whenInView } from "@/components/motion/entrance";
+ import { RingBurst, type RingBurstHandle } from "@/components/motion/RingBurst";
+ import { shapeSrc } from "@/lib/media";
+ import { dur, ease, mq } from "@/lib/tokens";
+@@ -39,9 +40,9 @@ export function OliveOil({ neverFried }: { neverFried: string }) {
+           .to(splash, { opacity: 1, scale: 1, x: (i) => [-70, 0, 70][i], y: (i) => [-50, -90, -44][i], rotate: (i) => [-30, 0, 30][i], duration: dur.pop, ease: ease.crunch, stagger: 0.04 }, "<")
+           .to(splash, { opacity: 0, y: "+=40", duration: 0.5, ease: "power2.in" }, ">0.15")
+           .to(badge, { opacity: 1, scale: 1, rotate: -4, duration: dur.pop + 0.1, ease: ease.crunch }, "<-0.2");
+-        const st = ScrollTrigger.create({ trigger: el, start: "top 65%", once: true, onEnter: () => tl.play() });
++        const stop = whenInView(el, "top 65%", () => tl.play());
+         return () => {
+-          st.kill();
++          stop();
+           tl.kill();
+         };
+       });
+diff --git a/yunchbite-redesign/site/src/components/content/PhotoStack.tsx b/yunchbite-redesign/site/src/components/content/PhotoStack.tsx
+index 5cfa668..6d119fc 100644
+--- a/yunchbite-redesign/site/src/components/content/PhotoStack.tsx
++++ b/yunchbite-redesign/site/src/components/content/PhotoStack.tsx
+@@ -2,6 +2,7 @@
+ import Image from "next/image";
+ import { useRef } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { photos } from "@/data/assets";
+ import { mq } from "@/lib/tokens";
+ import { cn } from "@/lib/cn";
+@@ -36,7 +37,8 @@ export function PhotoStack({ steps }: PhotoStackProps) {
+       const el = root.current;
+       if (!el) return;
+       const mm = gsap.matchMedia();
+-      mm.add(`${mq.motion} and (min-width: 768px)`, () => {
++      mm.add(`${mq.motion} and (min-width: 768px)`, (_c, safe) => {
++        const off = deferIn(safe, () => {
+         const section = el.closest("[data-stack-section]") ?? el;
+         const cards = el.querySelectorAll<HTMLElement>("[data-card]");
+         const tl = gsap.timeline({ defaults: { ease: "power2.inOut" }, scrollTrigger: { trigger: section, start: "top top", end: "bottom bottom", scrub: 0.6 } });
+@@ -45,6 +47,8 @@ export function PhotoStack({ steps }: PhotoStackProps) {
+           tl.fromTo(c, { xPercent: sx * 100, yPercent: sy * 100, rotation: (i % 2 ? 1 : -1) * 12, scale: 1.04 }, { xPercent: 0, yPercent: 0, rotation: PILE[i], scale: 1, duration: 0.7 }, i * 0.04);
+         });
+         tl.to({}, { duration: 0.3 });
++        });
++        return () => off();
+       });
+     },
+     { scope: root },
+diff --git a/yunchbite-redesign/site/src/components/content/ReadProgress.tsx b/yunchbite-redesign/site/src/components/content/ReadProgress.tsx
+index 5f82ecf..e49a3b4 100644
+--- a/yunchbite-redesign/site/src/components/content/ReadProgress.tsx
++++ b/yunchbite-redesign/site/src/components/content/ReadProgress.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, type ReactNode } from "react";
+ import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
++import { defer } from "@/components/motion/entrance";
+ import { shapeSrc } from "@/lib/media";
+ import { mq } from "@/lib/tokens";
+ 
+@@ -37,8 +38,8 @@ export function ReadProgress({ children }: { children: ReactNode }) {
+         });
+         return () => st.kill();
+       };
+-      mm.add(mq.motion, () => make(true));
+-      mm.add(mq.reduce, () => make(false));
++      mm.add(mq.motion, () => defer(() => make(true)));
++      mm.add(mq.reduce, () => defer(() => make(false)));
+     },
+     { scope: root },
+   );
+diff --git a/yunchbite-redesign/site/src/components/content/TiffinMoment.tsx b/yunchbite-redesign/site/src/components/content/TiffinMoment.tsx
+index b09d38c..c4aaec0 100644
+--- a/yunchbite-redesign/site/src/components/content/TiffinMoment.tsx
++++ b/yunchbite-redesign/site/src/components/content/TiffinMoment.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef } from "react";
+-import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
++import { gsap, useGSAP } from "@/components/motion/gsap";
++import { whenInView } from "@/components/motion/entrance";
+ import { shapeSrc } from "@/lib/media";
+ import { mq } from "@/lib/tokens";
+ 
+@@ -33,12 +34,12 @@ export function TiffinMoment({ className }: { className?: string }) {
+         const tl = gsap.timeline({ paused: true });
+         tl.to(lid, { x: 30, y: -38, rotation: 16, duration: 0.45, ease: "back.out(2.2)" })
+           .to(kernels, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(2)", stagger: 0.07 }, "-=0.2");
+-        const st = ScrollTrigger.create({ trigger: el, start: "top 70%", once: true, onEnter: () => tl.play() });
++        const stop = whenInView(el, "top 70%", () => tl.play());
+         // gentle bob once open
+         const bob = gsap.to(kernels, { y: "-=6", duration: 1.6, ease: "sine.inOut", yoyo: true, repeat: -1, stagger: { each: 0.2, from: "random" }, paused: true });
+         tl.eventCallback("onComplete", () => void bob.play());
+         return () => {
+-          st.kill();
++          stop();
+           tl.kill();
+           bob.kill();
+         };
+diff --git a/yunchbite-redesign/site/src/components/home/BuddyIntro.tsx b/yunchbite-redesign/site/src/components/home/BuddyIntro.tsx
+index 3ae620f..e326868 100644
+--- a/yunchbite-redesign/site/src/components/home/BuddyIntro.tsx
++++ b/yunchbite-redesign/site/src/components/home/BuddyIntro.tsx
+@@ -44,16 +44,31 @@ export function BuddyIntro({ heading, body, bubble, clickHint, lines }: BuddyInt
+         const irises = gsap.utils.toArray<SVGGElement>("[data-iris]", el);
+         // subtle idle bob (paused off screen)
+         const bob = body ? gsap.to(body, { y: -7, rotation: 0.6, duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1, paused: true }) : null;
+-        const io = new IntersectionObserver(([e]) => bob?.paused(!e.isIntersecting), { rootMargin: "80px" });
++        const io = new IntersectionObserver(
++          ([e]) => {
++            near = e.isIntersecting;
++            rect = null;
++            bob?.paused(!near);
++          },
++          { rootMargin: "80px" },
++        );
+         io.observe(el);
+ 
+         const setters = irises.map((g) => ({ x: gsap.quickTo(g, "x", { duration: 0.35, ease: "power3.out" }), y: gsap.quickTo(g, "y", { duration: 0.35, ease: "power3.out" }) }));
+         let raf = 0;
+         let last: { x: number; y: number } | null = null;
++        // Cached geometry: re-measured only after a scroll / resize, never per pointer move.
++        let rect: DOMRect | null = null;
++        const dirty = () => {
++          rect = null;
++        };
++        window.addEventListener("scroll", dirty, { passive: true });
++        window.addEventListener("resize", dirty, { passive: true });
++        let near = false;
+         const look = () => {
+           raf = 0;
+-          if (!svg || !last) return;
+-          const r = svg.getBoundingClientRect();
++          if (!svg || !last || !near) return;
++          const r = (rect ??= svg.getBoundingClientRect());
+           const k = r.width / 819;
+           EYES.forEach((e, i) => {
+             const ex = r.left + e.cx * k;
+@@ -74,6 +89,8 @@ export function BuddyIntro({ heading, body, bubble, clickHint, lines }: BuddyInt
+         window.addEventListener("pointermove", move, { passive: true });
+         return () => {
+           window.removeEventListener("pointermove", move);
++          window.removeEventListener("scroll", dirty);
++          window.removeEventListener("resize", dirty);
+           if (raf) cancelAnimationFrame(raf);
+           io.disconnect();
+           bob?.kill();
+@@ -99,7 +116,7 @@ export function BuddyIntro({ heading, body, bubble, clickHint, lines }: BuddyInt
+       <DriftShapes shapes={["makhana-1", "chilli", "makhana-3", "pudina-leaf", "makhana-5", "olive"]} className="opacity-80" />
+       <Container className="relative z-10 grid items-center gap-10 md:grid-cols-[1fr_1.05fr] lg:gap-16">
+         <div className="order-2 md:order-1">
+-          <Eyebrow className="mb-5 text-red">Makhana Buddy</Eyebrow>
++          <Eyebrow className="mb-5 text-maroon">Makhana Buddy</Eyebrow>
+           <TypeIn as="h2" id="buddy-title" text={heading} className="display-type text-[length:clamp(2.6rem,5.6vw,5.5rem)] leading-[0.92]" />
+           <Reveal delay={0.1}>
+             <p className="mt-6 max-w-[34rem] text-[length:clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed">{body}</p>
+diff --git a/yunchbite-redesign/site/src/components/home/Hero.tsx b/yunchbite-redesign/site/src/components/home/Hero.tsx
+index af72189..ffae905 100644
+--- a/yunchbite-redesign/site/src/components/home/Hero.tsx
++++ b/yunchbite-redesign/site/src/components/home/Hero.tsx
+@@ -1,8 +1,9 @@
+ "use client";
+ import { useRef, type CSSProperties } from "react";
+ import Image from "next/image";
+-import { gsap, useGSAP } from "@/components/motion/gsap";
+-import { whenLoaderDone } from "@/components/motion/loader-gate";
++import { gsap, useGSAP, warm } from "@/components/motion/gsap";
++import { defer, entranceOn } from "@/components/motion/entrance";
++import { loaderActive, whenLoaderDone } from "@/components/motion/loader-gate";
+ import { TypeIn } from "@/components/motion/TypeIn";
+ import { PackImage } from "@/components/product/PackImage";
+ import { ButtonLink, buttonClass, SlideArrow } from "@/components/ui/ButtonLink";
+@@ -59,61 +60,92 @@ export function Hero({ headline, line, primary, secondary, packs }: HeroProps) {
+       });
+ 
+       mm.add(mq.motion, () => {
+-        const packsIn = q("[data-pack-in]");
+         const packsOut = q("[data-pack]");
+-        const kernelsIn = q("[data-k-in]");
+         const kernelsFloat = q("[data-k-float]");
+         const kernelsOut = q("[data-k]");
+-        const intro = q("[data-intro]");
++        const headlineEl = el.querySelector<HTMLElement>("[data-headline]");
++        const introWrap = el.querySelector<HTMLElement>("[data-intro-wrap]");
++        const buddyWrap = el.querySelector<HTMLElement>("[data-buddy-wrap]");
+         const buddyEl = el.querySelector<HTMLElement>("[data-buddy]");
+-        const vh = window.innerHeight;
+-
+-        // ---- intro (plays when the loader curtain leaves; immediately on repeat visits) ----
+-        const tl = gsap.timeline({ paused: true });
+-        packsIn.forEach((p, i) => {
+-          const slot = PACK_SLOTS[i];
+-          tl.fromTo(
+-            p,
+-            { y: -(vh * 0.95), rotation: slot.r + slot.from * -26, opacity: 1 },
+-            { y: 0, rotation: slot.r, duration: dur.roast + 0.15, ease: "back.out(1.5)" },
+-            i * 0.07,
+-          );
+-          packsOut[i].setAttribute("data-yb-ready", "");
+-        });
+-        tl.fromTo(kernelsIn, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: dur.pop + 0.1, ease: "back.out(2)", stagger: { each: stagger.item * 0.7, from: "random" } }, 0.45);
+-        if (buddyEl) {
+-          gsap.set(buddyEl, { xPercent: 70, yPercent: 10, rotation: 8 });
+-          tl.to(buddyEl, { xPercent: 0, yPercent: 0, rotation: 0, duration: dur.roast, ease: "back.out(1.7)" }, 1.0);
++        let tl: gsap.core.Timeline | null = null;
++        let cancel = () => {};
++
++        // Intro: the pack drop, kernels, Buddy and the text lift. Builds its start pose (hidden / offset) and plays when the
++        // loader curtain leaves, or right away after a client navigation. Under the loader the build waits for first paint.
++        const buildIntro = () => {
++          if (!entranceOn()) {
++            // the loader already finished (very slow first paint): the hero is complete as painted, no entrance
++            q("[data-yb-anim]").forEach((n) => n.setAttribute("data-yb-ready", ""));
++            return;
++          }
++          const packsIn = q("[data-pack-in]");
++          const kernelsIn = q("[data-k-in]");
++          const intro = q("[data-intro]");
++          const vh = window.innerHeight;
++          warm([...packsIn, ...kernelsIn, ...intro, buddyEl]);
++          tl = gsap.timeline({ paused: true });
++          packsIn.forEach((p, i) => {
++            const slot = PACK_SLOTS[i];
++            tl!.fromTo(
++              p,
++              { y: -(vh * 0.95), rotation: slot.r + slot.from * -26, opacity: 1 },
++              { y: 0, rotation: slot.r, duration: dur.roast + 0.15, ease: "back.out(1.5)" },
++              i * 0.07,
++            );
++            packsOut[i].setAttribute("data-yb-ready", "");
++          });
++          tl.fromTo(kernelsIn, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: dur.pop + 0.1, ease: "back.out(2)", stagger: { each: stagger.item * 0.7, from: "random" } }, 0.45);
++          if (buddyEl) {
++            gsap.set(buddyEl, { xPercent: 70, yPercent: 10, rotation: 8 });
++            tl.to(buddyEl, { xPercent: 0, yPercent: 0, rotation: 0, duration: dur.roast, ease: "back.out(1.7)" }, 1.0);
++          }
++          gsap.set(intro, { opacity: 0, y: 26 });
++          intro.forEach((n) => n.setAttribute("data-yb-ready", ""));
++          tl.to(intro, { opacity: 1, y: 0, duration: dur.roast, ease: "power3.out", stagger: stagger.item * 1.4 }, 0.55);
++          cancel = whenLoaderDone(() => tl!.play());
++        };
++        let offIntro = () => {};
++        if (!entranceOn()) {
++          // Hard load without the loader: the hero is complete in the server HTML (LCP). No entrance, just mark it ready.
++          q("[data-yb-anim]").forEach((n) => n.setAttribute("data-yb-ready", ""));
++        } else if (loaderActive()) {
++          offIntro = defer(buildIntro);
++        } else {
++          buildIntro();
+         }
+-        gsap.set(intro, { opacity: 0, y: 26 });
+-        intro.forEach((n) => n.setAttribute("data-yb-ready", ""));
+-        tl.to(intro, { opacity: 1, y: 0, duration: dur.roast, ease: "power3.out", stagger: stagger.item * 1.4 }, 0.55);
+-        const cancel = whenLoaderDone(() => tl.play());
+-
+-        // ---- idle float (paused while the hero is off screen) ----
+-        const idle = kernelsFloat.map((k, i) =>
+-          gsap.to(k, { y: i % 2 ? 14 : -14, x: i % 3 ? 6 : -6, rotation: i % 2 ? 10 : -10, duration: 2.6 + (i % 4) * 0.5, ease: "sine.inOut", yoyo: true, repeat: -1 }),
+-        );
+-        const toggle = ScrollTriggerToggle(el, idle);
+-
+-        // ---- scroll: packs drift apart and up, headline ghosts, kernels fall toward HOME-02 (scrubbed, no pin) ----
+-        const scrub = gsap.timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: 0.6, invalidateOnRefresh: true }, defaults: { ease: "none" } });
+-        packsOut.forEach((p, i) => scrub.to(p, { x: PACK_SLOTS[i].out.x, y: PACK_SLOTS[i].out.y, rotation: PACK_SLOTS[i].out.r, duration: 1 }, 0));
+-        scrub.to("[data-headline]", { opacity: 0.15, y: -vh * 0.06, duration: 0.7 }, 0);
+-        scrub.to("[data-intro-wrap]", { opacity: 0, y: -vh * 0.08, duration: 0.55 }, 0.15);
+-        kernelsOut.forEach((k, i) => {
+-          scrub.to(k, { y: () => window.innerHeight * KERNELS[i].fall * 0.95, rotation: KERNELS[i].r * 2, duration: 1 }, 0);
+-          scrub.to(k, { opacity: 0, duration: 0.3 }, 0.7);
++
++        // ---- idle float + scroll-out: built after first paint (the hero is already visible and final) ----
++        let toggle = () => {};
++        let idle: gsap.core.Tween[] = [];
++        let scrub: gsap.core.Timeline | null = null;
++        const off = defer(() => {
++          idle = kernelsFloat.map((k, i) =>
++            gsap.to(k, { y: i % 2 ? 14 : -14, x: i % 3 ? 6 : -6, rotation: i % 2 ? 10 : -10, duration: 2.6 + (i % 4) * 0.5, ease: "sine.inOut", yoyo: true, repeat: -1 }),
++          );
++          toggle = ScrollTriggerToggle(el, idle);
++
++          // packs drift apart and up, headline ghosts, kernels fall toward HOME-02 (scrubbed, no pin)
++          const vh = window.innerHeight;
++          scrub = gsap.timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: 0.6, invalidateOnRefresh: true }, defaults: { ease: "none" } });
++          packsOut.forEach((p, i) => scrub!.to(p, { x: PACK_SLOTS[i].out.x, y: PACK_SLOTS[i].out.y, rotation: PACK_SLOTS[i].out.r, duration: 1 }, 0));
++          if (headlineEl) scrub.to(headlineEl, { opacity: 0.15, y: -vh * 0.06, duration: 0.7 }, 0);
++          if (introWrap) scrub.to(introWrap, { opacity: 0, y: -vh * 0.08, duration: 0.55 }, 0.15);
++          kernelsOut.forEach((k, i) => {
++            scrub!.to(k, { y: () => window.innerHeight * KERNELS[i].fall * 0.95, rotation: KERNELS[i].r * 2, duration: 1 }, 0);
++            scrub!.to(k, { opacity: 0, duration: 0.3 }, 0.7);
++          });
++          if (buddyEl && buddyWrap) scrub.to(buddyWrap, { y: -vh * 0.12, duration: 1 }, 0);
+         });
+-        if (buddyEl) scrub.to("[data-buddy-wrap]", { y: -vh * 0.12, duration: 1 }, 0);
+ 
+         return () => {
++          off();
++          offIntro();
+           cancel();
+-          tl.kill();
++          tl?.kill();
+           toggle();
+           idle.forEach((t) => t.kill());
+-          scrub.scrollTrigger?.kill();
+-          scrub.kill();
++          scrub?.scrollTrigger?.kill();
++          scrub?.kill();
+         };
+       });
+     },
+@@ -143,9 +175,9 @@ export function Hero({ headline, line, primary, secondary, packs }: HeroProps) {
+       {packs.map((p, i) => {
+         const slot = PACK_SLOTS[i];
+         return (
+-          <div key={p.product.slug} data-pack="" data-yb-anim="" className={`pointer-events-none absolute ${slot.cls}`} style={{ zIndex: slot.z }}>
++          <div key={p.product.slug} data-pack="" data-yb-anim="lcp" className={`pointer-events-none absolute ${slot.cls}`} style={{ zIndex: slot.z }}>
+             <div data-pack-in="" style={{ rotate: "0deg" }}>
+-              <PackImage product={p.product} size="lg" sizes="(min-width: 768px) 20vw, 36vw" priority decorative morph={false} imgClassName="drop-shadow-[0_26px_30px_rgb(42_18_16/0.3)]" />
++              <PackImage product={p.product} size="lg" sizes="(min-width: 768px) 20vw, 36vw" priority={i === 0} eager={i !== 0} decorative morph={false} imgClassName="drop-shadow-[0_26px_30px_rgb(42_18_16/0.3)]" />
+             </div>
+           </div>
+         );
+@@ -169,10 +201,10 @@ export function Hero({ headline, line, primary, secondary, packs }: HeroProps) {
+           />
+         </div>
+         <div data-intro-wrap="" className="relative z-30">
+-          <p data-intro="" data-yb-anim="" className="mx-auto mt-6 max-w-[30ch] text-[length:clamp(1.05rem,1.7vw,1.5rem)] font-medium leading-snug md:max-w-[44ch]">
++          <p data-intro="" data-yb-anim="lcp" className="mx-auto mt-6 max-w-[30ch] text-[length:clamp(1.05rem,1.7vw,1.5rem)] font-medium leading-snug md:max-w-[44ch]">
+             {line}
+           </p>
+-          <div data-intro="" data-yb-anim="" className="mt-7 flex flex-wrap items-center justify-center gap-3">
++          <div data-intro="" data-yb-anim="lcp" className="mt-7 flex flex-wrap items-center justify-center gap-3">
+             <a href={primary.href} className={buttonClass("solid", "lg")}>
+               <span>{primary.label}</span>
+               <SlideArrow />
+diff --git a/yunchbite-redesign/site/src/components/home/JindgiWipe.tsx b/yunchbite-redesign/site/src/components/home/JindgiWipe.tsx
+index 9d0bfed..de5f32e 100644
+--- a/yunchbite-redesign/site/src/components/home/JindgiWipe.tsx
++++ b/yunchbite-redesign/site/src/components/home/JindgiWipe.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, type CSSProperties } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { PackImage } from "@/components/product/PackImage";
+ import { Container } from "@/components/ui/Container";
+ import { shapeSrc } from "@/lib/media";
+@@ -77,7 +78,8 @@ export function JindgiWipe({ before, after, beforeCaption, afterCaption, pack }:
+       const el = root.current;
+       if (!el) return;
+       const mm = gsap.matchMedia();
+-      mm.add(mq.motion, () => {
++      mm.add(mq.motion, (_c, safe) => {
++        const off = deferIn(safe, () => {
+         const sceneB = el.querySelector<HTMLElement>("[data-scene-b]");
+         const edge = el.querySelector<HTMLElement>("[data-edge]");
+         const pops = gsap.utils.toArray<HTMLElement>("[data-pop]", el);
+@@ -101,6 +103,8 @@ export function JindgiWipe({ before, after, beforeCaption, afterCaption, pack }:
+           tl.scrollTrigger?.kill();
+           tl.kill();
+         };
++        });
++        return () => off();
+       });
+     },
+     { scope: root },
+diff --git a/yunchbite-redesign/site/src/components/home/OccasionStrip.tsx b/yunchbite-redesign/site/src/components/home/OccasionStrip.tsx
+index c400c01..9919938 100644
+--- a/yunchbite-redesign/site/src/components/home/OccasionStrip.tsx
++++ b/yunchbite-redesign/site/src/components/home/OccasionStrip.tsx
+@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
+ import { Eyebrow } from "@/components/ui/Eyebrow";
+ import { TypeIn } from "@/components/motion/TypeIn";
+ import { Reveal } from "@/components/motion/Reveal";
++import { defer } from "@/components/motion/entrance";
+ import { useDragScroll } from "./useDragScroll";
+ import { shapeSrc } from "@/lib/media";
+ import type { ShapeName } from "@/data/types";
+@@ -40,31 +41,49 @@ export function OccasionStrip({ occasions, eyebrow, heading }: { occasions: Occa
+     if (!el) return;
+     const cards = Array.from(el.querySelectorAll<HTMLElement>("[data-occ]"));
+     let raf = 0;
++    // Geometry is measured in one read pass (on setup and on resize); the scroll handler only reads scrollLeft and writes.
++    let geo: { c: number; w: number }[] = [];
++    let box = 0;
++    const measure = () => {
++      geo = cards.map((c) => ({ c: c.offsetLeft + (c.offsetWidth || 1) / 2, w: c.offsetWidth || 1 }));
++      box = el.clientWidth;
++    };
+     const update = () => {
+       raf = 0;
+-      const mid = el.scrollLeft + el.clientWidth / 2;
+-      for (const c of cards) {
+-        const cw = c.offsetWidth || 1;
+-        const d = (c.offsetLeft + cw / 2 - mid) / (cw * 1.05);
++      const mid = el.scrollLeft + box / 2;
++      cards.forEach((c, i) => {
++        const d = (geo[i].c - mid) / (geo[i].w * 1.05);
+         const a = Math.min(Math.abs(d), 2.2);
+         c.style.setProperty("--s", (0.84 + 0.16 * Math.max(0, 1 - a / 1.1)).toFixed(3));
+         c.style.setProperty("--y", `${(a * a * 14).toFixed(1)}px`);
+         c.style.setProperty("--r", `${(d * 3.2).toFixed(2)}deg`);
+         c.dataset.centre = a < 0.5 ? "1" : "0";
+-      }
++      });
+     };
+     const onScroll = () => {
+       if (!raf) raf = requestAnimationFrame(update);
+     };
+-    // start on the middle card
+-    const mid = cards[Math.floor(cards.length / 2)];
+-    if (mid) el.scrollLeft = mid.offsetLeft + mid.offsetWidth / 2 - el.clientWidth / 2;
+-    update();
+-    el.addEventListener("scroll", onScroll, { passive: true });
+-    window.addEventListener("resize", onScroll);
++    const onResize = () => {
++      measure();
++      onScroll();
++    };
++    let started = false;
++    const off = defer(() => {
++      started = true;
++      measure();
++      // start on the middle card
++      const mid = cards[Math.floor(cards.length / 2)];
++      if (mid) el.scrollLeft = mid.offsetLeft + mid.offsetWidth / 2 - box / 2;
++      update();
++      el.addEventListener("scroll", onScroll, { passive: true });
++      window.addEventListener("resize", onResize);
++    });
+     return () => {
+-      el.removeEventListener("scroll", onScroll);
+-      window.removeEventListener("resize", onScroll);
++      off();
++      if (started) {
++        el.removeEventListener("scroll", onScroll);
++        window.removeEventListener("resize", onResize);
++      }
+       if (raf) cancelAnimationFrame(raf);
+     };
+   }, []);
+diff --git a/yunchbite-redesign/site/src/components/layout/Footer.tsx b/yunchbite-redesign/site/src/components/layout/Footer.tsx
+index faa5f8a..2500f2b 100644
+--- a/yunchbite-redesign/site/src/components/layout/Footer.tsx
++++ b/yunchbite-redesign/site/src/components/layout/Footer.tsx
+@@ -92,7 +92,7 @@ export function Footer() {
+           <FooterBuddy />
+           <p
+             aria-hidden="true"
+-            className="display-type select-none whitespace-nowrap text-center text-red text-[length:var(--wm)] leading-[0.8] tracking-[0.005em]"
++            className="display-type select-none whitespace-nowrap text-center text-[#E5251B] text-[length:var(--wm)] leading-[0.8] tracking-[0.005em]"
+             style={{ fontStretch: "75%" }}
+           >
+             Yunch Bite
+diff --git a/yunchbite-redesign/site/src/components/layout/Loader.tsx b/yunchbite-redesign/site/src/components/layout/Loader.tsx
+index 1f31634..3b63515 100644
+--- a/yunchbite-redesign/site/src/components/layout/Loader.tsx
++++ b/yunchbite-redesign/site/src/components/layout/Loader.tsx
+@@ -1,6 +1,6 @@
+ "use client";
+ import { useEffect, useRef, useState } from "react";
+-import { gsap, SplitText } from "@/components/motion/gsap";
++import { gsap, SplitText, warm } from "@/components/motion/gsap";
+ import { LOADER_DONE_EVENT } from "@/components/motion/loader-gate";
+ import { loader as loaderCopy } from "@/data/copy/shared";
+ import { shapeSrc } from "@/lib/media";
+@@ -71,6 +71,7 @@ export function Loader() {
+       split = SplitText.create(line, { type: "chars" });
+     }, el);
+ 
++    warm([...shapes, ...(split ? (split as SplitText).chars : [])]);
+     const tl = gsap.timeline({ onComplete: finish });
+     tl.set([shapes, line], { visibility: "visible" }, 0)
+       .fromTo(
+@@ -122,6 +123,7 @@ export function Loader() {
+               data-shape=""
+               src={shapeSrc(p.s)}
+               alt=""
++              loading="lazy"
+               draggable={false}
+               className="absolute bottom-0 left-1/2 h-auto select-none will-change-transform"
+               style={{
+diff --git a/yunchbite-redesign/site/src/components/layout/MenuOverlay.tsx b/yunchbite-redesign/site/src/components/layout/MenuOverlay.tsx
+index 6f0afb4..2ab6242 100644
+--- a/yunchbite-redesign/site/src/components/layout/MenuOverlay.tsx
++++ b/yunchbite-redesign/site/src/components/layout/MenuOverlay.tsx
+@@ -1,12 +1,12 @@
+ "use client";
+ import { useEffect, useRef } from "react";
++import Image from "next/image";
+ import { usePathname } from "next/navigation";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
+ import { useLenis } from "@/components/motion/SmoothScroll";
+ import { TransitionLink } from "@/components/ui/TransitionLink";
+ import { Icon } from "@/components/ui/Icon";
+ import { PackImage } from "@/components/product/PackImage";
+-import { getProduct } from "@/data/products";
+ import { categories } from "@/data/categories";
+ import { menuPages, site } from "@/data/site";
+ import { buddyImage } from "@/lib/media";
+@@ -16,17 +16,15 @@ import { useMenu } from "./MenuContext";
+ const CLOSED = "inset(0% 0% 100% 0% round 0px 0px 70px 70px)";
+ const OPEN = "inset(0% 0% 0% 0% round 0px 0px 0px 0px)";
+ 
+-// One representative pack per category for the tiles.
+-const TILE_PRODUCTS: Record<string, string> = {
+-  makhana: "makhana-zipper-peri-peri",
+-  popcorn: "popcorn-salted",
+-  "dry-fruits": "dryfruits-roasted-almonds",
+-};
++/** One representative pack per category for the tiles (resolved on the server so the catalogue stays out of the client bundle). */
++export type MenuTileProducts = Record<string, { slug: string; name: string; formatLabel: string; flavourKey: string } | undefined>;
++
++const waveBuddy = buddyImage("wave");
+ 
+ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+ 
+ /** G-03. Full-screen brand-red menu: a real modal dialog (focus trap, Esc, focus return, scroll lock). */
+-export function MenuOverlay() {
++export function MenuOverlay({ tileProducts }: { tileProducts: MenuTileProducts }) {
+   const { open, setOpen, buttonRef, immediateRef } = useMenu();
+   const pathname = usePathname();
+   const lenis = useLenis();
+@@ -195,7 +193,7 @@ export function MenuOverlay() {
+               <p className="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-cream/80">Choose your crunch</p>
+               <ul className="grid grid-cols-3 gap-3">
+                 {categories.map((c) => {
+-                  const product = getProduct(TILE_PRODUCTS[c.key]);
++                  const product = tileProducts[c.key];
+                   return (
+                     <li key={c.key}>
+                       <TransitionLink
+@@ -219,8 +217,7 @@ export function MenuOverlay() {
+ 
+             {/* Makhana Buddy waves from the bottom-right of the right column */}
+             <div aria-hidden="true" className="pointer-events-none relative hidden min-h-[120px] flex-1 overflow-hidden md:block">
+-              {/* eslint-disable-next-line @next/next/no-img-element */}
+-              <img data-menu-buddy src={buddyImage("wave").src} alt="" width={buddyImage("wave").width} height={buddyImage("wave").height} className="absolute bottom-0 right-0 h-auto max-h-full w-auto max-w-[min(100%,230px)] origin-bottom [mask-image:linear-gradient(to_right,transparent_0,#000_14%)]" />
++              <Image data-menu-buddy src={waveBuddy.src} alt="" width={waveBuddy.width} height={waveBuddy.height} sizes="230px" className="absolute bottom-0 right-0 h-auto max-h-full w-auto max-w-[min(100%,230px)] origin-bottom [mask-image:linear-gradient(to_right,transparent_0,#000_14%)]" />
+             </div>
+ 
+             <div data-menu-extra className="flex flex-col gap-4">
+diff --git a/yunchbite-redesign/site/src/components/motion/Pop.tsx b/yunchbite-redesign/site/src/components/motion/Pop.tsx
+index 1d60627..0811e4e 100644
+--- a/yunchbite-redesign/site/src/components/motion/Pop.tsx
++++ b/yunchbite-redesign/site/src/components/motion/Pop.tsx
+@@ -1,7 +1,8 @@
+ "use client";
+ import { useRef, type CSSProperties, type ElementType, type ReactNode } from "react";
+ import { gsap, useGSAP } from "./gsap";
+-import { dur, ease, mq, reveal } from "@/lib/tokens";
++import { revealOnView } from "./entrance";
++import { dur, ease, mq } from "@/lib/tokens";
+ 
+ export interface PopProps {
+   as?: ElementType;
+@@ -9,15 +10,18 @@ export interface PopProps {
+   delay?: number;
+   /** Start scale (default 0.6). */
+   from?: number;
+-  /** "scroll" (default) pops on entering the viewport; "load" pops on mount. */
++  /** "scroll" (default) pops on entering the viewport; "load" is a first-viewport pop (implies `lcp`). */
+   trigger?: "scroll" | "load";
++  /** In the first viewport: visible on a hard load, pops only under the loader / after a client-side navigation. */
++  lcp?: boolean;
+   className?: string;
+   style?: CSSProperties;
+ }
+ 
+-/** Scale 0.6 -> 1 with the crunch overshoot (dur.pop). */
+-export function Pop({ as: Tag = "div", children, delay = 0, from = 0.6, trigger = "scroll", className, style }: PopProps) {
++/** Scale 0.6 -> 1 with the crunch overshoot (dur.pop). Driven by a shared IntersectionObserver. */
++export function Pop({ as: Tag = "div", children, delay = 0, from = 0.6, trigger = "scroll", lcp, className, style }: PopProps) {
+   const ref = useRef<HTMLElement>(null);
++  const hero = lcp || trigger === "load";
+ 
+   useGSAP(
+     () => {
+@@ -26,26 +30,29 @@ export function Pop({ as: Tag = "div", children, delay = 0, from = 0.6, trigger
+       const mm = gsap.matchMedia();
+       mm.add(mq.reduce, () => el.setAttribute("data-yb-ready", ""));
+       mm.add(mq.motion, () => {
+-        const tween = gsap.from(el, {
+-          scale: from,
+-          opacity: 0,
+-          duration: dur.pop,
+-          delay,
+-          ease: ease.crunch,
+-          clearProps: "transform,opacity",
+-          ...(trigger === "scroll" ? { scrollTrigger: { trigger: el, start: reveal.start, once: true } } : {}),
++        let tween: gsap.core.Tween | null = null;
++        const stop = revealOnView(el, {
++          lcp: hero,
++          play: (instant) => {
++            if (instant) {
++              el.setAttribute("data-yb-ready", "");
++              return;
++            }
++            tween = gsap.fromTo(el, { scale: from, opacity: 0 }, { scale: 1, opacity: 1, duration: dur.pop, delay, ease: ease.crunch, clearProps: "transform,opacity" });
++            el.setAttribute("data-yb-ready", "");
++          },
+         });
+-        el.setAttribute("data-yb-ready", "");
+         return () => {
+-          tween.revert();
++          stop();
++          tween?.revert();
+         };
+       });
+     },
+-    { scope: ref, dependencies: [delay, from, trigger] },
++    { scope: ref, dependencies: [delay, from, hero] },
+   );
+ 
+   return (
+-    <Tag ref={ref} className={className} style={style} data-yb-anim="">
++    <Tag ref={ref} className={className} style={style} data-yb-anim={hero ? "lcp" : ""}>
+       {children}
+     </Tag>
+   );
+diff --git a/yunchbite-redesign/site/src/components/motion/Reveal.tsx b/yunchbite-redesign/site/src/components/motion/Reveal.tsx
+index 0799a8c..449d0e9 100644
+--- a/yunchbite-redesign/site/src/components/motion/Reveal.tsx
++++ b/yunchbite-redesign/site/src/components/motion/Reveal.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, type CSSProperties, type ElementType, type ReactNode } from "react";
+-import { gsap, useGSAP } from "./gsap";
++import { gsap, useGSAP, warm } from "./gsap";
++import { marginFor, revealOnView } from "./entrance";
+ import { dur, ease, mq, reveal } from "@/lib/tokens";
+ 
+ export interface RevealProps {
+@@ -13,14 +14,22 @@ export interface RevealProps {
+   /** When set, the direct children are revealed one after another (seconds between them). */
+   stagger?: number;
+   duration?: number;
+-  /** ScrollTrigger start. Default "top 80%". */
++  /** Reveal line. Default "top 80%" (only "top N%" is supported). */
+   start?: string;
++  /**
++   * The content sits in the first viewport. Server HTML is visible straight away on a hard load (no entrance); the
++   * entrance only plays under the home loader and after a client-side navigation.
++   */
++  lcp?: boolean;
+   className?: string;
+   style?: CSSProperties;
+   id?: string;
+ }
+ 
+-/** Fades and slides content up when it scrolls into view (dur.roast, ease.roast). Content is in the SSR HTML. */
++/**
++ * Fades and slides content up when it scrolls into view (dur.roast, ease.roast). Content is in the SSR HTML.
++ * One shared IntersectionObserver drives it (no ScrollTrigger per element); no inline styles exist until it plays.
++ */
+ export function Reveal({
+   as: Tag = "div",
+   children,
+@@ -30,44 +39,53 @@ export function Reveal({
+   stagger,
+   duration = dur.roast,
+   start = reveal.start,
++  lcp,
+   className,
+   style,
+   id,
+ }: RevealProps) {
+   const ref = useRef<HTMLElement>(null);
++  const kids = stagger != null;
+ 
+   useGSAP(
+     () => {
+       const el = ref.current;
+       if (!el) return;
+-      const targets = stagger != null ? Array.from(el.children) : el;
+       const mm = gsap.matchMedia();
+       mm.add(mq.reduce, () => {
+         el.setAttribute("data-yb-ready", "");
+       });
+       mm.add(mq.motion, () => {
+-        const tween = gsap.from(targets, {
+-          opacity: 0,
+-          y,
+-          x,
+-          duration,
+-          delay,
+-          ease: ease.roast,
+-          stagger: stagger ?? 0,
+-          clearProps: "transform,opacity",
+-          scrollTrigger: { trigger: el, start, once: true },
++        let tween: gsap.core.Tween | null = null;
++        const stop = revealOnView(el, {
++          lcp,
++          margin: marginFor(start),
++          play: (instant) => {
++            if (instant) {
++              el.setAttribute("data-yb-ready", "");
++              return;
++            }
++            const targets = kids ? Array.from(el.children) : el;
++            if (kids) warm(targets as Element[]);
++            tween = gsap.fromTo(
++              targets,
++              { opacity: 0, y, x },
++              { opacity: 1, y: 0, x: 0, duration, delay, ease: ease.roast, stagger: stagger ?? 0, clearProps: "transform,opacity" },
++            );
++            el.setAttribute("data-yb-ready", "");
++          },
+         });
+-        el.setAttribute("data-yb-ready", "");
+         return () => {
+-          tween.revert();
++          stop();
++          tween?.revert();
+         };
+       });
+     },
+-    { scope: ref, dependencies: [y, x, delay, stagger, duration, start] },
++    { scope: ref, dependencies: [y, x, delay, stagger, duration, start, lcp] },
+   );
+ 
+   return (
+-    <Tag ref={ref} id={id} className={className} style={style} data-yb-anim={stagger != null ? "children" : ""}>
++    <Tag ref={ref} id={id} className={className} style={style} data-yb-anim={`${lcp ? "lcp" : ""}${lcp && kids ? "-" : ""}${kids ? "children" : ""}`}>
+       {children}
+     </Tag>
+   );
+diff --git a/yunchbite-redesign/site/src/components/motion/SmoothScroll.tsx b/yunchbite-redesign/site/src/components/motion/SmoothScroll.tsx
+index 8c7a85e..d6ea930 100644
+--- a/yunchbite-redesign/site/src/components/motion/SmoothScroll.tsx
++++ b/yunchbite-redesign/site/src/components/motion/SmoothScroll.tsx
+@@ -1,10 +1,11 @@
+ "use client";
+-import { useEffect, useSyncExternalStore, type ReactNode } from "react";
++import { useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
+ import { usePathname } from "next/navigation";
+-import Lenis from "lenis";
+-import { gsap, ScrollTrigger } from "./gsap";
++import type Lenis from "lenis";
++import { gsap, loadScrollTrigger, ScrollTrigger } from "./gsap";
+ import { lenis as lenisTok, mq } from "@/lib/tokens";
+ import { consumeNavIntent } from "@/lib/nav-intent";
++import { afterPaint, markSoftNav, scheduleRefresh } from "./entrance";
+ 
+ // A tiny external store so consumers re-render when Lenis is created/destroyed.
+ let instance: Lenis | null = null;
+@@ -30,33 +31,51 @@ export function useLenis(): Lenis | null {
+ /** Lenis (lerp 0.1) driven by gsap.ticker; only on fine-pointer devices without reduced motion. */
+ export function SmoothScroll({ children }: { children: ReactNode }) {
+   const pathname = usePathname();
++  // First client-side navigation: entrances (loader-free) may play from now on. Set during render so it is in place
++  // before the new page's effects read it (this provider renders before the page content).
++  const [firstPath] = useState(pathname);
++  if (typeof document !== "undefined" && firstPath !== pathname) markSoftNav();
+ 
+   useEffect(() => {
+     const mm = gsap.matchMedia();
+     mm.add(`${mq.fine} and ${mq.motion}`, () => {
+-      const l = new Lenis({ lerp: lenisTok.lerp, anchors: true, autoRaf: false });
+-      const tick = (t: number) => l.raf(t * 1000);
+-      gsap.ticker.add(tick);
+-      gsap.ticker.lagSmoothing(0);
+-      l.on("scroll", ScrollTrigger.update);
+-      setInstance(l);
++      // Lenis is loaded after first paint (its own chunk): smooth scrolling is a refinement, never part of the LCP path.
++      let l: Lenis | null = null;
++      let tick: ((t: number) => void) | null = null;
++      let dead = false;
++      afterPaint(() => {
++        if (dead) return;
++        void Promise.all([import("lenis"), loadScrollTrigger()]).then(([{ default: LenisCtor }]) => {
++          if (dead) return;
++          const inst = new LenisCtor({ lerp: lenisTok.lerp, anchors: true, autoRaf: false });
++          l = inst;
++          tick = (t: number) => inst.raf(t * 1000);
++          gsap.ticker.add(tick);
++          gsap.ticker.lagSmoothing(0);
++          inst.on("scroll", ScrollTrigger.update);
++          setInstance(inst);
++        });
++      });
+       return () => {
+-        gsap.ticker.remove(tick);
+-        gsap.ticker.lagSmoothing(500, 33);
+-        l.destroy();
+-        setInstance(null);
++        dead = true;
++        if (tick) gsap.ticker.remove(tick);
++        if (l) {
++          gsap.ticker.lagSmoothing(500, 33);
++          l.destroy();
++          setInstance(null);
++        }
+       };
+     });
+     // Late-loading fonts change layout; make sure triggers are measured against the final layout.
+-    if (document.fonts?.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
++    if (document.fonts?.ready) document.fonts.ready.then(() => scheduleRefresh(0));
+     return () => mm.revert();
+   }, []);
+ 
+   // Scroll to top on link navigations (not on browser back/forward), unless there is a hash.
+   useEffect(() => {
+     // Layout changes with every page: re-measure triggers once the new page is in place.
+-    const t = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+-    if (!consumeNavIntent()) return () => window.clearTimeout(t);
++    scheduleRefresh(120);
++    if (!consumeNavIntent()) return;
+     const hash = window.location.hash;
+     const l = instance;
+     if (hash) {
+@@ -64,12 +83,12 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
+       if (el) {
+         if (l) l.scrollTo(el, { offset: -(parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 80), immediate: true });
+         else el.scrollIntoView();
+-        return () => window.clearTimeout(t);
++        return;
+       }
+     }
+     if (l) l.scrollTo(0, { immediate: true, force: true });
+     else window.scrollTo(0, 0);
+-    return () => window.clearTimeout(t);
++    return;
+   }, [pathname]);
+ 
+   return <>{children}</>;
+diff --git a/yunchbite-redesign/site/src/components/motion/TypeIn.tsx b/yunchbite-redesign/site/src/components/motion/TypeIn.tsx
+index 29ef4a6..13a25d7 100644
+--- a/yunchbite-redesign/site/src/components/motion/TypeIn.tsx
++++ b/yunchbite-redesign/site/src/components/motion/TypeIn.tsx
+@@ -1,16 +1,23 @@
+ "use client";
+ import { useRef, type CSSProperties, type ElementType } from "react";
+-import { gsap, ScrollTrigger, SplitText, useGSAP } from "./gsap";
++import { gsap, SplitText, useGSAP, warm } from "./gsap";
++import { defer, entranceOn, observe, revealOnView } from "./entrance";
+ import { whenLoaderDone } from "./loader-gate";
+-import { dur, mq, reveal, stagger as stg } from "@/lib/tokens";
++import { dur, mq, stagger as stg } from "@/lib/tokens";
+ 
+ export interface TypeInProps {
+   /** Rendered tag, default span. Use "h1"/"h2"… for headings. */
+   as?: ElementType;
+   /** The full text. It is always in the server HTML; the animation only moves the letters. */
+   text: string;
+-  /** "load": play on mount (waits for the first-visit loader if one is showing). "scroll": play when it enters the viewport. */
++  /**
++   * "load": hero title, in the first viewport by construction (implies `lcp`): visible in the server HTML on a hard load
++   * (no split, no entrance); types in under the home loader and after a client-side navigation.
++   * "scroll": split lazily (about a viewport ahead) and type in when it reaches the reveal line.
++   */
+   trigger?: "load" | "scroll";
++  /** Force the LCP-safe mode for a "scroll" TypeIn that sits in the first viewport. */
++  lcp?: boolean;
+   delay?: number;
+   className?: string;
+   style?: CSSProperties;
+@@ -22,9 +29,10 @@ export interface TypeInProps {
+  * SplitText with autoSplit re-splits on resize / late font loads. aria "hidden" keeps the text accessible on any tag.
+  * Reduced motion: no split, text shown as is.
+  */
+-export function TypeIn({ as: Tag = "span", text, trigger = "scroll", delay = 0, className, style, id }: TypeInProps) {
++export function TypeIn({ as: Tag = "span", text, trigger = "scroll", lcp, delay = 0, className, style, id }: TypeInProps) {
+   const ref = useRef<HTMLElement>(null);
+   const isHeading = typeof Tag === "string" && /^h[1-6]$/.test(Tag);
++  const hero = lcp || trigger === "load";
+ 
+   useGSAP(
+     () => {
+@@ -38,61 +46,102 @@ export function TypeIn({ as: Tag = "span", text, trigger = "scroll", delay = 0,
+ 
+       mm.add(mq.motion, () => {
+         let played = false;
+-        let cleanupTrigger: () => void = () => {};
++        let revealed = false;
++        let split: SplitText | null = null;
++        let tween: gsap.core.Tween | null = null;
++        let cancelWait: () => void = () => {};
++        const stops: Array<() => void> = [];
+ 
+-        const split = SplitText.create(el, {
+-          type: "words,chars",
+-          autoSplit: true,
+-          // Headings may carry an aria-label: "auto" labels the heading and hides the chars, keeping its role and a
+-          // single copy of the text. A plain span/p may not carry aria-label: "hidden" hides the split element and adds
+-          // a screen-reader copy next to it (inside the parent heading, so the heading's name stays correct).
+-          aria: isHeading ? "auto" : "hidden",
+-          onSplit(self) {
+-            cleanupTrigger();
+-            if (played) return; // re-split after the animation finished: leave the chars in their final state
+-            const tween = gsap.fromTo(
+-              self.chars,
+-              { opacity: 0, yPercent: 38 },
+-              {
+-                opacity: 1,
+-                yPercent: 0,
+-                duration: dur.quick + 0.2,
+-                ease: "back.out(1.3)",
+-                stagger: stg.char,
+-                delay,
+-                paused: true,
+-                onComplete: () => {
+-                  played = true;
++        const doSplit = () => {
++          if (split) return;
++          split = SplitText.create(el, {
++            type: "words,chars",
++            autoSplit: true,
++            // Headings may carry an aria-label: "auto" labels the heading and hides the chars, keeping its role and a
++            // single copy of the text. A plain span/p may not carry aria-label: "hidden" hides the split element and adds
++            // a screen-reader copy next to it (inside the parent heading, so the heading's name stays correct).
++            aria: isHeading ? "auto" : "hidden",
++            onSplit(self) {
++              if (played) return; // re-split after the animation finished: leave the chars in their final state
++              warm(self.chars);
++              tween = gsap.fromTo(
++                self.chars,
++                { opacity: 0, yPercent: 38 },
++                {
++                  opacity: 1,
++                  yPercent: 0,
++                  duration: dur.quick + 0.2,
++                  ease: "back.out(1.3)",
++                  stagger: stg.char,
++                  delay,
++                  paused: !revealed,
++                  onComplete: () => {
++                    played = true;
++                  },
+                 },
+-              },
+-            );
++              );
++              el.setAttribute("data-yb-ready", "");
++              return tween;
++            },
++          });
++        };
++        const play = () => {
++          revealed = true;
++          if (!split) doSplit();
++          else tween?.play();
++        };
++
++        if (hero) {
++          if (!entranceOn()) {
++            // hard load, no loader: the heading is already painted from the server HTML; leave it alone
+             el.setAttribute("data-yb-ready", "");
+-            if (trigger === "load") {
+-              cleanupTrigger = whenLoaderDone(() => tween.play());
+-            } else {
+-              const st = ScrollTrigger.create({
+-                trigger: el,
+-                start: reveal.start,
+-                once: true,
+-                onEnter: () => tween.play(),
+-              });
+-              cleanupTrigger = () => st.kill();
+-            }
+-            return tween;
+-          },
+-        });
++          } else {
++            el.setAttribute("data-yb-ready", "wait");
++            // Split now, before first paint: splitting changes the wrap slightly, so doing it after paint would register as
++            // a layout shift on the hero title.
++            doSplit();
++            cancelWait = whenLoaderDone(() => play());
++          }
++        } else {
++          // Split about a viewport before it is needed (layout work stays out of hydration), play at the reveal line.
++          stops.push(
++            revealOnView(el, {
++              onWait: () => {
++                // The split itself runs as an idle job (one heading per task) rather than inside the observer callback.
++                const stopNear = observe(el, "100% 0px 100% 0px", (e) => {
++                  if (!e.isIntersecting) return;
++                  stopNear();
++                  if (!played) stops.push(defer(() => (played ? undefined : doSplit())));
++                });
++                stops.push(stopNear);
++              },
++              play: (instant) => {
++                if (instant) {
++                  // static first paint, or already behind the reader: no animation
++                  played = true;
++                  tween?.progress(1);
++                  el.setAttribute("data-yb-ready", "");
++                  return;
++                }
++                play();
++              },
++            }),
++          );
++        }
+ 
+         return () => {
+-          cleanupTrigger();
+-          split.revert();
++          cancelWait();
++          stops.forEach((s) => s());
++          split?.revert();
++          split = null;
+         };
+       });
+     },
+-    { scope: ref, dependencies: [text, trigger, delay, isHeading], revertOnUpdate: true },
++    { scope: ref, dependencies: [text, trigger, delay, isHeading, hero], revertOnUpdate: true },
+   );
+ 
+   return (
+-    <Tag ref={ref} id={id} className={className} style={style} data-yb-anim="">
++    <Tag ref={ref} id={id} className={className} style={style} data-yb-anim={hero ? "lcp" : ""}>
+       {text}
+     </Tag>
+   );
+diff --git a/yunchbite-redesign/site/src/components/motion/entrance.ts b/yunchbite-redesign/site/src/components/motion/entrance.ts
+new file mode 100644
+index 0000000..371b448
+--- /dev/null
++++ b/yunchbite-redesign/site/src/components/motion/entrance.ts
+@@ -0,0 +1,239 @@
++"use client";
++// Entrance policy + lazy-setup helpers shared by the motion primitives and the section components.
++//
++//  - LCP-safe entrances: on a hard load (no first-visit loader, no client navigation yet) nothing in the first viewport
++//    is hidden or animated, so the browser paints real content straight from the server HTML. Entrances run only
++//    under the home loader (`html[data-yb-loader]`) and after a client-side navigation (`html[data-yb-softnav]`),
++//    where the curtain covers the page anyway. CSS (globals.css) hides `[data-yb-anim]` only in those two modes.
++//  - Lazy setup: below-the-fold reveals use one shared IntersectionObserver instead of a ScrollTrigger per element,
++//    and scrubbed / pinned sections build their ScrollTriggers in idle time after first paint (`defer`), with a single
++//    `ScrollTrigger.refresh()` once the batch is done.
++import { loadScrollTrigger, ScrollTrigger } from "./gsap";
++import { whenLoaderDone } from "./loader-gate";
++
++/** True while entrances should play (home loader showing/leaving, or after the first client navigation). */
++export function entranceOn(): boolean {
++  if (typeof document === "undefined") return false;
++  const d = document.documentElement;
++  return d.hasAttribute("data-yb-loader") || d.hasAttribute("data-yb-softnav");
++}
++
++/** Marks the document as soft-navigated (called by SmoothScroll when the pathname changes). */
++export function markSoftNav() {
++  if (typeof document !== "undefined") document.documentElement.setAttribute("data-yb-softnav", "");
++}
++
++// ------------------------------------------------------------------------------------------------------------------
++// Shared IntersectionObserver registry (one observer per rootMargin).
++// ------------------------------------------------------------------------------------------------------------------
++type Cb = (entry: IntersectionObserverEntry) => void;
++const observers = new Map<string, { io: IntersectionObserver; cbs: Map<Element, Cb> }>();
++
++/** Observes `el`; `cb` runs for every intersection change. Returns an unobserve function. */
++export function observe(el: Element, margin: string, cb: Cb): () => void {
++  let o = observers.get(margin);
++  if (!o) {
++    const cbs = new Map<Element, Cb>();
++    const io = new IntersectionObserver(
++      (entries) => {
++        for (const e of entries) cbs.get(e.target)?.(e);
++      },
++      { rootMargin: margin },
++    );
++    o = { io, cbs };
++    observers.set(margin, o);
++  }
++  const { io, cbs } = o;
++  cbs.set(el, cb);
++  io.observe(el);
++  return () => {
++    if (cbs.get(el) === cb) {
++      cbs.delete(el);
++      io.unobserve(el);
++    }
++  };
++}
++
++/** "top 80%" -> rootMargin that fires when the element's top crosses 80% of the viewport height. */
++export function marginFor(start: string | undefined): string {
++  const m = /^top\s+(\d+(?:\.\d+)?)%$/.exec(start ?? "top 80%");
++  const pct = m ? Number(m[1]) : 80;
++  return `0px 0px -${Math.max(0, 100 - pct)}% 0px`;
++}
++
++export interface ViewRevealOptions {
++  /** The element is in the first viewport by construction (hero): never wait for scrolling. */
++  lcp?: boolean;
++  /** rootMargin for the reveal line (default top 80%). */
++  margin?: string;
++  /**
++   * Called when the element should reveal. `instant` = the element is already behind the reader (scrolled past or
++   * restored mid-page) or is part of the static first paint: show the final state with no animation.
++   * Must set `data-yb-ready=""` on the element (directly or via the tween it builds).
++   */
++  play: (instant: boolean) => void;
++  /** Called once the element is known to be waiting below the fold (hidden until reached): start pre-work here. */
++  onWait?: () => void;
++}
++
++/**
++ * Reveal-on-view with the LCP-safe policy.
++ *  - animate mode (loader / soft navigation): the element is held hidden (`data-yb-ready="wait"`) and `play(false)`
++ *    runs when it reaches the reveal line (lcp elements: right away, after the loader).
++ *  - static mode (hard load): lcp elements and anything already inside the first viewport stay visible (`play(true)`);
++ *    everything below is hidden then and revealed on scroll.
++ */
++export function revealOnView(el: HTMLElement, { lcp, margin = "0px 0px -20% 0px", play, onWait }: ViewRevealOptions): () => void {
++  if (entranceOn()) {
++    el.setAttribute("data-yb-ready", "wait");
++    if (lcp) return whenLoaderDone(() => play(false));
++    onWait?.();
++    let stop = () => {};
++    let cancelLoader = () => {};
++    stop = observe(el, margin, (e) => {
++      if (!e.isIntersecting && e.boundingClientRect.top > 0) return;
++      stop();
++      const instant = !e.isIntersecting; // above the viewport (or zero-sized): nothing to animate
++      // under the home loader, first-viewport reveals wait for the curtain so they play where they can be seen
++      cancelLoader = whenLoaderDone(() => play(instant));
++    });
++    return () => {
++      stop();
++      cancelLoader();
++    };
++  }
++  if (lcp) {
++    play(true);
++    return () => {};
++  }
++  let waiting = false;
++  let stop = () => {};
++  stop = observe(el, margin, (e) => {
++    if (e.isIntersecting) {
++      stop();
++      play(!waiting);
++      return;
++    }
++    const r = e.boundingClientRect;
++    if (!waiting && r.height > 0 && r.top >= window.innerHeight) {
++      // below the first viewport: hold it hidden until the reader gets there
++      waiting = true;
++      el.setAttribute("data-yb-ready", "wait");
++      onWait?.();
++    } else if (!waiting || r.bottom <= 0) {
++      // first viewport (between the reveal line and the fold), behind the reader, or not rendered: leave it as painted
++      stop();
++      play(true);
++    }
++  });
++  return () => stop();
++}
++
++// ------------------------------------------------------------------------------------------------------------------
++// Idle scheduling for scrubbed / pinned setup.
++// ------------------------------------------------------------------------------------------------------------------
++type Job = { run: () => void | (() => void); cleanup?: void | (() => void); cancelled: boolean };
++const queue: Job[] = [];
++let pump = false;
++let refreshTimer: number | undefined;
++
++// First paint gate: nothing below is scheduled until the browser has actually painted (FCP), so setup work never
++// competes with the first frame / LCP. Falls back to a timer when paint timing is unavailable.
++let painted = typeof window === "undefined";
++const paintWaiters: Array<() => void> = [];
++function releasePaint() {
++  if (painted && !paintWaiters.length) return;
++  painted = true;
++  paintWaiters.splice(0).forEach((f) => f());
++}
++if (typeof window !== "undefined") {
++  try {
++    if (performance.getEntriesByName("first-contentful-paint").length) painted = true;
++    else {
++      new PerformanceObserver((list, o) => {
++        if (list.getEntriesByName("first-contentful-paint").length) {
++          o.disconnect();
++          releasePaint();
++        }
++      }).observe({ type: "paint", buffered: true });
++      window.setTimeout(releasePaint, 3500);
++    }
++  } catch {
++    painted = true;
++  }
++}
++/** Runs `cb` once the page has painted (immediately if it already has). */
++export function afterPaint(cb: () => void) {
++  if (painted) cb();
++  else paintWaiters.push(cb);
++}
++
++const idle = (cb: () => void, timeout = 1500) => {
++  const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
++  if (w.requestIdleCallback) w.requestIdleCallback(cb, { timeout });
++  else window.setTimeout(cb, 60);
++};
++
++function drain() {
++  pump = false;
++  if (!queue.length) return;
++  // ScrollTrigger lives in its own chunk: make sure it is there before the first job that may need it.
++  void loadScrollTrigger().then(run);
++}
++function run() {
++  const t0 = performance.now();
++  while (queue.length) {
++    const job = queue.shift()!;
++    if (job.cancelled) continue;
++    job.cleanup = job.run();
++    if (performance.now() - t0 > 4) break; // keep every task short (long tasks are blocking time); the rest runs in the next idle slot
++  }
++  if (queue.length) schedulePump();
++  else scheduleRefresh();
++}
++function schedulePump() {
++  if (pump) return;
++  pump = true;
++  afterPaint(() => idle(drain));
++}
++
++/** Builds ScrollTriggers after first paint, in idle time. Returns a disposer (cancels, or runs the build's cleanup). */
++export function defer(run: () => void | (() => void)): () => void {
++  const job: Job = { run, cancelled: false };
++  queue.push(job);
++  schedulePump();
++  return () => {
++    job.cancelled = true;
++    if (typeof job.cleanup === "function") job.cleanup();
++    job.cleanup = undefined;
++  };
++}
++
++/** One ScrollTrigger.refresh() after the idle queue is empty (coalesces calls). */
++export function scheduleRefresh(delay = 80) {
++  window.clearTimeout(refreshTimer);
++  refreshTimer = window.setTimeout(() => {
++    if (queue.length) return; // the pump will schedule it again when it finishes
++    idle(() => ScrollTrigger?.refresh(), 800);
++  }, delay);
++}
++
++/**
++ * Runs `cb` once when the element reaches the `start` line ("top 75%") or is already behind the reader.
++ * IntersectionObserver based: no ScrollTrigger, no layout measurement. Returns a cancel function.
++ */
++export function whenInView(el: Element, start: string, cb: () => void): () => void {
++  let stop = () => {};
++  stop = observe(el, marginFor(start), (e) => {
++    if (e.isIntersecting || (e.boundingClientRect.height > 0 && e.boundingClientRect.bottom <= 0)) {
++      stop();
++      cb();
++    }
++  });
++  return () => stop();
++}
++
++/** `defer` for builds that create GSAP objects: runs inside the matchMedia context (`contextSafe`) so they are reverted with it. */
++export function deferIn(safe: gsap.ContextSafeFunc | undefined, run: () => void | (() => void)): () => void {
++  return defer(safe ? (safe(run) as () => void | (() => void)) : run);
++}
+diff --git a/yunchbite-redesign/site/src/components/motion/gsap.ts b/yunchbite-redesign/site/src/components/motion/gsap.ts
+index f320547..ca9505a 100644
+--- a/yunchbite-redesign/site/src/components/motion/gsap.ts
++++ b/yunchbite-redesign/site/src/components/motion/gsap.ts
+@@ -1,15 +1,44 @@
+ "use client";
+ // Single place where GSAP plugins are registered. Client-only: import from client components.
++//
++// ScrollTrigger (with Observer, about 17 KB gzipped) is not needed for the first paint: every ScrollTrigger is created
++// in an idle job after first paint (see `defer` in entrance.ts), so it lives in its own chunk, loaded by
++// `loadScrollTrigger()` right before the first such job runs. `ScrollTrigger` is a live binding: it is `undefined`
++// until that promise has resolved, so only touch it inside deferred work (or after awaiting `loadScrollTrigger()`).
+ import gsap from "gsap";
+-import { ScrollTrigger } from "gsap/ScrollTrigger";
+ import { SplitText } from "gsap/SplitText";
+ import { useGSAP } from "@gsap/react";
++import type { ScrollTrigger as ScrollTriggerClass } from "gsap/ScrollTrigger";
+ 
+ let registered = false;
+ if (typeof window !== "undefined" && !registered) {
+-  gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
+-  ScrollTrigger.config({ ignoreMobileResize: true });
++  gsap.registerPlugin(SplitText, useGSAP);
+   registered = true;
+ }
+ 
+-export { gsap, ScrollTrigger, SplitText, useGSAP };
++export type ScrollTrigger = ScrollTriggerClass;
++export let ScrollTrigger: typeof ScrollTriggerClass = undefined as unknown as typeof ScrollTriggerClass;
++
++let stPromise: Promise<void> | null = null;
++/** Loads and registers ScrollTrigger once. Resolves immediately on later calls. */
++export function loadScrollTrigger(): Promise<void> {
++  stPromise ??= import("gsap/ScrollTrigger").then((m) => {
++    gsap.registerPlugin(m.ScrollTrigger);
++    m.ScrollTrigger.config({ ignoreMobileResize: true });
++    ScrollTrigger = m.ScrollTrigger;
++  });
++  return stPromise;
++}
++
++/**
++ * Primes GSAP's per-element transform cache for many elements in one read pass. GSAP reads the computed transform of each
++ * target the first time it animates it; when tweens are created one after another, every read lands after the previous
++ * tween's write and forces a style recalculation per element. Doing all the reads first costs a single recalculation.
++ */
++export function warm(targets: ArrayLike<Element | null | undefined> | Element | null | undefined) {
++  if (!targets) return;
++  const list = "length" in (targets as object) ? Array.from(targets as ArrayLike<Element | null | undefined>) : [targets as Element];
++  for (const t of list) if (t) gsap.getProperty(t, "x");
++}
++
++export { gsap, SplitText, useGSAP };
+diff --git a/yunchbite-redesign/site/src/components/motion/index.ts b/yunchbite-redesign/site/src/components/motion/index.ts
+index 6695100..b28ca22 100644
+--- a/yunchbite-redesign/site/src/components/motion/index.ts
++++ b/yunchbite-redesign/site/src/components/motion/index.ts
+@@ -1,4 +1,4 @@
+-export { gsap, ScrollTrigger, SplitText, useGSAP } from "./gsap";
++export { gsap, SplitText, useGSAP } from "./gsap";
+ export { SmoothScroll, useLenis } from "./SmoothScroll";
+ export { TypeIn } from "./TypeIn";
+ export { Reveal } from "./Reveal";
+diff --git a/yunchbite-redesign/site/src/components/pdp/DataCards.tsx b/yunchbite-redesign/site/src/components/pdp/DataCards.tsx
+index 4a67e2e..4b46faa 100644
+--- a/yunchbite-redesign/site/src/components/pdp/DataCards.tsx
++++ b/yunchbite-redesign/site/src/components/pdp/DataCards.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useId, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { whenInView } from "@/components/motion/entrance";
+ import { Container } from "@/components/ui/Container";
+ import { TypeIn } from "@/components/motion/TypeIn";
+ import { shapeSrc } from "@/lib/media";
+@@ -93,26 +94,22 @@ export function DataCards({ heading, tabLabels, servingLabel, factLabels, ingred
+           gsap.set(c, { x: 0, y: 90, rotate: (i - 1) * 16, scale: 0.9, opacity: 0, transformOrigin: "50% 90%" });
+           c.setAttribute("data-yb-ready", "");
+         });
+-        const st = gsap.timeline({
+-          scrollTrigger: {
+-            trigger: stack,
+-            start: "top 78%",
+-            once: true,
+-            onEnter: () => {
+-              entered.current = true;
+-              if (activeRef.current === 1) {
+-                const nut = el.querySelector<HTMLElement>('[data-card="nutrition"]');
+-                if (nut) gsap.delayedCall(0.5, () => playNutrition(nut));
+-              }
+-            },
+-          },
+-        });
+-        cards.forEach((c, i) => {
+-          const f = fan(rel(i, activeRef.current), wide.current);
+-          st.to(c, { ...f, opacity: 1, duration: dur.roast, ease: ease.roast }, i * 0.1);
++        let st: gsap.core.Timeline | null = null;
++        const stop = whenInView(stack, "top 78%", () => {
++          entered.current = true;
++          st = gsap.timeline();
++          cards.forEach((c, i) => {
++            const f = fan(rel(i, activeRef.current), wide.current);
++            st!.to(c, { ...f, opacity: 1, duration: dur.roast, ease: ease.roast }, i * 0.1);
++          });
++          if (activeRef.current === 1) {
++            const nut = el.querySelector<HTMLElement>('[data-card="nutrition"]');
++            if (nut) gsap.delayedCall(0.5, () => playNutrition(nut));
++          }
+         });
+         return () => {
+-          st.kill();
++          stop();
++          st?.kill();
+           gsap.set(cards, { clearProps: "transform,opacity" });
+         };
+       });
+diff --git a/yunchbite-redesign/site/src/components/pdp/PdpFlight.tsx b/yunchbite-redesign/site/src/components/pdp/PdpFlight.tsx
+index 7212bff..2635eb9 100644
+--- a/yunchbite-redesign/site/src/components/pdp/PdpFlight.tsx
++++ b/yunchbite-redesign/site/src/components/pdp/PdpFlight.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, type ReactNode } from "react";
+-import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
++import { gsap, ScrollTrigger, useGSAP, warm } from "@/components/motion/gsap";
++import { defer, entranceOn } from "@/components/motion/entrance";
+ import { popElement } from "@/components/motion/pop";
+ import { whenLoaderDone } from "@/components/motion/loader-gate";
+ import { dur, ease, mq } from "@/lib/tokens";
+@@ -50,9 +51,14 @@ export function PdpFlight({ children }: { children: ReactNode }) {
+       const mm = gsap.matchMedia();
+       mm.add(mq.reduce, () => marks.forEach((m) => m.setAttribute("data-yb-ready", "")));
+ 
+-      // ---- entrance --------------------------------------------------------------------------------------------
++      // ---- entrance (loader / client navigation only: on a hard load the hero is final in the server HTML) -------------
+       mm.add(mq.motion, () => {
++        if (!entranceOn()) {
++          marks.forEach((m) => m.setAttribute("data-yb-ready", ""));
++          return;
++        }
+         const viaTransition = viewTransitionActive();
++        warm(marks);
+         const tl = gsap.timeline({ paused: true });
+         if (disc) {
+           gsap.set(disc, { scale: 0.7, opacity: 0 });
+@@ -89,65 +95,92 @@ export function PdpFlight({ children }: { children: ReactNode }) {
+         };
+       });
+ 
+-      // ---- flight: desktop ---------------------------------------------------------------------------------------
++      // ---- flight: desktop (built after first paint; measurements are cached, the scroll handler does pure math) -------
+       mm.add(`${mq.motion} and (min-width: 1024px)`, () => {
+         const land = q("[data-land]");
+         if (!land) return;
+-        el.dataset.flight = "on";
+-        gsap.set(pack, { transformOrigin: "50% 50%" });
++        let st: ScrollTrigger | null = null;
++        const off = defer(() => {
++          el.dataset.flight = "on";
++          gsap.set(pack, { transformOrigin: "50% 50%" });
+ 
+-        const update = () => {
+-          const sr = slot.getBoundingClientRect();
+-          const lr = land.getBoundingClientRect();
+-          const hr = stage.getBoundingClientRect();
+-          const H = window.innerHeight;
+-          const s = window.scrollY;
+-          const slotC = { x: sr.left + sr.width / 2, y: sr.top + sr.height / 2 };
+-          const landC = { x: lr.left + lr.width / 2, y: lr.top + lr.height / 2 };
+-          const run = Math.max(hero.offsetHeight - stage.offsetHeight, 1);
+-          const sLand = Math.min(Math.max(sr.height > 0 ? lr.height / sr.height : 1, 0.2), 1.6);
+-          const sLandW = sr.width > 0 ? lr.width / sr.width : 1;
+-          const scaleLand = Math.min(sLand, sLandW);
++          // Cached geometry, in document / stage-relative coordinates (re-measured on every ScrollTrigger refresh).
++          let m = { H: 0, run: 1, heroTop: 0, slotX: 0, slotRelY: 0, titleRelY: 0, landX: 0, landY: 0, scaleLand: 1, w: 0 };
++          const measure = () => {
++            const s = window.scrollY;
++            const sr = slot.getBoundingClientRect();
++            const lr = land.getBoundingClientRect();
++            const hr = stage.getBoundingClientRect();
++            const hero0 = hero.getBoundingClientRect();
++            const tr = title?.getBoundingClientRect();
++            const H = window.innerHeight;
++            const sLand = Math.min(Math.max(sr.height > 0 ? lr.height / sr.height : 1, 0.2), 1.6);
++            const sLandW = sr.width > 0 ? lr.width / sr.width : 1;
++            m = {
++              H,
++              run: Math.max(hero.offsetHeight - stage.offsetHeight, 1),
++              heroTop: hero0.top + s,
++              slotX: sr.left + sr.width / 2,
++              slotRelY: sr.top + sr.height / 2 - hr.top,
++              titleRelY: tr ? tr.top + tr.height / 2 - hr.top : H * 0.28,
++              landX: lr.left + lr.width / 2,
++              landY: lr.top + lr.height / 2 + s,
++              scaleLand: Math.min(sLand, sLandW),
++              w: el.clientWidth,
++            };
++          };
+ 
+-          // Phase A: stage pinned. Pack rises across the title and tilts.
+-          const tr = title?.getBoundingClientRect();
+-          const titleRelY = tr ? tr.top + tr.height / 2 - hr.top : H * 0.28;
+-          const p1 = { x: slotC.x + (el.clientWidth * 0.1), y: hr.top + titleRelY + H * 0.1 };
+-          const a = clamp01(s / run);
+-          const eA = gsap.parseEase("power2.inOut")(a);
++          const update = (s: number) => {
++            const { H, run, heroTop, slotX, slotRelY, titleRelY, landX, landY, scaleLand, w } = m;
++            // the sticky stage's top edge in the viewport at scroll `s`
++            const stageTop = Math.min(Math.max(heroTop - s, 0), heroTop + run - s);
++            const slotY = stageTop + slotRelY;
++            const lY = landY - s;
+ 
+-          let x: number, y: number, rot: number, sc: number;
+-          if (s <= run) {
+-            x = lerp(slotC.x, p1.x, eA);
+-            y = lerp(slotC.y, p1.y, eA);
+-            rot = lerp(0, -16, eA);
+-            sc = lerp(1, 0.92, eA);
+-          } else {
+-            // Phase B: glide from the title to the landing slot (which scrolls up to meet it).
+-            const sEnd = landC.y + s - H * 0.52; // scroll position at which the slot sits at 52% of the viewport
+-            const b = clamp01((s - run) / Math.max(sEnd - run, H * 0.5));
+-            const eB = gsap.parseEase("power3.inOut")(b);
+-            // fixed start point = where phase A ended (stage still pinned at that instant: stage top 0)
+-            const startY = titleRelY + H * 0.1;
+-            const startX = slotC.x + el.clientWidth * 0.1;
+-            x = lerp(startX, landC.x, eB);
+-            y = lerp(startY, landC.y, eB);
+-            rot = lerp(-16, 0, gsap.parseEase("back.out(2.2)")(b));
+-            sc = lerp(0.92, scaleLand, eB);
+-          }
+-          gsap.set(pack, { x: x - slotC.x, y: y - slotC.y, rotation: rot, scale: sc });
+-        };
++            // Phase A: stage pinned. Pack rises across the title and tilts.
++            const p1 = { x: slotX + w * 0.1, y: stageTop + titleRelY + H * 0.1 };
++            const a = clamp01(s / run);
++            const eA = gsap.parseEase("power2.inOut")(a);
++
++            let x: number, y: number, rot: number, sc: number;
++            if (s <= run) {
++              x = lerp(slotX, p1.x, eA);
++              y = lerp(slotY, p1.y, eA);
++              rot = lerp(0, -16, eA);
++              sc = lerp(1, 0.92, eA);
++            } else {
++              // Phase B: glide from the title to the landing slot (which scrolls up to meet it).
++              const sEnd = landY - H * 0.52; // scroll position at which the slot sits at 52% of the viewport
++              const b = clamp01((s - run) / Math.max(sEnd - run, H * 0.5));
++              const eB = gsap.parseEase("power3.inOut")(b);
++              // fixed start point = where phase A ended (stage still pinned at that instant: stage top 0)
++              const startY = titleRelY + H * 0.1;
++              const startX = slotX + w * 0.1;
++              x = lerp(startX, landX, eB);
++              y = lerp(startY, lY, eB);
++              rot = lerp(-16, 0, gsap.parseEase("back.out(2.2)")(b));
++              sc = lerp(0.92, scaleLand, eB);
++            }
++            setPack(x - slotX, y - slotY, rot, sc);
++          };
++          const setPack = (x: number, y: number, rotation: number, scale: number) => gsap.set(pack, { x, y, rotation, scale });
+ 
+-        const st = ScrollTrigger.create({
+-          trigger: el,
+-          start: "top bottom",
+-          end: "bottom top",
+-          onUpdate: update,
+-          onRefresh: update,
++          measure();
++          st = ScrollTrigger.create({
++            trigger: el,
++            start: "top bottom",
++            end: "bottom top",
++            onUpdate: (self) => update(self.scroll()),
++            onRefresh: (self) => {
++              measure();
++              update(self.scroll());
++            },
++          });
++          update(window.scrollY);
+         });
+-        update();
+         return () => {
+-          st.kill();
++          off();
++          st?.kill();
+           delete el.dataset.flight;
+           gsap.set(pack, { clearProps: "transform,opacity" });
+         };
+@@ -155,14 +188,18 @@ export function PdpFlight({ children }: { children: ReactNode }) {
+ 
+       // ---- tablet / phone: a gentle tilt as the hero scrolls away -------------------------------------------------
+       mm.add(`${mq.motion} and (max-width: 1023px)`, () => {
+-        const tween = gsap.to(pack, {
+-          y: -50,
+-          rotation: -7,
+-          ease: "none",
+-          scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 0.5 },
++        let tween: gsap.core.Tween | null = null;
++        const off = defer(() => {
++          tween = gsap.to(pack, {
++            y: -50,
++            rotation: -7,
++            ease: "none",
++            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 0.5 },
++          });
+         });
+         return () => {
+-          tween.revert();
++          off();
++          tween?.revert();
+         };
+       });
+     },
+diff --git a/yunchbite-redesign/site/src/components/pdp/ProductHero.tsx b/yunchbite-redesign/site/src/components/pdp/ProductHero.tsx
+index da62639..342f99a 100644
+--- a/yunchbite-redesign/site/src/components/pdp/ProductHero.tsx
++++ b/yunchbite-redesign/site/src/components/pdp/ProductHero.tsx
+@@ -34,7 +34,7 @@ export function ProductHero({ product: p, flavour: f, category, copy }: ProductH
+         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+           <div
+             data-disc=""
+-            data-yb-anim=""
++            data-yb-anim="lcp"
+             className="absolute bottom-[-14%] left-1/2 aspect-square w-[min(118vw,max(46rem,96vh))] -translate-x-1/2 rounded-full bg-[color-mix(in_srgb,var(--flavour)_42%,var(--color-cream))]"
+           />
+         </div>
+@@ -63,10 +63,10 @@ export function ProductHero({ product: p, flavour: f, category, copy }: ProductH
+           <ViewTransition name="pdp-title" share="morph" default="none">
+             <TypeIn as="h1" text={p.name} trigger="load" className="display-type mt-3 block max-w-[16ch] text-[length:clamp(2.7rem,8.6vw,8.8rem)] leading-[0.86] md:max-w-[20ch]" />
+           </ViewTransition>
+-          <p data-in="sub" data-yb-anim="" className="mt-4 max-w-[52ch] text-[length:clamp(1rem,1.25vw,1.15rem)] text-ink/85">
++          <p data-in="sub" data-yb-anim="lcp" className="mt-4 max-w-[52ch] text-[length:clamp(1rem,1.25vw,1.15rem)] text-ink/85">
+             {p.description}
+           </p>
+-          <div data-in="chips" data-yb-anim="" className="mt-5 flex flex-wrap items-center justify-center gap-2">
++          <div data-in="chips" data-yb-anim="lcp" className="mt-5 flex flex-wrap items-center justify-center gap-2">
+             {p.bestseller && (
+               <Pill tone="yellow" className="border-ink/20">
+                 <Icon name="star" className="size-3.5 text-red" />
+@@ -92,16 +92,16 @@ export function ProductHero({ product: p, flavour: f, category, copy }: ProductH
+         <div className="relative z-10 mx-auto mt-4 flex w-full max-w-[var(--container-max)] flex-1 items-end justify-center">
+           <div data-slot="" className="relative h-[clamp(15rem,45vh,36rem)] min-h-[15rem] w-[min(78vw,30rem)] flex-none">
+             <div data-pack="" className="pointer-events-none absolute inset-0 will-change-transform">
+-              <div data-in="pack" data-yb-anim="" className="absolute inset-0">
++              <div data-in="pack" data-yb-anim="lcp" className="absolute inset-0">
+                 <PackImage product={p} morph priority size="hero" fit imgClassName="drop-shadow-[0_28px_32px_rgb(42_18_16/0.32)]" />
+               </div>
+             </div>
+           </div>
+-          <div data-in="aside" data-yb-anim="" className="pointer-events-none absolute bottom-6 left-0 hidden max-w-[17rem] text-left lg:block">
++          <div data-in="aside" data-yb-anim="lcp" className="pointer-events-none absolute bottom-6 left-0 hidden max-w-[17rem] text-left lg:block">
+             <p className="display-type text-[length:clamp(1.3rem,2vw,1.9rem)] leading-[1.02]">{f.tagline}</p>
+           </div>
+-          <div data-in="buddy" data-yb-anim="" aria-hidden="true" className="pointer-events-none absolute bottom-0 right-[2%] hidden w-[clamp(7rem,15vw,15rem)] sm:block lg:right-[6%]">
+-            <FlavourBuddy flavour={f} pose="peek" hand={{ x: -14, y: 58, size: 44, rotate: -14 }} priority />
++          <div data-in="buddy" data-yb-anim="lcp" aria-hidden="true" className="pointer-events-none absolute bottom-0 right-[2%] hidden w-[clamp(7rem,15vw,15rem)] sm:block lg:right-[6%]">
++            <FlavourBuddy flavour={f} pose="peek" hand={{ x: -14, y: 58, size: 44, rotate: -14 }} />
+           </div>
+         </div>
+       </div>
+diff --git a/yunchbite-redesign/site/src/components/pdp/TasteProfile.tsx b/yunchbite-redesign/site/src/components/pdp/TasteProfile.tsx
+index 149e518..771efc3 100644
+--- a/yunchbite-redesign/site/src/components/pdp/TasteProfile.tsx
++++ b/yunchbite-redesign/site/src/components/pdp/TasteProfile.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { whenInView } from "@/components/motion/entrance";
+ import { Container } from "@/components/ui/Container";
+ import { Section } from "@/components/ui/Section";
+ import { TypeIn } from "@/components/motion/TypeIn";
+@@ -33,13 +34,15 @@ export function TasteProfile({ heading, pairsHeading, scale, meters, taste, pair
+       mm.add(mq.motion, () => {
+         const fills = gsap.utils.toArray<HTMLElement>("[data-fill]", el);
+         gsap.set(fills, { scaleX: 0, transformOrigin: "0 50%" });
+-        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: reveal.start, once: true } });
++        const tl = gsap.timeline({ paused: true });
++        const stop = whenInView(el, reveal.start, () => tl.play());
+         fills.forEach((f) => {
+           const rowIdx = Number(f.dataset.row);
+           const idx = Number(f.dataset.idx);
+           tl.to(f, { scaleX: 1, duration: dur.move, ease: ease.roast }, rowIdx * 0.12 + idx * 0.07);
+         });
+         return () => {
++          stop();
+           tl.kill();
+           gsap.set(fills, { clearProps: "transform" });
+         };
+diff --git a/yunchbite-redesign/site/src/components/product/FlavourBuddy.tsx b/yunchbite-redesign/site/src/components/product/FlavourBuddy.tsx
+index 4d1bf1d..9e5fb24 100644
+--- a/yunchbite-redesign/site/src/components/product/FlavourBuddy.tsx
++++ b/yunchbite-redesign/site/src/components/product/FlavourBuddy.tsx
+@@ -62,6 +62,7 @@ export function FlavourBuddy({
+         alt=""
+         width={120}
+         height={120}
++        loading="lazy"
+         draggable={false}
+         className="pointer-events-none absolute select-none"
+         style={{
+diff --git a/yunchbite-redesign/site/src/components/product/PackImage.tsx b/yunchbite-redesign/site/src/components/product/PackImage.tsx
+index c5b8607..314d9a7 100644
+--- a/yunchbite-redesign/site/src/components/product/PackImage.tsx
++++ b/yunchbite-redesign/site/src/components/product/PackImage.tsx
+@@ -18,6 +18,8 @@ export interface PackImageProps {
+   sizes?: string;
+   /** Above-the-fold packs (hero, LCP). */
+   priority?: boolean;
++  /** In the first viewport but not the LCP image: load eagerly without fetchpriority=high. */
++  eager?: boolean;
+   /** Wrap in <ViewTransition name="pack-<slug>"> so a card pack morphs into the product hero. */
+   morph?: boolean;
+   /** Fill the parent box (object-contain, bottom aligned) instead of sizing by the pack's own aspect ratio. */
+@@ -29,7 +31,7 @@ export interface PackImageProps {
+ }
+ 
+ /** The pack cut-out. Fills its (relatively positioned) box and keeps the pack's aspect ratio. */
+-export function PackImage({ product, size = "md", sizes, priority, morph, fit, decorative, className, imgClassName }: PackImageProps) {
++export function PackImage({ product, size = "md", sizes, priority, eager, morph, fit, decorative, className, imgClassName }: PackImageProps) {
+   const pack = packSrc(product);
+   const img = (
+     <div className={cn("relative w-full", fit && "h-full", className)} style={fit ? undefined : { aspectRatio: `${pack.width} / ${pack.height}` }}>
+@@ -39,6 +41,7 @@ export function PackImage({ product, size = "md", sizes, priority, morph, fit, d
+         fill
+         sizes={sizes ?? SIZES[size]}
+         priority={priority}
++        loading={eager && !priority ? "eager" : undefined}
+         className={cn("object-contain", fit && "object-bottom", imgClassName)}
+       />
+     </div>
+diff --git a/yunchbite-redesign/site/src/components/products/CategoryBand.tsx b/yunchbite-redesign/site/src/components/products/CategoryBand.tsx
+index 36f9bea..a440943 100644
+--- a/yunchbite-redesign/site/src/components/products/CategoryBand.tsx
++++ b/yunchbite-redesign/site/src/components/products/CategoryBand.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { Container } from "@/components/ui/Container";
+ import { Section } from "@/components/ui/Section";
+ import { ButtonLink } from "@/components/ui/ButtonLink";
+@@ -47,13 +48,16 @@ export function CategoryBand({ name, href, subline, statement, color, ink, cta,
+       const el = root.current;
+       if (!el) return;
+       const mm = gsap.matchMedia();
+-      mm.add(mq.motion, () => {
++      mm.add(mq.motion, (_c, safe) => {
++        const off = deferIn(safe, () => {
+         el.querySelectorAll<HTMLElement>("[data-drift]").forEach((n) => {
+           const d = Number(n.dataset.drift);
+           gsap.fromTo(n, { y: -d }, { y: d, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.6 } });
+         });
+         const disc = el.querySelector("[data-disc]");
+         if (disc) gsap.fromTo(disc, { rotate: -25 }, { rotate: 25, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.6 } });
++        });
++        return () => off();
+       });
+     },
+     { scope: root },
+diff --git a/yunchbite-redesign/site/src/components/products/PodiumOpener.tsx b/yunchbite-redesign/site/src/components/products/PodiumOpener.tsx
+index 6d09fcf..b70bd4b 100644
+--- a/yunchbite-redesign/site/src/components/products/PodiumOpener.tsx
++++ b/yunchbite-redesign/site/src/components/products/PodiumOpener.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, type CSSProperties } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { entranceOn } from "@/components/motion/entrance";
+ import { RingBurst, type RingBurstHandle } from "@/components/motion/RingBurst";
+ import { TypeIn } from "@/components/motion/TypeIn";
+ import { DriftShapes } from "@/components/sections/DriftShapes";
+@@ -58,6 +59,11 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
+       const all = [...items, ...steps, ...(tag ? [tag] : [])];
+       mm.add(mq.reduce, () => all.forEach((n) => n.setAttribute("data-yb-ready", "")));
+       mm.add(mq.motion, () => {
++        if (!entranceOn()) {
++          // hard load: the opener is complete in the server HTML (LCP); entrances only play after a client navigation
++          all.forEach((n) => n.setAttribute("data-yb-ready", ""));
++          return;
++        }
+         const lead = variant === "podium" ? 2 : 0;
+         // order of arrival: lead pack first, then outwards (podium) / top-down (pyramid)
+         const order = items
+@@ -98,6 +104,7 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
+         fit
+         decorative
+         priority={priority}
++        eager={!priority}
+         sizes="(min-width: 1024px) 320px, 30vw"
+         imgClassName="drop-shadow-[0_18px_22px_rgb(42_18_16/0.3)]"
+       />
+@@ -119,7 +126,7 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
+         ) : (
+           <TypeIn as="h1" text={title} trigger="load" className="display-type text-[length:clamp(3rem,10.5vw,10rem)] leading-[0.86]" />
+         )}
+-        <p data-tagline="" data-yb-anim="" className="mt-4 max-w-[34ch] text-[length:clamp(1rem,1.5vw,1.3rem)] text-ink/80">
++        <p data-tagline="" data-yb-anim="lcp" className="mt-4 max-w-[34ch] text-[length:clamp(1rem,1.5vw,1.3rem)] text-ink/80">
+           {tagline}
+         </p>
+ 
+@@ -128,16 +135,16 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
+             {packs.slice(0, 5).map((p, i) => {
+               const s = PODIUM[i];
+               return (
+-                <div key={p.slug} data-slot="" data-yb-anim="" className="relative flex w-[19%] flex-col items-center">
++                <div key={p.slug} data-slot="" data-yb-anim="lcp" className="relative flex w-[19%] flex-col items-center">
+                   {i === 2 && (
+                     <div className="absolute left-1/2 top-[38%] aspect-square w-[130%] -translate-x-1/2 -translate-y-1/2">
+                       <RingBurst ref={ring} color={burst} />
+                     </div>
+                   )}
+-                  <div className="relative z-10 w-full">{pack(p, s.pack, true)}</div>
++                  <div className="relative z-10 w-full">{pack(p, s.pack, i === 2)}</div>
+                   <div
+                     data-step=""
+-                    data-yb-anim=""
++                    data-yb-anim="lcp"
+                     className="relative z-0 -mt-[1.5%] flex w-full items-start justify-center rounded-t-[22px] px-1 pt-3 text-[length:clamp(0.65rem,1.1vw,0.9rem)] font-bold uppercase tracking-wide"
+                     style={{ height: `calc(var(--u) * ${s.block})`, background: p.color, color: p.ink }}
+                   >
+@@ -159,13 +166,13 @@ export function PodiumOpener({ variant, title, tagline, packs, shapes, burst, ey
+                     const idx = n++;
+                     if (!p) return null;
+                     return (
+-                      <div key={p.slug} data-slot="" data-yb-anim="" className="relative" style={{ width: r === 0 ? "14%" : "min(17%, 16vh)" }}>
++                      <div key={p.slug} data-slot="" data-yb-anim="lcp" className="relative" style={{ width: r === 0 ? "14%" : "min(17%, 16vh)" }}>
+                         {idx === 0 && (
+                           <div className="absolute left-1/2 top-1/2 aspect-square w-[150%] -translate-x-1/2 -translate-y-1/2">
+                             <RingBurst ref={ring} color={burst} />
+                           </div>
+                         )}
+-                        {pack(p, r === 0 ? 14 : 12, idx < 3)}
++                        {pack(p, r === 0 ? 14 : 12, idx === 0)}
+                       </div>
+                     );
+                   })}
+diff --git a/yunchbite-redesign/site/src/components/products/PopGrid.tsx b/yunchbite-redesign/site/src/components/products/PopGrid.tsx
+index 003b8aa..0faa3a2 100644
+--- a/yunchbite-redesign/site/src/components/products/PopGrid.tsx
++++ b/yunchbite-redesign/site/src/components/products/PopGrid.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, type ElementType, type ReactNode } from "react";
+-import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
++import { gsap, useGSAP, warm } from "@/components/motion/gsap";
++import { marginFor, revealOnView } from "@/components/motion/entrance";
+ import { dur, ease, mq } from "@/lib/tokens";
+ 
+ /**
+@@ -17,16 +18,37 @@ export function PopGrid({ as: Tag = "ul", className, children, from = 0.84 }: {
+       mm.add(mq.reduce, () => el.setAttribute("data-yb-ready", ""));
+       mm.add(mq.motion, () => {
+         const items = Array.from(el.children) as HTMLElement[];
+-        gsap.set(items, { opacity: 0, scale: from, y: 36 });
++        warm(items);
++        const hold = (n: HTMLElement) => gsap.set(n, { opacity: 0, scale: from, y: 36 });
++        let pending: HTMLElement[] = [];
++        let raf = 0;
++        const flush = () => {
++          raf = 0;
++          const batch = pending;
++          pending = [];
++          gsap.to(batch, { opacity: 1, scale: 1, y: 0, duration: dur.pop + 0.3, ease: ease.crunch, stagger: 0.07, overwrite: true, clearProps: "transform,opacity" });
++        };
++        // Children below the fold are held (inline) until they are reached; the ones already in the first viewport stay as painted.
++        const stops = items.map((n) =>
++          revealOnView(n, {
++            margin: marginFor("top 90%"),
++            onWait: () => hold(n),
++            play: (instant) => {
++              n.removeAttribute("data-yb-ready");
++              if (instant) {
++                gsap.set(n, { clearProps: "transform,opacity" });
++                return;
++              }
++              pending.push(n);
++              if (!raf) raf = requestAnimationFrame(flush);
++            },
++          }),
++        );
+         el.setAttribute("data-yb-ready", "");
+-        const triggers = ScrollTrigger.batch(items, {
+-          start: "top 90%",
+-          once: true,
+-          onEnter: (batch) =>
+-            gsap.to(batch, { opacity: 1, scale: 1, y: 0, duration: dur.pop + 0.3, ease: ease.crunch, stagger: 0.07, overwrite: true, clearProps: "transform,opacity" }),
+-        });
+         return () => {
+-          triggers.forEach((t) => t.kill());
++          stops.forEach((s) => s());
++          if (raf) cancelAnimationFrame(raf);
++          gsap.killTweensOf(items);
+           gsap.set(items, { clearProps: "transform,opacity" });
+         };
+       });
+diff --git a/yunchbite-redesign/site/src/components/sections/ClaimStack.tsx b/yunchbite-redesign/site/src/components/sections/ClaimStack.tsx
+index 6b6b7e0..903d7f6 100644
+--- a/yunchbite-redesign/site/src/components/sections/ClaimStack.tsx
++++ b/yunchbite-redesign/site/src/components/sections/ClaimStack.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, type CSSProperties } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { Icon, type IconName } from "@/components/ui/Icon";
+ import { Container } from "@/components/ui/Container";
+ import { Eyebrow } from "@/components/ui/Eyebrow";
+@@ -99,7 +100,8 @@ export function ClaimStack({ items, title, eyebrow, shapes = DEFAULT_SHAPES, ton
+       const pinEl = pin.current;
+       if (!el || !pinEl) return;
+       const mm = gsap.matchMedia();
+-      mm.add(`(min-width: 768px) and ${mq.motion}`, () => {
++      mm.add(`(min-width: 768px) and ${mq.motion}`, (_c, safe) => {
++        const off = deferIn(safe, () => {
+         const cards = gsap.utils.toArray<HTMLElement>("[data-card]", el);
+         const dims = gsap.utils.toArray<HTMLElement>("[data-dim]", el);
+         const shapesEls = gsap.utils.toArray<HTMLElement>("[data-depth]", el);
+@@ -140,6 +142,8 @@ export function ClaimStack({ items, title, eyebrow, shapes = DEFAULT_SHAPES, ton
+           tl.scrollTrigger?.kill();
+           tl.kill();
+         };
++        });
++        return () => off();
+       });
+     },
+     { scope: root, dependencies: [count] },
+diff --git a/yunchbite-redesign/site/src/components/sections/DriftShapes.tsx b/yunchbite-redesign/site/src/components/sections/DriftShapes.tsx
+index ea1c6ed..51ad2d5 100644
+--- a/yunchbite-redesign/site/src/components/sections/DriftShapes.tsx
++++ b/yunchbite-redesign/site/src/components/sections/DriftShapes.tsx
+@@ -2,6 +2,7 @@
+ import { useRef } from "react";
+ import type { ShapeName } from "@/data/types";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { shapeSrc } from "@/lib/media";
+ import { mq } from "@/lib/tokens";
+ import { cn } from "@/lib/cn";
+@@ -32,7 +33,8 @@ export function DriftShapes({ shapes, className }: DriftShapesProps) {
+       const el = root.current;
+       if (!el) return;
+       const mm = gsap.matchMedia();
+-      mm.add(mq.motion, () => {
++      mm.add(mq.motion, (_c, safe) => {
++        const off = deferIn(safe, () => {
+         el.querySelectorAll<HTMLElement>("[data-drift]").forEach((s) => {
+           const d = Number(s.dataset.drift);
+           const spin = Number(s.dataset.spin);
+@@ -47,6 +49,8 @@ export function DriftShapes({ shapes, className }: DriftShapesProps) {
+             },
+           );
+         });
++        });
++        return () => off();
+       });
+     },
+     { scope: root },
+diff --git a/yunchbite-redesign/site/src/components/sections/FlavourStageView.tsx b/yunchbite-redesign/site/src/components/sections/FlavourStageView.tsx
+index 6399e61..7f6d529 100644
+--- a/yunchbite-redesign/site/src/components/sections/FlavourStageView.tsx
++++ b/yunchbite-redesign/site/src/components/sections/FlavourStageView.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { FlavourBuddy } from "@/components/product/FlavourBuddy";
+ import { PackImage } from "@/components/product/PackImage";
+ import { TransitionLink } from "@/components/ui/TransitionLink";
+@@ -119,8 +120,11 @@ export function FlavourStageView({
+       const safe = contextSafe as <T extends (...a: never[]) => unknown>(f: T) => T;
+       if (arch) {
+         const mm = gsap.matchMedia();
+-        mm.add(mq.motion, () => {
++        mm.add(mq.motion, (_c, safe) => {
++          const off = deferIn(safe, () => {
+           gsap.fromTo(el, { clipPath: ARCH_FROM }, { clipPath: ARCH, ease: "none", scrollTrigger: { trigger: el, start: "top 98%", end: "top 40%", scrub: true } });
++          });
++          return () => off();
+         });
+       }
+ 
+diff --git a/yunchbite-redesign/site/src/components/sections/InsetOpener.tsx b/yunchbite-redesign/site/src/components/sections/InsetOpener.tsx
+index d80cd2a..6a84f9e 100644
+--- a/yunchbite-redesign/site/src/components/sections/InsetOpener.tsx
++++ b/yunchbite-redesign/site/src/components/sections/InsetOpener.tsx
+@@ -2,6 +2,7 @@
+ import Image from "next/image";
+ import { useRef } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { TypeIn } from "@/components/motion/TypeIn";
+ import { Eyebrow } from "@/components/ui/Eyebrow";
+ import { mq } from "@/lib/tokens";
+@@ -36,9 +37,10 @@ export function InsetOpener({ title, eyebrow, subtitle, image, as = "h1", classN
+       const img = el.querySelector<HTMLElement>("[data-img]");
+       if (!media || !head || !img) return;
+       const mm = gsap.matchMedia();
+-      mm.add(`${mq.motion} and (min-width: 768px)`, () => build(FROM_DESKTOP));
+-      mm.add(`${mq.motion} and (max-width: 767px)`, () => build(FROM_MOBILE));
+-      function build(from: string) {
++      mm.add(`${mq.motion} and (min-width: 768px)`, (_c, safe) => build(FROM_DESKTOP, safe));
++      mm.add(`${mq.motion} and (max-width: 767px)`, (_c, safe) => build(FROM_MOBILE, safe));
++      function build(from: string, safe: gsap.ContextSafeFunc | undefined) {
++        return deferIn(safe, () => {
+         const tl = gsap.timeline({
+           defaults: { ease: "none" },
+           scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: 0.5 },
+@@ -46,6 +48,7 @@ export function InsetOpener({ title, eyebrow, subtitle, image, as = "h1", classN
+         tl.fromTo(media, { clipPath: from }, { clipPath: TO }, 0)
+           .fromTo(img, { scale: 1.25 }, { scale: 1 }, 0)
+           .to(head, { yPercent: -18, opacity: 0, scale: 0.94 }, 0.35);
++        });
+       }
+     },
+     { scope: root },
+@@ -66,7 +69,7 @@ export function InsetOpener({ title, eyebrow, subtitle, image, as = "h1", classN
+           data-media=""
+           className="relative mx-auto mt-8 aspect-[16/9] w-[calc(100%-2*var(--gutter))] overflow-hidden rounded-card motion-safe:absolute motion-safe:inset-0 motion-safe:mt-0 motion-safe:aspect-auto motion-safe:w-full motion-safe:rounded-none motion-safe:[clip-path:inset(46%_24%_6%_24%_round_28px)] motion-safe:max-md:[clip-path:inset(40%_7%_8%_7%_round_24px)]"
+         >
+-          <div data-img="" className="absolute inset-0">
++          <div data-img="" className="absolute inset-0 motion-safe:[transform:scale(1.25)]">
+             <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
+           </div>
+         </div>
+diff --git a/yunchbite-redesign/site/src/components/sections/PartnerBand.tsx b/yunchbite-redesign/site/src/components/sections/PartnerBand.tsx
+index 10d14c8..b90deec 100644
+--- a/yunchbite-redesign/site/src/components/sections/PartnerBand.tsx
++++ b/yunchbite-redesign/site/src/components/sections/PartnerBand.tsx
+@@ -38,7 +38,7 @@ export function PartnerBand({ variant = "full", behind, className }: PartnerBand
+       <DriftShapes shapes={["makhana-1", "makhana-4", "makhana-2", "olive"]} className="opacity-90" />
+       <Container className="relative z-10 grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+         <div>
+-          <Eyebrow className="mb-5 text-yellow">{partnerBand.eyebrow}</Eyebrow>
++          <Eyebrow className="mb-5 text-cream">{partnerBand.eyebrow}</Eyebrow>
+           <TypeIn as="h2" id="partner-band-heading" text={partnerBand.heading} className="display-type text-[length:clamp(2.6rem,5.6vw,5.5rem)] leading-[0.92]" />
+           <Reveal className="mt-9" delay={0.15}>
+             <ButtonLink href={href} variant="cream" size="lg">
+diff --git a/yunchbite-redesign/site/src/components/sections/ProcessPath.tsx b/yunchbite-redesign/site/src/components/sections/ProcessPath.tsx
+index cc089db..fabee5f 100644
+--- a/yunchbite-redesign/site/src/components/sections/ProcessPath.tsx
++++ b/yunchbite-redesign/site/src/components/sections/ProcessPath.tsx
+@@ -2,6 +2,7 @@
+ import { useRef, type CSSProperties } from "react";
+ import Image from "next/image";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { Container } from "@/components/ui/Container";
+ import { Eyebrow } from "@/components/ui/Eyebrow";
+ import { TypeIn } from "@/components/motion/TypeIn";
+@@ -66,7 +67,8 @@ export function ProcessPath({ steps, title, eyebrow, tone = "soft", id, classNam
+       const st = stage.current;
+       if (!el || !st) return;
+       const mm = gsap.matchMedia();
+-      mm.add(`(min-width: 768px) and ${mq.motion}`, () => {
++      mm.add(`(min-width: 768px) and ${mq.motion}`, (_c, safe) => {
++        const off = deferIn(safe, () => {
+         const cards = gsap.utils.toArray<HTMLElement>("[data-step]", el);
+         const walker = el.querySelector<HTMLElement>("[data-walker]");
+         const bob = el.querySelector<HTMLElement>("[data-bob]");
+@@ -127,6 +129,8 @@ export function ProcessPath({ steps, title, eyebrow, tone = "soft", id, classNam
+           tl.kill();
+           gsap.set([...cards, walker, bob].filter(Boolean) as HTMLElement[], { clearProps: "all" });
+         };
++        });
++        return () => off();
+       });
+     },
+     { scope: root, dependencies: [count] },
+diff --git a/yunchbite-redesign/site/src/components/ui/ArchReveal.tsx b/yunchbite-redesign/site/src/components/ui/ArchReveal.tsx
+index 8386ab8..c304410 100644
+--- a/yunchbite-redesign/site/src/components/ui/ArchReveal.tsx
++++ b/yunchbite-redesign/site/src/components/ui/ArchReveal.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { useRef, type CSSProperties, type ElementType, type ReactNode } from "react";
+ import { gsap, useGSAP } from "@/components/motion/gsap";
++import { deferIn } from "@/components/motion/entrance";
+ import { mq } from "@/lib/tokens";
+ 
+ // Final (resting) arch. The CSS class in globals-free inline style keeps SSR output identical to the end state.
+@@ -28,7 +29,8 @@ export function ArchReveal({ as: Tag = "section", behind, className, style, head
+       const el = ref.current;
+       if (!el) return;
+       const mm = gsap.matchMedia();
+-      mm.add(mq.motion, () => {
++      mm.add(mq.motion, (_c, safe) => {
++        const off = deferIn(safe, () => {
+         gsap.fromTo(
+           el,
+           { clipPath: ARCH_FROM },
+@@ -38,6 +40,8 @@ export function ArchReveal({ as: Tag = "section", behind, className, style, head
+             scrollTrigger: { trigger: el, start: "top 98%", end: "top 40%", scrub: true },
+           },
+         );
++        });
++        return () => off();
+       });
+     },
+     { scope: ref },
+diff --git a/yunchbite-redesign/site/tests/home.spec.ts b/yunchbite-redesign/site/tests/home.spec.ts
+index 1183d7a..3c8bec1 100644
+--- a/yunchbite-redesign/site/tests/home.spec.ts
++++ b/yunchbite-redesign/site/tests/home.spec.ts
+@@ -237,3 +237,19 @@ test("390 px: no horizontal scroll and nothing wider than the viewport", async (
+   expect(overflow.bw).toBeLessThanOrEqual(overflow.iw);
+   await expect(page.locator("main h1")).toBeVisible();
+ });
++
++test("LCP-safe: on a hard load the hero is visible from the server HTML, before any JS runs", async ({ page }) => {
++  await noLoader(page);
++  await page.route("**/_next/static/**/*.js", (r) => r.abort()); // hydration never happens
++  await page.goto("/", { waitUntil: "domcontentloaded" });
++  await page.waitForTimeout(400);
++  const hidden = await page.evaluate(() =>
++    Array.from(document.querySelectorAll<HTMLElement>("main [data-yb-anim='lcp']"))
++      .filter((el) => getComputedStyle(el).opacity === "0")
++      .map((el) => el.tagName + "." + el.className.slice(0, 30)),
++  );
++  expect(hidden).toEqual([]);
++  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
++  await expect(page.locator("[data-pack]").first()).toBeVisible();
++  expect(await page.locator("[data-pack]").first().evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
++});
+diff --git a/yunchbite-redesign/site/tests/products.spec.ts b/yunchbite-redesign/site/tests/products.spec.ts
+index c39ead0..4ca888a 100644
+--- a/yunchbite-redesign/site/tests/products.spec.ts
++++ b/yunchbite-redesign/site/tests/products.spec.ts
+@@ -230,3 +230,13 @@ for (const path of ["/products", "/categories/makhana", "/categories/dry-fruits"
+     expect(bad.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).slice(0, 3).join(" | ")}`)).toEqual([]);
+   });
+ }
++
++test("LCP-safe: PDP hero (title, sub-line, chips, pack) is visible before any JS runs on a hard load", async ({ page }) => {
++  await noLoader(page);
++  await page.route("**/_next/static/**/*.js", (r) => r.abort());
++  await page.goto("/products/makhana-zipper-peri-peri", { waitUntil: "domcontentloaded" });
++  await page.waitForTimeout(400);
++  for (const sel of ["h1", "[data-in=sub]", "[data-in=chips]", "[data-in=pack]"]) {
++    expect(await page.locator(sel).first().evaluate((el) => getComputedStyle(el).opacity), sel).toBe("1");
++  }
++});

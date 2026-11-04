@@ -1,7 +1,6 @@
 "use client";
 import { useRef, type CSSProperties } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
-import { deferIn } from "@/components/motion/entrance";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -100,8 +99,7 @@ export function ClaimStack({ items, title, eyebrow, shapes = DEFAULT_SHAPES, ton
       const pinEl = pin.current;
       if (!el || !pinEl) return;
       const mm = gsap.matchMedia();
-      mm.add(`(min-width: 768px) and ${mq.motion}`, (_c, safe) => {
-        const off = deferIn(safe, () => {
+      mm.add(`(min-width: 768px) and ${mq.motion}`, () => {
         const cards = gsap.utils.toArray<HTMLElement>("[data-card]", el);
         const dims = gsap.utils.toArray<HTMLElement>("[data-dim]", el);
         const shapesEls = gsap.utils.toArray<HTMLElement>("[data-depth]", el);
@@ -142,8 +140,6 @@ export function ClaimStack({ items, title, eyebrow, shapes = DEFAULT_SHAPES, ton
           tl.scrollTrigger?.kill();
           tl.kill();
         };
-        });
-        return () => off();
       });
     },
     { scope: root, dependencies: [count] },

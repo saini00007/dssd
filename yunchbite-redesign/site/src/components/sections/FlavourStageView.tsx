@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
-import { deferIn } from "@/components/motion/entrance";
 import { FlavourBuddy } from "@/components/product/FlavourBuddy";
 import { PackImage } from "@/components/product/PackImage";
 import { TransitionLink } from "@/components/ui/TransitionLink";
@@ -120,11 +119,8 @@ export function FlavourStageView({
       const safe = contextSafe as <T extends (...a: never[]) => unknown>(f: T) => T;
       if (arch) {
         const mm = gsap.matchMedia();
-        mm.add(mq.motion, (_c, safe) => {
-          const off = deferIn(safe, () => {
+        mm.add(mq.motion, () => {
           gsap.fromTo(el, { clipPath: ARCH_FROM }, { clipPath: ARCH, ease: "none", scrollTrigger: { trigger: el, start: "top 98%", end: "top 40%", scrub: true } });
-          });
-          return () => off();
         });
       }
 

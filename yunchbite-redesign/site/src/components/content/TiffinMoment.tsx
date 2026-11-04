@@ -1,7 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/components/motion/gsap";
-import { whenInView } from "@/components/motion/entrance";
+import { gsap, ScrollTrigger, useGSAP } from "@/components/motion/gsap";
 import { shapeSrc } from "@/lib/media";
 import { mq } from "@/lib/tokens";
 
@@ -34,12 +33,12 @@ export function TiffinMoment({ className }: { className?: string }) {
         const tl = gsap.timeline({ paused: true });
         tl.to(lid, { x: 30, y: -38, rotation: 16, duration: 0.45, ease: "back.out(2.2)" })
           .to(kernels, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(2)", stagger: 0.07 }, "-=0.2");
-        const stop = whenInView(el, "top 70%", () => tl.play());
+        const st = ScrollTrigger.create({ trigger: el, start: "top 70%", once: true, onEnter: () => tl.play() });
         // gentle bob once open
         const bob = gsap.to(kernels, { y: "-=6", duration: 1.6, ease: "sine.inOut", yoyo: true, repeat: -1, stagger: { each: 0.2, from: "random" }, paused: true });
         tl.eventCallback("onComplete", () => void bob.play());
         return () => {
-          stop();
+          st.kill();
           tl.kill();
           bob.kill();
         };
