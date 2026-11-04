@@ -1,0 +1,25 @@
+{
+  "name": "site-walkthrough",
+  "site": "_yunchbite-new",
+  "url": "http://localhost:3200/",
+  "profile": "desktop",
+  "steps": [
+    { "do": "wait", "ms": 4500, "label": "first visit: makhana-pop loader, then hero entrance" },
+    { "do": "move", "x": 1000, "y": 500, "ms": 800 },
+    { "do": "wheel", "dy": 100, "every": 110, "forMs": 2600, "label": "scroll to the flavour stage" },
+    { "do": "wait", "ms": 1200 },
+    { "do": "click", "selector": "[aria-label*='Next' i]", "ms": 1800, "label": "next flavour" },
+    { "do": "click", "selector": "[aria-label*='Next' i]", "ms": 1800, "label": "next flavour" },
+    { "do": "click", "selector": "[aria-label*='Next' i]", "ms": 1800, "label": "next flavour" },
+    { "do": "wheel", "dy": 100, "every": 110, "forMs": 14000, "label": "scroll: Jindgi wipe, claim stack, categories, process path" },
+    { "do": "wheel", "dy": 100, "every": 110, "forMs": 9000, "label": "scroll: occasions, bestsellers, Buddy, partner band" },
+    { "do": "goto", "url": "http://localhost:3200/categories/makhana", "label": "category page" },
+    { "do": "wait", "ms": 2500 },
+    { "do": "wheel", "dy": 100, "every": 110, "forMs": 4000 },
+    { "do": "click", "selector": "a[href='/products/makhana-zipper-peri-peri']", "ms": 3500, "label": "pack card -> product page (morph)" },
+    { "do": "wheel", "dy": 100, "every": 110, "forMs": 9000, "label": "product page: pack flight, data cards, taste" },
+    { "do": "click", "selector": "header button[aria-haspopup], header button:has-text('Menu')", "ms": 2500, "label": "open menu" },
+    { "do": "click", "text": "About", "exact": true, "ms": 3500, "label": "menu -> About" },
+    { "do": "wheel", "dy": 100, "every": 110, "forMs": 12000, "label": "About: opener, YAN + CHI = YUNCH, journey" }
+  ]
+}
