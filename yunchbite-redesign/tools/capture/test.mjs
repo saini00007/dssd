@@ -23,7 +23,7 @@ const server = await startServer({ port: 0 });
 const started = Date.now();
 let run;
 try {
-  run = await capture([`${server.url}/motion-lab/`, '--out', out, '--profiles', profiles.join(','), '--step', '0.75']);
+  run = await capture([`${server.url}/motion-lab/`, '--out', out, '--profiles', profiles.join(','), '--step', '0.75', '--budget', '900']);
 } finally {
   await server.close();
 }

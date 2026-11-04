@@ -34,7 +34,7 @@ export async function settle(page, timeoutMs) {
     if (q.finite === 0 && q.tweens === 0 && !q.lenisScrolling && q.y === prevY) return { how: 'no running animations', ms: Date.now() - start };
     prevY = q.y;
     // Not quiet by DOM measures: fall back to comparing screenshots once the quick checks had a chance.
-    if (Date.now() - start > 600) {
+    if (Date.now() - start > 1800) {
       const hash = crypto.createHash('md5').update(await page.screenshot({ type: 'jpeg', quality: 40, scale: 'css' })).digest('hex');
       if (hash === prevHash) return { how: 'identical frames', ms: Date.now() - start };
       prevHash = hash;

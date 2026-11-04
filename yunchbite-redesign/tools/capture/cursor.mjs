@@ -201,7 +201,7 @@ export async function runCursor(run) {
       const ambient = Math.hypot(a2[i][0] - a1[i][0], a2[i][1] - a1[i][1]);
       const dx = b1[i][0] - a1[i][0];
       const dy = b1[i][1] - a1[i][1];
-      if (followerSel.has(pinfo.sel[i])) continue;
+      if (followerSel.has(pinfo.sel[i]) || (Math.abs(dx - (B.x - A.x)) < 0.15 * (B.x - A.x) && Math.abs(dy - (B.y - A.y)) < 0.15 * (B.y - A.y))) continue; // the cursor itself
       if (ambient > 1.5) continue; // moves on its own (CSS/JS loop): not pointer-driven
       if (Math.hypot(dx, dy) < 3) continue;
       moved.push({ i, selector: pinfo.sel[i], dx: round(dx, 1), dy: round(dy, 1), midway: { dx: round(mids[0][i][0] - a1[i][0], 1), dy: round(mids[0][i][1] - a1[i][1], 1) } });
@@ -221,7 +221,7 @@ export async function runCursor(run) {
     log('cursor', layers.length ? `parallax layers: ${layers.length}` : 'no pointer-driven parallax found');
 
     // ---- 3. magnetic elements: move while the pointer approaches but has not entered yet
-    const cands = (await page.evaluate(magneticCandidatesInPage)).slice(0, 6);
+    const cands = (await page.evaluate(magneticCandidatesInPage)).slice(0, 4);
     for (const c of cands) {
       if (Date.now() > deadline) break;
       const handle = await page.evaluateHandle((i) => window.__cap.magEls[i], c.i);
@@ -241,7 +241,7 @@ export async function runCursor(run) {
           return px > 40 && px < vp.width - 40 && py > 40 && py < vp.height - 40;
         }) || dirs[0];
         const track = [];
-        for (const d of [260, 180, 120, 70, 35]) {
+        for (const d of [240, 150, 80, 35]) {
           const px = c0.x + dir[0] * (c0.w / 2 + d);
           const py = c0.y + dir[1] * (c0.h / 2 + d);
           if (px < 2 || px > vp.width - 2 || py < 2 || py > vp.height - 2) continue;

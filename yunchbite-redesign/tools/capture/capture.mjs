@@ -25,7 +25,7 @@ const HELP = `Usage: node capture/capture.mjs <url> [options]
   --max-hovers <n>       hover elements to capture (default 24)
   --scroll-speed <px/s>  wheel speed for the scroll video (default 900)
   --intro-wait <ms>      time after navigation to let loaders/intros play (default 4000)
-  --budget <sec>         time budget per profile (default 360); later passes are skipped when spent
+  --budget <sec>         time budget per profile (default 420); later passes are skipped when spent
   --scroll-max <sec>     cap on the scroll-down phase (default 150)
   --step <fraction>      scroll-steps increment in viewports (default 0.5)
   --max-steps <n>        cap on step screenshots (default 80)
@@ -47,7 +47,7 @@ function parseCli(argv) {
     options: {
       out: { type: 'string' }, label: { type: 'string' }, profiles: { type: 'string', default: 'desktop,mobile' }, passes: { type: 'string', default: 'all' },
       'max-hovers': { type: 'string', default: '24' }, 'scroll-speed': { type: 'string', default: '900' }, 'intro-wait': { type: 'string', default: '4000' },
-      budget: { type: 'string', default: '360' }, 'scroll-max': { type: 'string', default: '150' }, step: { type: 'string', default: '0.5' }, 'max-steps': { type: 'string', default: '80' },
+      budget: { type: 'string', default: '420' }, 'scroll-max': { type: 'string', default: '150' }, step: { type: 'string', default: '0.5' }, 'max-steps': { type: 'string', default: '80' },
       'scene-threshold': { type: 'string', default: '0.08' }, 'max-keyframes': { type: 'string', default: '60' }, 'sheet-fps': { type: 'string', default: '4' }, 'full-page-cap': { type: 'string', default: '20000' },
       help: { type: 'boolean', short: 'h' },
     },

@@ -6,7 +6,7 @@ motion stack and design tokens.
 
 ```
 node capture/capture.mjs <url> [--out <dir>] [--profiles desktop,mobile] [--passes all|probe,scroll,frames,steps,hover,cursor,transition]
-                         [--max-hovers 24] [--scroll-speed 900] [--label name] [--intro-wait 4000] [--budget 360]
+                         [--max-hovers 24] [--scroll-speed 900] [--label name] [--intro-wait 4000] [--budget 420]
 node capture/capture.mjs --help          # all options
 node capture/test.mjs                    # regression test against fixtures/motion-lab (PROFILES=desktop for a quick run)
 node fixtures/serve.mjs --port 4173      # serve the fixtures by hand (http://127.0.0.1:4173/motion-lab/)
@@ -14,7 +14,7 @@ node fixtures/serve.mjs --port 4173      # serve the fixtures by hand (http://12
 
 Default output: `research/references/<slug of host+path>/` (`--label` replaces the slug). Passes are independent and
 failure-isolated; a crash is recorded in `<profile>/status.json` and the report, the other passes still run.
-Each profile has a time budget (`--budget`, default 360 s); passes that would start after it are skipped.
+Each profile has a time budget (`--budget`, default 420 s); passes that would start after it are skipped.
 Exit code: 0 ok, 1 usage/fatal error, 2 site blocked.
 
 ## What each pass writes (`<out>/<profile>/`)
