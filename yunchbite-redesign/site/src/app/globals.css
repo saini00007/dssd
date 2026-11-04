@@ -1,26 +1,408 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ */
+/* Design tokens (mirrored in src/lib/tokens.ts)                       */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-red: #d61610;
+  --color-red-deep: #ba0403;
+  --color-maroon: #8b1313;
+  --color-maroon-deep: #5a0b0b;
+  --color-yellow: #ffd200;
+  --color-cream: #fffdf5;
+  --color-cream-2: #fbefd9;
+  --color-makhana: #f1c396;
+  --color-ink: #2a1210;
+  /* Decorative flavour accent, set per component via style={{ "--flavour": … }} */
+  --color-flavour: var(--flavour, #d61610);
+  --color-flavour-ink: var(--flavour-ink, #fffdf5);
+
+  --font-display: var(--font-bricolage), "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-dm-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-hero: clamp(3.5rem, 11vw, 11rem);
+  --text-hero--line-height: 0.88;
+  --text-display: clamp(2.75rem, 7vw, 7rem);
+  --text-display--line-height: 0.92;
+  --text-h2: clamp(2rem, 4vw, 3.75rem);
+  --text-h2--line-height: 1;
+  --text-h3: clamp(1.4rem, 2vw, 2rem);
+  --text-h3--line-height: 1.1;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+
+  --radius-pill: 999px;
+  --radius-card: 28px;
+  --radius-small: 14px;
+
+  --ease-roast: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-crunch: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-glide: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+
+  --dur-micro: 120ms;
+  --dur-quick: 220ms;
+  --dur-pop: 380ms;
+  --dur-move: 600ms;
+  --dur-roast: 900ms;
+  --dur-switch: 1000ms;
+
+  --shadow-lift: 0 18px 40px -18px rgb(42 18 16 / 0.35);
+  --shadow-pill: 0 6px 24px -8px rgb(42 18 16 / 0.28);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --container-max: 1440px;
+  --gutter: 20px;
+  --section-y: clamp(4rem, 10vw, 9rem);
+  --header-h: 72px;
+  color-scheme: light;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (min-width: 768px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --gutter: 40px;
+    --header-h: 88px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+    overflow-x: clip;
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    font-variant-numeric: lining-nums;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  p,
+  li {
+    text-wrap: pretty;
+  }
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+  button,
+  [role="button"],
+  summary,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button {
+    cursor: pointer;
+  }
+  ::selection {
+    background: var(--color-yellow);
+    color: var(--color-ink);
+  }
+
+  /* Focus: red on light, yellow on dark. Never removed. */
+  :focus-visible {
+    outline: 3px solid var(--color-red);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  [data-header-theme="dark"] :focus-visible,
+  .on-dark :focus-visible,
+  :focus-visible.on-dark {
+    outline-color: var(--color-yellow);
+  }
+
+  /* Numbers: tabular where it matters (prices, nutrition) */
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
+
+/* Lenis (inlined from lenis/dist/lenis.css) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                           */
+/* ------------------------------------------------------------------ */
+/* Display type: the brand headline voice (caps, heavy, condensed). */
+@utility display-type {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 80%;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+}
+
+/* Giant outline text. Falls back to a solid colour where text-stroke is unsupported. */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: var(--stroke, 2px) var(--stroke-color, currentColor);
+  paint-order: stroke fill;
+}
+@supports not (-webkit-text-stroke: 1px black) {
+  .text-outline {
+    color: var(--stroke-color, currentColor);
+    opacity: 0.25;
+  }
+}
+
+@utility px-gutter {
+  padding-inline: var(--gutter);
+}
+@utility py-section {
+  padding-block: var(--section-y);
+}
+
+/* ------------------------------------------------------------------ */
+/* Animation hide-until-ready                                          */
+/* Content is always in the HTML. Elements that GSAP will animate are  */
+/* held invisible only after the inline <head> script sets data-js and */
+/* only until their effect marks them ready. A CSS failsafe reveals    */
+/* them if JS never arrives.                                           */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] [data-yb-anim]:not([data-yb-ready]) {
+    opacity: 0;
+    animation: yb-failsafe 0.01s 3s forwards;
+  }
+  html[data-js] [data-yb-anim="children"]:not([data-yb-ready]) {
+    opacity: 1;
+    animation: none;
+  }
+  html[data-js] [data-yb-anim="children"]:not([data-yb-ready]) > * {
+    opacity: 0;
+    animation: yb-failsafe 0.01s 3s forwards;
+  }
+}
+@keyframes yb-failsafe {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Loader shell (G-01). Visible only when the head script flags it.    */
+/* ------------------------------------------------------------------ */
+.yb-loader {
+  display: none;
+}
+html[data-yb-loader="on"] .yb-loader {
+  display: block;
+  animation: yb-loader-failsafe 0.01s 4.5s forwards;
+}
+@keyframes yb-loader-failsafe {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Rolling label (MENU <-> CLOSE) and other CSS-driven micro motion    */
+/* ------------------------------------------------------------------ */
+.roll-col {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.15em;
+  line-height: 1.15;
+  vertical-align: top;
+}
+.roll-col > span {
+  display: block;
+  transition: transform var(--dur-move) var(--ease-roast);
+  transition-delay: calc(var(--i, 0) * 28ms);
+}
+[data-open="true"] .roll-col > span {
+  transform: translateY(-100%);
+}
+
+@keyframes yb-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.yb-marquee-track {
+  animation: yb-marquee var(--marquee-dur, 40s) linear infinite;
+  will-change: transform;
+}
+.yb-marquee:hover .yb-marquee-track,
+.yb-marquee:focus-within .yb-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .yb-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
+  .yb-marquee-track [data-dup] {
+    display: none;
+  }
+}
+
+/* Visually-hidden but focusable skip link */
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -80px;
+  z-index: 200;
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  font-weight: 700;
+  transition: top var(--dur-quick) var(--ease-glide);
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Page transitions (React <ViewTransition>)                           */
+/* "curtain": the old page dims and settles back while the new page    */
+/* wipes up over it. "curtain-back": the same, wiping downward.        */
+/* ------------------------------------------------------------------ */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(root) {
+  animation: none;
+}
+
+/* Header stays put (and above the curtain) during page transitions. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(.curtain-out),
+::view-transition-old(.curtain-out-back) {
+  animation: yb-curtain-old var(--dur-move) var(--ease-roast) both;
+  transform-origin: 50% 50%;
+}
+::view-transition-new(.curtain-in) {
+  animation: yb-curtain-new var(--dur-move) var(--ease-roast) both;
+}
+::view-transition-new(.curtain-in-back) {
+  animation: yb-curtain-new-back var(--dur-move) var(--ease-roast) both;
+}
+@keyframes yb-curtain-old {
+  to {
+    transform: scale(0.98);
+    filter: brightness(0.72) saturate(0.9);
+  }
+}
+@keyframes yb-curtain-new {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes yb-curtain-new-back {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Shared pack morph (PackCard -> product hero) */
+::view-transition-group(.morph) {
+  animation-duration: 500ms;
+  animation-timing-function: var(--ease-roast);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: yb-via-blur;
+}
+@keyframes yb-via-blur {
+  35% {
+    filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.curtain-out),
+  ::view-transition-old(.curtain-out-back) {
+    animation: none;
+  }
+  ::view-transition-new(.curtain-in),
+  ::view-transition-new(.curtain-in-back) {
+    animation: yb-fade-in 150ms linear both;
+  }
+  ::view-transition-group(.morph) {
+    animation-duration: 0.01ms;
+  }
+  ::view-transition-image-pair(.morph) {
+    animation-name: none;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+@keyframes yb-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

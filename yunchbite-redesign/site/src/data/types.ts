@@ -1,6 +1,8 @@
 // Shared content types: the contract between data, assets and components.
 // Owned by the coordinator; change only with the coordinator's approval.
 
+import type { FlavourKey } from "./keys";
+
 export type CategoryKey = "makhana" | "popcorn" | "dry-fruits";
 
 /** Pack formats. Product pages exist per format (existing URLs). */
@@ -42,7 +44,7 @@ export interface TasteProfile {
 }
 
 export interface Flavour {
-  key: string; // e.g. "peri-peri"
+  key: FlavourKey; // e.g. "peri-peri"
   name: string; // "Peri-Peri Paradise" (clean spelling)
   category: CategoryKey;
   /** Pack colour sampled from the real pack photo (or provisional, see colorSource). */
@@ -68,7 +70,7 @@ export interface Product {
   slug: string;
   /** Clean display name, e.g. "Peri-Peri Paradise" */
   name: string;
-  flavourKey: string;
+  flavourKey: FlavourKey;
   category: CategoryKey;
   format: Format;
   /** "Zipper Pouch", "Pillow Pouch", "Jar", "Raw", "Pouch" */
