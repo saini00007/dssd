@@ -1,0 +1,99 @@
+{
+  "index": 6,
+  "dir": "hover/06-privacy-cookies",
+  "selector": "a.site-legal__link",
+  "tag": "a",
+  "text": "Privacy & Cookies",
+  "instancesOnPage": 1,
+  "hasHoverRule": true,
+  "rect": {
+    "x": 24,
+    "y": 859,
+    "width": 111,
+    "height": 22
+  },
+  "changedProperties": [
+    "opacity"
+  ],
+  "driver": "css transition",
+  "transitionSpec": {
+    "self": {
+      "transitionProperty": "opacity",
+      "transitionDuration": "0.25s",
+      "transitionTimingFunction": "ease",
+      "transitionDelay": "0s"
+    }
+  },
+  "liveDrivers": {
+    "css": [],
+    "gsap": []
+  },
+  "movedBeforeEntering": false,
+  "filmstrip": "hover/06-privacy-cookies/filmstrip.jpg",
+  "frames": [
+    {
+      "file": "f0-before.jpg",
+      "label": "before",
+      "ms": null
+    },
+    {
+      "file": "f1-in-0000ms.jpg",
+      "label": "in 0ms",
+      "ms": 0,
+      "actualMs": 420
+    },
+    {
+      "file": "f2-in-0080ms.jpg",
+      "label": "in 80ms",
+      "ms": 80,
+      "actualMs": 2195
+    },
+    {
+      "file": "f3-in-0160ms.jpg",
+      "label": "in 160ms",
+      "ms": 160,
+      "actualMs": 5784
+    },
+    {
+      "file": "f4-in-0320ms.jpg",
+      "label": "in 320ms",
+      "ms": 320,
+      "actualMs": 6357
+    },
+    {
+      "file": "f5-in-0600ms.jpg",
+      "label": "in 600ms",
+      "ms": 600,
+      "actualMs": 6596
+    },
+    {
+      "file": "f6-in-1000ms.jpg",
+      "label": "in 1000ms",
+      "ms": 1000,
+      "actualMs": 6785
+    },
+    {
+      "file": "f7-out-0060ms.jpg",
+      "label": "out 60ms",
+      "ms": 60,
+      "actualMs": 61
+    },
+    {
+      "file": "f8-out-0300ms.jpg",
+      "label": "out 300ms",
+      "ms": 300,
+      "actualMs": 877
+    }
+  ],
+  "diff": {
+    "self": {
+      "opacity": {
+        "from": "0.7",
+        "to": "1"
+      }
+    }
+  },
+  "diffOnApproach": {},
+  "ambientIgnored": {},
+  "note": "frame times are measured wall-clock from the mouse entering the element; screenshots themselves take ~30-100 ms in headless mode"
+}

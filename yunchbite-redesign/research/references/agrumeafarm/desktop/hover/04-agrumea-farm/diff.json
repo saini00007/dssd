@@ -1,0 +1,108 @@
+{
+  "index": 4,
+  "dir": "hover/04-agrumea-farm",
+  "selector": "div.site-header__brand.is-header-ready.is-revealed > a",
+  "tag": "a",
+  "text": "Agrumea Farm",
+  "instancesOnPage": 1,
+  "hasHoverRule": false,
+  "rect": {
+    "x": 653,
+    "y": 30,
+    "width": 135,
+    "height": 116
+  },
+  "changedProperties": [],
+  "driver": "css transition",
+  "transitionSpec": {
+    "child0 span.site-header__brand-track": {
+      "transitionProperty": "transform",
+      "transitionDuration": "0.9s",
+      "transitionTimingFunction": "cubic-bezier(0.645, 0.045, 0.355, 1)",
+      "transitionDelay": "0.1s"
+    },
+    "child2 g.site-logo-full__icon": {
+      "transitionProperty": "transform, opacity, color",
+      "transitionDuration": "0.78s, 0.28s, 0.28s",
+      "transitionTimingFunction": "cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1)",
+      "transitionDelay": "0s, 0s, 0s"
+    },
+    "child3 g.site-logo-full__farm": {
+      "transitionProperty": "transform, opacity, color",
+      "transitionDuration": "0.78s, 0.28s, 0.28s",
+      "transitionTimingFunction": "cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1)",
+      "transitionDelay": "0s, 0s, 0s"
+    },
+    "child4 g.site-logo-full__wordmark": {
+      "transitionProperty": "transform, opacity, color",
+      "transitionDuration": "0.78s, 0.28s, 0.28s",
+      "transitionTimingFunction": "cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1)",
+      "transitionDelay": "0s, 0s, 0s"
+    }
+  },
+  "liveDrivers": {
+    "css": [],
+    "gsap": []
+  },
+  "movedBeforeEntering": false,
+  "filmstrip": "hover/04-agrumea-farm/filmstrip.jpg",
+  "frames": [
+    {
+      "file": "f0-before.jpg",
+      "label": "before",
+      "ms": null
+    },
+    {
+      "file": "f1-in-0000ms.jpg",
+      "label": "in 0ms",
+      "ms": 0,
+      "actualMs": 404
+    },
+    {
+      "file": "f2-in-0080ms.jpg",
+      "label": "in 80ms",
+      "ms": 80,
+      "actualMs": 2011
+    },
+    {
+      "file": "f3-in-0160ms.jpg",
+      "label": "in 160ms",
+      "ms": 160,
+      "actualMs": 7327
+    },
+    {
+      "file": "f4-in-0320ms.jpg",
+      "label": "in 320ms",
+      "ms": 320,
+      "actualMs": 7659
+    },
+    {
+      "file": "f5-in-0600ms.jpg",
+      "label": "in 600ms",
+      "ms": 600,
+      "actualMs": 7878
+    },
+    {
+      "file": "f6-in-1000ms.jpg",
+      "label": "in 1000ms",
+      "ms": 1000,
+      "actualMs": 8066
+    },
+    {
+      "file": "f7-out-0060ms.jpg",
+      "label": "out 60ms",
+      "ms": 60,
+      "actualMs": 61
+    },
+    {
+      "file": "f8-out-0300ms.jpg",
+      "label": "out 300ms",
+      "ms": 300,
+      "actualMs": 917
+    }
+  ],
+  "diff": {},
+  "diffOnApproach": {},
+  "ambientIgnored": {},
+  "note": "frame times are measured wall-clock from the mouse entering the element; screenshots themselves take ~30-100 ms in headless mode"
+}

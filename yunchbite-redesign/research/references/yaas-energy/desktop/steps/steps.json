@@ -1,0 +1,316 @@
+{
+  "stepPx": 450,
+  "scroller": {
+    "mode": "window"
+  },
+  "steps": [
+    {
+      "index": 0,
+      "file": "steps/step-000-y0000.jpg",
+      "scrollY": 0,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "settled": "no running animations",
+      "settleMs": 126
+    },
+    {
+      "index": 1,
+      "file": "steps/step-001-y0540.jpg",
+      "scrollY": 540,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "settled": "timeout (continuous motion on page)",
+      "settleMs": 10528
+    },
+    {
+      "index": 2,
+      "file": "steps/step-002-y0981.jpg",
+      "scrollY": 981,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "settled": "no running animations",
+      "settleMs": 627
+    },
+    {
+      "index": 3,
+      "file": "steps/step-003-y1420.jpg",
+      "scrollY": 1420,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "settled": "no running animations",
+      "settleMs": 503
+    },
+    {
+      "index": 4,
+      "file": "steps/step-004-y1979.jpg",
+      "scrollY": 1979,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "settled": "no running animations",
+      "settleMs": 900
+    },
+    {
+      "index": 5,
+      "file": "steps/step-005-y2412.jpg",
+      "scrollY": 2412,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "settled": "no running animations",
+      "settleMs": 500
+    },
+    {
+      "index": 6,
+      "file": "steps/step-006-y2870.jpg",
+      "scrollY": 2870,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "settled": "no running animations",
+      "settleMs": 638
+    },
+    {
+      "index": 7,
+      "file": "steps/step-007-y3329.jpg",
+      "scrollY": 3329,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 1009
+    },
+    {
+      "index": 8,
+      "file": "steps/step-008-y3780.jpg",
+      "scrollY": 3780,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 1131
+    },
+    {
+      "index": 9,
+      "file": "steps/step-009-y4120.jpg",
+      "scrollY": 4120,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 256
+    },
+    {
+      "index": 10,
+      "file": "steps/step-010-y4648.jpg",
+      "scrollY": 4648,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 512
+    },
+    {
+      "index": 11,
+      "file": "steps/step-011-y5024.jpg",
+      "scrollY": 5024,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 256
+    },
+    {
+      "index": 12,
+      "file": "steps/step-012-y5515.jpg",
+      "scrollY": 5515,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 382
+    },
+    {
+      "index": 13,
+      "file": "steps/step-013-y6023.jpg",
+      "scrollY": 6023,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 633
+    },
+    {
+      "index": 14,
+      "file": "steps/step-014-y6427.jpg",
+      "scrollY": 6427,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 381
+    },
+    {
+      "index": 15,
+      "file": "steps/step-015-y6859.jpg",
+      "scrollY": 6859,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 387
+    },
+    {
+      "index": 16,
+      "file": "steps/step-016-y7276.jpg",
+      "scrollY": 7276,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 251
+    },
+    {
+      "index": 17,
+      "file": "steps/step-017-y7792.jpg",
+      "scrollY": 7792,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 384
+    },
+    {
+      "index": 18,
+      "file": "steps/step-018-y8280.jpg",
+      "scrollY": 8280,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 1132
+    },
+    {
+      "index": 19,
+      "file": "steps/step-019-y8730.jpg",
+      "scrollY": 8730,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 1136
+    },
+    {
+      "index": 20,
+      "file": "steps/step-020-y9180.jpg",
+      "scrollY": 9180,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 1156
+    },
+    {
+      "index": 21,
+      "file": "steps/step-021-y9630.jpg",
+      "scrollY": 9630,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 1151
+    },
+    {
+      "index": 22,
+      "file": "steps/step-022-y10080.jpg",
+      "scrollY": 10080,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 1139
+    },
+    {
+      "index": 23,
+      "file": "steps/step-023-y10530.jpg",
+      "scrollY": 10530,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "settled": "no running animations",
+      "settleMs": 1158
+    },
+    {
+      "index": 24,
+      "file": "steps/step-024-y10980.jpg",
+      "scrollY": 10980,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "settled": "no running animations",
+      "settleMs": 1154
+    },
+    {
+      "index": 25,
+      "file": "steps/step-025-y11430.jpg",
+      "scrollY": 11430,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "settled": "no running animations",
+      "settleMs": 1140
+    },
+    {
+      "index": 26,
+      "file": "steps/step-026-y11880.jpg",
+      "scrollY": 11880,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "settled": "no running animations",
+      "settleMs": 1129
+    },
+    {
+      "index": 27,
+      "file": "steps/step-027-y12330.jpg",
+      "scrollY": 12330,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "settled": "no running animations",
+      "settleMs": 1139
+    },
+    {
+      "index": 28,
+      "file": "steps/step-028-y12780.jpg",
+      "scrollY": 12780,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "settled": "no running animations",
+      "settleMs": 1136
+    },
+    {
+      "index": 29,
+      "file": "steps/step-029-y13230.jpg",
+      "scrollY": 13230,
+      "docHeight": 20100,
+      "viewportHeight": 900,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "settled": "no running animations",
+      "settleMs": 1135
+    }
+  ],
+  "fullPage": {
+    "file": "steps/fullpage.jpg",
+    "height": 20000,
+    "capped": true,
+    "docHeight": 20100,
+    "limitations": "Full-page capture resizes the viewport, so vh-based layouts, pinned (ScrollTrigger) sections, smooth-scroll wrappers and scroll-linked reveals can look different from the real scrolled page"
+  },
+  "abortedAfterScreenshotFailures": false
+}

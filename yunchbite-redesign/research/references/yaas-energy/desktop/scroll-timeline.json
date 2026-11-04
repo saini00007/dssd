@@ -1,0 +1,715 @@
+{
+  "url": "https://yaas-energy.com/",
+  "profile": "desktop",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "scroller": {
+    "mode": "window"
+  },
+  "scrollSpeedPxPerSec": 900,
+  "endReason": {
+    "down": "bottom reached",
+    "up": "target reached"
+  },
+  "videoDurationSec": 58.48,
+  "note": "Timeline t = seconds since navigation start; video t = seconds since page creation. They agree within ~0.3 s (the video starts slightly before the first sample).",
+  "maxDocHeight": 20100,
+  "phases": [
+    {
+      "name": "intro",
+      "from": 4,
+      "to": 6.04
+    },
+    {
+      "name": "scroll-down",
+      "from": 6.04,
+      "to": 40.54
+    },
+    {
+      "name": "pause-bottom",
+      "from": 40.54,
+      "to": 42.08
+    },
+    {
+      "name": "scroll-up",
+      "from": 42.08,
+      "to": 56.55
+    }
+  ],
+  "samples": [
+    {
+      "t": 4,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "intro"
+    },
+    {
+      "t": 4.34,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "intro"
+    },
+    {
+      "t": 4.59,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "intro"
+    },
+    {
+      "t": 4.85,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "intro"
+    },
+    {
+      "t": 5.11,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "intro"
+    },
+    {
+      "t": 5.41,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "intro"
+    },
+    {
+      "t": 5.67,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "intro"
+    },
+    {
+      "t": 5.94,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "intro"
+    },
+    {
+      "t": 6.05,
+      "scrollY": 0,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 8.12,
+      "scrollY": 348,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 9.53,
+      "scrollY": 1031,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 10.27,
+      "scrollY": 1250,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 11.71,
+      "scrollY": 2005,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 14.97,
+      "scrollY": 2454,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 15.69,
+      "scrollY": 2535,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 15.88,
+      "scrollY": 2837,
+      "docHeight": 20100,
+      "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 16.65,
+      "scrollY": 3597,
+      "docHeight": 20100,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 16.79,
+      "scrollY": 3817,
+      "docHeight": 20100,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 17.67,
+      "scrollY": 4597,
+      "docHeight": 20100,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 17.88,
+      "scrollY": 4929,
+      "docHeight": 20100,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 18.92,
+      "scrollY": 5531,
+      "docHeight": 20100,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 19.59,
+      "scrollY": 5556,
+      "docHeight": 20100,
+      "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 20.01,
+      "scrollY": 5905,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 20.26,
+      "scrollY": 6550,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 20.93,
+      "scrollY": 7110,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 21.16,
+      "scrollY": 7370,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 23.22,
+      "scrollY": 7882,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 23.59,
+      "scrollY": 8270,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 24.3,
+      "scrollY": 9018,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 24.7,
+      "scrollY": 9277,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 25.53,
+      "scrollY": 9555,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 26.28,
+      "scrollY": 10069,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 26.6,
+      "scrollY": 10595,
+      "docHeight": 20100,
+      "section": "section.screen2 \"This isn't about hyping you up. It's about stayi\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 26.9,
+      "scrollY": 10926,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 26.96,
+      "scrollY": 11050,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 27.23,
+      "scrollY": 11352,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 27.48,
+      "scrollY": 11632,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 27.94,
+      "scrollY": 11922,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 28.15,
+      "scrollY": 12111,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 29.69,
+      "scrollY": 12733,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 29.73,
+      "scrollY": 12791,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 32.19,
+      "scrollY": 13374,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 33.03,
+      "scrollY": 13977,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 34.02,
+      "scrollY": 14290,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 34.08,
+      "scrollY": 14442,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 34.35,
+      "scrollY": 15109,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 34.61,
+      "scrollY": 15439,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 34.86,
+      "scrollY": 15685,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 35.13,
+      "scrollY": 15924,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 35.39,
+      "scrollY": 16164,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 35.64,
+      "scrollY": 16388,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 35.88,
+      "scrollY": 16604,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 36.17,
+      "scrollY": 16852,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 36.43,
+      "scrollY": 17095,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 36.69,
+      "scrollY": 17328,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 36.94,
+      "scrollY": 17554,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 37.19,
+      "scrollY": 17785,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 37.46,
+      "scrollY": 18023,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 37.71,
+      "scrollY": 18251,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 37.98,
+      "scrollY": 18490,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 38.25,
+      "scrollY": 18725,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 38.51,
+      "scrollY": 18966,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 38.78,
+      "scrollY": 19148,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 39.01,
+      "scrollY": 19187,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 39.29,
+      "scrollY": 19198,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 39.54,
+      "scrollY": 19199,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 39.78,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 40.02,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 40.28,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 40.54,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 40.8,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 41.05,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 41.3,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 41.56,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 41.81,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 42.08,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 42.09,
+      "scrollY": 19200,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 42.36,
+      "scrollY": 19098,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 42.61,
+      "scrollY": 18905,
+      "docHeight": 20100,
+      "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 42.87,
+      "scrollY": 18673,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 45.51,
+      "scrollY": 18439,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 46.25,
+      "scrollY": 17997,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 47.8,
+      "scrollY": 17560,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 47.86,
+      "scrollY": 17366,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 48.28,
+      "scrollY": 16654,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 51.08,
+      "scrollY": 15820,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 51.13,
+      "scrollY": 15766,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 52.55,
+      "scrollY": 14973,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 54.59,
+      "scrollY": 14511,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 54.62,
+      "scrollY": 14467,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 55.45,
+      "scrollY": 13908,
+      "docHeight": 20100,
+      "section": "section#about \"Not For Everyone.For Our People.\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 56.31,
+      "scrollY": 13373,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 56.55,
+      "scrollY": 12957,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 56.81,
+      "scrollY": 12787,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 57.06,
+      "scrollY": 12750,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 57.32,
+      "scrollY": 12741,
+      "docHeight": 20100,
+      "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+      "phase": "scroll-up"
+    }
+  ]
+}

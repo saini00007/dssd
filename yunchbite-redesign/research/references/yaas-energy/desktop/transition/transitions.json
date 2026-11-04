@@ -1,0 +1,747 @@
+{
+  "tested": [
+    {
+      "link": {
+        "href": "https://yaas-energy.com/privacy-policy",
+        "text": "Privacy Policy",
+        "selector": "a.site-footer-credit.site-footer-privacy"
+      },
+      "urlBefore": "https://yaas-energy.com/",
+      "urlAfter": "https://yaas-energy.com/privacy-policy",
+      "type": "SPA-style (URL changed without page load)",
+      "loadEvents": [
+        {
+          "type": "framenavigated",
+          "ms": 17,
+          "url": "https://yaas-energy.com/privacy-policy"
+        }
+      ],
+      "historyCalls": [
+        {
+          "type": "replaceState",
+          "url": null,
+          "t": 611
+        },
+        {
+          "type": "pushState",
+          "url": "/privacy-policy",
+          "t": 58823
+        }
+      ],
+      "overlayElementsSeen": [
+        "div#pl"
+      ],
+      "settledAfterMs": 18798,
+      "clip": "video/transition-1.mp4",
+      "contactSheets": [
+        {
+          "file": "transition/link-1/sheet-01.jpg",
+          "frames": [
+            {
+              "t": 0,
+              "label": "click -0.40s"
+            },
+            {
+              "t": 0.13,
+              "label": "click -0.28s"
+            },
+            {
+              "t": 0.25,
+              "label": "click -0.15s"
+            },
+            {
+              "t": 0.38,
+              "label": "click -0.03s"
+            },
+            {
+              "t": 0.5,
+              "label": "click 0.10s"
+            },
+            {
+              "t": 0.63,
+              "label": "click 0.22s"
+            },
+            {
+              "t": 0.75,
+              "label": "click 0.35s"
+            },
+            {
+              "t": 0.88,
+              "label": "click 0.47s"
+            },
+            {
+              "t": 1,
+              "label": "click 0.60s"
+            },
+            {
+              "t": 1.13,
+              "label": "click 0.72s"
+            },
+            {
+              "t": 1.25,
+              "label": "click 0.85s"
+            },
+            {
+              "t": 1.38,
+              "label": "click 0.97s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-02.jpg",
+          "frames": [
+            {
+              "t": 1.5,
+              "label": "click 1.10s"
+            },
+            {
+              "t": 1.63,
+              "label": "click 1.23s"
+            },
+            {
+              "t": 1.75,
+              "label": "click 1.35s"
+            },
+            {
+              "t": 1.88,
+              "label": "click 1.48s"
+            },
+            {
+              "t": 2,
+              "label": "click 1.60s"
+            },
+            {
+              "t": 2.13,
+              "label": "click 1.73s"
+            },
+            {
+              "t": 2.25,
+              "label": "click 1.85s"
+            },
+            {
+              "t": 2.38,
+              "label": "click 1.98s"
+            },
+            {
+              "t": 2.5,
+              "label": "click 2.10s"
+            },
+            {
+              "t": 2.63,
+              "label": "click 2.23s"
+            },
+            {
+              "t": 2.75,
+              "label": "click 2.35s"
+            },
+            {
+              "t": 2.88,
+              "label": "click 2.48s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-03.jpg",
+          "frames": [
+            {
+              "t": 3,
+              "label": "click 2.60s"
+            },
+            {
+              "t": 3.13,
+              "label": "click 2.73s"
+            },
+            {
+              "t": 3.25,
+              "label": "click 2.85s"
+            },
+            {
+              "t": 3.38,
+              "label": "click 2.98s"
+            },
+            {
+              "t": 3.5,
+              "label": "click 3.10s"
+            },
+            {
+              "t": 3.63,
+              "label": "click 3.23s"
+            },
+            {
+              "t": 3.75,
+              "label": "click 3.35s"
+            },
+            {
+              "t": 3.88,
+              "label": "click 3.48s"
+            },
+            {
+              "t": 4,
+              "label": "click 3.60s"
+            },
+            {
+              "t": 4.13,
+              "label": "click 3.73s"
+            },
+            {
+              "t": 4.25,
+              "label": "click 3.85s"
+            },
+            {
+              "t": 4.38,
+              "label": "click 3.98s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-04.jpg",
+          "frames": [
+            {
+              "t": 4.5,
+              "label": "click 4.10s"
+            },
+            {
+              "t": 4.63,
+              "label": "click 4.22s"
+            },
+            {
+              "t": 4.75,
+              "label": "click 4.35s"
+            },
+            {
+              "t": 4.88,
+              "label": "click 4.47s"
+            },
+            {
+              "t": 5,
+              "label": "click 4.60s"
+            },
+            {
+              "t": 5.13,
+              "label": "click 4.72s"
+            },
+            {
+              "t": 5.25,
+              "label": "click 4.85s"
+            },
+            {
+              "t": 5.38,
+              "label": "click 4.97s"
+            },
+            {
+              "t": 5.5,
+              "label": "click 5.10s"
+            },
+            {
+              "t": 5.63,
+              "label": "click 5.22s"
+            },
+            {
+              "t": 5.75,
+              "label": "click 5.35s"
+            },
+            {
+              "t": 5.88,
+              "label": "click 5.47s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-05.jpg",
+          "frames": [
+            {
+              "t": 6,
+              "label": "click 5.60s"
+            },
+            {
+              "t": 6.13,
+              "label": "click 5.72s"
+            },
+            {
+              "t": 6.25,
+              "label": "click 5.85s"
+            },
+            {
+              "t": 6.38,
+              "label": "click 5.97s"
+            },
+            {
+              "t": 6.5,
+              "label": "click 6.10s"
+            },
+            {
+              "t": 6.63,
+              "label": "click 6.22s"
+            },
+            {
+              "t": 6.75,
+              "label": "click 6.35s"
+            },
+            {
+              "t": 6.88,
+              "label": "click 6.47s"
+            },
+            {
+              "t": 7,
+              "label": "click 6.60s"
+            },
+            {
+              "t": 7.13,
+              "label": "click 6.72s"
+            },
+            {
+              "t": 7.25,
+              "label": "click 6.85s"
+            },
+            {
+              "t": 7.38,
+              "label": "click 6.97s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-06.jpg",
+          "frames": [
+            {
+              "t": 7.5,
+              "label": "click 7.10s"
+            },
+            {
+              "t": 7.63,
+              "label": "click 7.22s"
+            },
+            {
+              "t": 7.75,
+              "label": "click 7.35s"
+            },
+            {
+              "t": 7.88,
+              "label": "click 7.47s"
+            },
+            {
+              "t": 8,
+              "label": "click 7.60s"
+            },
+            {
+              "t": 8.13,
+              "label": "click 7.72s"
+            },
+            {
+              "t": 8.25,
+              "label": "click 7.85s"
+            },
+            {
+              "t": 8.38,
+              "label": "click 7.97s"
+            },
+            {
+              "t": 8.5,
+              "label": "click 8.10s"
+            },
+            {
+              "t": 8.63,
+              "label": "click 8.22s"
+            },
+            {
+              "t": 8.75,
+              "label": "click 8.35s"
+            },
+            {
+              "t": 8.88,
+              "label": "click 8.47s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-07.jpg",
+          "frames": [
+            {
+              "t": 9,
+              "label": "click 8.60s"
+            },
+            {
+              "t": 9.13,
+              "label": "click 8.72s"
+            },
+            {
+              "t": 9.25,
+              "label": "click 8.85s"
+            },
+            {
+              "t": 9.38,
+              "label": "click 8.97s"
+            },
+            {
+              "t": 9.5,
+              "label": "click 9.10s"
+            },
+            {
+              "t": 9.63,
+              "label": "click 9.22s"
+            },
+            {
+              "t": 9.75,
+              "label": "click 9.35s"
+            },
+            {
+              "t": 9.88,
+              "label": "click 9.47s"
+            },
+            {
+              "t": 10,
+              "label": "click 9.60s"
+            },
+            {
+              "t": 10.13,
+              "label": "click 9.72s"
+            },
+            {
+              "t": 10.25,
+              "label": "click 9.85s"
+            },
+            {
+              "t": 10.38,
+              "label": "click 9.97s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-08.jpg",
+          "frames": [
+            {
+              "t": 10.5,
+              "label": "click 10.10s"
+            },
+            {
+              "t": 10.63,
+              "label": "click 10.22s"
+            },
+            {
+              "t": 10.75,
+              "label": "click 10.35s"
+            },
+            {
+              "t": 10.88,
+              "label": "click 10.47s"
+            },
+            {
+              "t": 11,
+              "label": "click 10.60s"
+            },
+            {
+              "t": 11.13,
+              "label": "click 10.72s"
+            },
+            {
+              "t": 11.25,
+              "label": "click 10.85s"
+            },
+            {
+              "t": 11.38,
+              "label": "click 10.97s"
+            },
+            {
+              "t": 11.5,
+              "label": "click 11.10s"
+            },
+            {
+              "t": 11.63,
+              "label": "click 11.22s"
+            },
+            {
+              "t": 11.75,
+              "label": "click 11.35s"
+            },
+            {
+              "t": 11.88,
+              "label": "click 11.47s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-09.jpg",
+          "frames": [
+            {
+              "t": 12,
+              "label": "click 11.60s"
+            },
+            {
+              "t": 12.13,
+              "label": "click 11.72s"
+            },
+            {
+              "t": 12.25,
+              "label": "click 11.85s"
+            },
+            {
+              "t": 12.38,
+              "label": "click 11.97s"
+            },
+            {
+              "t": 12.5,
+              "label": "click 12.10s"
+            },
+            {
+              "t": 12.63,
+              "label": "click 12.22s"
+            },
+            {
+              "t": 12.75,
+              "label": "click 12.35s"
+            },
+            {
+              "t": 12.88,
+              "label": "click 12.47s"
+            },
+            {
+              "t": 13,
+              "label": "click 12.60s"
+            },
+            {
+              "t": 13.13,
+              "label": "click 12.72s"
+            },
+            {
+              "t": 13.25,
+              "label": "click 12.85s"
+            },
+            {
+              "t": 13.38,
+              "label": "click 12.97s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-10.jpg",
+          "frames": [
+            {
+              "t": 13.5,
+              "label": "click 13.10s"
+            },
+            {
+              "t": 13.63,
+              "label": "click 13.22s"
+            },
+            {
+              "t": 13.75,
+              "label": "click 13.35s"
+            },
+            {
+              "t": 13.88,
+              "label": "click 13.47s"
+            },
+            {
+              "t": 14,
+              "label": "click 13.60s"
+            },
+            {
+              "t": 14.13,
+              "label": "click 13.72s"
+            },
+            {
+              "t": 14.25,
+              "label": "click 13.85s"
+            },
+            {
+              "t": 14.38,
+              "label": "click 13.97s"
+            },
+            {
+              "t": 14.5,
+              "label": "click 14.10s"
+            },
+            {
+              "t": 14.63,
+              "label": "click 14.22s"
+            },
+            {
+              "t": 14.75,
+              "label": "click 14.35s"
+            },
+            {
+              "t": 14.88,
+              "label": "click 14.47s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-11.jpg",
+          "frames": [
+            {
+              "t": 15,
+              "label": "click 14.60s"
+            },
+            {
+              "t": 15.13,
+              "label": "click 14.72s"
+            },
+            {
+              "t": 15.25,
+              "label": "click 14.85s"
+            },
+            {
+              "t": 15.38,
+              "label": "click 14.97s"
+            },
+            {
+              "t": 15.5,
+              "label": "click 15.10s"
+            },
+            {
+              "t": 15.63,
+              "label": "click 15.22s"
+            },
+            {
+              "t": 15.75,
+              "label": "click 15.35s"
+            },
+            {
+              "t": 15.88,
+              "label": "click 15.47s"
+            },
+            {
+              "t": 16,
+              "label": "click 15.60s"
+            },
+            {
+              "t": 16.13,
+              "label": "click 15.72s"
+            },
+            {
+              "t": 16.25,
+              "label": "click 15.85s"
+            },
+            {
+              "t": 16.38,
+              "label": "click 15.97s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-12.jpg",
+          "frames": [
+            {
+              "t": 16.5,
+              "label": "click 16.10s"
+            },
+            {
+              "t": 16.63,
+              "label": "click 16.23s"
+            },
+            {
+              "t": 16.75,
+              "label": "click 16.35s"
+            },
+            {
+              "t": 16.88,
+              "label": "click 16.48s"
+            },
+            {
+              "t": 17,
+              "label": "click 16.60s"
+            },
+            {
+              "t": 17.13,
+              "label": "click 16.73s"
+            },
+            {
+              "t": 17.25,
+              "label": "click 16.85s"
+            },
+            {
+              "t": 17.38,
+              "label": "click 16.98s"
+            },
+            {
+              "t": 17.5,
+              "label": "click 17.10s"
+            },
+            {
+              "t": 17.63,
+              "label": "click 17.23s"
+            },
+            {
+              "t": 17.75,
+              "label": "click 17.35s"
+            },
+            {
+              "t": 17.88,
+              "label": "click 17.48s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-13.jpg",
+          "frames": [
+            {
+              "t": 18,
+              "label": "click 17.60s"
+            },
+            {
+              "t": 18.13,
+              "label": "click 17.73s"
+            },
+            {
+              "t": 18.25,
+              "label": "click 17.85s"
+            },
+            {
+              "t": 18.38,
+              "label": "click 17.98s"
+            },
+            {
+              "t": 18.5,
+              "label": "click 18.10s"
+            },
+            {
+              "t": 18.63,
+              "label": "click 18.23s"
+            },
+            {
+              "t": 18.75,
+              "label": "click 18.35s"
+            },
+            {
+              "t": 18.88,
+              "label": "click 18.48s"
+            },
+            {
+              "t": 19,
+              "label": "click 18.60s"
+            },
+            {
+              "t": 19.13,
+              "label": "click 18.73s"
+            },
+            {
+              "t": 19.25,
+              "label": "click 18.85s"
+            },
+            {
+              "t": 19.38,
+              "label": "click 18.98s"
+            }
+          ]
+        },
+        {
+          "file": "transition/link-1/sheet-14.jpg",
+          "frames": [
+            {
+              "t": 19.5,
+              "label": "click 19.10s"
+            },
+            {
+              "t": 19.63,
+              "label": "click 19.23s"
+            },
+            {
+              "t": 19.75,
+              "label": "click 19.35s"
+            }
+          ]
+        }
+      ],
+      "note": "Contact-sheet labels are seconds relative to the click (video is trimmed to start 0.4 s before it)."
+    }
+  ]
+}

@@ -1,0 +1,1245 @@
+{
+  "url": "https://www.agrumeafarm.it/",
+  "capturedAt": "2026-11-04T08:41:31.623Z",
+  "totalSeconds": 364.9,
+  "blocked": false,
+  "profiles": [
+    {
+      "profile": "desktop",
+      "status": {
+        "probe": {
+          "status": "ok",
+          "seconds": 13.9,
+          "detail": {
+            "url": "https://www.agrumeafarm.it/",
+            "profile": "desktop",
+            "capturedAt": "2026-11-04T08:35:40.697Z",
+            "botWall": {
+              "detected": false
+            },
+            "scroller": {
+              "mode": "window"
+            },
+            "libs": {
+              "lenis": {
+                "via": [
+                  "global"
+                ],
+                "instanceFound": true,
+                "foundOn": "window.lenis",
+                "htmlClass": [
+                  "lenis"
+                ],
+                "options": {}
+              },
+              "splitting": {
+                "via": [
+                  "global"
+                ],
+                "globals": [],
+                "charOrWordSpans": 103
+              },
+              "nuxt": {
+                "via": [
+                  "global"
+                ]
+              }
+            },
+            "canvases": [
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 168,
+                "cssHeight": 234
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 353,
+                "cssHeight": 416
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 304,
+                "cssHeight": 448
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 246,
+                "cssHeight": 342
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 160,
+                "cssHeight": 189
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 114,
+                "cssHeight": 168
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 125,
+                "cssHeight": 174
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 158,
+                "cssHeight": 186
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 114,
+                "cssHeight": 168
+              },
+              {
+                "selector": "canvas.jar-slider__label",
+                "context": "2d",
+                "width": 300,
+                "height": 150,
+                "cssWidth": 125,
+                "cssHeight": 174
+              }
+            ],
+            "videos": [],
+            "animations": [
+              {
+                "type": "CSSTransition",
+                "name": "transform",
+                "target": "span.site-header__brand-track",
+                "duration": 900,
+                "delay": 100,
+                "easing": "cubic-bezier(0.645, 0.045, 0.355, 1)",
+                "iterations": 1,
+                "direction": "normal",
+                "fill": "backwards",
+                "playState": "running",
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "easing": "linear",
+                    "composite": "auto",
+                    "transform": "translate3d(0px, 115%, 0px)",
+                    "computedOffset": 0
+                  },
+                  {
+                    "offset": 1,
+                    "easing": "linear",
+                    "composite": "auto",
+                    "transform": "translateZ(0px)",
+                    "computedOffset": 1
+                  }
+                ]
+              },
+              {
+                "type": "CSSTransition",
+                "name": "opacity",
+                "target": "p.jar-slider__prompt.is-ready",
+                "duration": 900,
+                "delay": 180,
+                "easing": "cubic-bezier(0.645, 0.045, 0.355, 1)",
+                "iterations": 1,
+                "direction": "normal",
+                "fill": "backwards",
+                "playState": "running",
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "easing": "linear",
+                    "composite": "auto",
+                    "opacity": "0",
+                    "computedOffset": 0
+                  },
+                  {
+                    "offset": 1,
+                    "easing": "linear",
+                    "composite": "auto",
+                    "opacity": "1",
+                    "computedOffset": 1
+                  }
+                ]
+              },
+              {
+                "type": "CSSTransition",
+                "name": "transform",
+                "target": "p.jar-slider__prompt.is-ready",
+                "duration": 900,
+                "delay": 180,
+                "easing": "cubic-bezier(0.645, 0.045, 0.355, 1)",
+                "iterations": 1,
+                "direction": "normal",
+                "fill": "backwards",
+                "playState": "running",
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "easing": "linear",
+                    "composite": "auto",
+                    "transform": "translate3d(0px, 28px, 0px)",
+                    "computedOffset": 0
+                  },
+                  {
+                    "offset": 1,
+                    "easing": "linear",
+                    "composite": "auto",
+                    "transform": "translateZ(0px)",
+                    "computedOffset": 1
+                  }
+                ]
+              }
+            ],
+            "tokens": {
+              "fonts": {
+                "loadedFaces": [
+                  {
+                    "family": "ivystyle-sans",
+                    "weight": "600",
+                    "style": "normal"
+                  },
+                  {
+                    "family": "ivystyle-sans",
+                    "weight": "400",
+                    "style": "normal"
+                  },
+                  {
+                    "family": "ivymode",
+                    "weight": "400",
+                    "style": "normal"
+                  }
+                ],
+                "familiesByUsage": [
+                  {
+                    "family": "ivystyle-sans, \"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+                    "chars": 54
+                  },
+                  {
+                    "family": "ivymode, \"Iowan Old Style\", \"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
+                    "chars": 18
+                  }
+                ],
+                "elements": {
+                  "h1": {
+                    "sample": "Agrumea Farm: Sicilian artisan marmalade",
+                    "fontFamily": "ivystyle-sans, \"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+                    "fontSize": "32px",
+                    "fontWeight": "400",
+                    "lineHeight": "41.6px",
+                    "letterSpacing": "normal",
+                    "textTransform": "none",
+                    "color": "#762530"
+                  },
+                  "p": {
+                    "sample": "Scroll to discover",
+                    "fontFamily": "ivymode, \"Iowan Old Style\", \"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
+                    "fontSize": "13px",
+                    "fontWeight": "400",
+                    "lineHeight": "16.9px",
+                    "letterSpacing": "1.3px",
+                    "textTransform": "uppercase",
+                    "color": "#fdf3eb"
+                  },
+                  "a": {
+                    "sample": "Skip to content",
+                    "fontFamily": "ivystyle-sans, \"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+                    "fontSize": "14px",
+                    "fontWeight": "400",
+                    "lineHeight": "18.2px",
+                    "letterSpacing": "0.56px",
+                    "textTransform": "uppercase",
+                    "color": "#fdf3eb"
+                  },
+                  "button": {
+                    "sample": "mmeennuucclloossee",
+                    "fontFamily": "ivystyle-sans, \"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+                    "fontSize": "16px",
+                    "fontWeight": "400",
+                    "lineHeight": "20.8px",
+                    "letterSpacing": "normal",
+                    "textTransform": "none",
+                    "color": "#762530"
+                  },
+                  "li": {
+                    "sample": "HomeHome",
+                    "fontFamily": "ivystyle-sans, \"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+                    "fontSize": "16px",
+                    "fontWeight": "400",
+                    "lineHeight": "20.8px",
+                    "letterSpacing": "normal",
+                    "textTransform": "none",
+                    "color": "#762530"
+                  }
+                },
+                "largestOnFirstScreen": {
+                  "fontSizePx": 14,
+                  "selector": "a.site-lang-switcher__item",
+                  "text": "IT",
+                  "fontFamily": "ivystyle-sans, \"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+                  "fontWeight": "600",
+                  "lineHeight": "18.2px",
+                  "letterSpacing": "normal",
+                  "color": "#762530"
+                }
+              },
+              "typeScalePx": [
+                {
+                  "px": 13,
+                  "chars": 18
+                },
+                {
+                  "px": 14,
+                  "chars": 54
+                }
+              ],
+              "colors": {
+                "backgroundsByArea": [
+                  {
+                    "hex": "#fdf3eb",
+                    "area": 1296098
+                  },
+                  {
+                    "hex": "#762530",
+                    "area": 1296000
+                  },
+                  {
+                    "hex": "#ffffff",
+                    "area": 139816
+                  },
+                  {
+                    "hex": "#e94e1b",
+                    "area": 9653
+                  }
+                ],
+                "textByWeight": [
+                  {
+                    "hex": "#762530",
+                    "weight": 518
+                  },
+                  {
+                    "hex": "#fdf3eb",
+                    "weight": 472
+                  }
+                ],
+                "sectionBackgrounds": [
+                  {
+                    "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+                    "hex": "#fdf3eb"
+                  },
+                  {
+                    "section": "div.jar-slider__marquee",
+                    "hex": "#fdf3eb"
+                  },
+                  {
+                    "section": "div.jar-slider__shape-layer",
+                    "hex": "#fdf3eb"
+                  }
+                ]
+              },
+              "borderRadii": [
+                {
+                  "value": "50%",
+                  "count": 3
+                },
+                {
+                  "value": "1px",
+                  "count": 2
+                },
+                {
+                  "value": "999px",
+                  "count": 1
+                },
+                {
+                  "value": "14px",
+                  "count": 1
+                },
+                {
+                  "value": "500px",
+                  "count": 1
+                }
+              ],
+              "containerMaxWidths": [],
+              "customProperties": {
+                "--color-orange": "#e94e1b",
+                "--color-border": "#762530",
+                "--color-white": "#fdf3eb",
+                "--color-yellow": "#f39200",
+                "--border-round": "15px",
+                "--container-padding": "clamp(30px,2vw,40px)",
+                "--grid-columns": "12",
+                "--grid-gap-x": "clamp(12px,1.45vw,30px)",
+                "--grid-gap-y": "0",
+                "--header-offset": "clamp(20px,2vw,30px)",
+                "--header-logo-width": "clamp(126px,10vw,152px)",
+                "--header-pad-y": "24px",
+                "--header-brand-width": "108px",
+                "--header-safe-top": "calc(var(--header-pad-y) + var(--header-brand-width)*130/151)",
+                "--font-sans": "\"ivystyle-sans\",\"Avenir Next\",\"Helvetica Neue\",Helvetica,Arial,sans-serif",
+                "--font-serif": "\"ivymode\",\"Iowan Old Style\",\"Palatino Linotype\",\"Book Antiqua\",Palatino,serif",
+                "--text-small": ".875rem",
+                "--text-base": "1rem",
+                "--text-medium": "clamp(1.125rem, calc(1.085rem + .165vw) ,1.25rem)",
+                "--text-large": "clamp(1.2rem, calc(1.359rem + .1vw) ,1.938rem)",
+                "--text-hero": "2.65rem",
+                "--text-display": "clamp(2.5rem, calc(1rem + 8vw) ,999999px)",
+                "--line-height-s": "1.2",
+                "--line-height-m": "1.3",
+                "--space-s": "2.5rem",
+                "--space-xs": "var(--space-s)",
+                "--space-l": "3rem",
+                "--space-xl": "calc(var(--space-l)*2)",
+                "--page-transition-duration": "0ms",
+                "--page-cover-duration": "0ms",
+                "--page-lift-duration": "0ms",
+                "--page-jar-exit-duration": "0ms",
+                "--page-jar-fade-duration": "0ms",
+                "--ease-premium": "cubic-bezier(.645,.045,.355,1)",
+                "--ease-soft": "cubic-bezier(.22,1,.36,1)",
+                "--ease-out-expo": "cubic-bezier(.16,1,.3,1)",
+                "--ease-don-expo": "cubic-bezier(.19,1,.22,1)",
+                "--ease-don-power": "cubic-bezier(.165,.84,.44,1)",
+                "--app-height": "100svh",
+                "--ph-jar-scale-from": "1.25",
+                "--ph-jar-w": "clamp(250px,40vh,260px)",
+                "--ph-jar-h": "calc(var(--ph-jar-w)*1013/630)",
+                "--ph-jar-peek": ".3",
+                "--ph-jar-bottom": "-35%"
+              },
+              "scrollSnap": [],
+              "scrollBehavior": {
+                "html": "auto",
+                "body": "auto"
+              },
+              "cssUsage": {
+                "clamp": 60,
+                "vw": 82,
+                "vh": 16,
+                "blockedCrossOriginSheets": 1,
+                "sheetsReadable": 17
+              }
+            },
+            "page": {
+              "url": "https://www.agrumeafarm.it/en",
+              "title": "Agrumea Farm | Jams, pestos and flavours of Sicily",
+              "description": "Agrumea Farm transforms Sicilian citrus fruits, other fruits and produce into artisanal jams, pestos and preserves with an authentic flavour",
+              "og": {
+                "title": "Agrumea Farm | Jams, pestos and flavours of Sicily",
+                "description": "Agrumea Farm transforms Sicilian citrus fruits, other fruits and produce into artisanal jams, pestos and preserves with an authentic flavour",
+                "image": "https://images.prismic.io/agrumea-site/aiF5XQeQX7-eWvFc_foto_result.webp?auto=format,compress&rect=0,216,1920,1008&w=2400&h=1260",
+                "type": "website"
+              },
+              "lang": "en",
+              "domNodes": 360,
+              "docHeight": 900,
+              "viewport": {
+                "width": 1440,
+                "height": 900
+              },
+              "sections": [
+                {
+                  "index": 0,
+                  "tag": "div",
+                  "selector": "div.jar-slider__overlay",
+                  "label": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+                  "top": 0,
+                  "height": 900,
+                  "heightVh": 1,
+                  "background": "#fdf3eb",
+                  "position": "absolute"
+                },
+                {
+                  "index": 1,
+                  "tag": "div",
+                  "selector": "div.jar-slider__wrapper",
+                  "label": "div.jar-slider__marquee",
+                  "top": 0,
+                  "height": 900,
+                  "heightVh": 1,
+                  "background": "#fdf3eb",
+                  "position": "absolute"
+                },
+                {
+                  "index": 2,
+                  "tag": "div",
+                  "selector": "div.jar-slider__shape-layer",
+                  "label": "div.jar-slider__shape-layer",
+                  "top": 408,
+                  "height": 492,
+                  "heightVh": 0.55,
+                  "background": "#fdf3eb",
+                  "position": "absolute"
+                }
+              ]
+            },
+            "libraries": {
+              "lenis": {
+                "detected": true,
+                "via": [
+                  "global",
+                  "bundle fingerprint"
+                ],
+                "instanceFound": true,
+                "foundOn": "window.lenis",
+                "htmlClass": [
+                  "lenis"
+                ],
+                "options": {}
+              },
+              "splitting": {
+                "detected": true,
+                "via": [
+                  "global"
+                ],
+                "globals": [],
+                "charOrWordSpans": 103
+              },
+              "nuxt": {
+                "detected": true,
+                "via": [
+                  "global",
+                  "network+bundle fingerprint"
+                ]
+              },
+              "gsap": {
+                "detected": true,
+                "via": [
+                  "bundle fingerprint"
+                ],
+                "evidence": [
+                  "https://www.agrumeafarm.it/_nuxt/subbImUF.js"
+                ],
+                "note": "detected via bundle fingerprint (no global) - runtime details unavailable"
+              }
+            },
+            "midScroll": {
+              "y": 0,
+              "animations": [],
+              "activeScrollTriggers": null
+            },
+            "creationHooks": {
+              "note": "Recorded at creation time by init-script hooks, so tweens that already finished before the probe are included. Only works when gsap is exposed as window.gsap.",
+              "gsapTweens": [],
+              "gsapPluginsRegistered": [],
+              "waapi": [],
+              "historyCalls": [
+                {
+                  "type": "replaceState",
+                  "url": "https://www.agrumeafarm.it/en",
+                  "t": 401
+                },
+                {
+                  "type": "replaceState",
+                  "url": "https://www.agrumeafarm.it/en",
+                  "t": 467
+                },
+                {
+                  "type": "replaceState",
+                  "url": "https://www.agrumeafarm.it/en",
+                  "t": 484
+                }
+              ],
+              "truncated": false
+            },
+            "network": {
+              "totals": {
+                "scripts": {
+                  "count": 18,
+                  "bytes": 180907
+                },
+                "styles": {
+                  "count": 6,
+                  "bytes": 698
+                },
+                "fonts": {
+                  "count": 3,
+                  "bytes": 74420
+                },
+                "images": {
+                  "count": 32,
+                  "bytes": 1196938
+                },
+                "video": {
+                  "count": 0,
+                  "bytes": 0
+                },
+                "lottieJson": {
+                  "count": 0,
+                  "bytes": 0
+                },
+                "wasm": {
+                  "count": 0,
+                  "bytes": 0
+                },
+                "models3d": {
+                  "count": 0,
+                  "bytes": 0
+                },
+                "other": {
+                  "count": 11,
+                  "bytes": 0
+                }
+              },
+              "groups": {
+                "scripts": [
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/Cm4e0Ij0.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/DunroUJe.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/hBRD60Cs.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/CprvBfxI.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/D3S2afzA.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "text/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/Dciqcs4P.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/subbImUF.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/Dizcpx2j.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/DR3DmyiX.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/C-WwYP3L.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/Dj3jth3E.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/BYG4voJa.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.googletagmanager.com/gtag/js?id=G-PNTJV1LQLZ",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": 180907
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/BlT40MKB.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/Ct_hpPsY.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/C2AJ8JJK.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/DoMZv-wV.js",
+                    "type": "script",
+                    "status": 200,
+                    "mime": "application/javascript",
+                    "bytes": null
+                  }
+                ],
+                "styles": [
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/CmsHomePage.CpbPGEL3.css",
+                    "type": "stylesheet",
+                    "status": 200,
+                    "mime": "text/css",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/CmsHomePage.CpbPGEL3.css",
+                    "type": "stylesheet",
+                    "status": 200,
+                    "mime": "text/css",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://use.typekit.net/yey3ruw.css",
+                    "type": "stylesheet",
+                    "status": 200,
+                    "mime": "text/css",
+                    "bytes": 693
+                  },
+                  {
+                    "url": "https://p.typekit.net/p.css?s=1&k=yey3ruw&ht=tk&f=38008.38011.42534&a=92737358&app=typekit&e=css",
+                    "type": "stylesheet",
+                    "status": 200,
+                    "mime": "text/css",
+                    "bytes": 5
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/default.sNYEfnSI.css",
+                    "type": "stylesheet",
+                    "status": 200,
+                    "mime": "text/css",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/LegalPrivacyPage.B1Ny6ztU.css",
+                    "type": "stylesheet",
+                    "status": 200,
+                    "mime": "text/css",
+                    "bytes": null
+                  }
+                ],
+                "fonts": [
+                  {
+                    "url": "https://use.typekit.net/af/e1f115/00000000000000007735c082/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+                    "type": "font",
+                    "status": 200,
+                    "mime": "application/font-woff2",
+                    "bytes": 19672
+                  },
+                  {
+                    "url": "https://use.typekit.net/af/c59ffc/00000000000000007735ce7b/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+                    "type": "font",
+                    "status": 200,
+                    "mime": "application/font-woff2",
+                    "bytes": 34708
+                  },
+                  {
+                    "url": "https://use.typekit.net/af/32a3a5/00000000000000007735c074/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3",
+                    "type": "font",
+                    "status": 200,
+                    "mime": "application/font-woff2",
+                    "bytes": 20040
+                  }
+                ],
+                "images": [
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvgwQeQX7-eWdIy_arancia_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 16729
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhgweQX7-eWdJF_Pesto-salato_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 20313
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhTgeQX7-eWdI0_caponata_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 30640
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhfQeQX7-eWdI__pesto-rosso_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 34780
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/images/home/back-slider-home.svg",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/svg+xml",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvheAeQX7-eWdI6_fragole_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 21129
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhfweQX7-eWdJB_pesto_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 8700
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhegeQX7-eWdI8_gelsi_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 11181
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhfAeQX7-eWdI-_mandorla_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 6614
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhgQeQX7-eWdJD_pera_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 10826
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhdQeQX7-eWdI3_cipolla_result.webp?auto=format%2Ccompress&w=400",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 25278
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/images/home/circle-text-en.svg",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/svg+xml",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhgAeQX7-eWdJC_pesto_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 40535
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvg-QeQX7-eWdIz_arancia_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 49631
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhdAeQX7-eWdI2_caponata_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 54559
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhdweQX7-eWdI5_fragola_result.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 59464
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhhAeQX7-eWdJG_pistacchio_result.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 49273
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvheQeQX7-eWdI7_gelsi_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 53578
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhfgeQX7-eWdJA_pesto-rosso_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 47138
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhdgeQX7-eWdI4_cipolla-in-agrodolce_result.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 45858
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvheweQX7-eWdI9_mandorla_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 50616
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhggeQX7-eWdJE_pera_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 54722
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhgAeQX7-eWdJC_pesto_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 40535
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvg-QeQX7-eWdIz_arancia_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 49631
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhdAeQX7-eWdI2_caponata_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 54559
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhfgeQX7-eWdJA_pesto-rosso_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 47138
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhdweQX7-eWdI5_fragola_result.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 59464
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhggeQX7-eWdJE_pera_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 54722
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhhAeQX7-eWdJG_pistacchio_result.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 49273
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvheQeQX7-eWdI7_gelsi_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 53578
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvhdgeQX7-eWdI4_cipolla-in-agrodolce_result.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 45858
+                  },
+                  {
+                    "url": "https://images.prismic.io/agrumea-site/ahvheweQX7-eWdI9_mandorla_result-1.webp?auto=format,compress",
+                    "type": "image",
+                    "status": 200,
+                    "mime": "image/avif",
+                    "bytes": 50616
+                  }
+                ],
+                "video": [],
+                "lottieJson": [],
+                "wasm": [],
+                "models3d": [],
+                "other": [
+                  {
+                    "url": "https://www.agrumeafarm.it/",
+                    "type": "document",
+                    "status": 200,
+                    "mime": "text/html",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/en",
+                    "type": "document",
+                    "status": 200,
+                    "mime": "text/html",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/en/_payload.json?2dc9de92-a72a-4c54-b742-e8282f522ab4",
+                    "type": "other",
+                    "status": 200,
+                    "mime": "application/json",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-PNTJV1LQLZ&gtm=45je6b21h1v9260191481za200zd9260191481xf1&_p=1793781328515&gcs=G100&gcd=13p3q3p3p5l1&npa=1&dma_cps=-&dma=0&cid=1467023586.1793781329&frm=0&ngs=1&pscdl=denied&rcb=2&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNo",
+                    "type": "fetch",
+                    "status": 204,
+                    "mime": "text/plain",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_nuxt/builds/meta/2dc9de92-a72a-4c54-b742-e8282f522ab4.json",
+                    "type": "fetch",
+                    "status": 200,
+                    "mime": "application/json",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/en/_payload.json?2dc9de92-a72a-4c54-b742-e8282f522ab4",
+                    "type": "fetch",
+                    "status": 200,
+                    "mime": "application/json",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/cdn-cgi/rum?",
+                    "type": "xhr",
+                    "status": 204,
+                    "mime": "text/plain",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/en/privacy/_payload.json?2dc9de92-a72a-4c54-b742-e8282f522ab4",
+                    "type": "fetch",
+                    "status": 200,
+                    "mime": "application/json",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_payload.json?2dc9de92-a72a-4c54-b742-e8282f522ab4",
+                    "type": "fetch",
+                    "status": 200,
+                    "mime": "application/json",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.agrumeafarm.it/_payload.json?2dc9de92-a72a-4c54-b742-e8282f522ab4",
+                    "type": "fetch",
+                    "status": 200,
+                    "mime": "application/json",
+                    "bytes": null
+                  },
+                  {
+                    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-PNTJV1LQLZ&gtm=45je6b21h1v9260191481za200zd9260191481xf1&_p=1793781328515&gcs=G100&gcd=13p3q3p3p5l1&npa=1&dma_cps=-&dma=0&_eu=AEA&ae=a&cid=1467023586.1793781329&frm=0&ngs=1&pscdl=denied&rcb=2&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0",
+                    "type": "fetch",
+                    "status": 204,
+                    "mime": "text/plain",
+                    "bytes": null
+                  }
+                ]
+              },
+              "totalRequests": 70
+            }
+          }
+        },
+        "scroll": {
+          "status": "ok",
+          "seconds": 20,
+          "detail": {
+            "video": "video/scroll.mp4",
+            "durationSec": 13.12,
+            "samples": 24,
+            "endReason": {
+              "down": "stalled (scroll position stopped changing)",
+              "up": "target reached"
+            }
+          }
+        },
+        "frames": {
+          "status": "ok",
+          "seconds": 2.3,
+          "detail": {
+            "sheets": 5,
+            "keyframes": 12,
+            "raw": 52
+          }
+        },
+        "steps": {
+          "status": "ok",
+          "seconds": 15.5,
+          "detail": {
+            "steps": 2,
+            "fullPage": "steps/fullpage.jpg"
+          }
+        },
+        "hover": {
+          "status": "ok",
+          "seconds": 162.5,
+          "detail": {
+            "captured": 6,
+            "skipped": 3
+          }
+        },
+        "cursor": {
+          "status": "ok",
+          "seconds": 101.9,
+          "detail": {
+            "customCursor": false,
+            "parallaxLayers": 5,
+            "magnetic": 1
+          }
+        },
+        "transition": {
+          "status": "ok",
+          "seconds": 48.7,
+          "detail": {
+            "tested": 2
+          }
+        }
+      },
+      "page": {
+        "title": "Agrumea Farm | Jams, pestos and flavours of Sicily",
+        "description": "Agrumea Farm transforms Sicilian citrus fruits, other fruits and produce into artisanal jams, pestos and preserves with an authentic flavour",
+        "lang": "en",
+        "domNodes": 360,
+        "docHeight": 900
+      },
+      "libraries": {
+        "lenis": {
+          "via": [
+            "global",
+            "bundle fingerprint"
+          ],
+          "options": {}
+        },
+        "splitting": {
+          "via": [
+            "global"
+          ]
+        },
+        "nuxt": {
+          "via": [
+            "global",
+            "network+bundle fingerprint"
+          ]
+        },
+        "gsap": {
+          "via": [
+            "bundle fingerprint"
+          ]
+        }
+      },
+      "motion": {
+        "lenis": {},
+        "scrollTriggers": 0,
+        "pinned": 0,
+        "scrubbed": 0,
+        "creationTimeTweens": 0,
+        "liveTweens": 0,
+        "cssAnimations": 0,
+        "waapiAnimations": 0
+      },
+      "hoverCaptured": 6,
+      "customCursor": false,
+      "parallaxLayers": 5,
+      "magneticElements": [
+        "a.jar-slider__item"
+      ],
+      "transitions": [
+        {
+          "href": "https://www.agrumeafarm.it/",
+          "type": "SPA-style (URL changed without page load)"
+        },
+        {
+          "href": "https://www.agrumeafarm.it/en/dispensa/smeraldo",
+          "type": "no navigation (in-page / blocked)"
+        }
+      ],
+      "scroll": {
+        "videoDurationSec": 13.12,
+        "endReason": {
+          "down": "stalled (scroll position stopped changing)",
+          "up": "target reached"
+        },
+        "maxDocHeight": 900
+      },
+      "counts": {
+        "sheets": 5,
+        "keyframes": 12,
+        "steps": 2
+      },
+      "seconds": 364.7
+    }
+  ]
+}

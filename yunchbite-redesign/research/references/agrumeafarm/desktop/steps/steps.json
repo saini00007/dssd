@@ -1,0 +1,36 @@
+{
+  "stepPx": 450,
+  "scroller": {
+    "mode": "window"
+  },
+  "steps": [
+    {
+      "index": 0,
+      "file": "steps/step-000-y0000.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "viewportHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "settled": "no running animations",
+      "settleMs": 450
+    },
+    {
+      "index": 1,
+      "file": "steps/step-001-y0000.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "viewportHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "settled": "no running animations",
+      "settleMs": 126
+    }
+  ],
+  "fullPage": {
+    "file": "steps/fullpage.jpg",
+    "height": 900,
+    "capped": false,
+    "docHeight": 900,
+    "limitations": "Full-page capture resizes the viewport, so vh-based layouts, pinned (ScrollTrigger) sections, smooth-scroll wrappers and scroll-linked reveals can look different from the real scrolled page"
+  },
+  "abortedAfterScreenshotFailures": false
+}

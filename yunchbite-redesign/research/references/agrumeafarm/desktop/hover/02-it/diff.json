@@ -1,0 +1,109 @@
+{
+  "index": 2,
+  "dir": "hover/02-it",
+  "selector": "a.site-lang-switcher__item",
+  "tag": "a",
+  "text": "IT",
+  "instancesOnPage": 1,
+  "hasHoverRule": true,
+  "rect": {
+    "x": 30,
+    "y": 30,
+    "width": 37,
+    "height": 37
+  },
+  "changedProperties": [
+    "color",
+    "border-color",
+    "outline-color"
+  ],
+  "driver": "css transition",
+  "transitionSpec": {
+    "self": {
+      "transitionProperty": "border-color, color, background-color",
+      "transitionDuration": "0.3s, 0.3s, 0.3s",
+      "transitionTimingFunction": "ease, ease, ease",
+      "transitionDelay": "0s, 0s, 0s"
+    }
+  },
+  "liveDrivers": {
+    "css": [],
+    "gsap": []
+  },
+  "movedBeforeEntering": false,
+  "filmstrip": "hover/02-it/filmstrip.jpg",
+  "frames": [
+    {
+      "file": "f0-before.jpg",
+      "label": "before",
+      "ms": null
+    },
+    {
+      "file": "f1-in-0000ms.jpg",
+      "label": "in 0ms",
+      "ms": 0,
+      "actualMs": 369
+    },
+    {
+      "file": "f2-in-0080ms.jpg",
+      "label": "in 80ms",
+      "ms": 80,
+      "actualMs": 2131
+    },
+    {
+      "file": "f3-in-0160ms.jpg",
+      "label": "in 160ms",
+      "ms": 160,
+      "actualMs": 6414
+    },
+    {
+      "file": "f4-in-0320ms.jpg",
+      "label": "in 320ms",
+      "ms": 320,
+      "actualMs": 6734
+    },
+    {
+      "file": "f5-in-0600ms.jpg",
+      "label": "in 600ms",
+      "ms": 600,
+      "actualMs": 6950
+    },
+    {
+      "file": "f6-in-1000ms.jpg",
+      "label": "in 1000ms",
+      "ms": 1000,
+      "actualMs": 7138
+    },
+    {
+      "file": "f7-out-0060ms.jpg",
+      "label": "out 60ms",
+      "ms": 60,
+      "actualMs": 66
+    },
+    {
+      "file": "f8-out-0300ms.jpg",
+      "label": "out 300ms",
+      "ms": 300,
+      "actualMs": 793
+    }
+  ],
+  "diff": {
+    "self": {
+      "color": {
+        "from": "rgb(118, 37, 48)",
+        "to": "rgb(233, 78, 27)"
+      },
+      "border-color": {
+        "from": "rgb(118, 37, 48)",
+        "to": "rgb(233, 78, 27)"
+      },
+      "outline-color": {
+        "from": "rgb(118, 37, 48)",
+        "to": "rgb(233, 78, 27)"
+      }
+    }
+  },
+  "diffOnApproach": {},
+  "ambientIgnored": {},
+  "note": "frame times are measured wall-clock from the mouse entering the element; screenshots themselves take ~30-100 ms in headless mode"
+}

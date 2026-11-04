@@ -1,0 +1,211 @@
+{
+  "url": "https://www.agrumeafarm.it/",
+  "profile": "desktop",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "scroller": {
+    "mode": "window"
+  },
+  "scrollSpeedPxPerSec": 900,
+  "endReason": {
+    "down": "stalled (scroll position stopped changing)",
+    "up": "target reached"
+  },
+  "videoDurationSec": 13.12,
+  "note": "Timeline t = seconds since navigation start; video t = seconds since page creation. They agree within ~0.3 s (the video starts slightly before the first sample).",
+  "maxDocHeight": 900,
+  "phases": [
+    {
+      "name": "intro",
+      "from": 2.89,
+      "to": 6.2
+    },
+    {
+      "name": "scroll-down",
+      "from": 6.4,
+      "to": 9.7
+    },
+    {
+      "name": "pause-bottom",
+      "from": 9.7,
+      "to": 11.23
+    },
+    {
+      "name": "scroll-up",
+      "from": 11.23,
+      "to": 11.24
+    }
+  ],
+  "samples": [
+    {
+      "t": 2.9,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 3.16,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 3.42,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 3.68,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 3.94,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 4.2,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 4.46,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 4.71,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 4.97,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 5.23,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 5.51,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 5.76,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "intro"
+    },
+    {
+      "t": 6.4,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 9.7,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "scroll-down"
+    },
+    {
+      "t": 9.95,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 10.21,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 10.47,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 10.72,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 10.98,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 11.23,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "pause-bottom"
+    },
+    {
+      "t": 11.24,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 11.49,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 11.75,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "scroll-up"
+    },
+    {
+      "t": 12,
+      "scrollY": 0,
+      "docHeight": 900,
+      "section": "div.jar-slider__overlay \"SCROLL TO DISCOVER\"",
+      "phase": "scroll-up"
+    }
+  ]
+}

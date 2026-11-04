@@ -1,0 +1,901 @@
+{
+  "url": "https://yaas-energy.com/",
+  "profile": "desktop",
+  "capturedAt": "2026-11-04T08:41:47.223Z",
+  "botWall": {
+    "detected": false
+  },
+  "scroller": {
+    "mode": "window"
+  },
+  "libs": {
+    "lenis": {
+      "via": [
+        "global"
+      ],
+      "instanceFound": true,
+      "foundOn": "window.lenis",
+      "htmlClass": [
+        "lenis"
+      ],
+      "options": {}
+    },
+    "three": {
+      "via": [
+        "global"
+      ],
+      "revision": "169"
+    }
+  },
+  "canvases": [
+    {
+      "selector": "div.site-canvas > div > canvas",
+      "context": "webgl2",
+      "width": 1440,
+      "height": 900,
+      "cssWidth": 1440,
+      "cssHeight": 900
+    }
+  ],
+  "videos": [],
+  "animations": [],
+  "tokens": {
+    "fonts": {
+      "loadedFaces": [
+        {
+          "family": "Soledago",
+          "weight": "400",
+          "style": "normal"
+        },
+        {
+          "family": "Bounded",
+          "weight": "500",
+          "style": "normal"
+        },
+        {
+          "family": "Soledago PL",
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "familiesByUsage": [
+        {
+          "family": "Bounded, \"Helvetica Neue\", Arial, system-ui, -apple-system, sans-serif",
+          "chars": 1868
+        },
+        {
+          "family": "Soledago, \"Arial Narrow\", system-ui, -apple-system, sans-serif",
+          "chars": 359
+        }
+      ],
+      "elements": {
+        "h1": {
+          "sample": "YAAS. That feeling when everything just ",
+          "fontFamily": "\"Helvetica Neue\", Arial, system-ui, -apple-system, sans-serif",
+          "fontSize": "32px",
+          "fontWeight": "700",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "color": "#ffffff"
+        },
+        "h2": {
+          "sample": "5 Flavors. 1 Energy.",
+          "fontFamily": "Soledago, \"Arial Narrow\", system-ui, -apple-system, sans-serif",
+          "fontSize": "81.9574px",
+          "fontWeight": "400",
+          "lineHeight": "81.9574px",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "color": "#ffffff"
+        },
+        "h3": {
+          "sample": "Hanging with the squad till sunrise",
+          "fontFamily": "Soledago, \"Arial Narrow\", system-ui, -apple-system, sans-serif",
+          "fontSize": "40.9787px",
+          "fontWeight": "400",
+          "lineHeight": "45.0766px",
+          "letterSpacing": "-0.819574px",
+          "textTransform": "none",
+          "color": "#ffffff"
+        },
+        "p": {
+          "sample": "Zero-sugar energy for people who move at",
+          "fontFamily": "Bounded, \"Helvetica Neue\", Arial, system-ui, -apple-system, sans-serif",
+          "fontSize": "16px",
+          "fontWeight": "500",
+          "lineHeight": "22.4px",
+          "letterSpacing": "-0.4px",
+          "textTransform": "none",
+          "color": "#ffffff"
+        },
+        "a": {
+          "sample": "YAAS",
+          "fontFamily": "\"Helvetica Neue\", Arial, system-ui, -apple-system, sans-serif",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "color": "#ffffff"
+        },
+        "button": {
+          "sample": "Is this an energy drink or a soda?",
+          "fontFamily": "\"Helvetica Neue\", Arial, system-ui, -apple-system, sans-serif",
+          "fontSize": "13.3333px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "color": "#ffffff"
+        }
+      },
+      "largestOnFirstScreen": {
+        "fontSizePx": 539,
+        "selector": "span.logo-text",
+        "text": "YAAS",
+        "fontFamily": "Soledago, \"Arial Narrow\", system-ui, -apple-system, sans-serif",
+        "fontWeight": "400",
+        "lineHeight": "539px",
+        "letterSpacing": "-5.39px",
+        "color": "#ffffff"
+      }
+    },
+    "typeScalePx": [
+      {
+        "px": 16,
+        "chars": 213
+      },
+      {
+        "px": 16.3915,
+        "chars": 1460
+      },
+      {
+        "px": 20.4894,
+        "chars": 195
+      },
+      {
+        "px": 38.9298,
+        "chars": 15
+      },
+      {
+        "px": 40.9787,
+        "chars": 73
+      },
+      {
+        "px": 60.048,
+        "chars": 219
+      },
+      {
+        "px": 81.9574,
+        "chars": 19
+      },
+      {
+        "px": 92.2021,
+        "chars": 10
+      },
+      {
+        "px": 112.59,
+        "chars": 15
+      },
+      {
+        "px": 539,
+        "chars": 4
+      },
+      {
+        "px": 553.552,
+        "chars": 4
+      }
+    ],
+    "colors": {
+      "backgroundsByArea": [
+        {
+          "hex": "#ffffff",
+          "area": 12383899
+        },
+        {
+          "hex": "#e53a6b",
+          "area": 1296000
+        },
+        {
+          "hex": "#f0a3b4",
+          "area": 1296000
+        },
+        {
+          "hex": "#d9d9d9",
+          "area": 49498
+        },
+        {
+          "hex": "#212121",
+          "area": 820
+        }
+      ],
+      "textByWeight": [
+        {
+          "hex": "#212121",
+          "weight": 28626
+        },
+        {
+          "hex": "#ffffff",
+          "weight": 20029
+        },
+        {
+          "hex": "#e53a6b",
+          "weight": 4031
+        },
+        {
+          "hex": "#0085c6",
+          "weight": 840
+        },
+        {
+          "hex": "#f18221",
+          "weight": 840
+        },
+        {
+          "hex": "#efcc04",
+          "weight": 840
+        },
+        {
+          "hex": "#75bd38",
+          "weight": 799
+        },
+        {
+          "hex": "#e43a6c",
+          "weight": 594
+        }
+      ],
+      "sectionBackgrounds": [
+        {
+          "section": "section#flavors \"5 Flavors. 1 Energy.\"",
+          "hex": "#0b0a09"
+        },
+        {
+          "section": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+          "hex": "#0b0a09"
+        },
+        {
+          "section": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+          "hex": "#0b0a09"
+        },
+        {
+          "section": "section#about \"Not For Everyone.For Our People.\"",
+          "hex": "#ffffff"
+        },
+        {
+          "section": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+          "hex": "#0b0a09"
+        }
+      ]
+    },
+    "borderRadii": [
+      {
+        "value": "20px",
+        "count": 21
+      },
+      {
+        "value": "100px",
+        "count": 11
+      },
+      {
+        "value": "10px",
+        "count": 4
+      },
+      {
+        "value": "720px",
+        "count": 2
+      },
+      {
+        "value": "50%",
+        "count": 1
+      }
+    ],
+    "containerMaxWidths": [
+      {
+        "value": "878.195px",
+        "count": 8
+      },
+      {
+        "value": "1440px",
+        "count": 4
+      },
+      {
+        "value": "892.8px",
+        "count": 3
+      },
+      {
+        "value": "439.2px",
+        "count": 1
+      },
+      {
+        "value": "640px",
+        "count": 1
+      },
+      {
+        "value": "368.275px",
+        "count": 1
+      }
+    ],
+    "customProperties": {
+      "--asset-bg-texture": "url('/textures/bg-texture.webp')",
+      "--font-display": "\"Soledago\", \"Arial Narrow\", system-ui, -apple-system, sans-serif",
+      "--font-body": "\"Helvetica Neue\", Arial, system-ui, -apple-system, sans-serif",
+      "--font-beiruti": "\"Bounded\", \"Helvetica Neue\", Arial, system-ui, -apple-system, sans-serif",
+      "--ui-scale": "1",
+      "--ink": "#ffffff",
+      "--ink-soft": "rgba(255, 255, 255, .85)",
+      "--ink-on-light": "#212121",
+      "--ink-on-light-soft": "rgba(33, 33, 33, .72)",
+      "--block-gap": "80px",
+      "--heading-gap": "calc(50px * var(--ui-scale))",
+      "--block-heading": "45px",
+      "--text-body": "calc(16px * var(--ui-scale))",
+      "--text-body-sm": "calc(14px * var(--ui-scale))",
+      "--content-gutter": "10px",
+      "--content-inline": "var(--hero-margin, var(--content-gutter))",
+      "--paper": "#fdfaf1",
+      "--bg-color": "#f3d118",
+      "--block-gap-bottom": "calc(var(--block-gap) + 40px)"
+    },
+    "scrollSnap": [],
+    "scrollBehavior": {
+      "html": "auto",
+      "body": "auto"
+    },
+    "cssUsage": {
+      "clamp": 98,
+      "vw": 112,
+      "vh": 97,
+      "blockedCrossOriginSheets": 0,
+      "sheetsReadable": 3
+    }
+  },
+  "page": {
+    "url": "https://yaas-energy.com/",
+    "title": "YAAS Energy — Zero-Sugar Energy Drink in 5 Bold Flavors",
+    "description": "YAAS — zero-sugar, 5-calorie energy drink in 5 bold flavors: Citrus Lemon, Blueberry Rush, Wild Strawberry, Solar Orange, Green Apple. No crash.",
+    "og": {
+      "title": "YAAS Energy — Zero-Sugar Energy Drink in 5 Bold Flavors",
+      "description": "YAAS — zero-sugar, 5-calorie energy drink in 5 bold flavors: Citrus Lemon, Blueberry Rush, Wild Strawberry, Solar Orange, Green Apple. No crash.",
+      "image": "https://yaas-energy.com/images/og/cover.jpg",
+      "type": "website"
+    },
+    "lang": "en",
+    "domNodes": 408,
+    "docHeight": 20100,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "sections": [
+      {
+        "index": 0,
+        "tag": "section",
+        "selector": "section#flavors",
+        "label": "section#flavors \"5 Flavors. 1 Energy.\"",
+        "top": 0,
+        "height": 3450,
+        "heightVh": 3.83,
+        "background": "#0b0a09",
+        "position": "relative"
+      },
+      {
+        "index": 1,
+        "tag": "section",
+        "selector": "section.screen2.is-arc-running",
+        "label": "section.screen2.is-arc-running \"This isn't about hyping you up. It's about stayi\"",
+        "top": 2550,
+        "height": 8706,
+        "heightVh": 9.67,
+        "background": "#0b0a09",
+        "position": "relative"
+      },
+      {
+        "index": 2,
+        "tag": "section",
+        "selector": "section#why-yaas",
+        "label": "section#why-yaas \"Why YAAS Beats Whatever's Sitting in Your Fridge\"",
+        "top": 10233,
+        "height": 3785,
+        "heightVh": 4.21,
+        "background": "#0b0a09",
+        "position": "relative"
+      },
+      {
+        "index": 3,
+        "tag": "section",
+        "selector": "section#about",
+        "label": "section#about \"Not For Everyone.For Our People.\"",
+        "top": 13118,
+        "height": 6081,
+        "heightVh": 6.76,
+        "background": "#ffffff",
+        "position": "relative"
+      },
+      {
+        "index": 4,
+        "tag": "div",
+        "selector": "div.pin-spacer.pin-spacer-footerPin",
+        "label": "footer.site-footer.is-reveal \"YAAS Flavors Why YAAS About Us FAQ Contacts YAAS\"",
+        "top": 18300,
+        "height": 1800,
+        "heightVh": 2,
+        "background": "#0b0a09",
+        "position": "relative"
+      }
+    ]
+  },
+  "libraries": {
+    "lenis": {
+      "detected": true,
+      "via": [
+        "global",
+        "network+bundle fingerprint"
+      ],
+      "instanceFound": true,
+      "foundOn": "window.lenis",
+      "htmlClass": [
+        "lenis"
+      ],
+      "options": {}
+    },
+    "three": {
+      "detected": true,
+      "via": [
+        "global"
+      ],
+      "revision": "169"
+    },
+    "gsap": {
+      "detected": true,
+      "via": [
+        "bundle fingerprint"
+      ],
+      "evidence": [
+        "https://yaas-energy.com/assets/HomePage-BbpAj-fQ.js",
+        "https://yaas-energy.com/assets/index-BRGP4ayl.js"
+      ],
+      "note": "detected via bundle fingerprint (no global) - runtime details unavailable"
+    }
+  },
+  "midScroll": {
+    "y": 2081,
+    "animations": [],
+    "activeScrollTriggers": null
+  },
+  "creationHooks": {
+    "note": "Recorded at creation time by init-script hooks, so tweens that already finished before the probe are included. Only works when gsap is exposed as window.gsap.",
+    "gsapTweens": [],
+    "gsapPluginsRegistered": [],
+    "waapi": [],
+    "historyCalls": [
+      {
+        "type": "replaceState",
+        "url": null,
+        "t": 1012
+      }
+    ],
+    "truncated": false
+  },
+  "network": {
+    "totals": {
+      "scripts": {
+        "count": 12,
+        "bytes": 181396
+      },
+      "styles": {
+        "count": 1,
+        "bytes": 0
+      },
+      "fonts": {
+        "count": 2,
+        "bytes": 107612
+      },
+      "images": {
+        "count": 34,
+        "bytes": 2584014
+      },
+      "video": {
+        "count": 0,
+        "bytes": 0
+      },
+      "lottieJson": {
+        "count": 0,
+        "bytes": 0
+      },
+      "wasm": {
+        "count": 0,
+        "bytes": 0
+      },
+      "models3d": {
+        "count": 1,
+        "bytes": 150964
+      },
+      "other": {
+        "count": 2,
+        "bytes": 0
+      }
+    },
+    "groups": {
+      "scripts": [
+        {
+          "url": "https://yaas-energy.com/assets/normalizeScroll-CZzpJOkP.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/assets/HomePage-BbpAj-fQ.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/assets/index-BRGP4ayl.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/assets/Footer-C3Zt787m.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/assets/useSeo-BUSfEJoU.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/assets/heroLayout-CkukNhBw.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/assets/lenis-DgcTp2OQ.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/assets/Scene-BEgNfDjH.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://www.googletagmanager.com/gtag/js?id=G-L97RMT0WBK",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": 180911
+        },
+        {
+          "url": "https://yaas-energy.com/assets/renderOnDemand-CObyRKpl.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": 485
+        },
+        {
+          "url": "https://yaas-energy.com/assets/useCanMaterials-EH_pGyYK.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/assets/DetailScreen-cKH4vAQz.js",
+          "type": "script",
+          "status": 200,
+          "mime": "application/javascript",
+          "bytes": null
+        }
+      ],
+      "styles": [
+        {
+          "url": "https://yaas-energy.com/assets/index-DSoJKp6B.css",
+          "type": "stylesheet",
+          "status": 200,
+          "mime": "text/css",
+          "bytes": null
+        }
+      ],
+      "fonts": [
+        {
+          "url": "https://yaas-energy.com/fonts/Soledago.woff2",
+          "type": "font",
+          "status": 200,
+          "mime": "font/woff2",
+          "bytes": 28848
+        },
+        {
+          "url": "https://yaas-energy.com/fonts/Bounded-Medium.woff2",
+          "type": "font",
+          "status": 200,
+          "mime": "font/woff2",
+          "bytes": 78764
+        }
+      ],
+      "images": [
+        {
+          "url": "https://yaas-energy.com/images/hero/poster-desktop-orange.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 91086
+        },
+        {
+          "url": "https://yaas-energy.com/images/hero/poster-desktop-blueberry.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 97416
+        },
+        {
+          "url": "https://yaas-energy.com/images/gradient-still.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 23886
+        },
+        {
+          "url": "https://yaas-energy.com/images/hero/poster-desktop-strawberry.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 86868
+        },
+        {
+          "url": "https://yaas-energy.com/images/preloader/lemon.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 13100
+        },
+        {
+          "url": "https://yaas-energy.com/images/preloader/strawberry.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 13544
+        },
+        {
+          "url": "https://yaas-energy.com/images/preloader/orange.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 15510
+        },
+        {
+          "url": "https://yaas-energy.com/images/preloader/blueberry.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 14326
+        },
+        {
+          "url": "https://yaas-energy.com/textures/bg-texture.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 40440
+        },
+        {
+          "url": "https://yaas-energy.com/icons/arrow-right.svg",
+          "type": "image",
+          "status": 200,
+          "mime": "image/svg+xml",
+          "bytes": 893
+        },
+        {
+          "url": "https://yaas-energy.com/images/preloader/apple.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 13300
+        },
+        {
+          "url": "https://yaas-energy.com/images/about-brand-wordmark.svg",
+          "type": "image",
+          "status": 200,
+          "mime": "image/svg+xml",
+          "bytes": null
+        },
+        {
+          "url": "https://yaas-energy.com/images/about-brand-4.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 165336
+        },
+        {
+          "url": "https://yaas-energy.com/images/about-brand-3.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 98090
+        },
+        {
+          "url": "https://yaas-energy.com/images/about-brand-2.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 268344
+        },
+        {
+          "url": "https://yaas-energy.com/images/about-brand-1.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 182616
+        },
+        {
+          "url": "https://yaas-energy.com/icons/arrow-left.svg",
+          "type": "image",
+          "status": 200,
+          "mime": "image/svg+xml",
+          "bytes": 893
+        },
+        {
+          "url": "https://yaas-energy.com/images/cans/orange.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 158520
+        },
+        {
+          "url": "https://yaas-energy.com/images/cans/blueberry.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 147528
+        },
+        {
+          "url": "https://yaas-energy.com/textures/labels/strawberry.webp?v=2",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 92298
+        },
+        {
+          "url": "https://yaas-energy.com/textures/labels/blueberry.webp?v=2",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 87098
+        },
+        {
+          "url": "https://yaas-energy.com/textures/labels/lemon.webp?v=2",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 82348
+        },
+        {
+          "url": "https://yaas-energy.com/textures/labels/orange.webp?v=2",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 95990
+        },
+        {
+          "url": "https://yaas-energy.com/textures/labels/apple.webp?v=2",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 88098
+        },
+        {
+          "url": "https://yaas-energy.com/textures/thumbnails/blueberry.webp?v=4",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 18422
+        },
+        {
+          "url": "https://yaas-energy.com/textures/thumbnails/strawberry.webp?v=4",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 18220
+        },
+        {
+          "url": "https://yaas-energy.com/textures/thumbnails/lemon.webp?v=4",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 16402
+        },
+        {
+          "url": "https://yaas-energy.com/textures/thumbnails/orange.webp?v=4",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 19700
+        },
+        {
+          "url": "https://yaas-energy.com/photos/scenarios/study-1280.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 115552
+        },
+        {
+          "url": "https://yaas-energy.com/photos/scenarios/sport-1280.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 138628
+        },
+        {
+          "url": "https://yaas-energy.com/photos/scenarios/game-1280.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 88544
+        },
+        {
+          "url": "https://yaas-energy.com/photos/scenarios/road-1280.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 145618
+        },
+        {
+          "url": "https://yaas-energy.com/textures/thumbnails/apple.webp?v=4",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 17508
+        },
+        {
+          "url": "https://yaas-energy.com/photos/scenarios/party-1280.webp",
+          "type": "image",
+          "status": 200,
+          "mime": "image/webp",
+          "bytes": 127892
+        }
+      ],
+      "video": [],
+      "lottieJson": [],
+      "wasm": [],
+      "models3d": [
+        {
+          "url": "https://yaas-energy.com/models/can.glb",
+          "type": "other",
+          "status": 200,
+          "mime": "application/octet-stream",
+          "bytes": 150964
+        }
+      ],
+      "other": [
+        {
+          "url": "https://yaas-energy.com/",
+          "type": "document",
+          "status": 200,
+          "mime": "text/html",
+          "bytes": null
+        },
+        {
+          "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-L97RMT0WBK&gtm=45je6b21h1v9265761094za208zd9265761094xf1&_p=1793781695901&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=851179868.1793781696&frm=0&ngs=1&pscdl=noapi&rcb=14&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.",
+          "type": "fetch",
+          "status": 204,
+          "mime": "text/plain",
+          "bytes": null
+        }
+      ]
+    },
+    "totalRequests": 52
+  }
+}

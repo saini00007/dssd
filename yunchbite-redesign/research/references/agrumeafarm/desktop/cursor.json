@@ -1,0 +1,224 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "cursorHidden": {
+    "html": "auto",
+    "body": "auto",
+    "link": "pointer",
+    "nativeCursorHidden": false
+  },
+  "customCursors": [],
+  "parallax": {
+    "detected": true,
+    "sweep": {
+      "from": {
+        "x": 216,
+        "y": 135
+      },
+      "to": {
+        "x": 1224,
+        "y": 765
+      },
+      "mouseTravelPx": {
+        "x": 1008,
+        "y": 630
+      }
+    },
+    "layers": [
+      {
+        "selector": "span.cursor-label__text",
+        "dx": 366.8,
+        "dy": 221.3,
+        "midway": {
+          "dx": -155.3,
+          "dy": -105
+        },
+        "ratioX": 0.364,
+        "ratioY": 0.351,
+        "direction": "with pointer"
+      },
+      {
+        "selector": "div.cursor-label__pill.is-visible",
+        "dx": 361.7,
+        "dy": 221.3,
+        "midway": {
+          "dx": -160.4,
+          "dy": -105
+        },
+        "ratioX": 0.359,
+        "ratioY": 0.351,
+        "direction": "with pointer"
+      },
+      {
+        "selector": "span.cursor-label__diamond",
+        "dx": 312.3,
+        "dy": 221.3,
+        "midway": {
+          "dx": -209.8,
+          "dy": -105
+        },
+        "ratioX": 0.31,
+        "ratioY": 0.351,
+        "direction": "with pointer"
+      },
+      {
+        "selector": "div.cursor-label",
+        "dx": 304.2,
+        "dy": 221.3,
+        "midway": {
+          "dx": -217.9,
+          "dy": -105
+        },
+        "ratioX": 0.302,
+        "ratioY": 0.351,
+        "direction": "with pointer"
+      },
+      {
+        "selector": "div.jar-slider__shape-layer",
+        "dx": -13.1,
+        "dy": -3.4,
+        "midway": {
+          "dx": -2.4,
+          "dy": -1.5
+        },
+        "ratioX": -0.013,
+        "ratioY": -0.005,
+        "direction": "against pointer"
+      }
+    ],
+    "note": "Elements whose centre moves with the pointer across a slow sweep; elements that also move with the pointer parked (ambient loops) are excluded."
+  },
+  "magnetic": [
+    {
+      "selector": "a.jar-slider__item",
+      "magnetic": true,
+      "nameSuggestsMagnet": false,
+      "activationDistanceFromEdgePx": 150,
+      "maxShiftPx": 15.5,
+      "pullRatio": 0.12,
+      "track": [
+        {
+          "distanceFromEdgePx": 240,
+          "pointerOffsetFromCentre": 334,
+          "shiftX": 0.5,
+          "shiftY": 0.1
+        },
+        {
+          "distanceFromEdgePx": 150,
+          "pointerOffsetFromCentre": 244,
+          "shiftX": -4.5,
+          "shiftY": -7.2
+        },
+        {
+          "distanceFromEdgePx": 80,
+          "pointerOffsetFromCentre": 174,
+          "shiftX": -8.9,
+          "shiftY": -9.8
+        },
+        {
+          "distanceFromEdgePx": 35,
+          "pointerOffsetFromCentre": 129,
+          "shiftX": -11.7,
+          "shiftY": -10.1
+        }
+      ],
+      "viewportRect": {
+        "x": -87,
+        "y": 226
+      }
+    },
+    {
+      "selector": "div.site-header__brand.is-header-ready.is-revealed > a",
+      "magnetic": false,
+      "nameSuggestsMagnet": false,
+      "activationDistanceFromEdgePx": null,
+      "maxShiftPx": 0,
+      "pullRatio": null,
+      "track": [
+        {
+          "distanceFromEdgePx": 240,
+          "pointerOffsetFromCentre": 308,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 150,
+          "pointerOffsetFromCentre": 218,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 80,
+          "pointerOffsetFromCentre": 148,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 35,
+          "pointerOffsetFromCentre": 103,
+          "shiftX": 0,
+          "shiftY": 0
+        }
+      ],
+      "viewportRect": {
+        "x": 653,
+        "y": 30
+      }
+    },
+    {
+      "selector": "a.skip-link",
+      "magnetic": false,
+      "nameSuggestsMagnet": false,
+      "activationDistanceFromEdgePx": null,
+      "maxShiftPx": 0,
+      "pullRatio": null,
+      "track": [],
+      "viewportRect": {
+        "x": 0,
+        "y": -63
+      }
+    },
+    {
+      "selector": "button.site-menu-toggle",
+      "magnetic": false,
+      "nameSuggestsMagnet": false,
+      "activationDistanceFromEdgePx": null,
+      "maxShiftPx": 0,
+      "pullRatio": null,
+      "track": [
+        {
+          "distanceFromEdgePx": 240,
+          "pointerOffsetFromCentre": 304,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 150,
+          "pointerOffsetFromCentre": 214,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 80,
+          "pointerOffsetFromCentre": 144,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 35,
+          "pointerOffsetFromCentre": 99,
+          "shiftX": 0,
+          "shiftY": 0
+        }
+      ],
+      "viewportRect": {
+        "x": 1283,
+        "y": 30
+      }
+    }
+  ],
+  "customCursorDetected": false,
+  "clip": "video/cursor.mp4"
+}

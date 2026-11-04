@@ -1,0 +1,150 @@
+{
+  "name": "tour-product-production-about",
+  "url": "https://www.agrumeafarm.it/en/dispensa/caponata",
+  "profile": "desktop",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "recordedAt": "2026-11-04T09:09:55.041Z",
+  "videoSeconds": 68.4,
+  "steps": [
+    {
+      "i": 0,
+      "do": "wait",
+      "ms": 7000,
+      "label": "product page entrance",
+      "start": 1.998,
+      "ok": true,
+      "end": 9,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 1,
+      "do": "consent",
+      "start": 9,
+      "ok": true,
+      "end": 9.619,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 2,
+      "do": "move",
+      "x": 720,
+      "y": 480,
+      "ms": 500,
+      "start": 9.619,
+      "ok": true,
+      "end": 10.167,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 3,
+      "do": "wheelToEnd",
+      "dy": 100,
+      "every": 110,
+      "maxMs": 60000,
+      "label": "scroll product page",
+      "start": 10.168,
+      "ok": true,
+      "end": 22.065,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 4,
+      "do": "click",
+      "selector": ".site-menu-toggle",
+      "ms": 2000,
+      "label": "open menu",
+      "start": 22.065,
+      "ok": false,
+      "error": "locator.click: Timeout 8000ms exceeded.",
+      "end": 31.108,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 5,
+      "do": "click",
+      "selector": "a.fp-nav__link",
+      "nth": 1,
+      "ms": 5000,
+      "label": "menu -> production (SPA transition)",
+      "start": 31.108,
+      "ok": false,
+      "error": "locator.click: Timeout 8000ms exceeded.",
+      "end": 40.074,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 6,
+      "do": "move",
+      "x": 720,
+      "y": 480,
+      "ms": 400,
+      "start": 40.074,
+      "ok": true,
+      "end": 40.519,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 7,
+      "do": "wheelToEnd",
+      "dy": 100,
+      "every": 110,
+      "maxMs": 60000,
+      "label": "scroll production page",
+      "start": 40.519,
+      "ok": true,
+      "end": 44.364,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 8,
+      "do": "click",
+      "selector": ".site-menu-toggle",
+      "ms": 2000,
+      "label": "open menu",
+      "start": 44.365,
+      "ok": false,
+      "error": "locator.click: Timeout 8000ms exceeded.",
+      "end": 53.336,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 9,
+      "do": "click",
+      "selector": "a.fp-nav__secondary-link",
+      "nth": 0,
+      "ms": 5000,
+      "label": "menu -> about (SPA transition)",
+      "start": 53.336,
+      "ok": false,
+      "error": "locator.click: Timeout 8000ms exceeded.",
+      "end": 62.273,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 10,
+      "do": "move",
+      "x": 720,
+      "y": 480,
+      "ms": 400,
+      "start": 62.273,
+      "ok": true,
+      "end": 62.716,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    },
+    {
+      "i": 11,
+      "do": "wheelToEnd",
+      "dy": 100,
+      "every": 110,
+      "maxMs": 50000,
+      "label": "scroll about page",
+      "start": 62.716,
+      "ok": true,
+      "end": 66.498,
+      "url": "https://www.agrumeafarm.it/en/dispensa/caponata"
+    }
+  ]
+}

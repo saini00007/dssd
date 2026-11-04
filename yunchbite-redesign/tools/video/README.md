@@ -54,3 +54,7 @@ render PNG/JPG compositions). No npm dependencies. Exit codes: 0 ok, 2 bad usage
 - The cursor is not masked. It does not trigger events by itself but hover effects do.
 - Contact sheets at 4 fps skip most frames; use the event strips for timing.
 - The H.264 sources may show keyframe refresh noise; thresholds (noise floor, ≥ 3 frames) suppress most of it.
+
+## Known blind spot: slow, continuous motion
+
+The event detector is tuned on scroll-driven sites (calibrated on the Bucks Sauce recording). **Slow, continuous motion spread across the frame** can stay below the per-frame energy thresholds and produce no event, even though it's obvious when the video plays. Examples are Agrume Farm's wheel-driven jar carousel, drifting objects and slow rotations. For those, read timestamped sheets of the window in question, using the journey step log to find it, or lower the thresholds. Full-screen colour changes, such as YAAS's flavour background crossfade, are classified as **cuts**.

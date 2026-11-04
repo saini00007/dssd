@@ -4,6 +4,7 @@
 - **Stack** (from a browser visit): Next.js (Turbopack build), Prismic CMS (`images.prismic.io`), fonts *Inter Tight* + custom *Peperoncino Sans*, LogRocket, CrazyEgg, GTM. Vercel bot protection is on, so automated browsers are refused (429). This analysis is therefore based on the client's own recording.
 - **Source:** the client's desktop recording (Brave, 1920×1020, 65.6 s, VFR ≈24.5 fps, 1,607 frames). It covers the homepage, a reload (the loader), and the *Crushed Pineapple Sriracha* product page. **Mobile is skipped for now** (client decision).
 - **Frame data:** [`analysis/desktop-brave-2026-11-04/`](analysis/desktop-brave-2026-11-04/report.md) holds the motion timeline (`timeline.png`), 46 detected events with frame-by-frame strips (`events/E##-*/strip.jpg`), contact sheets, and the frame stepper `viewer.html` (← / → steps one frame).
+- **Key frames:** the whole recording at 1 fps in `key-frames/` ([0–11 s](key-frames/01-overview-1fps.jpg) · [12–23 s](key-frames/02-overview-1fps.jpg) · [24–35 s](key-frames/03-overview-1fps.jpg) · [36–47 s](key-frames/04-overview-1fps.jpg) · [48–59 s](key-frames/05-overview-1fps.jpg) · [60–65 s](key-frames/06-overview-1fps.jpg)).
 - **Precision:** timings marked **(measured)** come from frame strips with true timestamps. At ≈24.5 fps, one frame is ≈41 ms (recorder gaps up to 200 ms), so durations are ±1–2 frames. Event IDs (E##) refer to the strips.
 
 ---

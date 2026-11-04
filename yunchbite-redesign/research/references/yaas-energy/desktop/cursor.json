@@ -1,0 +1,164 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "cursorHidden": {
+    "html": "auto",
+    "body": "auto",
+    "link": "pointer",
+    "nativeCursorHidden": false
+  },
+  "customCursors": [],
+  "parallax": {
+    "detected": false,
+    "sweep": {
+      "from": {
+        "x": 216,
+        "y": 135
+      },
+      "to": {
+        "x": 1224,
+        "y": 765
+      },
+      "mouseTravelPx": {
+        "x": 1008,
+        "y": 630
+      }
+    },
+    "layers": [],
+    "note": "Elements whose centre moves with the pointer across a slow sweep; elements that also move with the pointer parked (ambient loops) are excluded."
+  },
+  "magnetic": [
+    {
+      "selector": "a.site-footer-logo-link",
+      "magnetic": false,
+      "nameSuggestsMagnet": false,
+      "activationDistanceFromEdgePx": null,
+      "maxShiftPx": 0,
+      "pullRatio": null,
+      "track": [
+        {
+          "distanceFromEdgePx": 80,
+          "pointerOffsetFromCentre": 700,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 35,
+          "pointerOffsetFromCentre": 655,
+          "shiftX": 0,
+          "shiftY": 0
+        }
+      ],
+      "viewportRect": {
+        "x": 100,
+        "y": 262
+      }
+    },
+    {
+      "selector": "button.faq-question",
+      "magnetic": false,
+      "nameSuggestsMagnet": false,
+      "activationDistanceFromEdgePx": null,
+      "maxShiftPx": 0,
+      "pullRatio": null,
+      "track": [
+        {
+          "distanceFromEdgePx": 80,
+          "pointerOffsetFromCentre": 386,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 35,
+          "pointerOffsetFromCentre": 341,
+          "shiftX": 0,
+          "shiftY": 0
+        }
+      ],
+      "viewportRect": {
+        "x": 100,
+        "y": 423
+      }
+    },
+    {
+      "selector": "a.hero-pill.contact-pill",
+      "magnetic": false,
+      "nameSuggestsMagnet": false,
+      "activationDistanceFromEdgePx": null,
+      "maxShiftPx": 0,
+      "pullRatio": null,
+      "track": [
+        {
+          "distanceFromEdgePx": 240,
+          "pointerOffsetFromCentre": 421,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 150,
+          "pointerOffsetFromCentre": 331,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 80,
+          "pointerOffsetFromCentre": 261,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 35,
+          "pointerOffsetFromCentre": 216,
+          "shiftX": 0,
+          "shiftY": 0
+        }
+      ],
+      "viewportRect": {
+        "x": 539,
+        "y": 272
+      }
+    },
+    {
+      "selector": "a.hero-cta",
+      "magnetic": false,
+      "nameSuggestsMagnet": false,
+      "activationDistanceFromEdgePx": null,
+      "maxShiftPx": 0,
+      "pullRatio": null,
+      "track": [
+        {
+          "distanceFromEdgePx": 240,
+          "pointerOffsetFromCentre": 347,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 150,
+          "pointerOffsetFromCentre": 257,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 80,
+          "pointerOffsetFromCentre": 187,
+          "shiftX": 0,
+          "shiftY": 0
+        },
+        {
+          "distanceFromEdgePx": 35,
+          "pointerOffsetFromCentre": 142,
+          "shiftX": 0,
+          "shiftY": 0
+        }
+      ],
+      "viewportRect": {
+        "x": 1126,
+        "y": 449
+      }
+    }
+  ],
+  "customCursorDetected": false,
+  "clip": "video/cursor.mp4"
+}

@@ -1,0 +1,182 @@
+{
+  "name": "home-jar-slider",
+  "url": "https://www.agrumeafarm.it/en",
+  "profile": "desktop",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "recordedAt": "2026-11-04T09:00:05.024Z",
+  "videoSeconds": 116.56,
+  "steps": [
+    {
+      "i": 0,
+      "do": "wait",
+      "ms": 10000,
+      "label": "loader + hero entrance",
+      "start": 1.047,
+      "ok": true,
+      "end": 11.048,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 1,
+      "do": "consent",
+      "start": 11.049,
+      "ok": true,
+      "end": 11.67,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 2,
+      "do": "move",
+      "x": 720,
+      "y": 480,
+      "ms": 600,
+      "start": 11.67,
+      "ok": true,
+      "end": 20.654,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 3,
+      "do": "wheel",
+      "dy": 100,
+      "every": 120,
+      "forMs": 9000,
+      "label": "wheel forward through the jars",
+      "start": 20.655,
+      "ok": true,
+      "end": 29.989,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 4,
+      "do": "wait",
+      "ms": 2000,
+      "label": "settle",
+      "start": 29.989,
+      "ok": true,
+      "end": 31.988,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 5,
+      "do": "wheel",
+      "dy": -100,
+      "every": 120,
+      "forMs": 3000,
+      "label": "wheel back",
+      "start": 31.989,
+      "ok": true,
+      "end": 35.596,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 6,
+      "do": "wait",
+      "ms": 1500,
+      "start": 35.597,
+      "ok": true,
+      "end": 37.097,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 7,
+      "do": "sweep",
+      "from": [
+        150,
+        480
+      ],
+      "to": [
+        1290,
+        480
+      ],
+      "ms": 3500,
+      "label": "mouse sweep (parallax / magnetic jars)",
+      "start": 37.097,
+      "ok": true,
+      "end": 79.755,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 8,
+      "do": "move",
+      "x": 720,
+      "y": 480,
+      "ms": 800,
+      "label": "rest on centre jar",
+      "start": 79.756,
+      "ok": true,
+      "end": 89.032,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 9,
+      "do": "wait",
+      "ms": 1500,
+      "start": 89.032,
+      "ok": true,
+      "end": 90.533,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 10,
+      "do": "click",
+      "selector": ".site-menu-toggle",
+      "ms": 2500,
+      "label": "open menu",
+      "start": 90.534,
+      "ok": true,
+      "end": 100.43,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 11,
+      "do": "hover",
+      "selector": "a.fp-nav__link",
+      "nth": 0,
+      "holdMs": 1200,
+      "label": "hover menu item 1",
+      "start": 100.43,
+      "ok": true,
+      "end": 106.619,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 12,
+      "do": "hover",
+      "selector": "a.fp-nav__link",
+      "nth": 1,
+      "holdMs": 1200,
+      "label": "hover menu item 2",
+      "start": 106.62,
+      "ok": true,
+      "end": 108.96,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 13,
+      "do": "hover",
+      "selector": "a.fp-nav__link",
+      "nth": 2,
+      "holdMs": 1200,
+      "label": "hover menu item 3",
+      "start": 108.96,
+      "ok": true,
+      "end": 111.207,
+      "url": "https://www.agrumeafarm.it/en"
+    },
+    {
+      "i": 14,
+      "do": "click",
+      "selector": ".site-menu-toggle",
+      "ms": 2500,
+      "label": "close menu",
+      "start": 111.207,
+      "ok": true,
+      "end": 115.218,
+      "url": "https://www.agrumeafarm.it/en"
+    }
+  ]
+}

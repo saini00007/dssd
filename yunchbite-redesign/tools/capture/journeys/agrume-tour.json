@@ -1,0 +1,20 @@
+{
+  "name": "tour-product-production-about",
+  "site": "agrumeafarm",
+  "url": "https://www.agrumeafarm.it/en/dispensa/caponata",
+  "profile": "desktop",
+  "steps": [
+    { "do": "wait", "ms": 7000, "label": "product page entrance" },
+    { "do": "consent" },
+    { "do": "move", "x": 720, "y": 480, "ms": 500 },
+    { "do": "wheelToEnd", "dy": 100, "every": 110, "maxMs": 60000, "label": "scroll product page" },
+    { "do": "click", "selector": ".site-menu-toggle", "ms": 2000, "label": "open menu" },
+    { "do": "click", "selector": "a.fp-nav__link", "nth": 1, "ms": 5000, "label": "menu -> production (SPA transition)" },
+    { "do": "move", "x": 720, "y": 480, "ms": 400 },
+    { "do": "wheelToEnd", "dy": 100, "every": 110, "maxMs": 60000, "label": "scroll production page" },
+    { "do": "click", "selector": ".site-menu-toggle", "ms": 2000, "label": "open menu" },
+    { "do": "click", "selector": "a.fp-nav__secondary-link", "nth": 0, "ms": 5000, "label": "menu -> about (SPA transition)" },
+    { "do": "move", "x": 720, "y": 480, "ms": 400 },
+    { "do": "wheelToEnd", "dy": 100, "every": 110, "maxMs": 50000, "label": "scroll about page" }
+  ]
+}

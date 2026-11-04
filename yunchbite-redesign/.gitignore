@@ -13,6 +13,8 @@ research/current-site/pages/*/dom.html
 research/current-site/crawl-state.json
 # video analyser: individual per-event frames stay local (strips + sheets are committed)
 research/references/**/analysis/**/events/*/frames/
-# TEMPORARY while captures run; committed once each capture is final
-research/references/agrumeafarm/
-research/references/yaas-energy/
+# journey temp dirs
+research/references/**/journeys/.tmp-*/
+# journeys: per-event strips and 4 fps sheets are regenerable from tools/capture/journeys/*.json; curated key-frames/ are committed instead
+research/references/**/journeys/analysis/**/events/
+research/references/**/journeys/analysis/**/sheets/

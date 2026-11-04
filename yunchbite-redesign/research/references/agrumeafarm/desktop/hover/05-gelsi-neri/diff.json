@@ -1,0 +1,88 @@
+{
+  "index": 5,
+  "dir": "hover/05-gelsi-neri",
+  "selector": "a.jar-slider__item",
+  "tag": "a",
+  "text": "GELSI NERI",
+  "instancesOnPage": 4,
+  "hasHoverRule": false,
+  "rect": {
+    "x": 609,
+    "y": 246,
+    "width": 377,
+    "height": 521
+  },
+  "changedProperties": [],
+  "driver": "none detected",
+  "transitionSpec": {},
+  "liveDrivers": {
+    "css": [],
+    "gsap": []
+  },
+  "movedBeforeEntering": false,
+  "filmstrip": "hover/05-gelsi-neri/filmstrip.jpg",
+  "frames": [
+    {
+      "file": "f0-before.jpg",
+      "label": "before",
+      "ms": null
+    },
+    {
+      "file": "f1-in-0000ms.jpg",
+      "label": "in 0ms",
+      "ms": 0,
+      "actualMs": 436
+    },
+    {
+      "file": "f2-in-0080ms.jpg",
+      "label": "in 80ms",
+      "ms": 80,
+      "actualMs": 2302
+    },
+    {
+      "file": "f3-in-0160ms.jpg",
+      "label": "in 160ms",
+      "ms": 160,
+      "actualMs": 3578
+    },
+    {
+      "file": "f4-in-0320ms.jpg",
+      "label": "in 320ms",
+      "ms": 320,
+      "actualMs": 5644
+    },
+    {
+      "file": "f5-in-0600ms.jpg",
+      "label": "in 600ms",
+      "ms": 600,
+      "actualMs": 11905
+    },
+    {
+      "file": "f6-in-1000ms.jpg",
+      "label": "in 1000ms",
+      "ms": 1000,
+      "actualMs": 27476
+    },
+    {
+      "file": "f7-out-0060ms.jpg",
+      "label": "out 60ms",
+      "ms": 60,
+      "actualMs": 60
+    },
+    {
+      "file": "f8-out-0300ms.jpg",
+      "label": "out 300ms",
+      "ms": 300,
+      "actualMs": 870
+    }
+  ],
+  "diff": {},
+  "diffOnApproach": {},
+  "ambientIgnored": {
+    "self": [
+      "transform",
+      "filter"
+    ]
+  },
+  "note": "frame times are measured wall-clock from the mouse entering the element; screenshots themselves take ~30-100 ms in headless mode"
+}

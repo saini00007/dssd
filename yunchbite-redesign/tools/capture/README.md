@@ -57,3 +57,23 @@ the repo `.gitignore`; contact sheets, JSON and reports are meant to be committe
   (the count of unreadable sheets is reported). Hover candidates still come from `a/button/cursor:pointer`.
 - Hover diffs cover the element, its ::before/::after and the first six descendants only. Canvas/WebGL cursors cannot be detected.
 - Bot walls and rate limits end the run (see above); some sites serve different content to headless browsers.
+
+## Scripted journeys (`journey.mjs`)
+
+Some experiences can't be followed by the standard capture. Agrume Farm's homepage never moves `window.scrollY` (the wheel drives a jar carousel), menus need clicks, and product pages are reached through links. For these, a **journey** scripts the interaction and records it as one continuous video, then runs `tools/video/analyze-video.mjs` on it.
+
+```bash
+node capture/journey.mjs capture/journeys/agrume-home.json            # record + frame analysis
+node capture/journey.mjs capture/journeys/yaas-flavors.json --no-analyze
+```
+
+**Steps:** `wait`, `waitForLoad`, `consent`, `goto`, `move`, `sweep`, `hover`, `click` (by `selector` or `text`), `key`, `wheel` (steady wheel input for `forMs`), and `wheelToEnd` (until the page stops scrolling). The format is documented at the top of `journey.mjs`; the specs used for the references are in `capture/journeys/`.
+
+**Outputs** go to `research/references/<site>/journeys/`:
+- `video/<name>.mp4` (git-ignored)
+- `<name>.log.json`: every step with its start and end in **video seconds**, so motion can be matched to the action that caused it
+- `analysis/<name>/`: report, events, timeline and viewer. Per-event strips and sheets stay local and are regenerable.
+
+Mouse moves are **time-based**, so a 3 s sweep takes 3 s even when the page is slow to process events. Earlier step-count-based moves stretched 10× on WebGL-heavy pages.
+
+A failed step (e.g. a click target covered after scrolling) is logged with its error, and the journey continues.

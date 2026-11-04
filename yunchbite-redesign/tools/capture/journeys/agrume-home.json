@@ -1,0 +1,23 @@
+{
+  "name": "home-jar-slider",
+  "site": "agrumeafarm",
+  "url": "https://www.agrumeafarm.it/en",
+  "profile": "desktop",
+  "steps": [
+    { "do": "wait", "ms": 10000, "label": "loader + hero entrance" },
+    { "do": "consent" },
+    { "do": "move", "x": 720, "y": 480, "ms": 600 },
+    { "do": "wheel", "dy": 100, "every": 120, "forMs": 9000, "label": "wheel forward through the jars" },
+    { "do": "wait", "ms": 2000, "label": "settle" },
+    { "do": "wheel", "dy": -100, "every": 120, "forMs": 3000, "label": "wheel back" },
+    { "do": "wait", "ms": 1500 },
+    { "do": "sweep", "from": [150, 480], "to": [1290, 480], "ms": 3500, "label": "mouse sweep (parallax / magnetic jars)" },
+    { "do": "move", "x": 720, "y": 480, "ms": 800, "label": "rest on centre jar" },
+    { "do": "wait", "ms": 1500 },
+    { "do": "click", "selector": ".site-menu-toggle", "ms": 2500, "label": "open menu" },
+    { "do": "hover", "selector": "a.fp-nav__link", "nth": 0, "holdMs": 1200, "label": "hover menu item 1" },
+    { "do": "hover", "selector": "a.fp-nav__link", "nth": 1, "holdMs": 1200, "label": "hover menu item 2" },
+    { "do": "hover", "selector": "a.fp-nav__link", "nth": 2, "holdMs": 1200, "label": "hover menu item 3" },
+    { "do": "click", "selector": ".site-menu-toggle", "ms": 2500, "label": "close menu" }
+  ]
+}

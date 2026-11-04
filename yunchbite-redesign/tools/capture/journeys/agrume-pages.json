@@ -1,0 +1,16 @@
+{
+  "name": "production-about",
+  "site": "agrumeafarm",
+  "url": "https://www.agrumeafarm.it/en/produzione",
+  "profile": "desktop",
+  "steps": [
+    { "do": "wait", "ms": 10000, "label": "loader + production entrance" },
+    { "do": "consent" },
+    { "do": "move", "x": 720, "y": 480, "ms": 400 },
+    { "do": "wheel", "dy": 100, "every": 110, "forMs": 45000, "label": "scroll production page" },
+    { "do": "goto", "url": "https://www.agrumeafarm.it/en/chi-siamo", "label": "load about page" },
+    { "do": "wait", "ms": 10000, "label": "loader + about entrance" },
+    { "do": "move", "x": 720, "y": 480, "ms": 400 },
+    { "do": "wheel", "dy": 100, "every": 110, "forMs": 40000, "label": "scroll about page" }
+  ]
+}

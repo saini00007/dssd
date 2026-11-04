@@ -1,0 +1,163 @@
+{
+  "name": "flavor-switcher-faq",
+  "url": "https://yaas-energy.com/",
+  "profile": "desktop",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "recordedAt": "2026-11-04T09:07:50.862Z",
+  "videoSeconds": 48.36,
+  "steps": [
+    {
+      "i": 0,
+      "do": "wait",
+      "ms": 6000,
+      "label": "hero entrance",
+      "start": 1.844,
+      "ok": true,
+      "end": 7.846,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 1,
+      "do": "consent",
+      "start": 7.847,
+      "ok": true,
+      "end": 8.641,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 2,
+      "do": "sweep",
+      "from": [
+        200,
+        450
+      ],
+      "to": [
+        1240,
+        450
+      ],
+      "ms": 2500,
+      "label": "mouse sweep over hero",
+      "start": 8.641,
+      "ok": true,
+      "end": 11.923,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 3,
+      "do": "click",
+      "text": "See the Flavors →",
+      "ms": 3500,
+      "label": "CTA -> flavours (anchor scroll)",
+      "start": 11.923,
+      "ok": true,
+      "end": 17.06,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 4,
+      "do": "click",
+      "selector": "button.arrow-right",
+      "ms": 2200,
+      "label": "next flavour 1",
+      "start": 17.06,
+      "ok": true,
+      "end": 21.967,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 5,
+      "do": "click",
+      "selector": "button.arrow-right",
+      "ms": 2200,
+      "label": "next flavour 2",
+      "start": 21.967,
+      "ok": true,
+      "end": 25.747,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 6,
+      "do": "click",
+      "selector": "button.arrow-right",
+      "ms": 2200,
+      "label": "next flavour 3",
+      "start": 25.748,
+      "ok": true,
+      "end": 29.652,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 7,
+      "do": "click",
+      "selector": "button.arrow-right",
+      "ms": 2200,
+      "label": "next flavour 4",
+      "start": 29.652,
+      "ok": true,
+      "end": 33.254,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 8,
+      "do": "click",
+      "selector": "button.arrow-left",
+      "ms": 2200,
+      "label": "previous flavour",
+      "start": 33.254,
+      "ok": true,
+      "end": 37.376,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 9,
+      "do": "hover",
+      "selector": "button.faq-question",
+      "nth": 0,
+      "holdMs": 1000,
+      "label": "scroll to FAQ",
+      "start": 37.377,
+      "ok": true,
+      "end": 39.498,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 10,
+      "do": "click",
+      "selector": "button.faq-question",
+      "nth": 1,
+      "ms": 1800,
+      "label": "open FAQ 2",
+      "start": 39.499,
+      "ok": true,
+      "end": 42.376,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 11,
+      "do": "click",
+      "selector": "button.faq-question",
+      "nth": 2,
+      "ms": 1800,
+      "label": "open FAQ 3",
+      "start": 42.377,
+      "ok": true,
+      "end": 45.164,
+      "url": "https://yaas-energy.com/"
+    },
+    {
+      "i": 12,
+      "do": "click",
+      "selector": "button.faq-question",
+      "nth": 2,
+      "ms": 1500,
+      "label": "close FAQ 3",
+      "start": 45.164,
+      "ok": true,
+      "end": 47.69,
+      "url": "https://yaas-energy.com/"
+    }
+  ]
+}

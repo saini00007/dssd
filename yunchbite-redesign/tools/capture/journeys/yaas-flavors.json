@@ -1,0 +1,21 @@
+{
+  "name": "flavor-switcher-faq",
+  "site": "yaas-energy",
+  "url": "https://yaas-energy.com/",
+  "profile": "desktop",
+  "steps": [
+    { "do": "wait", "ms": 6000, "label": "hero entrance" },
+    { "do": "consent" },
+    { "do": "sweep", "from": [200, 450], "to": [1240, 450], "ms": 2500, "label": "mouse sweep over hero" },
+    { "do": "click", "text": "See the Flavors →", "ms": 3500, "label": "CTA -> flavours (anchor scroll)" },
+    { "do": "click", "selector": "button.arrow-right", "ms": 2200, "label": "next flavour 1" },
+    { "do": "click", "selector": "button.arrow-right", "ms": 2200, "label": "next flavour 2" },
+    { "do": "click", "selector": "button.arrow-right", "ms": 2200, "label": "next flavour 3" },
+    { "do": "click", "selector": "button.arrow-right", "ms": 2200, "label": "next flavour 4" },
+    { "do": "click", "selector": "button.arrow-left", "ms": 2200, "label": "previous flavour" },
+    { "do": "hover", "selector": "button.faq-question", "nth": 0, "holdMs": 1000, "label": "scroll to FAQ" },
+    { "do": "click", "selector": "button.faq-question", "nth": 1, "ms": 1800, "label": "open FAQ 2" },
+    { "do": "click", "selector": "button.faq-question", "nth": 2, "ms": 1800, "label": "open FAQ 3" },
+    { "do": "click", "selector": "button.faq-question", "nth": 2, "ms": 1500, "label": "close FAQ 3" }
+  ]
+}

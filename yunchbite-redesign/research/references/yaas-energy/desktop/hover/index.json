@@ -1,0 +1,117 @@
+{
+  "candidatesFound": 25,
+  "uniqueGroups": 11,
+  "hoverRulesFound": 12,
+  "blockedStylesheets": 0,
+  "entries": [
+    {
+      "index": 1,
+      "dir": "hover/01-why-yaas",
+      "selector": "a.hero-pill.site-footer-pill",
+      "text": "Why YAAS",
+      "instancesOnPage": 5,
+      "changedProperties": [
+        "color",
+        "background-color",
+        "outline-color"
+      ],
+      "driver": "css transition",
+      "movedBeforeEntering": false,
+      "transitionSpec": {
+        "self": {
+          "transitionProperty": "background, border-color, color",
+          "transitionDuration": "0.2s, 0.2s, 0.2s",
+          "transitionTimingFunction": "ease, ease, ease",
+          "transitionDelay": "0s, 0s, 0s"
+        }
+      },
+      "filmstrip": "hover/01-why-yaas/filmstrip.jpg",
+      "diffFile": "hover/01-why-yaas/diff.json"
+    },
+    {
+      "index": 2,
+      "dir": "hover/02-partnership-yaas-energy-com",
+      "selector": "a.hero-pill.contact-pill",
+      "text": "partnership@yaas-energy.com →",
+      "instancesOnPage": 1,
+      "changedProperties": [
+        "color",
+        "background-color",
+        "outline-color",
+        "border-color"
+      ],
+      "driver": "css transition",
+      "movedBeforeEntering": false,
+      "transitionSpec": {
+        "self": {
+          "transitionProperty": "background, border-color, color",
+          "transitionDuration": "0.2s, 0.2s, 0.2s",
+          "transitionTimingFunction": "ease, ease, ease",
+          "transitionDelay": "0s, 0s, 0s"
+        }
+      },
+      "filmstrip": "hover/02-partnership-yaas-energy-com/filmstrip.jpg",
+      "diffFile": "hover/02-partnership-yaas-energy-com/diff.json"
+    },
+    {
+      "index": 3,
+      "dir": "hover/03-website-design-dviga",
+      "selector": "a.site-footer-credit",
+      "text": "Website design DVIGA",
+      "instancesOnPage": 1,
+      "changedProperties": [
+        "text-decoration-line"
+      ],
+      "driver": "instant or script-driven (no CSS transition found)",
+      "movedBeforeEntering": false,
+      "transitionSpec": {},
+      "filmstrip": "hover/03-website-design-dviga/filmstrip.jpg",
+      "diffFile": "hover/03-website-design-dviga/diff.json"
+    },
+    {
+      "index": 4,
+      "dir": "hover/04-privacy-policy",
+      "selector": "a.site-footer-credit.site-footer-privacy",
+      "text": "Privacy Policy",
+      "instancesOnPage": 1,
+      "changedProperties": [
+        "text-decoration-line"
+      ],
+      "driver": "instant or script-driven (no CSS transition found)",
+      "movedBeforeEntering": false,
+      "transitionSpec": {},
+      "filmstrip": "hover/04-privacy-policy/filmstrip.jpg",
+      "diffFile": "hover/04-privacy-policy/diff.json"
+    }
+  ],
+  "skipped": [
+    {
+      "selector": "a.detail-cta",
+      "reason": "covered by div.screen2-headline"
+    },
+    {
+      "selector": "button.arrow.arrow-left",
+      "reason": "not visible (opacity)"
+    },
+    {
+      "selector": "button.arrow.arrow-right",
+      "reason": "not visible (opacity)"
+    },
+    {
+      "selector": "button.flavor-thumb",
+      "reason": "covered by div.screen2-arc-stage"
+    },
+    {
+      "selector": "button.flavor-thumb.is-active",
+      "reason": "covered by div.screen2-arc-stage"
+    },
+    {
+      "selector": "button.faq-question",
+      "reason": "error: page.screenshot: Timeout 20000ms exceeded."
+    },
+    {
+      "selector": "a.site-footer-logo-link",
+      "reason": "covered by span.drop-text-piece"
+    }
+  ]
+}
