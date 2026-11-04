@@ -31,6 +31,10 @@ Each phase ends with client approval before the next one starts.
 | 2026-11-04 | Brand facts (phone, claims, address) are taken from the current website as they are and corrected later. | Client |
 | 2026-11-04 | The **product photos show the real, current pack artwork** (not the banner packs). They are the reference for pack colours and the cut-outs to come. | Client |
 | 2026-11-04 | **Forget the old site's mistakes; focus on the new.** Same sitemap, built clean (`/categories/…`, correct copy). No effort spent on fixing or redirecting the old build. | Client |
+| 2026-11-04 | **Site overview v1 approved**; go straight to building (wireframes skipped). | Client |
+| 2026-11-04 | **Makhana Buddy holds each flavour's ingredient** (chilli, chaat star, pepper, mint, cheese…); the mascot boy is retired. | Client |
+| 2026-11-04 | Defaults chosen by us (client: "else you choose"): header CTA "Partner with us" (no marketplace links yet); fonts *Bricolage Grotesque* (display) + *DM Sans* (body) until the packaging font is known; forms post to `/api/contact` (delivery target configurable); bestseller badge only on the 11 listed bestsellers; the existing reviews stay hidden until confirmed genuine; we draft new copy (taste profiles, pairs-with, FAQs, occasions) for later approval. | Us |
+| 2026-11-04 | **Stack:** Next.js 16.4.5 (App Router, Cache Components, all pages static), React 19.3 `<ViewTransition>` for page transitions and pack morphs, Tailwind v4, GSAP 3.15 + Lenis 1.3. Code in `site/`; contract in `site/ARCHITECTURE.md`. | Us |
 | 2026-11-04 | **Mobile is skipped for now.** References are captured and analysed on desktop only; the mobile study comes back before wireframes are finalised. | Client |
 
 ## Folder map
